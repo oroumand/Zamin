@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D945756F-FC70-43E6-8C6F-DEAFC5B0F732}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{289C2B0F-1D84-41EF-8911-F4552465EB96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01. Core", "01. Core", "{87470B18-89A2-4A4E-901F-E0CB506C7708}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Core.Domain", "src\01. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj", "{A5C33B69-E0C7-48C2-81DD-84956B91BDC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00. Toolkits", "00. Toolkits", "{15F101DA-C889-4725-BFE6-D42A9E2A91CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03. Infra", "03. Infra", "{0868F48C-0FAF-40C3-9EE1-7E78A7E01564}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. Endpoints", "04. Endpoints", "{A9D5D1D1-0621-4204-BFB5-A9F896832D43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02. Data", "02. Data", "{D91D9DE2-C407-42AB-972A-E7FDD30F307A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Data.EventSourcing.SqlServer", "src\02. Data\Zamin.Data.EventSourcing.SqlServer\Zamin.Data.EventSourcing.SqlServer.csproj", "{EDFB5064-C9AA-4C12-95A1-67616F5757E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Toolkits.Contracts", "src\00. Toolkits\Zamin.Toolkits.Contracts\Zamin.Toolkits.Contracts.csproj", "{27DEDF8F-8E87-480E-AC05-6684A17A3E95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5C33B69-E0C7-48C2-81DD-84956B91BDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5C33B69-E0C7-48C2-81DD-84956B91BDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5C33B69-E0C7-48C2-81DD-84956B91BDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5C33B69-E0C7-48C2-81DD-84956B91BDC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDFB5064-C9AA-4C12-95A1-67616F5757E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDFB5064-C9AA-4C12-95A1-67616F5757E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDFB5064-C9AA-4C12-95A1-67616F5757E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDFB5064-C9AA-4C12-95A1-67616F5757E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27DEDF8F-8E87-480E-AC05-6684A17A3E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DEDF8F-8E87-480E-AC05-6684A17A3E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DEDF8F-8E87-480E-AC05-6684A17A3E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DEDF8F-8E87-480E-AC05-6684A17A3E95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87470B18-89A2-4A4E-901F-E0CB506C7708} = {D945756F-FC70-43E6-8C6F-DEAFC5B0F732}
+		{A5C33B69-E0C7-48C2-81DD-84956B91BDC3} = {87470B18-89A2-4A4E-901F-E0CB506C7708}
+		{15F101DA-C889-4725-BFE6-D42A9E2A91CC} = {D945756F-FC70-43E6-8C6F-DEAFC5B0F732}
+		{0868F48C-0FAF-40C3-9EE1-7E78A7E01564} = {D945756F-FC70-43E6-8C6F-DEAFC5B0F732}
+		{A9D5D1D1-0621-4204-BFB5-A9F896832D43} = {D945756F-FC70-43E6-8C6F-DEAFC5B0F732}
+		{D91D9DE2-C407-42AB-972A-E7FDD30F307A} = {D945756F-FC70-43E6-8C6F-DEAFC5B0F732}
+		{EDFB5064-C9AA-4C12-95A1-67616F5757E8} = {D91D9DE2-C407-42AB-972A-E7FDD30F307A}
+		{27DEDF8F-8E87-480E-AC05-6684A17A3E95} = {15F101DA-C889-4725-BFE6-D42A9E2A91CC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {227A733E-5212-4E32-861B-B937187CB401}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\00. Toolkits\Zamin.Toolkits.Contracts\Zamin.Toolkits.Contracts.csproj" />
+    <ProjectReference Include="..\..\01. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
