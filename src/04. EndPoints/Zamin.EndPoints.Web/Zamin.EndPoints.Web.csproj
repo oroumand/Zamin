@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>2.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="3.1.3" />
+    <PackageReference Include="Microsoft.OpenApi" Version="1.1.4" />
+    <PackageReference Include="Scrutor" Version="3.2.2" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
+    <PackageReference Include="Serilog.Sinks.ElasticSearch" Version="8.0.1" />
+    <PackageReference Include="Serilog.Sinks.Http" Version="5.2.1" />
+    <PackageReference Include="Serilog.Sinks.MongoDB" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.2.0" />
+    <PackageReference Include="Serilog.Sinks.RabbitMQ" Version="3.0.6" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.Telegram" Version="0.1.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.2.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\02. Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Caching.Microsoft\Zamin.Infra.Tools.Caching.Microsoft.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Localizer.Parrot\Zamin.Infra.Tools.Localizer.Parrot.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.OM.AutoMapper\Zamin.Infra.Tools.OM.AutoMapper.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Srlzr.NewtonSoft\Zamin.Infra.Tools.Srlzr.NewtonSoft.csproj" />
+  </ItemGroup>
+
+</Project>
