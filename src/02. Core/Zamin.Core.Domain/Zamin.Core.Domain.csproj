@@ -13,8 +13,4 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\01. Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
-  </ItemGroup>
-
 </Project>

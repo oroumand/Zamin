@@ -11,8 +11,4 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\01. Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
-  </ItemGroup>
-
 </Project>
