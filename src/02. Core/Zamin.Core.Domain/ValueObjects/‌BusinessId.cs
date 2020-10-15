@@ -13,11 +13,6 @@ namespace Zamin.Core.Domain.ValueObjects
             {
                 throw new InvalidValueObjectStateException("ValidationErrorIsRequire", nameof(BusinessId));
             }
-            if (value.Length != 32)
-            {
-                throw new InvalidValueObjectStateException("ValidationErrorStringLength", nameof(BusinessId), "32", "32");
-            }
-
             if (Guid.TryParse(value, out Guid tempValue))
             {
                 Value = tempValue;

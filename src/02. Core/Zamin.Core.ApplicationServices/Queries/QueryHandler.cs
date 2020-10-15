@@ -5,19 +5,23 @@ namespace Zamin.Core.ApplicationServices.Queries
 {
 
     public interface IQueryHandler<TQuery, TData>
-        where TQuery : class, IQuery<TData>
+            where TQuery : class, IQuery<TData>
     {
-        Task<QueryResult<TData>> Handle(IQuery<TData> request);
+        Task<QueryResult<TData>> Handle(TQuery request);
     }
 
     public abstract class QueryHandler<TQuery, TData> : IQueryHandler<TQuery, TData>
         where TQuery : class, IQuery<TData>
     {
         protected readonly ZaminServices _zaminApplicationContext;
-        public QueryHandler(ZaminServices zaminApplicationContext)
+        public QueryHandler(ZaminServices eveApplicationContext)
         {
-            _zaminApplicationContext = zaminApplicationContext;
+            _zaminApplicationContext = eveApplicationContext;
         }
-        public abstract Task<QueryResult<TData>> Handle(IQuery<TData> request);
+
+        public Task<QueryResult<TData>> Handle(TQuery request)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
