@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Zamin.Infra.Tools.OM.AutoMapper.Common;
-using Zamin.Utilities.Services.ObjectMappers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Zamin.Toolkits.Services.ObjectMappers;
 
 namespace Zamin.Infra.Tools.OM.AutoMapper.DipendencyInjections
 {

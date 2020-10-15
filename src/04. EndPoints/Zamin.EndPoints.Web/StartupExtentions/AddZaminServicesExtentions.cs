@@ -5,12 +5,12 @@ using System;
 using Zamin.Infra.Tools.Caching.Microsoft;
 using Zamin.Infra.Tools.OM.AutoMapper.DipendencyInjections;
 using Zamin.EndPoints.Web.Configurations;
-using Zamin.Utilities;
-using Zamin.Utilities.Services.Chaching;
-using Zamin.Utilities.Services.Logger;
-using Zamin.Utilities.Services.Serializers;
-using Zamin.Utilities.Services.Users;
-using Zamin.Utilities.Services.Localizations;
+using Zamin.Toolkits;
+using Zamin.Toolkits.Services.Chaching;
+using Zamin.Toolkits.Services.Logger;
+using Zamin.Toolkits.Services.Serializers;
+using Zamin.Toolkits.Services.Users;
+using Zamin.Toolkits.Services.Translations;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {

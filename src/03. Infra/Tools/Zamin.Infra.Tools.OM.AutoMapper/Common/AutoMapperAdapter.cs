@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Zamin.Utilities.Services.ObjectMappers;
+using Zamin.Toolkits.Services.ObjectMappers;
 
 namespace Zamin.Infra.Tools.OM.AutoMapper.Common
 {

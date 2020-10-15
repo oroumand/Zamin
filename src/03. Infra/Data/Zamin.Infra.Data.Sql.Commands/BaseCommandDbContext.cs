@@ -11,8 +11,8 @@ using System.Threading;
 using Zamin.Infra.Data.Sql.Configurations;
 using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
 using Zamin.Infra.Events.Outbox;
-using Zamin.Utilities.Services.Users;
-using Zamin.Utilities.Services.Serializers;
+using Zamin.Toolkits.Services.Serializers;
+using Zamin.Toolkits.Services.Users;
 
 namespace Zamin.Infra.Data.Sql.Commands
 {
@@ -115,14 +115,16 @@ namespace Zamin.Infra.Data.Sql.Commands
                 {
                     OutBoxEventItems.Add(new OutBoxEventItem
                     {
+                        EventId = Guid.NewGuid(),
                         AccuredByUserId = userInfoService.UserId().ToString(),
+                        AccuredOn = DateTime.Now,
                         AggregateId = aggregate.BusinessId.ToString(),
                         AggregateName = aggregate.GetType().Name,
                         AggregateTypeName = aggregate.GetType().FullName,
-                        EventDate = DateTime.Now,
                         EventName = @event.GetType().Name,
-                        EventTypeName = aggregate.GetType().Name,
-                        EventPayload = serializer.Serilize(@event)
+                        EventTypeName = @event.GetType().FullName,
+                        EventPayload = serializer.Serilize(@event),
+                        IsProcessed = false
                     });
                 }
             }

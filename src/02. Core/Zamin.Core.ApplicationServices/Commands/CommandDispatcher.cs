@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using Zamin.Core.ApplicationServices.Common;
 using Zamin.Core.Domain.Exceptions;
-using Zamin.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Zamin.Toolkits;
 
 namespace Zamin.Core.ApplicationServices.Commands
 {
@@ -81,8 +81,10 @@ namespace Zamin.Core.ApplicationServices.Commands
                 var validationResult = validator.Validate(command);
                 if (!validationResult.IsValid)
                 {
-                    TValidationResult res = new TValidationResult();
-                    res.Status = ApplicationServiceStatus.ValidationError;
+                    TValidationResult res = new TValidationResult
+                    {
+                        Status = ApplicationServiceStatus.ValidationError
+                    };
                     foreach (var item in validationResult.Errors)
                     {
                         res.AddMessage(item.ErrorMessage);

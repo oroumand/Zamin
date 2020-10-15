@@ -1,11 +1,11 @@
-﻿using Zamin.Utilities.Services.Logger;
-using Zamin.Utilities.Services.Serializers;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Zamin.Toolkits.Services.Logger;
+using Zamin.Toolkits.Services.Serializers;
 
 namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
 {
@@ -14,7 +14,6 @@ namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
         private readonly RequestDelegate _next;
         private readonly ILogger<ApiExceptionMiddleware> _logger;
         private readonly ApiExceptionOptions _options;
-        private readonly IJsonSerializer _serializer;
         public ApiExceptionMiddleware(ApiExceptionOptions options, RequestDelegate next,
             ILogger<ApiExceptionMiddleware> logger, IJsonSerializer serializer
             )
@@ -22,7 +21,6 @@ namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
             _next = next;
             _logger = logger;
             _options = options;
-            _serializer = serializer;
         }
 
         public async Task Invoke(HttpContext context, IScopeInformation scopeInfo /* other dependencies */)

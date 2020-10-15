@@ -2,10 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>1.0.0-Preview.2.0.0</Version>
+    <Description>implementation Of CQRS Patterns in c# For Application Services</Description>
+    <RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\01. Utilities\Zamin.Toolkits\Zamin.Toolkits.csproj" />
     <ProjectReference Include="..\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
   </ItemGroup>
 
