@@ -5,6 +5,7 @@
     <Version>1.0.0-Preview.2.0.0</Version>
     <Description>Event outbox classes</Description>
     <RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+    <Authors>Alireza Oroumand</Authors>
   </PropertyGroup>
 
 </Project>

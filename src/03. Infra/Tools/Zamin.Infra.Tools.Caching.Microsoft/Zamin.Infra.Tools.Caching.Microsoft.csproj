@@ -5,6 +5,7 @@
     <Version>1.0.0-Preview.2.0.0</Version>
     <Description>Implementation of caching adapters using Microsoft caching</Description>
     <RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+    <Authors>Alireza Oroumand</Authors>
   </PropertyGroup>
 
   <ItemGroup>
