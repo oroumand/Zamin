@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Zamin.Core.ApplicationServices.Common;
 using Zamin.Toolkits;
 
 namespace Zamin.Core.ApplicationServices.Queries
@@ -14,14 +15,40 @@ namespace Zamin.Core.ApplicationServices.Queries
         where TQuery : class, IQuery<TData>
     {
         protected readonly ZaminServices _zaminApplicationContext;
-        public QueryHandler(ZaminServices eveApplicationContext)
+        protected readonly QueryResult<TData> result = new QueryResult<TData>();
+
+        protected virtual Task<QueryResult<TData>> ResultAsync(TData data, ApplicationServiceStatus status)
         {
-            _zaminApplicationContext = eveApplicationContext;
+            result._data = data;
+            result.Status = status;
+            return Task.FromResult(result);
         }
 
-        public Task<QueryResult<TData>> Handle(TQuery request)
+        protected virtual QueryResult<TData> Result(TData data, ApplicationServiceStatus status)
         {
-            throw new System.NotImplementedException();
+            result._data = data;
+            result.Status = status;
+            return result;
         }
+
+
+        protected virtual Task<QueryResult<TData>> ResultAsync(TData data)
+        {
+            var status = data != null ? ApplicationServiceStatus.Ok : ApplicationServiceStatus.NotFound;
+            return ResultAsync(data, status);
+        }
+
+        protected virtual QueryResult<TData> Result(TData data)
+        {
+            var status = data != null ? ApplicationServiceStatus.Ok : ApplicationServiceStatus.NotFound;
+            return Result(data, status);
+        }
+
+        public QueryHandler(ZaminServices zaminApplicationContext)
+        {
+            _zaminApplicationContext = zaminApplicationContext;
+        }
+
+        public abstract Task<QueryResult<TData>> Handle(TQuery request);
     }
 }
