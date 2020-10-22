@@ -15,14 +15,12 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 {
     public static class AddApiConfigurationExtentions
     {
-        public static IServiceCollection AddEveApiServices(this IServiceCollection services,
+        public static IServiceCollection AddZaminApiServices(this IServiceCollection services,
             IConfiguration configuration)
         {
-            var _zaminConfigurations = new ZaminConfigurations();
-            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_zaminConfigurations);
-            services.AddSingleton(_zaminConfigurations);
-
-            services.AddHttpContextAccessor();
+            var _ZaminConfigurations = new ZaminConfigurations();
+            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_ZaminConfigurations);
+            services.AddSingleton(_ZaminConfigurations);
             services.AddScoped<ValidateModelStateAttribute>();
             services.AddControllers(options =>
             {
@@ -30,7 +28,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }).AddFluentValidation();
 
-            services.AddEveCoreDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
+            services.AddEveCoreDependencies(_ZaminConfigurations.AssmblyNameForLoad.Split(','));
 
             AddSwagger(services);
             return services;
@@ -38,16 +36,16 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 
         private static void AddSwagger(IServiceCollection services)
         {
-            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
-            if (_zaminConfigurations.Swagger != null && _zaminConfigurations.Swagger.SwaggerDoc != null)
+            var _ZaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
+            if (_ZaminConfigurations.Swagger != null && _ZaminConfigurations.Swagger.SwaggerDoc != null)
             {
                 services.AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc(_zaminConfigurations.Swagger.SwaggerDoc.Name, new OpenApiInfo { Title = _zaminConfigurations.Swagger.SwaggerDoc.Title, Version = _zaminConfigurations.Swagger.SwaggerDoc.Version });
+                    c.SwaggerDoc(_ZaminConfigurations.Swagger.SwaggerDoc.Name, new OpenApiInfo { Title = _ZaminConfigurations.Swagger.SwaggerDoc.Title, Version = _ZaminConfigurations.Swagger.SwaggerDoc.Version });
                 });
             }
         }
-        public static void UseEveApiConfigure(this IApplicationBuilder app, ZaminConfigurations configuration, IWebHostEnvironment env)
+        public static void UseZaminApiConfigure(this IApplicationBuilder app, ZaminConfigurations configuration, IWebHostEnvironment env)
         {
             app.UseApiExceptionHandler(options =>
             {

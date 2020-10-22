@@ -13,7 +13,7 @@ namespace Zamin.Infra.Tools.Localizer.Parrot
         private readonly List<LocalizationRecord> _localizationRecords;
         public ParrotDataWrapper(IConfiguration configuration)
         {
-            var cnnString = configuration["EveConfigurations:Translator:ParrotTranslator:ConnectionString"];
+            var cnnString = configuration["ZaminConfigurations:Translator:ParrotTranslator:ConnectionString"];
             _dbConnection = new SqlConnection(cnnString);
             string selectCommand = "Select * from ParrotTranslations";
             _localizationRecords = _dbConnection.Query<LocalizationRecord>(selectCommand, commandType: CommandType.Text).ToList();

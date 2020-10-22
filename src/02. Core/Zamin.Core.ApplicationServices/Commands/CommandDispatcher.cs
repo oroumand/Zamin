@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using Zamin.Core.ApplicationServices.Common;
 using Zamin.Core.Domain.Exceptions;
+using Zamin.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Zamin.Toolkits;
 
 namespace Zamin.Core.ApplicationServices.Commands
 {
@@ -13,12 +13,12 @@ namespace Zamin.Core.ApplicationServices.Commands
     public class CommandDispatcher : ICommandDispatcher
     {
         private readonly IServiceScopeFactory _serviceFactory;
-        private readonly ZaminServices _zaminServices;
+        private readonly ZaminServices _ZaminServices;
 
-        public CommandDispatcher(IServiceScopeFactory serviceScopeFactory, ZaminServices zaminServices)
+        public CommandDispatcher(IServiceScopeFactory serviceScopeFactory, ZaminServices ZaminServices)
         {
             _serviceFactory = serviceScopeFactory;
-            _zaminServices = zaminServices;
+            _ZaminServices = ZaminServices;
         }
 
         public Task<CommandResult> Send<TCommand>(in TCommand command) where TCommand : class, ICommand
@@ -64,10 +64,10 @@ namespace Zamin.Core.ApplicationServices.Commands
                 }
                 if (ex?.Parameters.Any() == true)
                 {
-                    commandResult.AddMessage(_zaminServices.ResourceManager[ex.Message, ex?.Parameters]);
+                    commandResult.AddMessage(_ZaminServices.ResourceManager[ex.Message, ex?.Parameters]);
                 }
                 else
-                    commandResult.AddMessage(_zaminServices.ResourceManager[ex.Message]);
+                    commandResult.AddMessage(_ZaminServices.ResourceManager[ex.Message]);
 
                 commandResult.Status = ApplicationServiceStatus.InvalidDomainState;
                 return Task.FromResult(commandResult as TCommandResult);
@@ -81,10 +81,8 @@ namespace Zamin.Core.ApplicationServices.Commands
                 var validationResult = validator.Validate(command);
                 if (!validationResult.IsValid)
                 {
-                    TValidationResult res = new TValidationResult
-                    {
-                        Status = ApplicationServiceStatus.ValidationError
-                    };
+                    TValidationResult res = new TValidationResult();
+                    res.Status = ApplicationServiceStatus.ValidationError;
                     foreach (var item in validationResult.Errors)
                     {
                         res.AddMessage(item.ErrorMessage);

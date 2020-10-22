@@ -1,6 +1,6 @@
 ﻿using Zamin.Core.Domain.Data;
+using Zamin.Utilities;
 using System.Threading.Tasks;
-using Zamin.Toolkits;
 
 namespace Zamin.Infra.Data.Sql.Commands
 {
@@ -8,12 +8,12 @@ namespace Zamin.Infra.Data.Sql.Commands
         where TDbContext : BaseCommandDbContext
     {
         protected readonly TDbContext _dbContext;
-        protected readonly ZaminServices _zaminApplicationService;
+        protected readonly ZaminServices _ZaminApplicationService;
 
-        public BaseEntityFrameworkUnitOfWork(TDbContext dbContext, ZaminServices zaminApplicationContext)
+        public BaseEntityFrameworkUnitOfWork(TDbContext dbContext, ZaminServices ZaminApplicationContext)
         {
             _dbContext = dbContext;
-            _zaminApplicationService = zaminApplicationContext;
+            _ZaminApplicationService = ZaminApplicationContext;
         }
 
         public void BeginTransaction()

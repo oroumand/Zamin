@@ -1,11 +1,11 @@
 ﻿using Zamin.Core.Domain.Entities;
 using Zamin.Core.Domain.ValueObjects;
+using Zamin.Utilities.Services.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Zamin.Toolkits.Services.Users;
 
 namespace Zamin.Infra.Data.Sql.Configurations
 {

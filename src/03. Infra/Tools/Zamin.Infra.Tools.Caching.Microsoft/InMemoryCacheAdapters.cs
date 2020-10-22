@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using Zamin.Utilities.Services.Chaching;
+using Microsoft.Extensions.Caching.Memory;
 using System;
-using Zamin.Toolkits.Services.Chaching;
 
 namespace Zamin.Infra.Tools.Caching.Microsoft
 {

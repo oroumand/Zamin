@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Queries;
 using Zamin.Core.ApplicationServices.Events;
+using Zamin.Utilities;
+using Zamin.Utilities.Services.Serializers;
 using Zamin.Core.ApplicationServices.Common;
 using Zamin.EndPoints.Web.Extentions;
-using Zamin.Toolkits;
 
 namespace Zamin.EndPoints.Web.Controllers
 {
@@ -17,7 +19,6 @@ namespace Zamin.EndPoints.Web.Controllers
         protected IEventDispatcher EventDispatcher => HttpContext.EventDispatcher();
         protected ZaminServices ZaminApplicationContext => HttpContext.ZaminApplicationContext();
 
-  
 
         protected async Task<IActionResult> Create<TCommand, TCommandResult>(TCommand command) where TCommand : class, ICommand<TCommandResult>
         {

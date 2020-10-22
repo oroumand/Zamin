@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
+﻿using Zamin.Utilities.Services.Chaching;
+using Zamin.Utilities.Services.Serializers;
+using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Text;
-using Zamin.Toolkits.Services.Chaching;
-using Zamin.Toolkits.Services.Serializers;
 
 namespace Zamin.Infra.Tools.Caching.Microsoft
 {

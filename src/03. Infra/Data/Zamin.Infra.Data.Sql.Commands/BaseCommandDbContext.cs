@@ -11,8 +11,8 @@ using System.Threading;
 using Zamin.Infra.Data.Sql.Configurations;
 using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
 using Zamin.Infra.Events.Outbox;
-using Zamin.Toolkits.Services.Serializers;
-using Zamin.Toolkits.Services.Users;
+using Zamin.Utilities.Services.Users;
+using Zamin.Utilities.Services.Serializers;
 
 namespace Zamin.Infra.Data.Sql.Commands
 {

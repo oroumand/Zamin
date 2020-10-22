@@ -1,6 +1,6 @@
 ﻿using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.Domain.ValueObjects;
-using Zamin.Toolkits.Extentions;
+using Zamin.Utilities.Extentions;
 
 namespace Zamin.Core.Domain.Toolkits.ValueObjects
 {

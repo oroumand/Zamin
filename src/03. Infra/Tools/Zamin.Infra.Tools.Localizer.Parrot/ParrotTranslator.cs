@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Zamin.Utilities.Services.Localizations;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Globalization;
-using Zamin.Toolkits.Services.Translations;
 
 namespace Zamin.Infra.Tools.Localizer.Parrot
 {

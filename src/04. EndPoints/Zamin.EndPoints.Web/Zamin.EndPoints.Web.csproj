@@ -2,10 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>1.0.0-Preview.2.0.0</Version>
-    <RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
-    <Description>Useful filters, middleware, extetions and ... for api endpoint in zamin framework</Description>
-    <Authors>Alireza Oroumand</Authors>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,10 +25,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\01. Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
     <ProjectReference Include="..\..\02. Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\02. Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
     <ProjectReference Include="..\..\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql.Commands\Zamin.Infra.Data.Sql.Commands.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql.Queries\Zamin.Infra.Data.Sql.Queries.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Events\Zamin.Infra.Events.Outbox\Zamin.Infra.Events.Outbox.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Localization.Microsoft\Zamin.Infra.Localizations.Microsoft.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Caching.Microsoft\Zamin.Infra.Tools.Caching.Microsoft.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Localizer.Parrot\Zamin.Infra.Tools.Localizer.Parrot.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Messaging.RabbitMq\Zamin.Infra.Tools.Messaging.RabbitMq.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.OM.AutoMapper\Zamin.Infra.Tools.OM.AutoMapper.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Srlzr.NewtonSoft\Zamin.Infra.Tools.Srlzr.NewtonSoft.csproj" />
   </ItemGroup>

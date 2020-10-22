@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Zamin.Core.Domain.Events;
+using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
-using Zamin.Core.Domain.Events;
 
 namespace Zamin.Core.ApplicationServices.Events
 {

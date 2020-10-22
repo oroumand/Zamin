@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\02. Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\..\..\src\02. Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
+    <ProjectReference Include="..\..\..\..\src\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

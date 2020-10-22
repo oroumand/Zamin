@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using Zamin.Core.ApplicationServices.Common;
-using Zamin.Toolkits;
+﻿using Zamin.Core.ApplicationServices.Common;
+using Zamin.Utilities;
+using System.Threading.Tasks;
 
 namespace Zamin.Core.ApplicationServices.Queries
-{
-
+{   
     public interface IQueryHandler<TQuery, TData>
-            where TQuery : class, IQuery<TData>
+        where TQuery : class, IQuery<TData>
     {
         Task<QueryResult<TData>> Handle(TQuery request);
     }
@@ -14,7 +13,7 @@ namespace Zamin.Core.ApplicationServices.Queries
     public abstract class QueryHandler<TQuery, TData> : IQueryHandler<TQuery, TData>
         where TQuery : class, IQuery<TData>
     {
-        protected readonly ZaminServices _zaminApplicationContext;
+        protected readonly ZaminServices _ZaminApplicationContext;
         protected readonly QueryResult<TData> result = new QueryResult<TData>();
 
         protected virtual Task<QueryResult<TData>> ResultAsync(TData data, ApplicationServiceStatus status)
@@ -44,9 +43,9 @@ namespace Zamin.Core.ApplicationServices.Queries
             return Result(data, status);
         }
 
-        public QueryHandler(ZaminServices zaminApplicationContext)
+        public QueryHandler(ZaminServices ZaminApplicationContext)
         {
-            _zaminApplicationContext = zaminApplicationContext;
+            _ZaminApplicationContext = ZaminApplicationContext;
         }
 
         public abstract Task<QueryResult<TData>> Handle(TQuery request);

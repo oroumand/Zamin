@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Zamin.Utilities.Services.Serializers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Zamin.Toolkits.Services.Serializers;
 
 namespace Zamin.Infra.Tools.Srlzr.NewtonSoft
 {

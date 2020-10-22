@@ -2,18 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.0.0-Preview.2.0.0</Version>
-    <Description>Base commands data classes in Zamin  Framework</Description>
-    <RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
-    <Authors>Alireza Oroumand</Authors>
+    <Version>2.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.35" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\01. Utilities\Zamin.Toolkits\Zamin.Toolkits.csproj" />
     <ProjectReference Include="..\..\..\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
     <ProjectReference Include="..\..\Events\Zamin.Infra.Events.Outbox\Zamin.Infra.Events.Outbox.csproj" />
     <ProjectReference Include="..\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />

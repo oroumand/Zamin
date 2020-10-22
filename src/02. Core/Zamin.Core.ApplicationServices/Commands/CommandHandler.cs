@@ -1,18 +1,18 @@
 ﻿using Zamin.Core.ApplicationServices.Common;
+using Zamin.Utilities;
 using System.Threading.Tasks;
-using Zamin.Toolkits;
 
 namespace Zamin.Core.ApplicationServices.Commands
 {
     public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand, TData>
     where TCommand : ICommand<TData>
     {
-        protected readonly ZaminServices _zaminServices;
+        protected readonly ZaminServices _ZaminServices;
         protected readonly CommandResult<TData> result = new CommandResult<TData>();
 
-        public CommandHandler(ZaminServices zaminServices)
+        public CommandHandler(ZaminServices ZaminServices)
         {
-            _zaminServices = zaminServices;
+            _ZaminServices = ZaminServices;
         }
         public abstract Task<CommandResult<TData>> Handle(TCommand request);
         protected virtual Task<CommandResult<TData>> OkAsync(TData data)
@@ -43,22 +43,22 @@ namespace Zamin.Core.ApplicationServices.Commands
 
         protected void AddMessage(string message)
         {
-            result.AddMessage(_zaminServices.ResourceManager[message]);
+            result.AddMessage(_ZaminServices.ResourceManager[message]);
         }
         protected void AddMessage(string message, params string[] arguments)
         {
-            result.AddMessage(_zaminServices.ResourceManager[message, arguments]);
+            result.AddMessage(_ZaminServices.ResourceManager[message, arguments]);
         }
     }
 
     public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
     where TCommand : ICommand
     {
-        protected readonly ZaminServices _zaminServices;
+        protected readonly ZaminServices _ZaminServices;
         protected readonly CommandResult result = new CommandResult();
-        public CommandHandler(ZaminServices zaminServices)
+        public CommandHandler(ZaminServices ZaminServices)
         {
-            _zaminServices = zaminServices;
+            _ZaminServices = ZaminServices;
         }
         public abstract Task<CommandResult> Handle(TCommand request);
 
@@ -86,11 +86,11 @@ namespace Zamin.Core.ApplicationServices.Commands
         }
         protected void AddMessage(string message)
         {
-            result.AddMessage(_zaminServices.ResourceManager[message]);
+            result.AddMessage(_ZaminServices.ResourceManager[message]);
         }
         protected void AddMessage(string message, params string[] arguments)
         {
-            result.AddMessage(_zaminServices.ResourceManager[message, arguments]);
+            result.AddMessage(_ZaminServices.ResourceManager[message, arguments]);
         }
     }
 }
