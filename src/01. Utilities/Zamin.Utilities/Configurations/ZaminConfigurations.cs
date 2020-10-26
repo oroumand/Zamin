@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Zamin.EndPoints.Web.Configurations
+namespace Zamin.Utilities.Configurations
 {
 
 

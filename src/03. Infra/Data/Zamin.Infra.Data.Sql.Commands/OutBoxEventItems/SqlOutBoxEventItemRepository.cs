@@ -11,7 +11,7 @@ namespace Zamin.Infra.Data.Sql.Commands.OutBoxEventItems
 {
     public class SqlOutBoxEventItemRepository : IOutBoxEventItemRepository
     {
-        string _connectionString;
+        readonly string _connectionString;
         public SqlOutBoxEventItemRepository(IConfiguration configuration)
         {
             _connectionString = configuration["ZaminConfigurations:Messaging:EventOutbox:ConnectionString"];

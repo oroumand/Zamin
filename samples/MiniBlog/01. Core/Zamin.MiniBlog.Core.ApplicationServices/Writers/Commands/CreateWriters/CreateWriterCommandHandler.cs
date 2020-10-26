@@ -14,7 +14,7 @@ namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreatePerson
     {
         private readonly IWriterRepository writerRepository;
 
-        public CreateWriterCommandHandler(ZaminServices ZaminServices, IWriterRepository writerRepository) : base(ZaminServices)
+        public CreateWriterCommandHandler(ZaminServices zaminServices, IWriterRepository writerRepository) : base(zaminServices)
         {
             this.writerRepository = writerRepository;
         }

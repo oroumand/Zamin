@@ -1,6 +1,6 @@
-﻿using Zamin.EndPoints.Web.Configurations;
-using Zamin.EndPoints.Web.Filters;
+﻿using Zamin.EndPoints.Web.Filters;
 using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
+using Zamin.Utilities.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
@@ -17,9 +17,9 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var _ZaminConfigurations = new ZaminConfigurations();
-            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_ZaminConfigurations);
-            services.AddSingleton(_ZaminConfigurations);
+            var _zaminConfigurations = new ZaminConfigurations();
+            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_zaminConfigurations);
+            services.AddSingleton(_zaminConfigurations);
 
             
             services.AddControllersWithViews(options =>
@@ -29,7 +29,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             })
 
             .AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (t, f) => f.Create(typeof(TResourceType)));
-            services.AddEveCoreDependencies(_ZaminConfigurations.AssmblyNameForLoad);
+            services.AddEveCoreDependencies(_zaminConfigurations.AssmblyNameForLoad);
 
             return services;
         }

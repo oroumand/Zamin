@@ -2,6 +2,7 @@
 
 namespace Zamin.Infra.Events.Outbox
 {
+
     public class OutBoxEventItem
     {
         public long OutBoxEventItemId { get; set; }

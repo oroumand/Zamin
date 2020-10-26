@@ -13,12 +13,12 @@ namespace Zamin.Core.ApplicationServices.Commands
     public class CommandDispatcher : ICommandDispatcher
     {
         private readonly IServiceScopeFactory _serviceFactory;
-        private readonly ZaminServices _ZaminServices;
+        private readonly ZaminServices _zaminServices;
 
-        public CommandDispatcher(IServiceScopeFactory serviceScopeFactory, ZaminServices ZaminServices)
+        public CommandDispatcher(IServiceScopeFactory serviceScopeFactory, ZaminServices zaminServices)
         {
             _serviceFactory = serviceScopeFactory;
-            _ZaminServices = ZaminServices;
+            _zaminServices = zaminServices;
         }
 
         public Task<CommandResult> Send<TCommand>(in TCommand command) where TCommand : class, ICommand
@@ -64,10 +64,10 @@ namespace Zamin.Core.ApplicationServices.Commands
                 }
                 if (ex?.Parameters.Any() == true)
                 {
-                    commandResult.AddMessage(_ZaminServices.ResourceManager[ex.Message, ex?.Parameters]);
+                    commandResult.AddMessage(_zaminServices.ResourceManager[ex.Message, ex?.Parameters]);
                 }
                 else
-                    commandResult.AddMessage(_ZaminServices.ResourceManager[ex.Message]);
+                    commandResult.AddMessage(_zaminServices.ResourceManager[ex.Message]);
 
                 commandResult.Status = ApplicationServiceStatus.InvalidDomainState;
                 return Task.FromResult(commandResult as TCommandResult);

@@ -81,8 +81,7 @@ namespace Zamin.Utilities.Extentions
                 return false;
             return true;
 
-
-            bool IsFormat1Validate(string nationalId)
+            static bool IsFormat1Validate(string nationalId)
             {
                 var allDigitEqual = new[] { "00000000000", "11111111111", "22222222222", "33333333333", "44444444444", "55555555555", "66666666666", "77777777777", "88888888888", "99999999999" };
                 if (!allDigitEqual.Contains(nationalId))
@@ -90,22 +89,22 @@ namespace Zamin.Utilities.Extentions
                 return false;
             }
 
-            bool IsFormat2Validate(string nationalId)
+            static bool IsFormat2Validate(string nationalId)
             {
                 var chArray = nationalId.ToCharArray();
                 var controlCode = Convert.ToInt32(nationalId[10].ToString());
                 var factor = Convert.ToInt32(nationalId[9].ToString()) + 2;
                 var sum = 0;
-                sum = sum + (factor + Convert.ToInt32(chArray[0].ToString())) * 29;
-                sum = sum + (factor + Convert.ToInt32(chArray[1].ToString())) * 27;
-                sum = sum + (factor + Convert.ToInt32(chArray[2].ToString())) * 23;
-                sum = sum + (factor + Convert.ToInt32(chArray[3].ToString())) * 19;
-                sum = sum + (factor + Convert.ToInt32(chArray[4].ToString())) * 17;
-                sum = sum + (factor + Convert.ToInt32(chArray[5].ToString())) * 29;
-                sum = sum + (factor + Convert.ToInt32(chArray[6].ToString())) * 27;
-                sum = sum + (factor + Convert.ToInt32(chArray[7].ToString())) * 23;
-                sum = sum + (factor + Convert.ToInt32(chArray[8].ToString())) * 19;
-                sum = sum + (factor + Convert.ToInt32(chArray[9].ToString())) * 17;
+                sum += (factor + Convert.ToInt32(chArray[0].ToString())) * 29;
+                sum += (factor + Convert.ToInt32(chArray[1].ToString())) * 27;
+                sum += (factor + Convert.ToInt32(chArray[2].ToString())) * 23;
+                sum += (factor + Convert.ToInt32(chArray[3].ToString())) * 19;
+                sum += (factor + Convert.ToInt32(chArray[4].ToString())) * 17;
+                sum += (factor + Convert.ToInt32(chArray[5].ToString())) * 29;
+                sum += (factor + Convert.ToInt32(chArray[6].ToString())) * 27;
+                sum += (factor + Convert.ToInt32(chArray[7].ToString())) * 23;
+                sum += (factor + Convert.ToInt32(chArray[8].ToString())) * 19;
+                sum += (factor + Convert.ToInt32(chArray[9].ToString())) * 17;
                 var remaining = sum % 11;
                 if (remaining == 10)
                     remaining = 0;

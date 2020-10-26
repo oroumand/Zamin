@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zamin.EndPoints.Web.Configurations
+namespace Zamin.Utilities.Configurations
 {
     public class Swagger
     {

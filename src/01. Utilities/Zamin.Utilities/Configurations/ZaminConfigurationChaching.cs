@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Zamin.EndPoints.Web.Configurations
+namespace Zamin.Utilities.Configurations
 {
     public enum ChachProvider
     {

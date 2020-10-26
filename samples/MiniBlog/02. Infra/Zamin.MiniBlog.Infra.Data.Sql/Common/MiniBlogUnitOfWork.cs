@@ -6,7 +6,7 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Common
 {
     public class MiniBlogUnitOfWork : BaseEntityFrameworkUnitOfWork<MiniblogDbContext>, IMiniblogUnitOfWork
     {
-        public MiniBlogUnitOfWork(MiniblogDbContext dbContext, ZaminServices ZaminApplicationContext) : base(dbContext, ZaminApplicationContext)
+        public MiniBlogUnitOfWork(MiniblogDbContext dbContext, ZaminServices zaminApplicationContext) : base(dbContext, zaminApplicationContext)
         {
         }
     }

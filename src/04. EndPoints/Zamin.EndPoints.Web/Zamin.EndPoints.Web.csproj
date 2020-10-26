@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>2.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,7 +36,6 @@
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Localization.Microsoft\Zamin.Infra.Localizations.Microsoft.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Caching.Microsoft\Zamin.Infra.Tools.Caching.Microsoft.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Localizer.Parrot\Zamin.Infra.Tools.Localizer.Parrot.csproj" />
-    <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Messaging.RabbitMq\Zamin.Infra.Tools.Messaging.RabbitMq.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.OM.AutoMapper\Zamin.Infra.Tools.OM.AutoMapper.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Srlzr.NewtonSoft\Zamin.Infra.Tools.Srlzr.NewtonSoft.csproj" />
   </ItemGroup>

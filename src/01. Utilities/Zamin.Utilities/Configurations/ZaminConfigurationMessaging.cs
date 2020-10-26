@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zamin.EndPoints.Web.Configurations
+namespace Zamin.Utilities.Configurations
 {
     public class Messaging
     {
         public string MessageBusTypeName { get; set; }
         public EventOutbox EventOutbox { get; set; }
+        public MessageInbox MessageInbox { get; set; }
         public Rabbitmq RabbitMq { get; set; }
         public Inputs Inputs { get; set; }
     }
@@ -18,6 +19,7 @@ namespace Zamin.EndPoints.Web.Configurations
         public string Password { get; set; }
         public string Host { get; set; }
         public string Port { get; set; }
+        public string VirualHost { get; set; }
         public string Protocol { get; set; }
         public string ExchangeName { get; set; }
         public bool ExchangeDurable { get; set; }
@@ -32,7 +34,7 @@ namespace Zamin.EndPoints.Web.Configurations
         public int SendOutBoxInterval { get; set; }
         public int SendOutBoxCount { get; set; }
     }
-   
+
     public class Inputs
     {
         public object[] Commands { get; set; }
@@ -51,4 +53,14 @@ namespace Zamin.EndPoints.Web.Configurations
         public string MapToClass { get; set; }
     }
 
+    public class MessageInbox
+    {
+        public bool Enabled { get; set; }
+        public string MessageInboxRepositoryTypeName { get; set; }
+        public SqlMessageInbox SqlMessageInbox { get; set; }
+    }
+    public class SqlMessageInbox
+    {
+        public string ConnectionString { get; set; }
+    }
 }
