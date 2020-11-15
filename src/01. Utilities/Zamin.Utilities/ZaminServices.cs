@@ -9,21 +9,21 @@ namespace Zamin.Utilities
 {
     public class ZaminServices
     {
-        public readonly ITranslator ResourceManager;
+        public readonly ITranslator Translator;
         public readonly ICacheAdapter CacheAdapter;
         public readonly IMapperAdapter MapperFacade;
         public readonly ILoggerFactory LoggerFactory;
         public readonly IJsonSerializer Serializer;
         public readonly IUserInfoService UserInfoService;
 
-        public ZaminServices(ITranslator resourceManager,
+        public ZaminServices(ITranslator translator,
                 ILoggerFactory loggerFactory,
                 IJsonSerializer serializer,
                 IUserInfoService userInfoService,
                 ICacheAdapter cacheAdapter,
                 IMapperAdapter mapperFacade)
         {
-            ResourceManager = resourceManager;
+            Translator = translator;
             LoggerFactory = loggerFactory;
             Serializer = serializer;
             UserInfoService = userInfoService;

@@ -67,6 +67,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Infra.Tools.Localizer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.MiniBlog.EndPoints.Api", "samples\MiniBlog\03. EndPoints\Zamin.MiniBlog.EndPoints.Api\Zamin.MiniBlog.EndPoints.Api.csproj", "{C0D5DAC8-72E7-4E53-A004-7546EDA09DF1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Infra.Events.PoolingPublisher", "src\03. Infra\Events\Zamin.Infra.Events.PoolingPublisher\Zamin.Infra.Events.PoolingPublisher.csproj", "{972FB613-63D2-41E8-A408-99DF28CC883F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{06E21D59-00F0-4DCB-9BEA-333DF2B0B1F2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Messaging.IdempotentConsumers", "src\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers\Zamin.Messaging.IdempotentConsumers.csproj", "{42EA21FA-3330-4A4E-A204-6FBA4ABEDEFD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Messaging.MessageBus.RabbitMq", "src\03. Infra\Messaging\Zamin.Messaging.MessageBus.RabbitMq\Zamin.Messaging.MessageBus.RabbitMq.csproj", "{868ED513-8196-4286-A9DF-36B1E6D71F2D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Messaging.IdempotentConsumers.Store.Sql", "src\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers.Store.Sql\Zamin.Messaging.IdempotentConsumers.Store.Sql.csproj", "{26AFF4B4-16C8-41F5-A908-128BCE539E09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +155,22 @@ Global
 		{C0D5DAC8-72E7-4E53-A004-7546EDA09DF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0D5DAC8-72E7-4E53-A004-7546EDA09DF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0D5DAC8-72E7-4E53-A004-7546EDA09DF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972FB613-63D2-41E8-A408-99DF28CC883F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972FB613-63D2-41E8-A408-99DF28CC883F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972FB613-63D2-41E8-A408-99DF28CC883F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972FB613-63D2-41E8-A408-99DF28CC883F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42EA21FA-3330-4A4E-A204-6FBA4ABEDEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42EA21FA-3330-4A4E-A204-6FBA4ABEDEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42EA21FA-3330-4A4E-A204-6FBA4ABEDEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42EA21FA-3330-4A4E-A204-6FBA4ABEDEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{868ED513-8196-4286-A9DF-36B1E6D71F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{868ED513-8196-4286-A9DF-36B1E6D71F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{868ED513-8196-4286-A9DF-36B1E6D71F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{868ED513-8196-4286-A9DF-36B1E6D71F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26AFF4B4-16C8-41F5-A908-128BCE539E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26AFF4B4-16C8-41F5-A908-128BCE539E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26AFF4B4-16C8-41F5-A908-128BCE539E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26AFF4B4-16C8-41F5-A908-128BCE539E09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -179,6 +205,11 @@ Global
 		{C2B6F1A3-1097-4915-8AAC-C8CC8BF0DDAF} = {6E361992-F140-4083-9132-78A9A652D1E7}
 		{F45CBC29-4046-4440-9437-44CFE1740FB8} = {6E361992-F140-4083-9132-78A9A652D1E7}
 		{C0D5DAC8-72E7-4E53-A004-7546EDA09DF1} = {FB609964-945C-47F8-9907-AB5FA6B40492}
+		{972FB613-63D2-41E8-A408-99DF28CC883F} = {7C975EC2-CDEA-451A-980A-EB1B6F326C8C}
+		{06E21D59-00F0-4DCB-9BEA-333DF2B0B1F2} = {DC544674-9E95-4F6E-94C8-545A77391E66}
+		{42EA21FA-3330-4A4E-A204-6FBA4ABEDEFD} = {06E21D59-00F0-4DCB-9BEA-333DF2B0B1F2}
+		{868ED513-8196-4286-A9DF-36B1E6D71F2D} = {06E21D59-00F0-4DCB-9BEA-333DF2B0B1F2}
+		{26AFF4B4-16C8-41F5-A908-128BCE539E09} = {06E21D59-00F0-4DCB-9BEA-333DF2B0B1F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5D1ECA0-C4FC-4886-ABDA-F867CC0914D9}

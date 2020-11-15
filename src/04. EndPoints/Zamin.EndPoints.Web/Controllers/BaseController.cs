@@ -21,6 +21,8 @@ namespace Zamin.EndPoints.Web.Controllers
 
 
 
+
+
         protected async Task<IActionResult> Create<TCommand, TCommandResult>(TCommand command) where TCommand : class, ICommand<TCommandResult>
         {
             var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command);

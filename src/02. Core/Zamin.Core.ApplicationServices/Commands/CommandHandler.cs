@@ -43,11 +43,11 @@ namespace Zamin.Core.ApplicationServices.Commands
 
         protected void AddMessage(string message)
         {
-            result.AddMessage(_zaminServices.ResourceManager[message]);
+            result.AddMessage(_zaminServices.Translator[message]);
         }
         protected void AddMessage(string message, params string[] arguments)
         {
-            result.AddMessage(_zaminServices.ResourceManager[message, arguments]);
+            result.AddMessage(_zaminServices.Translator[message, arguments]);
         }
     }
 
@@ -86,11 +86,11 @@ namespace Zamin.Core.ApplicationServices.Commands
         }
         protected void AddMessage(string message)
         {
-            result.AddMessage(_zaminServices.ResourceManager[message]);
+            result.AddMessage(_zaminServices.Translator[message]);
         }
         protected void AddMessage(string message, params string[] arguments)
         {
-            result.AddMessage(_zaminServices.ResourceManager[message, arguments]);
+            result.AddMessage(_zaminServices.Translator[message, arguments]);
         }
     }
 }

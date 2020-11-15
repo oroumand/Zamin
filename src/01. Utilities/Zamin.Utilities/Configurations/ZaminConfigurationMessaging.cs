@@ -4,17 +4,18 @@ using System.Text;
 
 namespace Zamin.Utilities.Configurations
 {
-    public class Messaging
+
+
+    public class MessageBus
     {
         public string MessageBusTypeName { get; set; }
-        public EventOutbox EventOutbox { get; set; }
-        public MessageInbox MessageInbox { get; set; }
-        public Rabbitmq RabbitMq { get; set; }
-        public Inputs Inputs { get; set; }
+        public string MessageConsumerTypeName { get; set; }
+        public RabbitMq RabbitMq { get; set; }
     }
 
-    public class Rabbitmq
+    public class RabbitMq
     {
+
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Host { get; set; }
@@ -24,43 +25,35 @@ namespace Zamin.Utilities.Configurations
         public string ExchangeName { get; set; }
         public bool ExchangeDurable { get; set; }
         public bool ExchangeAutoDeleted { get; set; }
-    }
+        public Uri Uri => new Uri($"{Protocol}://{UserName}:{Password}@{Host}:{Port}{VirualHost}");
 
-    public class EventOutbox
-    {
-        public bool Enabled { get; set; }
-        public string ConnectionString { get; set; }
-        public string OutBoxRepositoryTypeName { get; set; }
-        public int SendOutBoxInterval { get; set; }
-        public int SendOutBoxCount { get; set; }
     }
-
-    public class Inputs
+    public class Messageconsumer
     {
-        public object[] Commands { get; set; }
-        public Eventinbox[] EventInbox { get; set; }
-    }
-
-    public class Eventinbox
-    {
-        public string ServiceId { get; set; }
+        public string MessageInboxStoreTypeName { get; set; }
+        public SqlMessageInboxStore SqlMessageInboxStore { get; set; }
+        public Command[] Commands { get; set; }
         public Event[] Events { get; set; }
+    }
+    public class SqlMessageInboxStore
+    {
+        public string ConnectionString { get; set; }
+    }
+    public class Command
+    {
+        public string CommandName { get; set; }
+        public string MapToClass { get; set; }
     }
 
     public class Event
     {
-        public string Name { get; set; }
-        public string MapToClass { get; set; }
+        public string FromServiceId { get; set; }
+        public Eventdata[] EventData { get; set; }
     }
 
-    public class MessageInbox
+    public class Eventdata
     {
-        public bool Enabled { get; set; }
-        public string MessageInboxRepositoryTypeName { get; set; }
-        public SqlMessageInbox SqlMessageInbox { get; set; }
-    }
-    public class SqlMessageInbox
-    {
-        public string ConnectionString { get; set; }
+        public string EventName { get; set; }
+        public string MapToClass { get; set; }
     }
 }

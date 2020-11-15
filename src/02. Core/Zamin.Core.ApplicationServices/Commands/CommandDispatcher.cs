@@ -2,6 +2,7 @@
 using Zamin.Core.ApplicationServices.Common;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Utilities;
+using Zamin.Utilities.Services.Localizations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
@@ -13,12 +14,12 @@ namespace Zamin.Core.ApplicationServices.Commands
     public class CommandDispatcher : ICommandDispatcher
     {
         private readonly IServiceScopeFactory _serviceFactory;
-        private readonly ZaminServices _zaminServices;
+        private readonly ITranslator _translator;
 
-        public CommandDispatcher(IServiceScopeFactory serviceScopeFactory, ZaminServices zaminServices)
+        public CommandDispatcher(IServiceScopeFactory serviceScopeFactory,ITranslator translator)
         {
             _serviceFactory = serviceScopeFactory;
-            _zaminServices = zaminServices;
+            _translator = translator;
         }
 
         public Task<CommandResult> Send<TCommand>(in TCommand command) where TCommand : class, ICommand
@@ -64,10 +65,10 @@ namespace Zamin.Core.ApplicationServices.Commands
                 }
                 if (ex?.Parameters.Any() == true)
                 {
-                    commandResult.AddMessage(_zaminServices.ResourceManager[ex.Message, ex?.Parameters]);
+                    commandResult.AddMessage(_translator[ex.Message, ex?.Parameters]);
                 }
                 else
-                    commandResult.AddMessage(_zaminServices.ResourceManager[ex.Message]);
+                    commandResult.AddMessage(_translator[ex.Message]);
 
                 commandResult.Status = ApplicationServiceStatus.InvalidDomainState;
                 return Task.FromResult(commandResult as TCommandResult);

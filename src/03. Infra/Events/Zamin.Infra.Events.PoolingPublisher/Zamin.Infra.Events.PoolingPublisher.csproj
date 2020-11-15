@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\01. Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
+    <ProjectReference Include="..\Zamin.Infra.Events.Outbox\Zamin.Infra.Events.Outbox.csproj" />
   </ItemGroup>
 
 </Project>

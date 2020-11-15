@@ -14,7 +14,9 @@ namespace Zamin.Utilities.Configurations
         public string UserInfoServiceTypeName { get; set; }
         public bool RegisterAutomapperProfiles { get; set; } = true;
         public string AssmblyNameForLoad { get; set; }
-        public Messaging Messaging { get; set; }
+        public MessageBus MessageBus { get; set; }
+        public Messageconsumer Messageconsumer { get; set; }
+        public PoolingPublisher PoolingPublisher { get; set; }
 
         public Translator Translator { get; set; }
 

@@ -78,7 +78,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                     c.RoutePrefix = string.Empty;
                 });
             }
-
+            
             app.UseCors(builder =>
             {
                 builder.AllowAnyOrigin();
@@ -93,6 +93,9 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 endpoints.MapControllers();
             });
         }
+
+
+
 
     }
 }

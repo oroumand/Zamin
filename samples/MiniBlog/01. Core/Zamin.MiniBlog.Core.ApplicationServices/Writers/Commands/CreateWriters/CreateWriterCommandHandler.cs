@@ -12,18 +12,18 @@ namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreatePerson
 {
     public class CreateWriterCommandHandler : CommandHandler<CreateWiterCommand, long>
     {
-        private readonly IWriterRepository writerRepository;
+        private readonly IWriterRepository _writerRepository;
 
         public CreateWriterCommandHandler(ZaminServices zaminServices, IWriterRepository writerRepository) : base(zaminServices)
         {
-            this.writerRepository = writerRepository;
+            this._writerRepository = writerRepository;
         }
 
         public override Task<CommandResult<long>> Handle(CreateWiterCommand request)
         {
             Writer writer = new Writer(BusinessId.FromGuid(request.BusinessId), request.FirstName, request.LastName);
-            writerRepository.Insert(writer);
-            writerRepository.Commit();
+            _writerRepository.Insert(writer);
+            _writerRepository.Commit();
             return OkAsync(writer.Id);
         }
     }

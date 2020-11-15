@@ -11,7 +11,16 @@ namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Events
     {
         public Task Handle(PersonCreated Event)
         {
-            int a = 123;
+            Console.WriteLine(Event.FirstName);
+            return Task.CompletedTask;
+        }
+    }
+
+    public class PersonUpdatedHandler : IDomainEventHandler<PersonUpdated>
+    {
+        public Task Handle(PersonUpdated Event)
+        {
+            Console.WriteLine(Event.FirstName);
             return Task.CompletedTask;
         }
     }

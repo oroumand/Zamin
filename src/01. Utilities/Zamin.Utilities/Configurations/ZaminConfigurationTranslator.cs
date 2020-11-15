@@ -15,6 +15,8 @@ namespace Zamin.Utilities.Configurations
     public class Parrottranslator
     {
         public string ConnectionString { get; set; }
+        public string SelectCommand { get; set; } = "Select * from ParrotTranslations";
+        public string InsertCommand { get; set; } = "INSERT INTO [dbo].[ParrotTranslations]([Key],[Value],[Culture]) VALUES (@Key,@Value,@Culture) select SCOPE_IDENTITY()";
     }
 
 }

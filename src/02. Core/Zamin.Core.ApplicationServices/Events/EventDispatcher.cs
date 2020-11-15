@@ -13,7 +13,6 @@ namespace Zamin.Core.ApplicationServices.Events
             _serviceFactory = serviceScopeFactory;
         }
         #region Event Dispatcher
-
         public async Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class, IDomainEvent
         {
             using var serviceProviderScop = _serviceFactory.CreateScope();
@@ -23,9 +22,6 @@ namespace Zamin.Core.ApplicationServices.Events
                 await handler.Handle(@event);
             }
         }
-
-
-
         #endregion
 
     }

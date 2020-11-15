@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\01. Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
+    <ProjectReference Include="..\Zamin.Messaging.IdempotentConsumers\Zamin.Messaging.IdempotentConsumers.csproj" />
   </ItemGroup>
 
 </Project>

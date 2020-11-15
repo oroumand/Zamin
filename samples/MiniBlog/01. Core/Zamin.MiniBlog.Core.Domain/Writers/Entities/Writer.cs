@@ -25,5 +25,17 @@ namespace Zamin.MiniBlog.Core.Domain.Writers.Entities
                 PersonId = BusinessId.Value.ToString()
             });
         }
+
+        public void Update( Title firstName, Title lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            AddEvent(new PersonUpdated
+            {
+                FirstName = FirstName.Value,
+                LastName = LastName.Value,
+                PersonId = BusinessId.Value.ToString()
+            });
+        }
     }
 }

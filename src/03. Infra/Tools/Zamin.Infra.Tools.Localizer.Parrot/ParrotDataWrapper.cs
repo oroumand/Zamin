@@ -4,6 +4,7 @@ using System.Data;
 using Dapper;
 using System.Data.SqlClient;
 using System.Linq;
+using Zamin.Utilities.Configurations;
 
 namespace Zamin.Infra.Tools.Localizer.Parrot
 {
@@ -11,12 +12,13 @@ namespace Zamin.Infra.Tools.Localizer.Parrot
     {
         private readonly IDbConnection _dbConnection;
         private readonly List<LocalizationRecord> _localizationRecords;
-        public ParrotDataWrapper(IConfiguration configuration)
+        private readonly ZaminConfigurations _configuration;
+
+        public ParrotDataWrapper(ZaminConfigurations configuration)
         {
-            var cnnString = configuration["ZaminConfigurations:Translator:ParrotTranslator:ConnectionString"];
-            _dbConnection = new SqlConnection(cnnString);
-            string selectCommand = "Select * from ParrotTranslations";
-            _localizationRecords = _dbConnection.Query<LocalizationRecord>(selectCommand, commandType: CommandType.Text).ToList();
+            _configuration = configuration;
+            _dbConnection = new SqlConnection(configuration.Translator.Parrottranslator.ConnectionString);
+            _localizationRecords = _dbConnection.Query<LocalizationRecord>(configuration.Translator.Parrottranslator.SelectCommand, commandType: CommandType.Text).ToList();
         }
 
         public string Get(string key, string culture)
@@ -30,7 +32,7 @@ namespace Zamin.Infra.Tools.Localizer.Parrot
                     Culture = culture,
                     Value = key
                 };
-                string insertCommand = "INSERT INTO [dbo].[ParrotTranslations]([Key],[Value],[Culture]) VALUES (@Key,@Value,@Culture) select SCOPE_IDENTITY()";
+                string insertCommand = _configuration.Translator.Parrottranslator.InsertCommand;
                 var parameters = new DynamicParameters();
                 parameters.Add("@Key", key);
                 parameters.Add("@Culture", culture);

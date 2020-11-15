@@ -1,4 +1,5 @@
-﻿using Zamin.Utilities.Services.Localizations;
+﻿using Zamin.Utilities.Configurations;
+using Zamin.Utilities.Services.Localizations;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Globalization;
@@ -9,7 +10,7 @@ namespace Zamin.Infra.Tools.Localizer.Parrot
     {
         private readonly ParrotDataWrapper _localizer;
         private readonly string _currentCulture;
-        public ParrotTranslator(IConfiguration configuration)
+        public ParrotTranslator(ZaminConfigurations configuration)
         {
 #if NET451
                         _currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();

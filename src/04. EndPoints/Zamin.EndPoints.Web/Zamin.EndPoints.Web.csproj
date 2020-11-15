@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
+    <Authors>Alireza Oroumand</Authors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +34,10 @@
     <ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql.Queries\Zamin.Infra.Data.Sql.Queries.csproj" />
     <ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
     <ProjectReference Include="..\..\03. Infra\Events\Zamin.Infra.Events.Outbox\Zamin.Infra.Events.Outbox.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Events\Zamin.Infra.Events.PoolingPublisher\Zamin.Infra.Events.PoolingPublisher.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers.Store.Sql\Zamin.Messaging.IdempotentConsumers.Store.Sql.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers\Zamin.Messaging.IdempotentConsumers.csproj" />
+    <ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.MessageBus.RabbitMq\Zamin.Messaging.MessageBus.RabbitMq.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Localization.Microsoft\Zamin.Infra.Localizations.Microsoft.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Caching.Microsoft\Zamin.Infra.Tools.Caching.Microsoft.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Localizer.Parrot\Zamin.Infra.Tools.Localizer.Parrot.csproj" />
