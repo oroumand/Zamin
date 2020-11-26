@@ -158,7 +158,7 @@ namespace Zamin.Infra.Data.Sql.Commands
                 {
                     foreach (var navigation in entityNavigations)
                     {
-                        var inverseNavigation = navigation.FindInverse();
+                        var inverseNavigation = navigation.Inverse;
                         if (inverseNavigation != null)
                             includedNavigations.Add(inverseNavigation);
                     }
@@ -167,7 +167,7 @@ namespace Zamin.Infra.Data.Sql.Commands
                 while (stack.Count > 0 && !stack.Peek().MoveNext())
                     stack.Pop();
                 if (stack.Count == 0) break;
-                entityType = stack.Peek().Current.GetTargetType();
+                entityType = stack.Peek().Current.TargetEntityType;
             }
         }
     }
