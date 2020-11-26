@@ -6,11 +6,13 @@ namespace Zamin.Utilities.Configurations
 {
     public class Swagger
     {
+        public bool Enabled { get; set; }
         public Swaggerdoc SwaggerDoc { get; set; }
     }
 
     public class Swaggerdoc
     {
+      
         public string Version { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }

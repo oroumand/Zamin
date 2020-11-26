@@ -29,8 +29,8 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             }).AddFluentValidation();
 
             services.AddEveCoreDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
-
-            AddSwagger(services);
+            if(_zaminConfigurations.Swagger.Enabled)
+                AddSwagger(services);
             return services;
         }
 
@@ -68,7 +68,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             });
 
             app.UseStatusCodePages();
-            if (configuration.Swagger != null && configuration.Swagger.SwaggerDoc != null)
+            if (configuration.Swagger != null && configuration.Swagger.SwaggerDoc != null && configuration.Swagger.Enabled)
             {
 
                 app.UseSwagger();
