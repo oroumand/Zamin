@@ -78,7 +78,7 @@ namespace Zamin.Infra.Data.Sql.Commands
         public override int SaveChanges()
         {
             ChangeTracker.DetectChanges();
-            beforeSaveTriggers();
+            BeforeSaveTriggers();
             ChangeTracker.AutoDetectChangesEnabled = false;
             var result = base.SaveChanges();
             ChangeTracker.AutoDetectChangesEnabled = true;
@@ -90,20 +90,20 @@ namespace Zamin.Infra.Data.Sql.Commands
             CancellationToken cancellationToken = default)
         {
             ChangeTracker.DetectChanges();
-            beforeSaveTriggers();
+            BeforeSaveTriggers();
             ChangeTracker.AutoDetectChangesEnabled = false;
             var result = base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
             ChangeTracker.AutoDetectChangesEnabled = true;
             return result;
         }
 
-        private void beforeSaveTriggers()
+        private void BeforeSaveTriggers()
         {
-            setShadowProperties();
-            addOutboxEvetItems();
+            SetShadowProperties();
+            AddOutboxEvetItems();
         }
 
-        private void addOutboxEvetItems()
+        private void AddOutboxEvetItems()
         {
             var changedAggregates = ChangeTracker.GetChangedAggregates();
             var userInfoService = this.GetService<IUserInfoService>();
@@ -130,7 +130,7 @@ namespace Zamin.Infra.Data.Sql.Commands
             }
         }
 
-        private void setShadowProperties()
+        private void SetShadowProperties()
         {
             var userInfoService = this.GetService<IUserInfoService>();
             ChangeTracker.SetAuditableEntityPropertyValues(userInfoService);

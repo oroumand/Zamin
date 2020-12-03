@@ -74,7 +74,7 @@ namespace Zamin.Core.ApplicationServices.Commands
                 return Task.FromResult(commandResult as TCommandResult);
             }
         }
-        private TValidationResult Validate<TCommand, TValidationResult>(TCommand command, IServiceScope serviceScope) where TValidationResult : ApplicationServiceResult, new()
+        private static TValidationResult Validate<TCommand, TValidationResult>(TCommand command, IServiceScope serviceScope) where TValidationResult : ApplicationServiceResult, new()
         {
             var validator = serviceScope.ServiceProvider.GetService<IValidator<TCommand>>();
             if (validator != null)
@@ -82,8 +82,10 @@ namespace Zamin.Core.ApplicationServices.Commands
                 var validationResult = validator.Validate(command);
                 if (!validationResult.IsValid)
                 {
-                    TValidationResult res = new TValidationResult();
-                    res.Status = ApplicationServiceStatus.ValidationError;
+                    TValidationResult res = new TValidationResult
+                    {
+                        Status = ApplicationServiceStatus.ValidationError
+                    };
                     foreach (var item in validationResult.Errors)
                     {
                         res.AddMessage(item.ErrorMessage);
