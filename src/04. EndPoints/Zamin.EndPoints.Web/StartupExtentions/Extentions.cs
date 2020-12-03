@@ -9,7 +9,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 {
     public static class Extentions
     {
-        public static IServiceCollection AddEveCoreDependencies(this IServiceCollection services,
+        public static IServiceCollection AddZaminDependencies(this IServiceCollection services,
             params string[] assemblyNamesForSearch)
         {
 

@@ -13,7 +13,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 {
     public static class MvcConfigurationExtentions
     {
-        public static IServiceCollection EveConfigureMvcServices<TResourceType>(
+        public static IServiceCollection ZaminConfigureMvcServices<TResourceType>(
             this IServiceCollection services,
             IConfiguration configuration)
         {
@@ -29,7 +29,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             })
 
             .AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (t, f) => f.Create(typeof(TResourceType)));
-            services.AddEveCoreDependencies(_zaminConfigurations.AssmblyNameForLoad);
+            services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad);
 
             return services;
         }

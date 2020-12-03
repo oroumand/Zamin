@@ -28,7 +28,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }).AddFluentValidation();
 
-            services.AddEveCoreDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
+            services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
             if(_zaminConfigurations.Swagger.Enabled)
                 AddSwagger(services);
             return services;
