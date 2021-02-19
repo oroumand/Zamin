@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Zamin.Core.ApplicationServices.Queries
+namespace Zamin.Core.Domain.Data
 {
     public class PagedData<T>
     {

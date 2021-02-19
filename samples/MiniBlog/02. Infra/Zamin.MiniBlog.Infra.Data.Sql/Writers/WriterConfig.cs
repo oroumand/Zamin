@@ -2,9 +2,6 @@
 using Zamin.MiniBlog.Core.Domain.Writers.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Writers
 {

@@ -18,9 +18,9 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         public static IServiceCollection AddZaminApiServices(this IServiceCollection services,
             IConfiguration configuration)
         {
-            var _zaminConfigurations = new ZaminConfigurations();
-            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_zaminConfigurations);
-            services.AddSingleton(_zaminConfigurations);
+            var _hamoonConfigurations = new ZaminConfigurations();
+            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_hamoonConfigurations);
+            services.AddSingleton(_hamoonConfigurations);
             services.AddScoped<ValidateModelStateAttribute>();
             services.AddControllers(options =>
             {
@@ -28,20 +28,20 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }).AddFluentValidation();
 
-            services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
-            if(_zaminConfigurations.Swagger.Enabled)
+            services.AddZaminDependencies(_hamoonConfigurations.AssmblyNameForLoad.Split(','));
+            if (_hamoonConfigurations.Swagger.Enabled)
                 AddSwagger(services);
             return services;
         }
 
         private static void AddSwagger(IServiceCollection services)
         {
-            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
-            if (_zaminConfigurations.Swagger != null && _zaminConfigurations.Swagger.SwaggerDoc != null)
+            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
+            if (_hamoonConfigurations.Swagger != null && _hamoonConfigurations.Swagger.SwaggerDoc != null)
             {
                 services.AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc(_zaminConfigurations.Swagger.SwaggerDoc.Name, new OpenApiInfo { Title = _zaminConfigurations.Swagger.SwaggerDoc.Title, Version = _zaminConfigurations.Swagger.SwaggerDoc.Version });
+                    c.SwaggerDoc(_hamoonConfigurations.Swagger.SwaggerDoc.Name, new OpenApiInfo { Title = _hamoonConfigurations.Swagger.SwaggerDoc.Title, Version = _hamoonConfigurations.Swagger.SwaggerDoc.Version });
                 });
             }
         }

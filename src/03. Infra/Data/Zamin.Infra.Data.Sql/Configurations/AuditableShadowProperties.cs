@@ -102,7 +102,12 @@ namespace Zamin.Infra.Data.Sql.Configurations
                                      .Where(x => x.State == EntityState.Modified ||
                                             x.State == EntityState.Added ||
                                             x.State == EntityState.Deleted).Select(c => c.Entity).ToList();
-        public static List<AggregateRoot> GetAllAggregates(this ChangeTracker changeTracker) =>
+
+        public static List<EntityEntry<IAuditable>> GetChangedAuditable(this ChangeTracker changeTracker) =>
+            changeTracker.Entries<IAuditable>()
+                .Where(x => x.State == EntityState.Modified || x.State == EntityState.Added || x.State == EntityState.Deleted).ToList();
+
+        public static List<AggregateRoot> GetAggregatesWithEvent(this ChangeTracker changeTracker) =>
             changeTracker.Entries<AggregateRoot>()
                                      .Where(x => x.State != EntityState.Detached).Select(c => c.Entity).Where(c => c.GetEvents().Any()).ToList();
 

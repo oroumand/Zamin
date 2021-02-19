@@ -1,7 +1,9 @@
 ﻿using Zamin.EndPoints.Web.Filters;
 using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
 using Zamin.Utilities.Configurations;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,29 +13,28 @@ using System.Data.SqlClient;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {
-    public static class MvcConfigurationExtentions
+    public static class AddMvcConfigurationExtentions
     {
-        public static IServiceCollection ZaminConfigureMvcServices<TResourceType>(
-            this IServiceCollection services,
+        public static IServiceCollection AddZaminMvcServices(this IServiceCollection services,
             IConfiguration configuration)
         {
-            var _zaminConfigurations = new ZaminConfigurations();
-            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_zaminConfigurations);
-            services.AddSingleton(_zaminConfigurations);
-
-            
+            var _hamoonConfigurations = new ZaminConfigurations();
+            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_hamoonConfigurations);
+            services.AddSingleton(_hamoonConfigurations);
+            services.AddScoped<ValidateModelStateAttribute>();
             services.AddControllersWithViews(options =>
             {
-                options.Filters.AddService<ValidateModelStateAttribute>();
+                //options.Filters.AddService<ValidateModelStateAttribute>();
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
-            })
+            }).AddRazorRuntimeCompilation()
+            .AddFluentValidation();
 
-            .AddDataAnnotationsLocalization(options => options.DataAnnotationLocalizerProvider = (t, f) => f.Create(typeof(TResourceType)));
-            services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad);
+            services.AddZaminDependencies(_hamoonConfigurations.AssmblyNameForLoad.Split(','));
 
             return services;
         }
-        public static void EveMvcConfigure(this IApplicationBuilder app, Action<IEndpointRouteBuilder> configur, ZaminConfigurations configuration)
+
+        public static void UseZaminMvcConfigure(this IApplicationBuilder app, Action<IEndpointRouteBuilder> configur, ZaminConfigurations configuration, IWebHostEnvironment env)
         {
             app.UseApiExceptionHandler(options =>
             {

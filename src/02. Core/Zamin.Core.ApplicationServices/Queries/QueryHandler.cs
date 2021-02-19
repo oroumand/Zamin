@@ -13,7 +13,7 @@ namespace Zamin.Core.ApplicationServices.Queries
     public abstract class QueryHandler<TQuery, TData> : IQueryHandler<TQuery, TData>
         where TQuery : class, IQuery<TData>
     {
-        protected readonly ZaminServices _zaminApplicationContext;
+        protected readonly ZaminServices _hamoonApplicationContext;
         protected readonly QueryResult<TData> result = new QueryResult<TData>();
 
         protected virtual Task<QueryResult<TData>> ResultAsync(TData data, ApplicationServiceStatus status)
@@ -43,9 +43,9 @@ namespace Zamin.Core.ApplicationServices.Queries
             return Result(data, status);
         }
 
-        public QueryHandler(ZaminServices zaminApplicationContext)
+        public QueryHandler(ZaminServices hamoonApplicationContext)
         {
-            _zaminApplicationContext = zaminApplicationContext;
+            _hamoonApplicationContext = hamoonApplicationContext;
         }
 
         public abstract Task<QueryResult<TData>> Handle(TQuery request);

@@ -12,9 +12,9 @@ namespace Zamin.Infra.Tools.Srlzr.NewtonSoft
             string.IsNullOrWhiteSpace(input) ?
                 default : JsonConvert.DeserializeObject<TOutput>(input);
 
-        public object Deserialize(string input, Type type)=>
+        public object Deserialize(string input, Type type) =>
             string.IsNullOrWhiteSpace(input) ?
-                null : JsonConvert.DeserializeObject(input,type);
+                null : JsonConvert.DeserializeObject(input, type);
 
         public string Serilize<TInput>(TInput input) => input == null ? string.Empty : JsonConvert.SerializeObject(input, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
     }

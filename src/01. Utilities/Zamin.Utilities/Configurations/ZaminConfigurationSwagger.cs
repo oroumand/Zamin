@@ -12,7 +12,6 @@ namespace Zamin.Utilities.Configurations
 
     public class Swaggerdoc
     {
-      
         public string Version { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }

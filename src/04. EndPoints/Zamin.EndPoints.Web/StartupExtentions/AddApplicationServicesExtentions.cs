@@ -15,13 +15,24 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             IEnumerable<Assembly> assembliesForSearch) =>
             services
                 .AddCommandHandlers(assembliesForSearch)
+                .AddCommandDispatcherDecorators()
                 .AddQueryHandlers(assembliesForSearch)
                 .AddEventHandlers(assembliesForSearch)
                 .AddFluentValidators(assembliesForSearch);
 
         private static IServiceCollection AddCommandHandlers(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch) =>
-            services.AddWithTransientLifetime(assembliesForSearch, typeof(ICommandHandler<>), typeof(ICommandHandler<,>), typeof(ICommandDispatcher));
+            services.AddWithTransientLifetime(assembliesForSearch, typeof(ICommandHandler<>), typeof(ICommandHandler<,>));
+
+        private static IServiceCollection AddCommandDispatcherDecorators(this IServiceCollection services)
+        {
+            services.AddTransient<CommandDispatcher, CommandDispatcher>();
+            services.AddTransient<CommandDispatcherDomainExceptionHandlerChain, CommandDispatcherDomainExceptionHandlerChain>();
+            services.AddTransient<CommandDispatcherValidationChain, CommandDispatcherValidationChain>();
+            services.AddTransient<ICommandDispatcher, CommandDispatcherValidationChain>();
+            return services;
+
+        }
 
         private static IServiceCollection AddQueryHandlers(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch) =>

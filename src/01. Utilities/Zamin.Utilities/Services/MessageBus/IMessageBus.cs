@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-
-namespace Zamin.Utilities.Services.MessageBus
+﻿namespace Zamin.Utilities.Services.MessageBus
 {
     public interface IMessageBus
     {

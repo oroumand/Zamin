@@ -2,9 +2,6 @@
 using Zamin.MiniBlog.Core.Domain.Writers.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Common
 {
@@ -30,7 +27,7 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Common
         public MiniblogDbContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<MiniblogDbContext>();
-            builder.UseSqlServer("Server =.\\SQL2019; Database=MiniBlogDb ;User Id =sa;Password=1qaz!QAZ; MultipleActiveResultSets=true");
+            builder.UseSqlServer("Server =.\\Sql2019; Database=MiniBlogDb ;User Id =sa;Password=1qaz!QAZ; MultipleActiveResultSets=true");
             return new MiniblogDbContext(builder.Options);
         }
     }

@@ -19,9 +19,7 @@ namespace Zamin.EndPoints.Web.Controllers
         protected IEventDispatcher EventDispatcher => HttpContext.EventDispatcher();
         protected ZaminServices ZaminApplicationContext => HttpContext.ZaminApplicationContext();
 
-
-
-
+     
 
         protected async Task<IActionResult> Create<TCommand, TCommandResult>(TCommand command) where TCommand : class, ICommand<TCommandResult>
         {

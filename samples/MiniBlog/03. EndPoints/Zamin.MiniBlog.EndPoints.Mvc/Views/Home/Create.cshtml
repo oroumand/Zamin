@@ -1,0 +1,15 @@
+﻿@*@model Zamin.MiniBlog.EndPoints.Mvc.Controllers.Person*@
+@model Zamin.MiniBlog.Core.ApplicationServices.People.Commands.CreatePerson.CreatePersonCommand
+<div asp-validation-summary="ModelOnly"></div>
+
+<form asp-action="Create">
+
+    Name: <input asp-for="FirstName" /> <span asp-validation-for="FirstName"></span>
+    <br />
+    Email: <input asp-for="LastName" /> <span asp-validation-for="LastName"></span>
+    <br />
+    Age: <input asp-for="Age" /> <span asp-validation-for="Age"></span>
+
+    <br /><br />
+    <input type="submit" value="submtit" />
+</form>

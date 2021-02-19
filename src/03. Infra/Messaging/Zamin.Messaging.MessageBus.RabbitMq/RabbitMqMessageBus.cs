@@ -126,7 +126,7 @@ namespace Zamin.Messaging.MessageBus.RabbitMq
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += eventHandler;
             var queue = channel.QueueDeclare($"{ _configuration.ServiceId}", true, false, false);
-            
+
             channel.QueueBind(queue.QueueName, _configuration.MessageBus.RabbitMq.ExchangeName, route);
             channel.BasicConsume(queue.QueueName, true, consumer);
         }

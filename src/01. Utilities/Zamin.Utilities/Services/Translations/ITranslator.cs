@@ -12,7 +12,15 @@
             get;
             set;
         }
+
+        string this[char separator, params string[] names]
+        {
+            get;
+            set;
+        }
+
         string GetString(string name);
-        string GetString(string name, params string[] arguments);
+        string GetString(string pattern, params string[] arguments);
+        string GetConcateString(char separator = ' ', params string[] names);
     }
 }

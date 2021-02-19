@@ -1,12 +1,7 @@
 CREATE TABLE [dbo].[ParrotTranslations](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL Primary Key,
 	[Key] [nvarchar](255) NOT NULL,
 	[Value] [nvarchar](500) NOT NULL,
 	[Culture] [nvarchar](5) NULL
- CONSTRAINT [PK_LocalizationRecords] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+	)
 

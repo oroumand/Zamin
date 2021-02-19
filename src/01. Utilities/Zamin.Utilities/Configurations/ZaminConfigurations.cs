@@ -3,13 +3,10 @@ using System.Linq;
 
 namespace Zamin.Utilities.Configurations
 {
-
-
     public class ZaminConfigurations
     {
         public string ServiceId { get; set; } = "Service01";
         public string JsonSerializerTypeName { get; set; }
-
         public string ExcelSerializerTypeName { get; set; }
         public string UserInfoServiceTypeName { get; set; }
         public bool RegisterAutomapperProfiles { get; set; } = true;
@@ -17,9 +14,10 @@ namespace Zamin.Utilities.Configurations
         public MessageBus MessageBus { get; set; }
         public Messageconsumer Messageconsumer { get; set; }
         public PoolingPublisher PoolingPublisher { get; set; }
+        public EntityChangeInterception EntityChangeInterception { get; set; }
+        public ApplicationEvents ApplicationEvents { get; set; }
 
         public Translator Translator { get; set; }
-
         public Swagger Swagger { get; set; }
         public Chaching Chaching { get; set; }
     }

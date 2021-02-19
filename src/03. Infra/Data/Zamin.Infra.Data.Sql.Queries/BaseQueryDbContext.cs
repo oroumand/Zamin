@@ -1,5 +1,4 @@
-﻿using Zamin.Infra.Data.Sql.Configurations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +19,6 @@ namespace Zamin.Infra.Data.Sql.Queries
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.SetHasNoKey();
         }
         public override int SaveChanges()
         {

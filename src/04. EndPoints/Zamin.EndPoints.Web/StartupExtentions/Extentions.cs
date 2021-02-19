@@ -4,18 +4,26 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using Microsoft.Extensions.DependencyModel;
+using Zamin.Utilities.Services.DependentyInjection;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {
     public static class Extentions
     {
+
         public static IServiceCollection AddZaminDependencies(this IServiceCollection services,
             params string[] assemblyNamesForSearch)
         {
 
             var assemblies = GetAssemblies(assemblyNamesForSearch);
-            services.AddApplicationServices(assemblies).AddDataAccess(assemblies).AddZaminServices(assemblies);
+            services.AddApplicationServices(assemblies).AddDataAccess(assemblies).AddZaminServices(assemblies).AddCustomeDepenecies(assemblies);
             return services;
+        }
+        public static IServiceCollection AddCustomeDepenecies(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+        {
+            return services.AddWithTransientLifetime(assemblies, typeof(ITransientLifetime))
+                .AddWithScopedLifetime(assemblies, typeof(IScopeLifetime))
+                .AddWithSingletonLifetime(assemblies, typeof(ISingletoneLifetime));
         }
 
         public static IServiceCollection AddWithTransientLifetime(this IServiceCollection services,

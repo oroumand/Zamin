@@ -18,23 +18,23 @@ namespace Zamin.MiniBlog.EndPoints.Api
 {
     public class Startup
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration configuration;
 
         public Startup(IConfiguration configuration)
         {
-            this._configuration = configuration;
+            this.configuration = configuration;
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddZaminApiServices(_configuration);
-            services.AddDbContext<MiniblogDbContext>(c => c.UseSqlServer(_configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
+            services.AddZaminApiServices(configuration);
+            services.AddDbContext<MiniblogDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            ZaminConfigurations zaminConfigurations)
+            ZaminConfigurations hamoonConfigurations)
         {
-            app.UseZaminApiConfigure(zaminConfigurations, env);
+            app.UseZaminApiConfigure(hamoonConfigurations, env);
         }
     }
 }

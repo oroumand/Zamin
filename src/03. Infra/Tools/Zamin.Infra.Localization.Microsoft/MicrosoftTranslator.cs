@@ -19,6 +19,8 @@ namespace Zamin.Infra.Localizations.Microsoft
         }
         public string this[string name] { get => GetString(name); set => throw new NotImplementedException(); }
         public string this[string name, params string[] arguments] { get => GetString(name, arguments); set => throw new NotImplementedException(); }
+        public string this[char sepprator, params string[] names] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public string GetString(string name)
         {
             return _localizer[name];
@@ -30,6 +32,11 @@ namespace Zamin.Infra.Localizations.Microsoft
                 arguments[i] = GetString(arguments[i]);
             }
             return _localizer[name, arguments];
+        }
+
+        public string GetConcateString(char sepprator, params string[] names)
+        {
+            throw new NotImplementedException();
         }
     }
 }

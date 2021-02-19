@@ -13,6 +13,8 @@ using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
 using Zamin.Infra.Events.Outbox;
 using Zamin.Utilities.Services.Users;
 using Zamin.Utilities.Services.Serializers;
+using Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems;
+using Zamin.Utilities.Configurations;
 
 namespace Zamin.Infra.Data.Sql.Commands
 {
@@ -21,6 +23,7 @@ namespace Zamin.Infra.Data.Sql.Commands
         private IDbContextTransaction _transaction;
 
         public DbSet<OutBoxEventItem> OutBoxEventItems { get; set; }
+        private readonly List<EntityChageInterceptorItem> entityChageInterceptorItems = new List<EntityChageInterceptorItem>();
 
         public BaseCommandDbContext(DbContextOptions options) : base(options)
         {
@@ -78,7 +81,7 @@ namespace Zamin.Infra.Data.Sql.Commands
         public override int SaveChanges()
         {
             ChangeTracker.DetectChanges();
-            BeforeSaveTriggers();
+            beforeSaveTriggers();
             ChangeTracker.AutoDetectChangesEnabled = false;
             var result = base.SaveChanges();
             ChangeTracker.AutoDetectChangesEnabled = true;
@@ -90,22 +93,33 @@ namespace Zamin.Infra.Data.Sql.Commands
             CancellationToken cancellationToken = default)
         {
             ChangeTracker.DetectChanges();
-            BeforeSaveTriggers();
+            beforeSaveTriggers();
             ChangeTracker.AutoDetectChangesEnabled = false;
             var result = base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
             ChangeTracker.AutoDetectChangesEnabled = true;
             return result;
         }
 
-        private void BeforeSaveTriggers()
-        {
-            SetShadowProperties();
-            AddOutboxEvetItems();
+        private void beforeSaveTriggers()
+        {            
+            var _hamoonConfigurations = this.GetService<ZaminConfigurations>();
+            setShadowProperties();
+            if(_hamoonConfigurations.ApplicationEvents.TransactionalEventsEnabled)
+                addOutboxEvetItems();
+            if(_hamoonConfigurations.EntityChangeInterception.Enabled)
+                addEntityChangeInterceptorItems();
         }
 
-        private void AddOutboxEvetItems()
+
+        private void setShadowProperties()
         {
-            var changedAggregates = ChangeTracker.GetChangedAggregates();
+            var userInfoService = this.GetService<IUserInfoService>();
+            ChangeTracker.SetAuditableEntityPropertyValues(userInfoService);
+        }
+
+        private void addOutboxEvetItems()
+        {
+            var changedAggregates = ChangeTracker.GetAggregatesWithEvent();
             var userInfoService = this.GetService<IUserInfoService>();
             var serializer = this.GetService<IJsonSerializer>();
             foreach (var aggregate in changedAggregates)
@@ -130,10 +144,52 @@ namespace Zamin.Infra.Data.Sql.Commands
             }
         }
 
-        private void SetShadowProperties()
+        private void addEntityChangeInterceptorItems()
         {
+            var changedEntities = ChangeTracker.GetChangedAuditable();
+            var transactionId = Guid.NewGuid().ToString();
+            var dateOfAccured = DateTime.Now;
+            var propertyForReject = new List<string>
+            {
+                AuditableShadowProperties.CreatedByUserId,
+                AuditableShadowProperties.CreatedDateTime,
+                AuditableShadowProperties.ModifiedByUserId,
+                AuditableShadowProperties.ModifiedDateTime
+            };
             var userInfoService = this.GetService<IUserInfoService>();
-            ChangeTracker.SetAuditableEntityPropertyValues(userInfoService);
+            var repository = this.GetService<IEntityChageInterceptorItemRepository>();
+            var entityChageInterceptorItems = new List<EntityChageInterceptorItem>();
+            foreach (var entity in changedEntities)
+            {
+                var entityChageInterceptorItem = new EntityChageInterceptorItem
+                {
+                    Id = Guid.NewGuid(),
+                    TransactionId = transactionId,
+                    UserId = userInfoService.UserId().ToString(),
+                    Ip = userInfoService.GetUserIp(),
+                    EntityType = entity.Entity.GetType().FullName,
+                    EntityId = entity.Property("BusinessId").CurrentValue.ToString(),
+                    DateOfOccurrence = dateOfAccured,
+                    ChangeType = entity.State.ToString(),
+                    ContextName = GetType().FullName
+                };
+
+                foreach (var property in entity.Properties.Where(c => propertyForReject.All(d => d != c.Metadata.Name)))
+                {
+                    if (entity.State == EntityState.Added || property.IsModified)
+                    {                        
+                        entityChageInterceptorItem.PropertyChangeLogItems.Add(new PropertyChangeLogItem
+                        {
+                            ChageInterceptorItemId = entityChageInterceptorItem.Id,
+                            PropertyName = property.Metadata.Name,
+                            Value = property.CurrentValue?.ToString(),
+                        });
+                    }
+                }
+                entityChageInterceptorItems.Add(entityChageInterceptorItem);
+            }
+            repository.Save(entityChageInterceptorItems);
+
         }
 
         public IEnumerable<string> GetIncludePaths(Type clrEntityType)

@@ -1,0 +1,12 @@
+﻿using Zamin.Core.ApplicationServices.Commands;
+using System;
+
+namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.CreatePerson
+{
+    public class CreatePersonCommand : ICommand<long>
+    {
+        public int Age { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+}

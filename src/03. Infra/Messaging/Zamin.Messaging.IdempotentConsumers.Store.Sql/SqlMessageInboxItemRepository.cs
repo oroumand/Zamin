@@ -1,5 +1,4 @@
 ﻿using Zamin.Utilities.Configurations;
-using System;
 using System.Data.SqlClient;
 using Dapper;
 using System.Linq;

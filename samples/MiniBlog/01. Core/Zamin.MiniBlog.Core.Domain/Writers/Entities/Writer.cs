@@ -2,10 +2,6 @@
 using Zamin.Core.Domain.Toolkits.ValueObjects;
 using Zamin.Core.Domain.ValueObjects;
 using Zamin.MiniBlog.Core.Domain.Writers.Events;
-using System;
-using System.Collections.Generic;
-using System.Security.Principal;
-using System.Text;
 
 namespace Zamin.MiniBlog.Core.Domain.Writers.Entities
 {

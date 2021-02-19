@@ -1,6 +1,8 @@
-﻿namespace Zamin.Core.ApplicationServices.Queries
+﻿using Zamin.Core.Domain.Data;
+
+namespace Zamin.Core.ApplicationServices.Queries
 {
-    public class PageQuery<TData> : IQuery<TData>
+    public class PageQuery<TData> : IPageQuery, IQuery<TData>
     {
         public int PageNumber { get; set; } = 1;
         public int PageSize { get; set; } = 10;

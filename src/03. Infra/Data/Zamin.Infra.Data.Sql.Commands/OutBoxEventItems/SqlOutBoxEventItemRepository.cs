@@ -1,8 +1,5 @@
 ﻿using Zamin.Infra.Events.Outbox;
-using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using System.Linq;
@@ -12,7 +9,7 @@ namespace Zamin.Infra.Data.Sql.Commands.OutBoxEventItems
 {
     public class SqlOutBoxEventItemRepository : IOutBoxEventItemRepository
     {
-        private readonly ZaminConfigurations _configurations;
+        private readonly ZaminConfigurations  _configurations;
 
         public SqlOutBoxEventItemRepository(ZaminConfigurations configurations)
         {
