@@ -39,7 +39,6 @@
     <ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers.Store.Sql\Zamin.Messaging.IdempotentConsumers.Store.Sql.csproj" />
     <ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers\Zamin.Messaging.IdempotentConsumers.csproj" />
     <ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.MessageBus.RabbitMq\Zamin.Messaging.MessageBus.RabbitMq.csproj" />
-    <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Localization.Microsoft\Zamin.Infra.Localizations.Microsoft.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Caching.Microsoft\Zamin.Infra.Tools.Caching.Microsoft.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Localizer.Parrot\Zamin.Infra.Tools.Localizer.Parrot.csproj" />
     <ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.OM.AutoMapper\Zamin.Infra.Tools.OM.AutoMapper.csproj" />
