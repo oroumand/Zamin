@@ -2,7 +2,7 @@
 
 namespace Zamin.MiniBlog.Core.Domain.Writers.Events
 {
-    public class PersonCreated:IDomainEvent
+    public class PersonCreated : IDomainEvent
     {
         public string PersonId { get; set; }
         public string FirstName { get; set; }

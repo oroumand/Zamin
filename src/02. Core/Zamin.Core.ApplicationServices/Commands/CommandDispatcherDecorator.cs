@@ -2,10 +2,10 @@
 
 namespace Zamin.Core.ApplicationServices.Commands
 {
-    public abstract class CommandDispatcherChain : ICommandDispatcher
+    public abstract class CommandDispatcherDecorator : ICommandDispatcher
     {
         protected ICommandDispatcher _commandDispatcher;
-        public CommandDispatcherChain(ICommandDispatcher commandDispatcher)
+        public CommandDispatcherDecorator(ICommandDispatcher commandDispatcher)
         {
             _commandDispatcher = commandDispatcher;
         }

@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
-namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreatePerson
+namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreateWriters
 {
-    public class CreateWriterValidator:AbstractValidator<CreateWiterCommand>
+    public class CreateWriterValidator : AbstractValidator<CreateWiterCommand>
     {
         public CreateWriterValidator()
         {

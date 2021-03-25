@@ -1,8 +1,4 @@
 ﻿using Zamin.Utilities.Services.DependentyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Zamin.MiniBlog.EndPoints.Mvc.Infrastrucutres
 {
@@ -19,7 +15,7 @@ namespace Zamin.MiniBlog.EndPoints.Mvc.Infrastrucutres
         void Exec();
     }
 
-    public class CustomServiceSingletone : ICustomServiceSingletone,ISingletoneLifetime
+    public class CustomServiceSingletone : ICustomServiceSingletone, ISingletoneLifetime
     {
         public void Exec()
         {

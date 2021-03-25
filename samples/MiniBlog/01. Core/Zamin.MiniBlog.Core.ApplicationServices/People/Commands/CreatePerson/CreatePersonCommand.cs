@@ -1,5 +1,4 @@
 ﻿using Zamin.Core.ApplicationServices.Commands;
-using System;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.CreatePerson
 {

@@ -18,9 +18,9 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         public static IServiceCollection AddZaminApiServices(this IServiceCollection services,
             IConfiguration configuration)
         {
-            var _hamoonConfigurations = new ZaminConfigurations();
-            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_hamoonConfigurations);
-            services.AddSingleton(_hamoonConfigurations);
+            var _zaminConfigurations = new ZaminConfigurationOptions();
+            configuration.GetSection(_zaminConfigurations.SectionName).Bind(_zaminConfigurations);
+            services.AddSingleton(_zaminConfigurations);
             services.AddScoped<ValidateModelStateAttribute>();
             services.AddControllers(options =>
             {
@@ -28,24 +28,24 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }).AddFluentValidation();
 
-            services.AddZaminDependencies(_hamoonConfigurations.AssmblyNameForLoad.Split(','));
-            if (_hamoonConfigurations.Swagger.Enabled)
-                AddSwagger(services);
+            services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
+
+            AddSwagger(services);
             return services;
         }
 
         private static void AddSwagger(IServiceCollection services)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
-            if (_hamoonConfigurations.Swagger != null && _hamoonConfigurations.Swagger.SwaggerDoc != null)
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            if (_zaminConfigurations?.Swagger?.Enabled == true && _zaminConfigurations.Swagger.SwaggerDoc != null)
             {
                 services.AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc(_hamoonConfigurations.Swagger.SwaggerDoc.Name, new OpenApiInfo { Title = _hamoonConfigurations.Swagger.SwaggerDoc.Title, Version = _hamoonConfigurations.Swagger.SwaggerDoc.Version });
+                    c.SwaggerDoc(_zaminConfigurations.Swagger.SwaggerDoc.Name, new OpenApiInfo { Title = _zaminConfigurations.Swagger.SwaggerDoc.Title, Version = _zaminConfigurations.Swagger.SwaggerDoc.Version });
                 });
             }
         }
-        public static void UseZaminApiConfigure(this IApplicationBuilder app, ZaminConfigurations configuration, IWebHostEnvironment env)
+        public static void UseZaminApiConfigure(this IApplicationBuilder app, ZaminConfigurationOptions configuration, IWebHostEnvironment env)
         {
             app.UseApiExceptionHandler(options =>
             {
@@ -68,7 +68,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             });
 
             app.UseStatusCodePages();
-            if (configuration.Swagger != null && configuration.Swagger.SwaggerDoc != null && configuration.Swagger.Enabled)
+            if (configuration.Swagger != null && configuration.Swagger.SwaggerDoc != null)
             {
 
                 app.UseSwagger();
@@ -78,7 +78,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                     c.RoutePrefix = string.Empty;
                 });
             }
-            
+
             app.UseCors(builder =>
             {
                 builder.AllowAnyOrigin();

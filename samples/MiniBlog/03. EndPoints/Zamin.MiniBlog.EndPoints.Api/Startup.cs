@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Zamin.EndPoints.Web.StartupExtentions;
 using Zamin.MiniBlog.Infra.Data.Sql.Commands.Common;
+using Zamin.MiniBlog.Infra.Data.Sql.Queries.Common;
 using Zamin.Utilities.Configurations;
 using Zamin.Utilities.Services.MessageBus;
 using Microsoft.AspNetCore.Builder;
@@ -28,13 +29,16 @@ namespace Zamin.MiniBlog.EndPoints.Api
         {
             services.AddZaminApiServices(configuration);
             services.AddDbContext<MiniblogDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
+            services.AddDbContext<MiniblogQueryDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
+
+            
 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            ZaminConfigurations hamoonConfigurations)
+            ZaminConfigurationOptions zaminConfigurations)
         {
-            app.UseZaminApiConfigure(hamoonConfigurations, env);
+            app.UseZaminApiConfigure(zaminConfigurations, env);
         }
     }
 }

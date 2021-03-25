@@ -3,6 +3,7 @@ using Zamin.Core.Domain.ValueObjects;
 using Zamin.Utilities.Services.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,7 @@ namespace Zamin.Infra.Data.Sql.Configurations
                     .Property<BusinessId>("BusinessId").HasConversion(c => c.Value, d => BusinessId.FromGuid(d))
                     .IsUnicode()
                     .IsRequired();
+                modelBuilder.Entity(entityType.ClrType).HasAlternateKey("BusinessId");
             }
         }
 
@@ -110,6 +112,30 @@ namespace Zamin.Infra.Data.Sql.Configurations
         public static List<AggregateRoot> GetAggregatesWithEvent(this ChangeTracker changeTracker) =>
             changeTracker.Entries<AggregateRoot>()
                                      .Where(x => x.State != EntityState.Detached).Select(c => c.Entity).Where(c => c.GetEvents().Any()).ToList();
+
+        public static ModelBuilder UseValueConverterForType<T>(this ModelBuilder modelBuilder, ValueConverter converter, int maxLenght = 0)
+        {
+            return modelBuilder.UseValueConverterForType(typeof(T), converter, maxLenght);
+        }
+
+        public static ModelBuilder UseValueConverterForType(this ModelBuilder modelBuilder, Type type, ValueConverter converter, int maxLength = 0)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                var properties = entityType.ClrType.GetProperties().Where(p => p.PropertyType == type);
+
+                foreach (var property in properties)
+                {
+                    modelBuilder.Entity(entityType.Name).Property(property.Name)
+                        .HasConversion(converter);
+                    if (maxLength > 0)
+                        modelBuilder.Entity(entityType.Name).Property(property.Name).HasMaxLength(maxLength);
+
+                }
+            }
+
+            return modelBuilder;
+        }
 
     }
 }

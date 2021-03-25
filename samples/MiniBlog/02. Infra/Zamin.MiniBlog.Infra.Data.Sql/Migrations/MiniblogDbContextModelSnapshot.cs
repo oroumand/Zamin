@@ -17,7 +17,7 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.1");
+                .HasAnnotation("ProductVersion", "5.0.4");
 
             modelBuilder.Entity("Zamin.Infra.Events.Outbox.OutBoxEventItem", b =>
                 {
@@ -102,6 +102,8 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasAlternateKey("BusinessId");
+
                     b.ToTable("Person");
                 });
 
@@ -135,6 +137,8 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("BusinessId");
 
                     b.ToTable("Writers");
                 });

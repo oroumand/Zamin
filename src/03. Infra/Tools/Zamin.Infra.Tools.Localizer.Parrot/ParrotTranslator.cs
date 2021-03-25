@@ -9,7 +9,7 @@ namespace Zamin.Infra.Tools.Localizer.Parrot
     {
         private readonly ParrotDataWrapper _localizer;
         private readonly string _currentCulture;
-        public ParrotTranslator(ZaminConfigurations configuration)
+        public ParrotTranslator(ZaminConfigurationOptions configuration)
         {
 #if NET451
                         _currentCulture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();

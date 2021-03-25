@@ -1,28 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Zamin.Utilities.Configurations
 {
-    public enum ChachProvider
-    {
-        MemoryCache,
-        DistributedSqlServerCache,
-        StackExchangeRedisCache,
-        NCacheDistributedCache
-    }
-    public class Chaching
+    public class CachingOptions
     {
         public bool Enable { get; set; }
         public bool EnableQueryAutomaticCache { get; set; }
-        public ChachProvider Provider { get; set; }
-        public Distributedsqlservercache DistributedSqlServerCache { get; set; }
-        public Stackexchangerediscache StackExchangeRedisCache { get; set; }
-        public Ncachedistributedcache NCacheDistributedCache { get; set; }
-        public Policy[] Policies { get; set; }
+        public CacheProvider Provider { get; set; }
+        public DistributedSqlServerCacheOptions DistributedSqlServerCache { get; set; }
+        public StackexchangeRedisCacheOptions StackExchangeRedisCache { get; set; }
+        public NcacheDistributedCacheOptions NCacheDistributedCache { get; set; }
+        public PolicyOptions[] Policies { get; set; }
 
-        public Policy GetFor(string typeName) =>
+        public PolicyOptions GetFor(string typeName) =>
              Policies?.Length < 1 ? null :
                  Policies.OrderBy(c => c.Order).FirstOrDefault(c =>
                  c?.Excludes?.Any(d => typeName.Contains(d)) == false &&
@@ -31,27 +22,27 @@ namespace Zamin.Utilities.Configurations
 
     }
 
-    public class Distributedsqlservercache
+    public class DistributedSqlServerCacheOptions
     {
         public string ConnectionString { get; set; }
         public string SchemaName { get; set; }
         public string TableName { get; set; }
     }
 
-    public class Stackexchangerediscache
+    public class StackexchangeRedisCacheOptions
     {
         public string Configuration { get; set; }
         public string SampleInstance { get; set; }
     }
 
-    public class Ncachedistributedcache
+    public class NcacheDistributedCacheOptions
     {
         public string CacheName { get; set; }
         public bool EnableLogs { get; set; }
         public bool ExceptionsEnabled { get; set; }
     }
 
-    public class Policy
+    public class PolicyOptions
     {
         public string Name { get; set; }
         public int Order { get; set; }

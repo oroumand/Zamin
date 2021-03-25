@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Writers
+namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.People
 {
     public class PersonConfig : IEntityTypeConfiguration<Person>
     {

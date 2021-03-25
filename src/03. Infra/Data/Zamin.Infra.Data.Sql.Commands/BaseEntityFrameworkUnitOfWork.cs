@@ -8,12 +8,12 @@ namespace Zamin.Infra.Data.Sql.Commands
         where TDbContext : BaseCommandDbContext
     {
         protected readonly TDbContext _dbContext;
-        protected readonly ZaminServices _hamoonApplicationContext;
+        protected readonly ZaminServices _zaminApplicationService;
 
-        public BaseEntityFrameworkUnitOfWork(TDbContext dbContext, ZaminServices hamoonApplicationContext)
+        public BaseEntityFrameworkUnitOfWork(TDbContext dbContext, ZaminServices zaminApplicationContext)
         {
             _dbContext = dbContext;
-            _hamoonApplicationContext = hamoonApplicationContext;
+            _zaminApplicationService = zaminApplicationContext;
         }
 
         public void BeginTransaction()

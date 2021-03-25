@@ -1,5 +1,6 @@
 ﻿using Zamin.Core.Domain.Events;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 namespace Zamin.Core.ApplicationServices.Events
@@ -7,16 +8,15 @@ namespace Zamin.Core.ApplicationServices.Events
 
     public class EventDispatcher : IEventDispatcher
     {
-        private readonly IServiceScopeFactory _serviceFactory;
-        public EventDispatcher(IServiceScopeFactory serviceScopeFactory)
+        private readonly IServiceProvider _serviceProvider;
+        public EventDispatcher(IServiceProvider serviceProvider)
         {
-            _serviceFactory = serviceScopeFactory;
+            _serviceProvider = serviceProvider;
         }
         #region Event Dispatcher
         public async Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class, IDomainEvent
         {
-            using var serviceProviderScop = _serviceFactory.CreateScope();
-            var handlers = serviceProviderScop.ServiceProvider.GetServices<IDomainEventHandler<TDomainEvent>>();
+            var handlers = _serviceProvider.GetServices<IDomainEventHandler<TDomainEvent>>();
             foreach (var handler in handlers)
             {
                 await handler.Handle(@event);

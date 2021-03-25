@@ -27,9 +27,9 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         private static IServiceCollection AddCommandDispatcherDecorators(this IServiceCollection services)
         {
             services.AddTransient<CommandDispatcher, CommandDispatcher>();
-            services.AddTransient<CommandDispatcherDomainExceptionHandlerChain, CommandDispatcherDomainExceptionHandlerChain>();
-            services.AddTransient<CommandDispatcherValidationChain, CommandDispatcherValidationChain>();
-            services.AddTransient<ICommandDispatcher, CommandDispatcherValidationChain>();
+            services.AddTransient<CommandDispatcherDomainExceptionHandlerDecorator, CommandDispatcherDomainExceptionHandlerDecorator>();
+            services.AddTransient<CommandDispatcherValidationDecorator, CommandDispatcherValidationDecorator>();
+            services.AddTransient<ICommandDispatcher, CommandDispatcherValidationDecorator>();
             return services;
 
         }

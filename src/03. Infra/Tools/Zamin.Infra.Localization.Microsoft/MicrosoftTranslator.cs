@@ -1,4 +1,5 @@
-﻿using Zamin.Utilities.Services.Localizations;
+﻿using Zamin.Utilities.Configurations;
+using Zamin.Utilities.Services.Localizations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
@@ -9,12 +10,10 @@ namespace Zamin.Infra.Localizations.Microsoft
     public class MicrosoftTranslator : ITranslator
     {
         private readonly IStringLocalizer _localizer;
-        public MicrosoftTranslator(IServiceScopeFactory serviceScopeFactory, IConfiguration configuration)
+        public MicrosoftTranslator(IServiceProvider serviceProvider, ZaminConfigurationOptions zaminConfigurationOptions)
         {
-            using var serviceScop = serviceScopeFactory.CreateScope();
-            var stringLocalizerFactory = serviceScop.ServiceProvider.GetRequiredService<IStringLocalizerFactory>();
-            var assemblyQualifiedName = configuration["ZaminConfigurations:MicrosoftTranslator:ResourceKeyHolderAssemblyQualifiedTypeName"];
-            var type = Type.GetType(assemblyQualifiedName);
+            var stringLocalizerFactory = serviceProvider.GetRequiredService<IStringLocalizerFactory>();
+            var type = Type.GetType(zaminConfigurationOptions.Translator.MicrosoftTranslatorOptions.ResourceKeyHolderAssemblyQualifiedTypeName);
             _localizer = stringLocalizerFactory.Create(type);
         }
         public string this[string name] { get => GetString(name); set => throw new NotImplementedException(); }

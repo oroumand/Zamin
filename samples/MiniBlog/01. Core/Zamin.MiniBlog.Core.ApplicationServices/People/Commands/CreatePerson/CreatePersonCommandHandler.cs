@@ -10,21 +10,22 @@ namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.CreatePerson
     {
         private readonly IPersonCommandRepository _personRepository;
 
-        public CreatePersonCommandHandler(ZaminServices hamoonServices, IPersonCommandRepository personRepository) : base(hamoonServices)
+        public CreatePersonCommandHandler(ZaminServices zaminServices, IPersonCommandRepository personRepository) : base(zaminServices)
         {
             _personRepository = personRepository;
+
         }
 
         public override Task<CommandResult<long>> Handle(CreatePersonCommand request)
         {
             Person person = new Person
-            {                
+            {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Age = null
             };
             _personRepository.Insert(person);
-            _personRepository.Commit();            
+            _personRepository.CommitAsync();
             return OkAsync(person.Id);
         }
     }

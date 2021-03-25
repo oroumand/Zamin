@@ -18,23 +18,21 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         public static IServiceCollection AddZaminMvcServices(this IServiceCollection services,
             IConfiguration configuration)
         {
-            var _hamoonConfigurations = new ZaminConfigurations();
-            configuration.GetSection(nameof(ZaminConfigurations)).Bind(_hamoonConfigurations);
-            services.AddSingleton(_hamoonConfigurations);
-            services.AddScoped<ValidateModelStateAttribute>();
+            var _zaminConfigurations = new ZaminConfigurationOptions();
+            configuration.GetSection(_zaminConfigurations.SectionName).Bind(_zaminConfigurations);
+            services.AddSingleton(_zaminConfigurations);
             services.AddControllersWithViews(options =>
             {
-                //options.Filters.AddService<ValidateModelStateAttribute>();
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }).AddRazorRuntimeCompilation()
             .AddFluentValidation();
 
-            services.AddZaminDependencies(_hamoonConfigurations.AssmblyNameForLoad.Split(','));
+            services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
 
             return services;
         }
 
-        public static void UseZaminMvcConfigure(this IApplicationBuilder app, Action<IEndpointRouteBuilder> configur, ZaminConfigurations configuration, IWebHostEnvironment env)
+        public static void UseZaminMvcConfigure(this IApplicationBuilder app, Action<IEndpointRouteBuilder> configur, ZaminConfigurationOptions configuration, IWebHostEnvironment env)
         {
             app.UseApiExceptionHandler(options =>
             {
@@ -55,11 +53,16 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                     return LogLevel.Error;
                 };
             });
+
             app.UseStatusCodePages();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
+
+            if (configuration?.Session?.Enable == true)
+                app.UseSession();
+
             app.UseEndpoints(configur);
         }
     }

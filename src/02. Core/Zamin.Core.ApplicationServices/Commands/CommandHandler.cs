@@ -7,12 +7,12 @@ namespace Zamin.Core.ApplicationServices.Commands
     public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand, TData>
     where TCommand : ICommand<TData>
     {
-        protected readonly ZaminServices _hamoonServices;
+        protected readonly ZaminServices _zaminServices;
         protected readonly CommandResult<TData> result = new CommandResult<TData>();
 
-        public CommandHandler(ZaminServices hamoonServices)
+        public CommandHandler(ZaminServices zaminServices)
         {
-            _hamoonServices = hamoonServices;
+            _zaminServices = zaminServices;
         }
         public abstract Task<CommandResult<TData>> Handle(TCommand request);
         protected virtual Task<CommandResult<TData>> OkAsync(TData data)
@@ -43,22 +43,22 @@ namespace Zamin.Core.ApplicationServices.Commands
 
         protected void AddMessage(string message)
         {
-            result.AddMessage(_hamoonServices.Translator[message]);
+            result.AddMessage(_zaminServices.Translator[message]);
         }
         protected void AddMessage(string message, params string[] arguments)
         {
-            result.AddMessage(_hamoonServices.Translator[message, arguments]);
+            result.AddMessage(_zaminServices.Translator[message, arguments]);
         }
     }
 
     public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
     where TCommand : ICommand
     {
-        protected readonly ZaminServices _hamoonServices;
+        protected readonly ZaminServices _zaminServices;
         protected readonly CommandResult result = new CommandResult();
-        public CommandHandler(ZaminServices hamoonServices)
+        public CommandHandler(ZaminServices zaminServices)
         {
-            _hamoonServices = hamoonServices;
+            _zaminServices = zaminServices;
         }
         public abstract Task<CommandResult> Handle(TCommand request);
 
@@ -86,11 +86,11 @@ namespace Zamin.Core.ApplicationServices.Commands
         }
         protected void AddMessage(string message)
         {
-            result.AddMessage(_hamoonServices.Translator[message]);
+            result.AddMessage(_zaminServices.Translator[message]);
         }
         protected void AddMessage(string message, params string[] arguments)
         {
-            result.AddMessage(_hamoonServices.Translator[message, arguments]);
+            result.AddMessage(_zaminServices.Translator[message, arguments]);
         }
     }
 }

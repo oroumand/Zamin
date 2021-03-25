@@ -5,20 +5,20 @@ using Zamin.MiniBlog.Core.Domain.Writers.Repositories;
 using Zamin.Utilities;
 using System.Threading.Tasks;
 
-namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreatePerson
+namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreateWriters
 {
     public class CreateWriterCommandHandler : CommandHandler<CreateWiterCommand, long>
     {
         private readonly IWriterRepository _writerRepository;
 
-        public CreateWriterCommandHandler(ZaminServices hamoonServices, IWriterRepository writerRepository) : base(hamoonServices)
+        public CreateWriterCommandHandler(ZaminServices zaminServices, IWriterRepository writerRepository) : base(zaminServices)
         {
-            this._writerRepository = writerRepository;
+            _writerRepository = writerRepository;
         }
 
         public override Task<CommandResult<long>> Handle(CreateWiterCommand request)
         {
-            
+
             Writer writer = new Writer(BusinessId.FromGuid(request.BusinessId), request.FirstName, request.LastName);
             _writerRepository.Insert(writer);
             _writerRepository.Commit();

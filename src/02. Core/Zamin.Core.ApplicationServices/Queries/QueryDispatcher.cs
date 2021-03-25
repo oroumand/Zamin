@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 namespace Zamin.Core.ApplicationServices.Queries
@@ -6,18 +7,17 @@ namespace Zamin.Core.ApplicationServices.Queries
 
     public class QueryDispatcher : IQueryDispatcher
     {
-        private readonly IServiceScopeFactory _serviceFactory;
-        public QueryDispatcher(IServiceScopeFactory serviceScopeFactory)
+        private readonly IServiceProvider _serviceProvider;
+        public QueryDispatcher(IServiceProvider serviceProvider)
         {
-            _serviceFactory = serviceScopeFactory;
+            _serviceProvider = serviceProvider;
         }
 
         #region Query Dispatcher
 
         public Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query) where TQuery : class, IQuery<TData>
         {
-            using var serviceScope = _serviceFactory.CreateScope();
-            var handler = serviceScope.ServiceProvider.GetRequiredService<IQueryHandler<TQuery, TData>>();
+            var handler = _serviceProvider.GetRequiredService<IQueryHandler<TQuery, TData>>();
             return handler.Handle(query);
         }
         #endregion

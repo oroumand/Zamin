@@ -2,7 +2,7 @@
 
 namespace Zamin.MiniBlog.Core.Domain.People.Entities
 {
-    public class Person:AggregateRoot
+    public class Person : AggregateRoot
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

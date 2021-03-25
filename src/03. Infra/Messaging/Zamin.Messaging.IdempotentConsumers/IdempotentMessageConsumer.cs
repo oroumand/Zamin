@@ -12,15 +12,15 @@ namespace Zamin.Messaging.IdempotentConsumers
 {
     public class IdempotentMessageConsumer : IMessageConsumer
     {
-        private readonly ZaminConfigurations _hamoonConfigurations;
+        private readonly ZaminConfigurationOptions _zaminConfigurations;
         private readonly IEventDispatcher _eventDispatcher;
         private readonly IJsonSerializer _jsonSerializer;
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IMessageInboxItemRepository _messageInboxItemRepository;
         private readonly Dictionary<string, string> _messageTypeMap = new Dictionary<string, string>();
-        public IdempotentMessageConsumer(ZaminConfigurations hamoonConfigurations, IEventDispatcher eventDispatcher, IJsonSerializer jsonSerializer, ICommandDispatcher commandDispatcher, IMessageInboxItemRepository messageInboxItemRepository)
+        public IdempotentMessageConsumer(ZaminConfigurationOptions zaminConfigurations, IEventDispatcher eventDispatcher, IJsonSerializer jsonSerializer, ICommandDispatcher commandDispatcher, IMessageInboxItemRepository messageInboxItemRepository)
         {
-            _hamoonConfigurations = hamoonConfigurations;
+            _zaminConfigurations = zaminConfigurations;
             _eventDispatcher = eventDispatcher;
             _jsonSerializer = jsonSerializer;
             _commandDispatcher = commandDispatcher;
@@ -30,16 +30,16 @@ namespace Zamin.Messaging.IdempotentConsumers
 
         private void LoadMessageMap()
         {
-            if (_hamoonConfigurations?.Messageconsumer?.Commands?.Any() == true)
+            if (_zaminConfigurations?.Messageconsumer?.Commands?.Any() == true)
             {
-                foreach (var item in _hamoonConfigurations?.Messageconsumer?.Commands)
+                foreach (var item in _zaminConfigurations?.Messageconsumer?.Commands)
                 {
-                    _messageTypeMap.Add($"{_hamoonConfigurations.ServiceId}.{item.CommandName}", item.MapToClass);
+                    _messageTypeMap.Add($"{_zaminConfigurations.ServiceId}.{item.CommandName}", item.MapToClass);
                 }
             }
-            if (_hamoonConfigurations?.Messageconsumer?.Events?.Any() == true)
+            if (_zaminConfigurations?.Messageconsumer?.Events?.Any() == true)
             {
-                foreach (var eventPublisher in _hamoonConfigurations?.Messageconsumer?.Events)
+                foreach (var eventPublisher in _zaminConfigurations?.Messageconsumer?.Events)
                 {
                     foreach (var @event in eventPublisher?.EventData)
                     {
@@ -55,8 +55,8 @@ namespace Zamin.Messaging.IdempotentConsumers
             if (_messageInboxItemRepository.AllowReceive(parcel.MessageId, sender))
             {
                 var mapToClass = _messageTypeMap[parcel.Route];
-                var eventType = Type.GetType(mapToClass);
-                dynamic command = _jsonSerializer.Deserialize(parcel.MessageBody, eventType);
+                var commandType = Type.GetType(mapToClass);
+                dynamic command = _jsonSerializer.Deserialize(parcel.MessageBody, commandType);
                 _commandDispatcher.Send(command);
                 _messageInboxItemRepository.Receive(parcel.MessageId, sender);
             }

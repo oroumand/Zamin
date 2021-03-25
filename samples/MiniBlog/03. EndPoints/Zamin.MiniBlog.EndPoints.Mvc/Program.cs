@@ -6,7 +6,7 @@ namespace Zamin.MiniBlog.EndPoints.Mvc
     {
         public static void Main(string[] args)
         {
-            new ZaminProgram().Main(args, typeof(Startup), "appsettings.json", "appsettings.hamoon.json", "appsettings.serilog.json");
+            new ZaminProgram().Main(args, typeof(Startup), "appsettings.json", "appsettings.zamin.json", "appsettings.serilog.json");
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Zamin.Messaging.IdempotentConsumers.Store.Sql
     public class SqlMessageInboxItemRepository : IMessageInboxItemRepository
     {
         readonly string _connectionString;
-        public SqlMessageInboxItemRepository(ZaminConfigurations configurations)
+        public SqlMessageInboxItemRepository(ZaminConfigurationOptions configurations)
         {
             _connectionString = configurations.Messageconsumer.SqlMessageInboxStore.ConnectionString;
         }

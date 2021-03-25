@@ -7,7 +7,7 @@ namespace Zamin.EndPoints.Web.Extentions
     {
         public static string GetClaim(this ClaimsPrincipal userClaimsPrincipal, string claimType)
         {
-            return userClaimsPrincipal.Claims.FirstOrDefault((x) => x.Type == claimType)?.Value;
+            return userClaimsPrincipal.Claims.FirstOrDefault((Claim x) => x.Type == claimType)?.Value;
         }
     }
 }

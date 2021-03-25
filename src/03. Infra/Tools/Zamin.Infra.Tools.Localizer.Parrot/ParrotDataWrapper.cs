@@ -12,12 +12,12 @@ namespace Zamin.Infra.Tools.Localizer.Parrot
     {
         private readonly IDbConnection _dbConnection;
         private readonly List<LocalizationRecord> _localizationRecords;
-        private readonly ZaminConfigurations _configuration;
+        private readonly ZaminConfigurationOptions _configuration;
         private string SelectCommand = "Select * from [{0}].[{1}]";
         private string InsertCommand = "INSERT INTO [{0}].[{1}]([Key],[Value],[Culture]) VALUES (@Key,@Value,@Culture) select SCOPE_IDENTITY()";
 
 
-        public ParrotDataWrapper(ZaminConfigurations configuration)
+        public ParrotDataWrapper(ZaminConfigurationOptions configuration)
         {
             _configuration = configuration;
             _dbConnection = new SqlConnection(configuration.Translator.Parrottranslator.ConnectionString);

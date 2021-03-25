@@ -6,6 +6,6 @@ namespace Zamin.Utilities.Services.Serializers
     {
         string Serilize<TInput>(TInput input);
         TOutput Deserialize<TOutput>(string input);
-        object Deserialize(string input,Type type);
+        object Deserialize(string input, Type type);
     }
 }

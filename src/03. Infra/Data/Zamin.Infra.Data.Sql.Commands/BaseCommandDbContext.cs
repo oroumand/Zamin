@@ -101,12 +101,12 @@ namespace Zamin.Infra.Data.Sql.Commands
         }
 
         private void beforeSaveTriggers()
-        {            
-            var _hamoonConfigurations = this.GetService<ZaminConfigurations>();
+        {
+            var _zaminConfigurations = this.GetService<ZaminConfigurationOptions>();
             setShadowProperties();
-            if(_hamoonConfigurations.ApplicationEvents.TransactionalEventsEnabled)
+            if (_zaminConfigurations.ApplicationEvents.TransactionalEventsEnabled)
                 addOutboxEvetItems();
-            if(_hamoonConfigurations.EntityChangeInterception.Enabled)
+            if (_zaminConfigurations.EntityChangeInterception.Enabled)
                 addEntityChangeInterceptorItems();
         }
 
@@ -177,7 +177,7 @@ namespace Zamin.Infra.Data.Sql.Commands
                 foreach (var property in entity.Properties.Where(c => propertyForReject.All(d => d != c.Metadata.Name)))
                 {
                     if (entity.State == EntityState.Added || property.IsModified)
-                    {                        
+                    {
                         entityChageInterceptorItem.PropertyChangeLogItems.Add(new PropertyChangeLogItem
                         {
                             ChageInterceptorItemId = entityChageInterceptorItem.Id,

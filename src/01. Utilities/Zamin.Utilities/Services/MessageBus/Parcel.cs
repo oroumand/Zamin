@@ -9,6 +9,6 @@ namespace Zamin.Utilities.Services.MessageBus
         public string MessageName { get; set; }
         public Dictionary<string, object> Headers { get; set; }
         public string MessageBody { get; set; }
-        public string Route { get; set; }    
+        public string Route { get; set; }
     }
 }

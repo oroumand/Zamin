@@ -4,7 +4,7 @@ namespace Zamin.Utilities.Services.MessageBus
 {
     public interface IMessageConsumer
     {
-        void ConsumeEvent(string sender,Parcel parcel);
+        void ConsumeEvent(string sender, Parcel parcel);
         void ConsumeCommand(string sender, Parcel parcel);
     }
     public class FakeMessageConsumer : IMessageConsumer
@@ -18,7 +18,7 @@ namespace Zamin.Utilities.Services.MessageBus
 
         public void ConsumeEvent(string sender, Parcel parcel)
         {
-            Consume("event", sender,parcel);
+            Consume("event", sender, parcel);
         }
 
         private static void Consume(string type, string sender, Parcel parcel)

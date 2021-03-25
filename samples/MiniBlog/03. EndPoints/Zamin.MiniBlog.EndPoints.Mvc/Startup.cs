@@ -27,14 +27,14 @@ namespace Zamin.MiniBlog.EndPoints.Mvc
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            ZaminConfigurations hamoonConfigurations)
+            ZaminConfigurationOptions zaminConfigurations)
         {
             app.UseZaminMvcConfigure(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-            }, hamoonConfigurations, env);
+            }, zaminConfigurations, env);
         }
 
     }

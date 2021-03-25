@@ -12,12 +12,12 @@ namespace Zamin.Messaging.MessageBus.RabbitMq
 {
     public class RabbitMqMessageBus : IMessageBus
     {
-        private readonly ZaminConfigurations _configuration;
+        private readonly ZaminConfigurationOptions _configuration;
         private readonly IJsonSerializer _jsonSerializer;
         private readonly IMessageConsumer _messageConsumer;
         private readonly IConnection _connection;
 
-        public RabbitMqMessageBus(ZaminConfigurations configuration, IJsonSerializer jsonSerializer, IMessageConsumer messageConsumer)
+        public RabbitMqMessageBus(ZaminConfigurationOptions configuration, IJsonSerializer jsonSerializer, IMessageConsumer messageConsumer)
         {
             _configuration = configuration;
             _jsonSerializer = jsonSerializer;

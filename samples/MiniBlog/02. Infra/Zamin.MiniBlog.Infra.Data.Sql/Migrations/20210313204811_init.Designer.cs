@@ -10,27 +10,27 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
 {
     [DbContext(typeof(MiniblogDbContext))]
-    [Migration("20201022051509_init")]
+    [Migration("20210313204811_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.4");
 
             modelBuilder.Entity("Zamin.Infra.Events.Outbox.OutBoxEventItem", b =>
                 {
                     b.Property<long>("OutBoxEventItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("AccuredByUserId")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("AccuredOn")
                         .HasColumnType("datetime2");
@@ -39,26 +39,26 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AggregateName")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("AggregateTypeName")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<Guid>("EventId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("EventName")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("EventPayload")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EventTypeName")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<bool>("IsProcessed")
                         .HasColumnType("bit");
@@ -68,16 +68,57 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
                     b.ToTable("OutBoxEventItems");
                 });
 
+            modelBuilder.Entity("Zamin.MiniBlog.Core.Domain.People.Entities.Person", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("BusinessId")
+                        .IsUnicode(true)
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("ModifiedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasAlternateKey("BusinessId");
+
+                    b.ToTable("Person");
+                });
+
             modelBuilder.Entity("Zamin.MiniBlog.Core.Domain.Writers.Entities.Writer", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<Guid>("BusinessId")
-                        .HasColumnType("uniqueidentifier")
-                        .IsUnicode(true);
+                        .IsUnicode(true)
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("CreatedByUserId")
                         .HasColumnType("int");
@@ -98,6 +139,8 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("BusinessId");
 
                     b.ToTable("Writers");
                 });

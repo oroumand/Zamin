@@ -1,23 +1,21 @@
 ﻿using FluentValidation;
 using Zamin.Core.ApplicationServices.Common;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Threading.Tasks;
 
 namespace Zamin.Core.ApplicationServices.Commands
 {
-    public class CommandDispatcherValidationChain : CommandDispatcherChain
+    public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
     {
-        private readonly IServiceScopeFactory _serviceScopeFactory;
-
-        public CommandDispatcherValidationChain(CommandDispatcherDomainExceptionHandlerChain commandDispatcher, IServiceScopeFactory serviceScopeFactory) : base(commandDispatcher)
+        private readonly IServiceProvider _serviceProvider;
+        public CommandDispatcherValidationDecorator(CommandDispatcherDomainExceptionHandlerDecorator commandDispatcher, IServiceProvider serviceProvider) : base(commandDispatcher)
         {
-            _serviceScopeFactory = serviceScopeFactory;
+            _serviceProvider = serviceProvider;
         }
-
         public override Task<CommandResult> Send<TCommand>(in TCommand command)
         {
-            using var serviceScope = _serviceScopeFactory.CreateScope();
-            var validationResult = Validate<TCommand, CommandResult>(command, serviceScope);
+            var validationResult = Validate<TCommand, CommandResult>(command);
             if (validationResult != null)
             {
                 return Task.FromResult(validationResult);
@@ -27,18 +25,17 @@ namespace Zamin.Core.ApplicationServices.Commands
 
         public override Task<CommandResult<TData>> Send<TCommand, TData>(in TCommand command)
         {
-            using var serviceScope = _serviceScopeFactory.CreateScope();
-            var validationResult = Validate<TCommand, CommandResult<TData>>(command, serviceScope);
+            var validationResult = Validate<TCommand, CommandResult<TData>>(command);
             if (validationResult != null)
             {
                 return Task.FromResult(validationResult);
             }
-            return _commandDispatcher.Send<TCommand,TData>(command);
+            return _commandDispatcher.Send<TCommand, TData>(command);
         }
 
-        private static TValidationResult Validate<TCommand, TValidationResult>(TCommand command, IServiceScope serviceScope) where TValidationResult : ApplicationServiceResult, new()
+        private TValidationResult Validate<TCommand, TValidationResult>(TCommand command) where TValidationResult : ApplicationServiceResult, new()
         {
-            var validator = serviceScope.ServiceProvider.GetService<IValidator<TCommand>>();
+            var validator = _serviceProvider.GetService<IValidator<TCommand>>();
             if (validator != null)
             {
                 var validationResult = validator.Validate(command);

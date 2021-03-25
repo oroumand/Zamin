@@ -1,9 +1,7 @@
-﻿using Zamin.EndPoints.Web.Controllers;
+﻿using Zamin.MiniBlog.EndPoints.Mvc.Models;
+using Zamin.EndPoints.Web.Controllers;
 using Zamin.MiniBlog.Core.ApplicationServices.People.Commands.CreatePerson;
-using Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreatePerson;
 using Zamin.MiniBlog.EndPoints.Mvc.Infrastrucutres;
-using Zamin.MiniBlog.EndPoints.Mvc.Models;
-using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -62,6 +60,18 @@ namespace Zamin.MiniBlog.EndPoints.Mvc.Controllers
         {
             return View();
         }
+        public IActionResult Session()
+        {
+            var sessionValue = GetTestSessionValue();
+            return View(sessionValue as object);
+        }
+        public IActionResult SetSession()
+        {
+            var sessionKey = "test-session";
+            HttpContext.Session.Set(sessionKey, System.Text.Encoding.UTF8.GetBytes("Hi this is test session value"));
+            return RedirectToAction(nameof(Session));
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -93,7 +103,14 @@ namespace Zamin.MiniBlog.EndPoints.Mvc.Controllers
 
         private void Save(CreatePersonCommand person)
         {
-          Console.WriteLine("");
+            Console.WriteLine("");
+        }
+        private string GetTestSessionValue()
+        {
+            var sessionKey = "test-session";
+            return HttpContext.Session.TryGetValue(sessionKey, out byte[] sessionValue) ?
+                System.Text.Encoding.UTF8.GetString(sessionValue) :
+                "";
         }
     }
 }

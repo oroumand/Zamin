@@ -16,16 +16,18 @@ using Zamin.Infra.Events.Outbox;
 using Zamin.Infra.Events.PoolingPublisher;
 using Zamin.Messaging.IdempotentConsumers;
 using Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems;
+using Microsoft.AspNetCore.Http;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {
     public static class AddZaminServicesExtentions
     {
         public static IServiceCollection AddZaminServices(
-            this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
+           this IServiceCollection services,
+           IEnumerable<Assembly> assembliesForSearch)
         {
             services.AddCaching();
+            services.AddSession();
             services.AddLogging();
             services.AddJsonSerializer(assembliesForSearch);
             services.AddObjectMapper(assembliesForSearch);
@@ -40,10 +42,10 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 
         private static IServiceCollection AddCaching(this IServiceCollection services)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
-            if (_hamoonConfigurations?.Chaching?.Enable == true)
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            if (_zaminConfigurations?.Caching?.Enable == true)
             {
-                if (_hamoonConfigurations.Chaching.Provider == ChachProvider.MemoryCache)
+                if (_zaminConfigurations.Caching.Provider == CacheProvider.MemoryCache)
                 {
                     services.AddScoped<ICacheAdapter, InMemoryCacheAdapter>();
                 }
@@ -52,24 +54,24 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                     services.AddScoped<ICacheAdapter, DistributedCacheAdapter>();
                 }
 
-                switch (_hamoonConfigurations.Chaching.Provider)
+                switch (_zaminConfigurations.Caching.Provider)
                 {
-                    case ChachProvider.DistributedSqlServerCache:
+                    case CacheProvider.DistributedSqlServerCache:
                         services.AddDistributedSqlServerCache(options =>
                         {
-                            options.ConnectionString = _hamoonConfigurations.Chaching.DistributedSqlServerCache.ConnectionString;
-                            options.SchemaName = _hamoonConfigurations.Chaching.DistributedSqlServerCache.SchemaName;
-                            options.TableName = _hamoonConfigurations.Chaching.DistributedSqlServerCache.TableName;
+                            options.ConnectionString = _zaminConfigurations.Caching.DistributedSqlServerCache.ConnectionString;
+                            options.SchemaName = _zaminConfigurations.Caching.DistributedSqlServerCache.SchemaName;
+                            options.TableName = _zaminConfigurations.Caching.DistributedSqlServerCache.TableName;
                         });
                         break;
-                    case ChachProvider.StackExchangeRedisCache:
+                    case CacheProvider.StackExchangeRedisCache:
                         services.AddStackExchangeRedisCache(options =>
                         {
-                            options.Configuration = _hamoonConfigurations.Chaching.StackExchangeRedisCache.Configuration;
-                            options.InstanceName = _hamoonConfigurations.Chaching.StackExchangeRedisCache.SampleInstance;
+                            options.Configuration = _zaminConfigurations.Caching.StackExchangeRedisCache.Configuration;
+                            options.InstanceName = _zaminConfigurations.Caching.StackExchangeRedisCache.SampleInstance;
                         });
                         break;
-                    case ChachProvider.NCacheDistributedCache:
+                    case CacheProvider.NCacheDistributedCache:
                         throw new NotSupportedException("NCache Not Supporting yet");
                     default:
                         services.AddMemoryCache();
@@ -82,7 +84,32 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             }
             return services;
         }
+        private static IServiceCollection AddSession(this IServiceCollection services)
+        {
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            if (_zaminConfigurations?.Session?.Enable == true)
+            {
+                var sessionCookie = _zaminConfigurations.Session.Cookie;
+                CookieBuilder cookieBuilder = new();
+                cookieBuilder.Name = sessionCookie.Name;
+                cookieBuilder.Domain = sessionCookie.Domain;
+                cookieBuilder.Expiration = sessionCookie.Expiration;
+                cookieBuilder.HttpOnly = sessionCookie.HttpOnly;
+                cookieBuilder.IsEssential = sessionCookie.IsEssential;
+                cookieBuilder.MaxAge = sessionCookie.MaxAge;
+                cookieBuilder.Path = sessionCookie.Path;
+                cookieBuilder.SameSite = Enum.Parse<SameSiteMode>(sessionCookie.SameSite.ToString());
+                cookieBuilder.SecurePolicy = Enum.Parse<CookieSecurePolicy>(sessionCookie.SecurePolicy.ToString());
 
+                services.AddSession(options =>
+                {
+                    options.Cookie = cookieBuilder;
+                    options.IdleTimeout = _zaminConfigurations.Session.IdleTimeout;
+                    options.IOTimeout = _zaminConfigurations.Session.IOTimeout;
+                });
+            }
+            return services;
+        }
         private static IServiceCollection AddLogging(this IServiceCollection services)
         {
             return services.AddScoped<IScopeInformation, ScopeInformation>();
@@ -90,9 +117,9 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 
         public static IServiceCollection AddJsonSerializer(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                .AddClasses(c => c.Where(type => type.Name == _hamoonConfigurations.JsonSerializerTypeName && typeof(IJsonSerializer).IsAssignableFrom(type)))
+                .AddClasses(c => c.Where(type => type.Name == _zaminConfigurations.JsonSerializerTypeName && typeof(IJsonSerializer).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
                 .WithSingletonLifetime());
             return services;
@@ -101,8 +128,8 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 
         private static IServiceCollection AddObjectMapper(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
-            if (_hamoonConfigurations.RegisterAutomapperProfiles)
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            if (_zaminConfigurations.RegisterAutomapperProfiles)
             {
                 services.AddAutoMapperProfiles(assembliesForSearch);
             }
@@ -111,9 +138,9 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         private static IServiceCollection AddUserInfoService(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                .AddClasses(classes => classes.Where(type => type.Name == _hamoonConfigurations.UserInfoServiceTypeName && typeof(IUserInfoService).IsAssignableFrom(type)))
+                .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.UserInfoServiceTypeName && typeof(IUserInfoService).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
                 .WithSingletonLifetime());
 
@@ -122,9 +149,9 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         private static IServiceCollection AddTranslator(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                .AddClasses(classes => classes.Where(type => type.Name == _hamoonConfigurations.Translator.TranslatorTypeName && typeof(ITranslator).IsAssignableFrom(type)))
+                .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.Translator.TranslatorTypeName && typeof(ITranslator).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
                 .WithSingletonLifetime());
             return services;
@@ -134,35 +161,33 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         private static IServiceCollection AddMessageBus(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
-            if (_hamoonConfigurations.MessageBus.Enabled)
-            {
-                services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                .AddClasses(classes => classes.Where(type => type.Name == _hamoonConfigurations.MessageBus.MessageConsumerTypeName && typeof(IMessageConsumer).IsAssignableFrom(type)))
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+
+            services.Scan(s => s.FromAssemblies(assembliesForSearch)
+                .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.MessageBus.MessageConsumerTypeName && typeof(IMessageConsumer).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
                 .WithTransientLifetime());
 
-                services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                 .AddClasses(classes => classes.Where(type => type.Name == _hamoonConfigurations.Messageconsumer.MessageInboxStoreTypeName && typeof(IMessageInboxItemRepository).IsAssignableFrom(type)))
-                 .AsImplementedInterfaces()
-                 .WithTransientLifetime());
+            services.Scan(s => s.FromAssemblies(assembliesForSearch)
+             .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.Messageconsumer.MessageInboxStoreTypeName && typeof(IMessageInboxItemRepository).IsAssignableFrom(type)))
+             .AsImplementedInterfaces()
+             .WithTransientLifetime());
 
-                services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                    .AddClasses(classes => classes.Where(type => type.Name == _hamoonConfigurations.MessageBus.MessageBusTypeName && typeof(IMessageBus).IsAssignableFrom(type)))
-                    .AsImplementedInterfaces()
-                    .WithSingletonLifetime());
-            }
+            services.Scan(s => s.FromAssemblies(assembliesForSearch)
+                .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.MessageBus.MessageBusTypeName && typeof(IMessageBus).IsAssignableFrom(type)))
+                .AsImplementedInterfaces()
+                .WithSingletonLifetime());
             return services;
         }
 
         private static IServiceCollection AddPoolingPublisher(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
-            if (_hamoonConfigurations.PoolingPublisher.Enabled)
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            if (_zaminConfigurations.PoolingPublisher.Enabled)
             {
                 services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                    .AddClasses(classes => classes.Where(type => type.Name == _hamoonConfigurations.PoolingPublisher.OutBoxRepositoryTypeName && typeof(IOutBoxEventItemRepository).IsAssignableFrom(type)))
+                    .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.PoolingPublisher.OutBoxRepositoryTypeName && typeof(IOutBoxEventItemRepository).IsAssignableFrom(type)))
                     .AsImplementedInterfaces()
                     .WithSingletonLifetime());
                 services.AddHostedService<PoolingPublisherHostedService>();
@@ -174,11 +199,11 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         private static IServiceCollection AddEntityChangeInterception(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch)
         {
-            var _hamoonConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurations>();
-            if (_hamoonConfigurations.EntityChangeInterception.Enabled)
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            if (_zaminConfigurations.EntityChangeInterception.Enabled)
             {
                 services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                    .AddClasses(classes => classes.Where(type => type.Name == _hamoonConfigurations.EntityChangeInterception.
+                    .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.EntityChangeInterception.
                         EntityChageInterceptorRepositoryTypeName && typeof(IEntityChageInterceptorItemRepository).IsAssignableFrom(type)))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
