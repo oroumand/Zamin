@@ -87,6 +87,48 @@ namespace Zamin.Infra.Data.Sql.Commands
             }
             return query.FirstOrDefault(c => c.BusinessId == businessId);
         }
+        async Task ICommandRepository<TEntity>.InsertAsync(TEntity entity)
+        {
+            await _dbContext.Set<TEntity>().AddAsync(entity);
+        }
+        async Task<TEntity> ICommandRepository<TEntity>.GetAsync(long id)
+        {
+            return await _dbContext.Set<TEntity>().FindAsync(id);
+        }
+
+        public async Task<TEntity> GetAsync(BusinessId businessId)
+        {
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(c => c.BusinessId == businessId);
+        }
+
+        async Task<TEntity> ICommandRepository<TEntity>.GetGraphAsync(long id)
+        {
+            var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
+            IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+            var temp = graphPath.ToList();
+            foreach (var item in graphPath)
+            {
+                query = query.Include(item);
+            }
+            return await query.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task<TEntity> GetGraphAsync(BusinessId businessId)
+        {
+            var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
+            IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+            var temp = graphPath.ToList();
+            foreach (var item in graphPath)
+            {
+                query = query.Include(item);
+            }
+            return await query.FirstOrDefaultAsync(c => c.BusinessId == businessId);
+        }
+
+        async Task<bool> ICommandRepository<TEntity>.ExistsAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await _dbContext.Set<TEntity>().AnyAsync(expression);
+        }
 
         public int Commit()
         {
