@@ -17,5 +17,12 @@ namespace Zamin.Core.Domain.Data
         TEntity GetGraph(long id);
         TEntity GetGraph(BusinessId businessId);
         bool Exists(Expression<Func<TEntity, bool>> expression);
+        
+        Task InsertAsync(TEntity entity);
+        Task<TEntity> GetAsync(long id);
+        Task<TEntity> GetAsync(BusinessId businessId);
+        Task<TEntity> GetGraphAsync(long id);
+        Task<TEntity> GetGraphAsync(BusinessId businessId);
+        Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> expression);
     }
 }
