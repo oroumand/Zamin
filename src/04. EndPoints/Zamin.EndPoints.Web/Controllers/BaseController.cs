@@ -19,7 +19,18 @@ namespace Zamin.EndPoints.Web.Controllers
         protected IEventDispatcher EventDispatcher => HttpContext.EventDispatcher();
         protected ZaminServices ZaminApplicationContext => HttpContext.ZaminApplicationContext();
 
-        
+        public IActionResult Excel<T>(List<T> list)
+        {
+            var serializer = (IExcelSerializer)HttpContext.RequestServices.GetService(typeof(IExcelSerializer));
+            var bytes = serializer.ListToExcelByteArray(list);
+            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+        public IActionResult Excel<T>(List<T> list, string fileName)
+        {
+            var serializer = (IExcelSerializer)HttpContext.RequestServices.GetService(typeof(IExcelSerializer));
+            var bytes = serializer.ListToExcelByteArray(list);
+            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
+        }
 
 
         protected async Task<IActionResult> Create<TCommand, TCommandResult>(TCommand command) where TCommand : class, ICommand<TCommandResult>
@@ -47,7 +58,7 @@ namespace Zamin.EndPoints.Web.Controllers
             var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command);
             if (result.Status == ApplicationServiceStatus.Ok)
             {
-                return StatusCode((int)HttpStatusCode.Created, result.Data);
+                return StatusCode((int)HttpStatusCode.OK, result.Data);
             }
             else if (result.Status == ApplicationServiceStatus.NotFound)
             {
@@ -61,7 +72,7 @@ namespace Zamin.EndPoints.Web.Controllers
             var result = await CommandDispatcher.Send(command);
             if (result.Status == ApplicationServiceStatus.Ok)
             {
-                return StatusCode((int)HttpStatusCode.Created);
+                return StatusCode((int)HttpStatusCode.OK);
             }
             else if (result.Status == ApplicationServiceStatus.NotFound)
             {
@@ -76,7 +87,7 @@ namespace Zamin.EndPoints.Web.Controllers
             var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command);
             if (result.Status == ApplicationServiceStatus.Ok)
             {
-                return StatusCode((int)HttpStatusCode.Created, result.Data);
+                return StatusCode((int)HttpStatusCode.NoContent, result.Data);
             }
             else if (result.Status == ApplicationServiceStatus.NotFound)
             {
@@ -90,7 +101,7 @@ namespace Zamin.EndPoints.Web.Controllers
             var result = await CommandDispatcher.Send(command);
             if (result.Status == ApplicationServiceStatus.Ok)
             {
-                return StatusCode((int)HttpStatusCode.Created);
+                return StatusCode((int)HttpStatusCode.NoContent);
             }
             else if (result.Status == ApplicationServiceStatus.NotFound)
             {

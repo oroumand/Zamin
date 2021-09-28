@@ -1,5 +1,6 @@
 ﻿using Zamin.Core.ApplicationServices.Common;
 using Zamin.Utilities;
+using System;
 using System.Threading.Tasks;
 
 namespace Zamin.Core.ApplicationServices.Commands
@@ -7,13 +8,15 @@ namespace Zamin.Core.ApplicationServices.Commands
     public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand, TData>
     where TCommand : ICommand<TData>
     {
-        protected readonly ZaminServices _zaminServices;
-        protected readonly CommandResult<TData> result = new CommandResult<TData>();
 
+        protected readonly ZaminServices _zaminServices;
+        protected readonly CommandResult<TData> result = new();
+        [Obsolete(message: "HammonServices Dependency removed from Constructor in the next release")]
         public CommandHandler(ZaminServices zaminServices)
         {
             _zaminServices = zaminServices;
         }
+
         public abstract Task<CommandResult<TData>> Handle(TCommand request);
         protected virtual Task<CommandResult<TData>> OkAsync(TData data)
         {
@@ -55,7 +58,9 @@ namespace Zamin.Core.ApplicationServices.Commands
     where TCommand : ICommand
     {
         protected readonly ZaminServices _zaminServices;
-        protected readonly CommandResult result = new CommandResult();
+        protected readonly CommandResult result = new();
+        
+        [Obsolete(message: "HammonServices Dependency removed from Constructor in the next release")]
         public CommandHandler(ZaminServices zaminServices)
         {
             _zaminServices = zaminServices;

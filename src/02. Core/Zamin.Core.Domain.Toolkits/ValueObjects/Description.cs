@@ -5,7 +5,12 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
 {
     public class Description : BaseValueObject<Description>
     {
-        public static Description FromString(string value) => new Description(value);
+        #region Properties
+        public string Value { get; private set; } 
+        #endregion
+
+        #region Constructors and Factories
+        public static Description FromString(string value) => new(value);
         public Description(string value)
         {
             if (!string.IsNullOrWhiteSpace(value) && value.Length > 500)
@@ -17,22 +22,19 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
         }
         private Description()
         {
+        } 
+        #endregion        
 
-        }
+        #region Equality Check
+        public override int ObjectGetHashCode() => Value.GetHashCode();
 
-        public string Value { get; private set; }
+        public override bool ObjectIsEqual(Description otherObject) => Value == otherObject.Value; 
+        #endregion
 
-        public override int ObjectGetHashCode()
-        {
-            return Value.GetHashCode();
-        }
-
-        public override bool ObjectIsEqual(Description otherObject)
-        {
-            return Value == otherObject.Value;
-        }
-
+        #region Operator Overloading
         public static explicit operator string(Description description) => description.Value;
-        public static implicit operator Description(string value) => new Description(value);
+
+        public static implicit operator Description(string value) => new(value); 
+        #endregion
     }
 }

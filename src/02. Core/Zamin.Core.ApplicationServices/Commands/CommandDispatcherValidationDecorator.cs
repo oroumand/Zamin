@@ -1,57 +1,87 @@
 ﻿using FluentValidation;
 using Zamin.Core.ApplicationServices.Common;
+using Zamin.Utilities.Services.Logger;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-
 namespace Zamin.Core.ApplicationServices.Commands
 {
     public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
     {
+        #region Fields
         private readonly IServiceProvider _serviceProvider;
-        public CommandDispatcherValidationDecorator(CommandDispatcherDomainExceptionHandlerDecorator commandDispatcher, IServiceProvider serviceProvider) : base(commandDispatcher)
+        private readonly ILogger<CommandDispatcherValidationDecorator> _logger;
+        #endregion
+
+        #region Constructors
+        public CommandDispatcherValidationDecorator(CommandDispatcherDomainExceptionHandlerDecorator commandDispatcher,
+                                                    IServiceProvider serviceProvider,ILogger<CommandDispatcherValidationDecorator> logger)
+                                                    : base(commandDispatcher)
         {
             _serviceProvider = serviceProvider;
+            _logger = logger;
         }
-        public override Task<CommandResult> Send<TCommand>(in TCommand command)
+        #endregion
+
+        #region Send Commands
+        public override Task<CommandResult> Send<TCommand>(TCommand command)
         {
+            _logger.LogDebug(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  start at :{StartDateTime}", command.GetType(), command, DateTime.Now);
             var validationResult = Validate<TCommand, CommandResult>(command);
+
             if (validationResult != null)
             {
+                _logger.LogInformation(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  failed. Validation errors are: {ValidationErrors}", command.GetType(), command, validationResult.Messages);
                 return Task.FromResult(validationResult);
             }
+            _logger.LogDebug(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  finished at :{EndDateTime}", command.GetType(), command, DateTime.Now);
             return _commandDispatcher.Send(command);
         }
 
         public override Task<CommandResult<TData>> Send<TCommand, TData>(in TCommand command)
         {
+            _logger.LogDebug(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  start at :{StartDateTime}", command.GetType(), command, DateTime.Now);
+
             var validationResult = Validate<TCommand, CommandResult<TData>>(command);
+
             if (validationResult != null)
             {
+                _logger.LogInformation(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  failed. Validation errors are: {ValidationErrors}", command.GetType(), command, validationResult.Messages);
                 return Task.FromResult(validationResult);
             }
+            _logger.LogDebug(ZaminEventId.CommandValidation, "Validating command of type {CommandType} With value {Command}  finished at :{EndDateTime}", command.GetType(), command, DateTime.Now);
             return _commandDispatcher.Send<TCommand, TData>(command);
         }
+        #endregion
 
+        #region Privaite Methods
         private TValidationResult Validate<TCommand, TValidationResult>(TCommand command) where TValidationResult : ApplicationServiceResult, new()
         {
             var validator = _serviceProvider.GetService<IValidator<TCommand>>();
+            TValidationResult res = null;
+
             if (validator != null)
             {
                 var validationResult = validator.Validate(command);
                 if (!validationResult.IsValid)
                 {
-                    TValidationResult res = new TValidationResult();
-                    res.Status = ApplicationServiceStatus.ValidationError;
+                    res = new()
+                    {
+                        Status = ApplicationServiceStatus.ValidationError
+                    };
                     foreach (var item in validationResult.Errors)
                     {
                         res.AddMessage(item.ErrorMessage);
                     }
-
-                    return res;
                 }
             }
-            return null;
-        }
+            else
+            {
+                _logger.LogInformation(ZaminEventId.CommandValidation, "There is not any validator for {CommandType}", command.GetType());
+            }
+            return res;
+        } 
+        #endregion
     }
 }

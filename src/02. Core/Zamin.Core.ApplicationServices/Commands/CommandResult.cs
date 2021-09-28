@@ -15,13 +15,6 @@ namespace Zamin.Core.ApplicationServices.Commands
     public class CommandResult<TData> : CommandResult
     {
         internal TData _data;
-        public TData Data
-        {
-            get
-            {
-                return _data;
-            }
-        }
-
+        public TData Data => _data;
     }
 }

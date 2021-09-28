@@ -10,24 +10,23 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {
     public static class AddMvcConfigurationExtentions
     {
         public static IServiceCollection AddZaminMvcServices(this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration, Action<MvcOptions> mvcOptions = null)
         {
             var _zaminConfigurations = new ZaminConfigurationOptions();
             configuration.GetSection(_zaminConfigurations.SectionName).Bind(_zaminConfigurations);
             services.AddSingleton(_zaminConfigurations);
-            services.AddControllersWithViews(options =>
+            services.AddControllersWithViews(mvcOptions == null ? (options =>
             {
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
-            }).AddRazorRuntimeCompilation()
+            }) : mvcOptions).AddRazorRuntimeCompilation()
             .AddFluentValidation();
-
-            services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
 
             return services;
         }

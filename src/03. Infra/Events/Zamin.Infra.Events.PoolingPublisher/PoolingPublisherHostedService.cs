@@ -13,9 +13,9 @@ namespace Zamin.Infra.Events.PoolingPublisher
     {
         private readonly ZaminConfigurationOptions _configuration;
         private readonly IOutBoxEventItemRepository _outBoxEventItemRepository;
-        private readonly IMessageBus _messageBus;
+        private readonly ISendMessageBus _messageBus;
         private Timer _timer;
-        public PoolingPublisherHostedService(ZaminConfigurationOptions configuration, IOutBoxEventItemRepository outBoxEventItemRepository, IMessageBus messageBus)
+        public PoolingPublisherHostedService(ZaminConfigurationOptions configuration, IOutBoxEventItemRepository outBoxEventItemRepository, ISendMessageBus messageBus)
         {
             _configuration = configuration;
             _outBoxEventItemRepository = outBoxEventItemRepository;

@@ -1,5 +1,5 @@
 ﻿using Zamin.Core.ApplicationServices.Events;
-using Zamin.MiniBlog.Core.Domain.Writers.Events;
+using Zamin.MiniBlog.Core.Domain.People.Events;
 using System;
 using System.Threading.Tasks;
 

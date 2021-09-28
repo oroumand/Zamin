@@ -1,4 +1,5 @@
 ﻿using Zamin.Core.ApplicationServices.Commands;
+using Zamin.Core.Domain.Exceptions;
 using Zamin.MiniBlog.Core.Domain.People.Entities;
 using Zamin.MiniBlog.Core.Domain.People.Repositories;
 using Zamin.Utilities;
@@ -16,16 +17,12 @@ namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.CreatePerson
 
         }
 
-        public override Task<CommandResult<long>> Handle(CreatePersonCommand request)
+        public override  Task<CommandResult<long>> Handle(CreatePersonCommand request)
         {
-            Person person = new Person
-            {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Age = null
-            };
+           // throw new InvalidEntityStateException("test");
+            Person person = new Person(request.FirstName, request.LastName, null);
             _personRepository.Insert(person);
-            _personRepository.CommitAsync();
+             _personRepository.Commit();
             return OkAsync(person.Id);
         }
     }

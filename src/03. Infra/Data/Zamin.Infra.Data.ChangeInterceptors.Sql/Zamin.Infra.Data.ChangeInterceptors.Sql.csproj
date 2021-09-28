@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+     <Version>5.1.2</Version>
+    <Authors>Alireza Oroumand</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.90" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01. Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
+    <ProjectReference Include="..\Zamin.Infra.Data.ChangeInterceptors\Zamin.Infra.Data.ChangeInterceptors.csproj" />
+  </ItemGroup>
+</Project>

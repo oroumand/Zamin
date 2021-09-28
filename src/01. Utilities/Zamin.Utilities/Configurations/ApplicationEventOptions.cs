@@ -2,7 +2,7 @@
 {
     public class ApplicationEventOptions
     {
-        public bool TransactionalEventsEnabled { get; set; }
-        public bool RaiseInmemoryEvents { get; set; }
+        public bool TransactionalEventsEnabled { get; set; } = true;
+        public bool RaiseInmemoryEvents { get; set; } = false;
     }
 }

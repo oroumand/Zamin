@@ -5,13 +5,13 @@ namespace Zamin.Utilities.Configurations
 {
     public class CachingOptions
     {
-        public bool Enable { get; set; }
-        public bool EnableQueryAutomaticCache { get; set; }
-        public CacheProvider Provider { get; set; }
-        public DistributedSqlServerCacheOptions DistributedSqlServerCache { get; set; }
-        public StackexchangeRedisCacheOptions StackExchangeRedisCache { get; set; }
-        public NcacheDistributedCacheOptions NCacheDistributedCache { get; set; }
-        public PolicyOptions[] Policies { get; set; }
+        public bool Enable { get; set; } = true;
+        public bool EnableQueryAutomaticCache { get; set; } = true;
+        public CacheProvider Provider { get; set; } = CacheProvider.MemoryCache;
+        public DistributedSqlServerCacheOptions DistributedSqlServerCache { get; set; } = null;
+        public StackexchangeRedisCacheOptions StackExchangeRedisCache { get; set; } = null;
+        public NcacheDistributedCacheOptions NCacheDistributedCache { get; set; } = null;
+        public PolicyOptions[] Policies { get; set; } = Array.Empty<PolicyOptions>();
 
         public PolicyOptions GetFor(string typeName) =>
              Policies?.Length < 1 ? null :
@@ -24,31 +24,31 @@ namespace Zamin.Utilities.Configurations
 
     public class DistributedSqlServerCacheOptions
     {
-        public string ConnectionString { get; set; }
-        public string SchemaName { get; set; }
-        public string TableName { get; set; }
+        public string ConnectionString { get; set; } = string.Empty;
+        public string SchemaName { get; set; } = "dbo";
+        public string TableName { get; set; } = "TableName";
     }
 
     public class StackexchangeRedisCacheOptions
     {
-        public string Configuration { get; set; }
-        public string SampleInstance { get; set; }
+        public string Configuration { get; set; } = "localhost";
+        public string SampleInstance { get; set; } = "SampleInstance";
     }
 
     public class NcacheDistributedCacheOptions
     {
-        public string CacheName { get; set; }
-        public bool EnableLogs { get; set; }
-        public bool ExceptionsEnabled { get; set; }
+        public string CacheName { get; set; } = "demoClusteredCache";
+        public bool EnableLogs { get; set; } = true;
+        public bool ExceptionsEnabled { get; set; } = true;
     }
 
     public class PolicyOptions
     {
-        public string Name { get; set; }
-        public int Order { get; set; }
-        public DateTime? AbsoluteExpiration { get; set; }
-        public int SlidingExpiration { get; set; }
-        public string[] Includes { get; set; }
-        public string[] Excludes { get; set; }
+        public string Name { get; set; } = "Default";
+        public int Order { get; set; } = 1;
+        public DateTime? AbsoluteExpiration { get; set; } = null;
+        public int SlidingExpiration { get; set; } = 60;
+        public string[] Includes { get; set; } = new string[] { "*" };
+        public string[] Excludes { get; set; } = new string[] { "-" };
     }
 }

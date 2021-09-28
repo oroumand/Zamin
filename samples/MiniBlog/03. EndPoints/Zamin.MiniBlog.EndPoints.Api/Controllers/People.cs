@@ -10,27 +10,21 @@ namespace Zamin.MiniBlog.EndPoints.Api.Controllers
     [Route("api/[Controller]")]
     public class PeopleController : BaseController
     {
-        private readonly IMessageBus _messageBus;
+        private readonly ISendMessageBus _messageBus;
 
-        //private readonly MiniblogDbContext _miniblogDbContext;
-
-        //public PeopleController(MiniblogDbContext miniblogDbContext)
-        //{
-        //    _miniblogDbContext = miniblogDbContext;
-        //}
-        public PeopleController(IMessageBus messageBus)
+        public PeopleController(ISendMessageBus messageBus)
         {
             _messageBus = messageBus;
         }
-        [HttpPost("/Save")]
-        public async Task<IActionResult> Post([FromBody] CreatePersonCommand createPerson)
+        [HttpPost("TestEvent")]
+        public async Task<IActionResult> TestEvent([FromBody] CreatePersonCommand createPerson)
         {
 
             return await Create<CreatePersonCommand, long>(createPerson);
         }
 
-        [HttpPost("/TestExternal")]
-        public IActionResult TestExternal([FromBody] string name)
+        [HttpGet("TestCommand")]
+        public IActionResult TestCommand([FromQuery] string name)
         {
             _messageBus.SendCommandTo("MiniBlogService01", "TestCommand", new TestCommand
             {

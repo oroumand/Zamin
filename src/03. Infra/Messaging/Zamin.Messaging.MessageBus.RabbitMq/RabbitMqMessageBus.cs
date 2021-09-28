@@ -28,7 +28,7 @@ namespace Zamin.Messaging.MessageBus.RabbitMq
             };
             _connection = connectionFactory.CreateConnection();
             var channel = _connection.CreateModel();
-            channel.ExchangeDeclare(configuration.MessageBus.RabbitMq.ExchangeName, ExchangeType.Topic, configuration.MessageBus.RabbitMq.ExchangeDurable, configuration.MessageBus.RabbitMq.ExchangeAutoDeleted);
+            channel.ExchangeDeclare(configuration.MessageBus.RabbitMq.ExchangeName, ExchangeType.Direct, configuration.MessageBus.RabbitMq.ExchangeDurable, configuration.MessageBus.RabbitMq.ExchangeAutoDeleted);
             ReveiveMessages();
         }
 
@@ -110,26 +110,29 @@ namespace Zamin.Messaging.MessageBus.RabbitMq
 
         public void Subscribe(string serviceId, string eventName)
         {
-            var queueName = $"{serviceId}.{eventName}";
-            MessageReceiver(queueName, Consumer_EventReceived);
-        }
+            var route = $"{serviceId}.{eventName}";
+            //MessageReceiver(queueName, Consumer_EventReceived);
 
-        public void Receive(string commandName)
-        {
-            var queueName = $"{_configuration.ServiceId}.{commandName}";
-            MessageReceiver(queueName, Consumer_CommandReceived);
-        }
-
-        private void MessageReceiver(string route, EventHandler<BasicDeliverEventArgs> eventHandler)
-        {
             var channel = _connection.CreateModel();
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += eventHandler;
-            var queue = channel.QueueDeclare($"{ _configuration.ServiceId}", true, false, false);
+            consumer.Received += Consumer_EventReceived;
+            var queue = channel.QueueDeclare($"{route}", true, false, false);
 
             channel.QueueBind(queue.QueueName, _configuration.MessageBus.RabbitMq.ExchangeName, route);
             channel.BasicConsume(queue.QueueName, true, consumer);
         }
+
+        public void Receive(string commandName)
+        {
+            var route = $"{_configuration.ServiceId}.{commandName}";
+            var channel = _connection.CreateModel();
+            var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += Consumer_CommandReceived;
+            var queue = channel.QueueDeclare($"{ route}", true, false, false);
+            channel.QueueBind(queue.QueueName, _configuration.MessageBus.RabbitMq.ExchangeName, route);
+            channel.BasicConsume(queue.QueueName, true, consumer);
+        }
+
         private void Consumer_EventReceived(object sender, BasicDeliverEventArgs e)
         {
             _messageConsumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel());

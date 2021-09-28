@@ -87,6 +87,7 @@ namespace Zamin.Infra.Data.Sql.Commands
             }
             return query.FirstOrDefault(c => c.BusinessId == businessId);
         }
+
         async Task ICommandRepository<TEntity>.InsertAsync(TEntity entity)
         {
             await _dbContext.Set<TEntity>().AddAsync(entity);
@@ -155,6 +156,4 @@ namespace Zamin.Infra.Data.Sql.Commands
             _dbContext.RollbackTransaction();
         }
     }
-
 }
-

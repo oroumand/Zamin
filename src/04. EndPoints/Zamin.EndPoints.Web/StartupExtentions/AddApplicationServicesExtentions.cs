@@ -31,7 +31,6 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             services.AddTransient<CommandDispatcherValidationDecorator, CommandDispatcherValidationDecorator>();
             services.AddTransient<ICommandDispatcher, CommandDispatcherValidationDecorator>();
             return services;
-
         }
 
         private static IServiceCollection AddQueryHandlers(this IServiceCollection services,

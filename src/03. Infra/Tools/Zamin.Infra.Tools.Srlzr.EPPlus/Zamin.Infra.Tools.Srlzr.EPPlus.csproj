@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+     <Version>5.1.2</Version>
+    <Authors>Alireza Oroumand</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.5.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\01. Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

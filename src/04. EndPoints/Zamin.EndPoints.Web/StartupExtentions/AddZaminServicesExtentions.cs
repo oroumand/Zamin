@@ -23,13 +23,14 @@ namespace Zamin.EndPoints.Web.StartupExtentions
     public static class AddZaminServicesExtentions
     {
         public static IServiceCollection AddZaminServices(
-           this IServiceCollection services,
-           IEnumerable<Assembly> assembliesForSearch)
+            this IServiceCollection services,
+            IEnumerable<Assembly> assembliesForSearch)
         {
             services.AddCaching();
             services.AddSession();
             services.AddLogging();
             services.AddJsonSerializer(assembliesForSearch);
+            services.AddExcelSerializer(assembliesForSearch);
             services.AddObjectMapper(assembliesForSearch);
             services.AddUserInfoService(assembliesForSearch);
             services.AddTranslator(assembliesForSearch);
@@ -47,11 +48,11 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             {
                 if (_zaminConfigurations.Caching.Provider == CacheProvider.MemoryCache)
                 {
-                    services.AddScoped<ICacheAdapter, InMemoryCacheAdapter>();
+                    services.AddTransient<ICacheAdapter, InMemoryCacheAdapter>();
                 }
                 else
                 {
-                    services.AddScoped<ICacheAdapter, DistributedCacheAdapter>();
+                    services.AddTransient<ICacheAdapter, DistributedCacheAdapter>();
                 }
 
                 switch (_zaminConfigurations.Caching.Provider)
@@ -89,17 +90,17 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
             if (_zaminConfigurations?.Session?.Enable == true)
             {
-                var sessionCookie = _zaminConfigurations.Session.Cookie;
+                var eveSessionCookie = _zaminConfigurations.Session.Cookie;
                 CookieBuilder cookieBuilder = new();
-                cookieBuilder.Name = sessionCookie.Name;
-                cookieBuilder.Domain = sessionCookie.Domain;
-                cookieBuilder.Expiration = sessionCookie.Expiration;
-                cookieBuilder.HttpOnly = sessionCookie.HttpOnly;
-                cookieBuilder.IsEssential = sessionCookie.IsEssential;
-                cookieBuilder.MaxAge = sessionCookie.MaxAge;
-                cookieBuilder.Path = sessionCookie.Path;
-                cookieBuilder.SameSite = Enum.Parse<SameSiteMode>(sessionCookie.SameSite.ToString());
-                cookieBuilder.SecurePolicy = Enum.Parse<CookieSecurePolicy>(sessionCookie.SecurePolicy.ToString());
+                cookieBuilder.Name = eveSessionCookie.Name;
+                cookieBuilder.Domain = eveSessionCookie.Domain;
+                cookieBuilder.Expiration = eveSessionCookie.Expiration;
+                cookieBuilder.HttpOnly = eveSessionCookie.HttpOnly;
+                cookieBuilder.IsEssential = eveSessionCookie.IsEssential;
+                cookieBuilder.MaxAge = eveSessionCookie.MaxAge;
+                cookieBuilder.Path = eveSessionCookie.Path;
+                cookieBuilder.SameSite = Enum.Parse<SameSiteMode>(eveSessionCookie.SameSite.ToString());
+                cookieBuilder.SecurePolicy = Enum.Parse<CookieSecurePolicy>(eveSessionCookie.SecurePolicy.ToString());
 
                 services.AddSession(options =>
                 {
@@ -125,6 +126,15 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             return services;
         }
 
+        public static IServiceCollection AddExcelSerializer(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
+        {
+            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            services.Scan(s => s.FromAssemblies(assembliesForSearch)
+                .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.ExcelSerializerTypeName && typeof(IExcelSerializer).IsAssignableFrom(type)))
+                .AsImplementedInterfaces()
+                .WithSingletonLifetime());
+            return services;
+        }
 
         private static IServiceCollection AddObjectMapper(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
@@ -171,12 +181,20 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
              .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.Messageconsumer.MessageInboxStoreTypeName && typeof(IMessageInboxItemRepository).IsAssignableFrom(type)))
              .AsImplementedInterfaces()
-             .WithTransientLifetime());
+             .WithSingletonLifetime());
 
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
-                .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.MessageBus.MessageBusTypeName && typeof(IMessageBus).IsAssignableFrom(type)))
+                .AddClasses(classes => classes.Where(type => type.Name.StartsWith(_zaminConfigurations.MessageBus.MessageBusTypeName) && typeof(ISendMessageBus).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
                 .WithSingletonLifetime());
+
+            services.Scan(s => s.FromAssemblies(assembliesForSearch)
+                .AddClasses(classes => classes.Where(type => type.Name.StartsWith(_zaminConfigurations.MessageBus.MessageBusTypeName) && typeof(IReceiveMessageBus).IsAssignableFrom(type)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
+
+
+            services.AddHostedService<IdempotentConsumerHostedService>();
             return services;
         }
 

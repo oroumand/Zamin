@@ -11,7 +11,7 @@ namespace Zamin.EndPoints.Web.Services
     public class WebUserInfoService : IUserInfoService
     {
         private readonly HttpContext _httpContext;
-        private const string AccessList = "http://CCS.Dotin.ir/ws/2005/05/identity/claims/AccessList";
+        private const string AccessList = "";
 
         public WebUserInfoService(IHttpContextAccessor httpContextAccessor)
         {

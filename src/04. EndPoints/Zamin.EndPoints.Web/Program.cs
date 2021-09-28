@@ -58,8 +58,4 @@ namespace Zamin.EndPoints.Web
                 })
             .UseSerilog();
     }
-
-
-
-
 }

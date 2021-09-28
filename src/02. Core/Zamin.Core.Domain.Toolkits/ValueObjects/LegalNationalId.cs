@@ -6,7 +6,12 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
 {
     public class LegalNationalId : BaseValueObject<LegalNationalId>
     {
-        public static LegalNationalId FromString(string value) => new LegalNationalId(value);
+        #region Properties
+        public string Value { get; private set; }
+        #endregion
+
+        #region Constructors and Factories
+        public static LegalNationalId FromString(string value) => new(value);
         public LegalNationalId(string value)
         {
             if (!value.IsLegalNationalIdValid())
@@ -21,24 +26,22 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
 
         }
 
-        public string Value { get; private set; }
+        #endregion
 
-        public override int ObjectGetHashCode()
-        {
-            return Value.GetHashCode();
-        }
+        #region Equality Check
 
-        public override bool ObjectIsEqual(LegalNationalId otherObject)
-        {
-            return Value == otherObject.Value;
-        }
-        public override string ToString()
-        {
-            return Value;
-        }
+        public override int ObjectGetHashCode() => Value.GetHashCode();
 
+        public override bool ObjectIsEqual(LegalNationalId otherObject) => Value == otherObject.Value;
+
+        public override string ToString() => Value;
+
+        #endregion
+
+        #region Operator Overloading
         public static explicit operator string(LegalNationalId title) => title.Value;
-        public static implicit operator LegalNationalId(string value) => new LegalNationalId(value);
+        public static implicit operator LegalNationalId(string value) => new(value);
+        #endregion
 
     }
 }

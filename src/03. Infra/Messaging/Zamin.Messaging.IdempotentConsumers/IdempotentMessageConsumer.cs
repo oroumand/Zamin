@@ -1,6 +1,5 @@
 ﻿using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Events;
-using Zamin.Messaging.IdempotentConsumers;
 using Zamin.Utilities.Configurations;
 using Zamin.Utilities.Services.MessageBus;
 using Zamin.Utilities.Services.Serializers;
@@ -30,13 +29,7 @@ namespace Zamin.Messaging.IdempotentConsumers
 
         private void LoadMessageMap()
         {
-            if (_zaminConfigurations?.Messageconsumer?.Commands?.Any() == true)
-            {
-                foreach (var item in _zaminConfigurations?.Messageconsumer?.Commands)
-                {
-                    _messageTypeMap.Add($"{_zaminConfigurations.ServiceId}.{item.CommandName}", item.MapToClass);
-                }
-            }
+
             if (_zaminConfigurations?.Messageconsumer?.Events?.Any() == true)
             {
                 foreach (var eventPublisher in _zaminConfigurations?.Messageconsumer?.Events)
@@ -46,6 +39,13 @@ namespace Zamin.Messaging.IdempotentConsumers
                         _messageTypeMap.Add($"{eventPublisher.FromServiceId}.{@event.EventName}", @event.MapToClass);
 
                     }
+                }
+            }
+            if (_zaminConfigurations?.Messageconsumer?.Commands?.Any() == true)
+            {
+                foreach (var item in _zaminConfigurations?.Messageconsumer?.Commands)
+                {
+                    _messageTypeMap.Add($"{_zaminConfigurations.ServiceId}.{item.CommandName}", item.MapToClass);
                 }
             }
         }

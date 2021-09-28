@@ -6,7 +6,12 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
 {
     public class NationalCode : BaseValueObject<NationalCode>
     {
-        public static NationalCode FromString(string value) => new NationalCode(value);
+        #region Properties
+        public string Value { get; private set; }
+        #endregion
+
+        #region Constructors and Factories
+        public static NationalCode FromString(string value) => new(value);
         public NationalCode(string value)
         {
             if (!value.IsNationalCode())
@@ -20,25 +25,25 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
         {
 
         }
+        #endregion
 
-        public string Value { get; private set; }
+        #region Equality Check
+        public override int ObjectGetHashCode() => Value.GetHashCode();
 
-        public override int ObjectGetHashCode()
-        {
-            return Value.GetHashCode();
-        }
+        public override bool ObjectIsEqual(NationalCode otherObject) => Value == otherObject.Value;
 
-        public override bool ObjectIsEqual(NationalCode otherObject)
-        {
-            return Value == otherObject.Value;
-        }
-        public override string ToString()
-        {
-            return Value;
-        }
+        #endregion
+       
+        #region Operator Overloading
 
         public static explicit operator string(NationalCode title) => title.Value;
-        public static implicit operator NationalCode(string value) => new NationalCode(value);
+        public static implicit operator NationalCode(string value) => new(value);
+        #endregion
+
+        #region Methods
+        public override string ToString() => Value;
+
+        #endregion
 
     }
 }

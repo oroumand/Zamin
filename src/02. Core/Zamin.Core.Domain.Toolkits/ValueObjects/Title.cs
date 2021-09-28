@@ -5,6 +5,11 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
 {
     public class Title : BaseValueObject<Title>
     {
+        #region Properties
+        public string Value { get; private set; }
+        #endregion
+
+        #region Constructors and Factories
         public static Title FromString(string value) => new Title(value);
         public Title(string value)
         {
@@ -22,9 +27,10 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
         {
 
         }
+        #endregion
 
-        public string Value { get; private set; }
 
+        #region Equality Check
         public override int ObjectGetHashCode()
         {
             return Value.GetHashCode();
@@ -34,13 +40,16 @@ namespace Zamin.Core.Domain.Toolkits.ValueObjects
         {
             return Value == otherObject.Value;
         }
-        public override string ToString()
-        {
-            return Value;
-        }
+        #endregion
 
+
+        #region Operator Overloading
         public static explicit operator string(Title title) => title.Value;
-        public static implicit operator Title(string value) => new Title(value);
+        public static implicit operator Title(string value) => new(value);
+        #endregion
 
+        #region Methods
+        public override string ToString() => Value; 
+        #endregion
     }
 }

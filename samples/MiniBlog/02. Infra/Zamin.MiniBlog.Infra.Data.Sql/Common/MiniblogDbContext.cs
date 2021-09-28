@@ -28,7 +28,7 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Common
         public MiniblogDbContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<MiniblogDbContext>();
-            builder.UseSqlServer("Server =.; Database=MiniBlogDb ;User Id =sa;Password=a_A123456; MultipleActiveResultSets=true");
+            builder.UseSqlServer("Server =.; Database=MiniBlogDb ;User Id =sa;Password=1qaz!QAZ; MultipleActiveResultSets=true");
             return new MiniblogDbContext(builder.Options);
         }
     }

@@ -10,8 +10,6 @@ using System.Threading.Tasks;
 
 namespace Zamin.MiniBlog.EndPoints.Mvc.Controllers
 {
-
-
     //public class Person
     //{
     //    public int Id { get; set; }
@@ -49,11 +47,11 @@ namespace Zamin.MiniBlog.EndPoints.Mvc.Controllers
         }
         public async Task<IActionResult> Test()
         {
-            var result = await CommandDispatcher.Send<CreatePersonCommand, long>(new CreatePersonCommand
-            {
-                FirstName = "Alrieza" + DateTime.Now.Ticks,
-                LastName = "Alrieza" + DateTime.Now.Ticks
-            });
+            //var result = await CommandDispatcher.Send<CreatePersonCommand, long>(new CreatePersonCommand
+            //{
+            //    FirstName = "Alrieza" + DateTime.Now.Ticks,
+            //    LastName = "Alrieza" + DateTime.Now.Ticks
+            //});
             return View();
         }
         public IActionResult Privacy()
