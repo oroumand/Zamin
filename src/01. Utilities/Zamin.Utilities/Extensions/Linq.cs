@@ -1,12 +1,12 @@
-﻿using Zamin.Utilities.Services.Localizations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Zamin.Utilities.Services.Localizations;
 
-namespace Zamin.Utilities.Extentions
+namespace Zamin.Utilities.Extensions
 {
     public static class Linq
     {
@@ -24,7 +24,7 @@ namespace Zamin.Utilities.Extentions
         public static DataTable ToDataTable<T>(this List<T> list)
         {
 
-            DataTable dataTable = new DataTable(typeof(T).Name);
+            DataTable dataTable = new(typeof(T).Name);
 
             PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
@@ -49,7 +49,7 @@ namespace Zamin.Utilities.Extentions
 
         public static List<T> ToList<T>(this DataTable dt, ITranslator resourceManager)
         {
-            List<T> data = new List<T>();
+            List<T> data = new();
             foreach (DataRow row in dt.Rows)
             {
                 T item = GetItem<T>(row, resourceManager);

@@ -8,20 +8,18 @@ using System.Threading.Tasks;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Queries.UserByFirstName
 {
-    public class UserByFirstNameQueryHandler : QueryHandler<UserByFirstNameQuery, PagedData<List<WriterSummary>>>
+    public class UserByFirstNameQueryHandler : QueryHandler<UserByFirstNameQuery, PagedData<WriterSummary>>
     {
-        private readonly IWriterQueryRepository repository;
+        private readonly IWriterQueryRepository _writerQueryRepository;
 
-        public UserByFirstNameQueryHandler(ZaminServices zaminApplicationContext, IWriterQueryRepository repository) : base(zaminApplicationContext)
+        public UserByFirstNameQueryHandler(ZaminServices zaminApplicationContext, IWriterQueryRepository writerQueryRepository) : base(zaminApplicationContext)
         {
-            this.repository = repository;
+            _writerQueryRepository = writerQueryRepository;
         }
-
-        public override Task<QueryResult<PagedData<List<WriterSummary>>>> Handle(UserByFirstNameQuery request)
+        public override Task<QueryResult<PagedData<WriterSummary>>> Handle(UserByFirstNameQuery request)
         {
-            var result = repository.Select(request);
+            var result = _writerQueryRepository.Select(request);
             return ResultAsync(result);
-
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Linq;
 
-namespace Zamin.Utilities.Extentions
+namespace Zamin.Utilities.Extensions
 {
     public static class EnumExtensions
     {
