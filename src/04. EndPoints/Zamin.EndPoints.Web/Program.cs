@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -9,7 +10,7 @@ namespace Zamin.EndPoints.Web
 {
     public class ZaminProgram
     {
-        public int Main(string[] args, Type startUp, params string[] appSettingFiles)
+        public WebApplicationBuilder Main(string[] args, params string[] appSettingFiles)
         {
 
             if (appSettingFiles == null || !appSettingFiles.Any())
@@ -29,13 +30,12 @@ namespace Zamin.EndPoints.Web
             try
             {
                 Log.Information("Starting web host");
-                CreateHostBuilder(args, startUp, appSettingFiles).Build().Run();
-                return 0;
+                return CreateHostBuilder(args, appSettingFiles);
             }
             catch (Exception ex)
             {
                 Log.Fatal(ex, "Host terminated unexpectedly");
-                return 1;
+                return null;
             }
             finally
             {
@@ -43,19 +43,16 @@ namespace Zamin.EndPoints.Web
             }
         }
 
-        private IHostBuilder CreateHostBuilder(string[] args, Type startUp, params string[] appSettingFiles) =>
-            Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((ctx, config) =>
+        private WebApplicationBuilder CreateHostBuilder(string[] args, params string[] appSettingFiles)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            foreach (var item in appSettingFiles)
             {
-                foreach (var item in appSettingFiles)
-                {
-                    config.AddJsonFile(item, true);
-                }
-            })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup(startUp);
-                })
-            .UseSerilog();
+                builder.Configuration.AddJsonFile(item, true);
+            }
+
+            return builder;
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace Zamin.MiniBlog.EndPoints.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddZaminMvcServices(_configuration);
+            //services.AddZaminMvcServices(_configuration);
             services.AddDbContext<MiniblogDbContext>(c => c.UseSqlServer(_configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
             services.AddDbContext<MiniblogQueryDbContext>(c => c.UseSqlServer(_configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
         }

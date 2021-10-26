@@ -19,14 +19,19 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         public static IServiceCollection AddZaminMvcServices(this IServiceCollection services,
             IConfiguration configuration, Action<MvcOptions> mvcOptions = null)
         {
-            var _zaminConfigurations = new ZaminConfigurationOptions();
-            configuration.GetSection(_zaminConfigurations.SectionName).Bind(_zaminConfigurations);
-            services.AddSingleton(_zaminConfigurations);
+            var zaminConfigurations = new ZaminConfigurationOptions();
+            configuration.GetSection(zaminConfigurations.SectionName).Bind(zaminConfigurations);
+            services.AddSingleton(zaminConfigurations);
             services.AddControllersWithViews(mvcOptions == null ? (options =>
             {
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }) : mvcOptions).AddRazorRuntimeCompilation()
             .AddFluentValidation();
+
+            if (zaminConfigurations?.Session?.Enable == true)
+                services.AddSession();
+
+            services.AddZaminDependencies(zaminConfigurations.AssmblyNameForLoad.Split(','));
 
             return services;
         }
