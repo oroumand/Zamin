@@ -24,6 +24,8 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }).AddFluentValidation();
 
+            services.AddEndpointsApiExplorer();
+
             services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
 
             AddSwagger(services);
