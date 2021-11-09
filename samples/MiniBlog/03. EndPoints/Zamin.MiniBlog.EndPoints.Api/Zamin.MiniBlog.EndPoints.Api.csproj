@@ -1,23 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\04. EndPoints\Zamin.EndPoints.Web\Zamin.EndPoints.Web.csproj" />
-    <ProjectReference Include="..\..\01. Core\Zamin.MiniBlog.Core.ApplicationServices\Zamin.MiniBlog.Core.ApplicationServices.csproj" />
-    <ProjectReference Include="..\..\01. Core\Zamin.MiniBlog.Core.Domain\Zamin.MiniBlog.Core.Domain.csproj" />
-    <ProjectReference Include="..\..\02. Infra\Zamin.MiniBlog.Infra.Data.Sql.Queries\Zamin.MiniBlog.Infra.Data.Sql.Queries.csproj" />
-    <ProjectReference Include="..\..\02. Infra\Zamin.MiniBlog.Infra.Data.Sql\Zamin.MiniBlog.Infra.Data.Sql.Commands.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\src\04. EndPoints\Zamin.EndPoints.Web\Zamin.EndPoints.Web.csproj" />
+	  <ProjectReference Include="..\..\01. Core\Zamin.MiniBlog.Core.ApplicationServices\Zamin.MiniBlog.Core.ApplicationServices.csproj" />
+	  <ProjectReference Include="..\..\01. Core\Zamin.MiniBlog.Core.Domain\Zamin.MiniBlog.Core.Domain.csproj" />
+	  <ProjectReference Include="..\..\02. Infra\Zamin.MiniBlog.Infra.Data.Sql.Queries\Zamin.MiniBlog.Infra.Data.Sql.Queries.csproj" />
+	  <ProjectReference Include="..\..\02. Infra\Zamin.MiniBlog.Infra.Data.Sql\Zamin.MiniBlog.Infra.Data.Sql.Commands.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Zamin.EndPoints.Web.Controllers" />
+	</ItemGroup>
 
 </Project>
