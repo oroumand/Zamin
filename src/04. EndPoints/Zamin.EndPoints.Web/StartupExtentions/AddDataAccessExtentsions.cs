@@ -1,7 +1,7 @@
-﻿using Zamin.Core.Domain.Data;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Reflection;
+using Zamin.Core.Domain.Data;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {

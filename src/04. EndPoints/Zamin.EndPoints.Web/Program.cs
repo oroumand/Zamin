@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Serilog;
-using System;
-using System.Linq;
-
-namespace Zamin.EndPoints.Web
+﻿namespace Zamin.EndPoints.Web
 {
     public class ZaminProgram
     {

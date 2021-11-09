@@ -1,16 +1,12 @@
-﻿using Zamin.EndPoints.Web.Filters;
-using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
-using Zamin.Utilities.Configurations;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Data.SqlClient;
-using Microsoft.AspNetCore.Mvc;
+using Zamin.EndPoints.Web.Filters;
+using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
+using Zamin.Utilities.Configurations;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {
