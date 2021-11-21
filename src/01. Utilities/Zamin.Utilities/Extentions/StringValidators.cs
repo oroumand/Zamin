@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Zamin.Utilities.Extentions
+namespace Zamin.Utilities.Extensions
 {
     public static class StringValidators
     {

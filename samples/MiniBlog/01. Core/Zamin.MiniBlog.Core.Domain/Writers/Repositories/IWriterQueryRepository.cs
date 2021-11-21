@@ -6,6 +6,6 @@ namespace Zamin.MiniBlog.Core.Domain.Writers.Repositories
 {
     public interface IWriterQueryRepository : IQueryRepository
     {
-        public PagedData<List<WriterSummary>> Select(IWriterByFirstName writerByFirstName);
+        public PagedData<WriterSummary> Select(IWriterByFirstName writerByFirstName);
     }
 }

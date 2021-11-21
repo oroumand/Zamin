@@ -1,4 +1,4 @@
-﻿using Zamin.Utilities.Extentions;
+﻿using Zamin.Utilities.Extensions;
 using Zamin.Utilities.Services.Localizations;
 using Zamin.Utilities.Services.Serializers;
 using System.Collections.Generic;

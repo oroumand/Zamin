@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Zamin.Utilities.Extentions
+namespace Zamin.Utilities.Extensions
 {
     public static class Linq
     {

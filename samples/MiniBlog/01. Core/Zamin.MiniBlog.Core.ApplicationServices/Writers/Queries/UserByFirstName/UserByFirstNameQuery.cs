@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Queries.UserByFirstName
 {
-    public class UserByFirstNameQuery : PageQuery<PagedData<List<WriterSummary>>>, IWriterByFirstName
+    public class UserByFirstNameQuery : PageQuery<PagedData<WriterSummary>>, IWriterByFirstName
     {
         public string FirstName { get; set; }
     }
