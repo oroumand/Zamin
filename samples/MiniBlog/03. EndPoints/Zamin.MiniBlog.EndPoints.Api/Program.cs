@@ -1,14 +1,27 @@
-﻿using Zamin.EndPoints.Web;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Zamin.EndPoints.Web;
+using Zamin.EndPoints.Web.StartupExtentions;
+using Zamin.MiniBlog.Infra.Data.Sql.Commands.Common;
+using Zamin.MiniBlog.Infra.Data.Sql.Queries.Common;
+using Zamin.Utilities.Configurations;
 
-namespace Zamin.MiniBlog.EndPoints.Api
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            new ZaminProgram().Main(args, typeof(Startup), "appsettings.json", "appsettings.zamin.json", "appsettings.serilog.json");
-        }
+var builder = new ZaminProgram().Main(args, "appsettings.json", "appsettings.zamin.json", "appsettings.serilog.json");
 
+//Configuration
+ConfigurationManager Configuration = builder.Configuration;
 
-    }
-}
+// Add services to the container.
+
+builder.Services.AddZaminApiServices(Configuration);
+builder.Services.AddDbContext<MiniblogDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
+builder.Services.AddDbContext<MiniblogQueryDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
+
+//Middlewares
+var app = builder.Build();
+var zaminOptions = app.Services.GetService<ZaminConfigurationOptions>();
+
+app.UseZaminApiConfigure(zaminOptions, app.Environment);
+
+app.Run();

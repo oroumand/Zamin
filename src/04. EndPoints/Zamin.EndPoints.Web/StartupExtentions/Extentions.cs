@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
+using Microsoft.Extensions.DependencyModel;
 using System.Collections.Generic;
 using System.Reflection;
-using Microsoft.Extensions.DependencyModel;
 using Zamin.Utilities.Services.DependentyInjection;
 
 namespace Zamin.EndPoints.Web.StartupExtentions

@@ -1,16 +1,12 @@
-﻿using Zamin.EndPoints.Web.Filters;
-using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
-using Zamin.Utilities.Configurations;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Data.SqlClient;
-using Microsoft.AspNetCore.Mvc;
+using Zamin.EndPoints.Web.Filters;
+using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
+using Zamin.Utilities.Configurations;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {
@@ -19,14 +15,19 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         public static IServiceCollection AddZaminMvcServices(this IServiceCollection services,
             IConfiguration configuration, Action<MvcOptions> mvcOptions = null)
         {
-            var _zaminConfigurations = new ZaminConfigurationOptions();
-            configuration.GetSection(_zaminConfigurations.SectionName).Bind(_zaminConfigurations);
-            services.AddSingleton(_zaminConfigurations);
+            var zaminConfigurations = new ZaminConfigurationOptions();
+            configuration.GetSection(zaminConfigurations.SectionName).Bind(zaminConfigurations);
+            services.AddSingleton(zaminConfigurations);
             services.AddControllersWithViews(mvcOptions == null ? (options =>
             {
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }) : mvcOptions).AddRazorRuntimeCompilation()
             .AddFluentValidation();
+
+            if (zaminConfigurations?.Session?.Enable == true)
+                services.AddSession();
+
+            services.AddZaminDependencies(zaminConfigurations.AssmblyNameForLoad.Split(','));
 
             return services;
         }

@@ -1,12 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.OpenApi.Models;
-using System;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System.Data.SqlClient;
-using FluentValidation.AspNetCore;
 using Zamin.EndPoints.Web.Filters;
 using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
 using Zamin.Utilities.Configurations;
@@ -27,6 +23,8 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 options.Filters.AddService<ValidateModelStateAttribute>();
                 options.Filters.Add(typeof(TrackActionPerformanceFilter));
             }).AddFluentValidation();
+
+            services.AddEndpointsApiExplorer();
 
             services.AddZaminDependencies(_zaminConfigurations.AssmblyNameForLoad.Split(','));
 
