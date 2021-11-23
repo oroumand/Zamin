@@ -1,8 +1,8 @@
-﻿namespace Zamin.Utilities.Configurations
+﻿namespace Zamin.Utilities.Configurations;
+
+public class ApplicationEventOptions
 {
-    public class ApplicationEventOptions
-    {
-        public bool TransactionalEventsEnabled { get; set; } = true;
-        public bool RaiseInmemoryEvents { get; set; } = false;
-    }
+    public bool TransactionalEventsEnabled { get; set; } = true;
+    public bool RaiseInmemoryEvents { get; set; } = false;
 }
+

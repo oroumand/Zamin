@@ -1,7 +1,5 @@
-﻿namespace Zamin.Utilities.Services.ObjectMappers
+﻿namespace Zamin.Utilities.Services.ObjectMappers;
+public interface IMapperAdapter
 {
-    public interface IMapperAdapter
-    {
-        TDestination Map<TSource, TDestination>(TSource source);
-    }
+    TDestination Map<TSource, TDestination>(TSource source);
 }

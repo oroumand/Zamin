@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 using System.Reflection;
 using Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems;
 using Zamin.Infra.Events.Outbox;
@@ -80,7 +79,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             }
             else
             {
-                services.AddScoped<ICacheAdapter, NullObjectCacheAdapter>();
+                services.AddScoped<ICacheAdapter, FakeCacheAdapter>();
             }
             return services;
         }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using Zamin.EndPoints.Web.Extentions;
 using Zamin.Utilities.Services.Users;
 using Microsoft.AspNetCore.Http;

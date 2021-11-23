@@ -1,8 +1,6 @@
-﻿namespace Zamin.Utilities.Services.MessageBus
+﻿namespace Zamin.Utilities.Services.MessageBus;
+public interface IMessageConsumer
 {
-    public interface IMessageConsumer
-    {
-        void ConsumeEvent(string sender, Parcel parcel);
-        void ConsumeCommand(string sender, Parcel parcel);
-    }
+    void ConsumeEvent(string sender, Parcel parcel);
+    void ConsumeCommand(string sender, Parcel parcel);
 }

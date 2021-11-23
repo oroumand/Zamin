@@ -1,5 +1,4 @@
 ﻿using Zamin.Core.ApplicationServices.Commands;
-using Zamin.Core.Domain.Exceptions;
 using Zamin.MiniBlog.Core.Domain.People.Entities;
 using Zamin.MiniBlog.Core.Domain.People.Repositories;
 using Zamin.Utilities;

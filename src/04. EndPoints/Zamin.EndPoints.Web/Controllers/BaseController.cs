@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Net;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Queries;

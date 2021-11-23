@@ -1,6 +1,5 @@
 ﻿using Zamin.Utilities.Configurations;
 using Zamin.Utilities.Services.Localizations;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using System;

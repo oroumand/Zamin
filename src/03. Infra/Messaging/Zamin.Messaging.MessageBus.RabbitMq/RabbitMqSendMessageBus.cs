@@ -4,8 +4,8 @@ using Zamin.Utilities.Services.Serializers;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
-using Zamin.Utilities.Extentions;
 using Microsoft.Extensions.ObjectPool;
+using Zamin.Utilities.Extensions;
 
 namespace Zamin.Messaging.MessageBus.RabbitMq
 {
