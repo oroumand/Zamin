@@ -1,9 +1,6 @@
-﻿using Zamin.Core.ApplicationServices.Commands;
+﻿namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.PTestCommands;
 
-namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.PTestCommands
+public class PTestCommand : ICommand
 {
-    public class PTestCommand : ICommand
-    {
-        public string Name { get; set; }
-    }
+    public string Name { get; set; }
 }

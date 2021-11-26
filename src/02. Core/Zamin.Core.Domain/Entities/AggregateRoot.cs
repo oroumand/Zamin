@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Zamin.Core.Domain.Events;
+﻿using Zamin.Core.Domain.Events;
 
 namespace Zamin.Core.Domain.Entities;
 

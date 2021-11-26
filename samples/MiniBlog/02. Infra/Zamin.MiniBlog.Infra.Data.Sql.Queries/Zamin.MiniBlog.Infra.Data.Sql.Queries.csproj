@@ -1,12 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\03. Infra\Data\Zamin.Infra.Data.Sql.Queries\Zamin.Infra.Data.Sql.Queries.csproj" />
-    <ProjectReference Include="..\..\01. Core\Zamin.MiniBlog.Core.Domain\Zamin.MiniBlog.Core.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\src\03. Infra\Data\Zamin.Infra.Data.Sql.Queries\Zamin.Infra.Data.Sql.Queries.csproj" />
+		<ProjectReference Include="..\..\00. Utilities\Zamin.MiniBlog.Utilities\Zamin.MiniBlog.Utilities.csproj" />
+		<ProjectReference Include="..\..\01. Core\Zamin.MiniBlog.Core.Domain\Zamin.MiniBlog.Core.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Zamin.Core.Domain.Data" />
+		<Using Include="Zamin.Infra.Data.Sql.Queries" />
+		<Using Include="Zamin.Utilities.Extensions" />
+		<Using Include="Zamin.MiniBlog.Infra.Data.Sql.Queries.Common.Models" />
+	</ItemGroup>
 
 </Project>

@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
 {
     public partial class init : Migration
@@ -30,7 +32,7 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Person",
+                name: "People",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -46,8 +48,8 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.Id);
-                    table.UniqueConstraint("AK_Person_BusinessId", x => x.BusinessId);
+                    table.PrimaryKey("PK_People", x => x.Id);
+                    table.UniqueConstraint("AK_People_BusinessId", x => x.BusinessId);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,7 +79,7 @@ namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Migrations
                 name: "OutBoxEventItems");
 
             migrationBuilder.DropTable(
-                name: "Person");
+                name: "People");
 
             migrationBuilder.DropTable(
                 name: "Writers");

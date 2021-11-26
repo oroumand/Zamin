@@ -1,17 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Resources\**" />
-    <EmbeddedResource Remove="Resources\**" />
-    <None Remove="Resources\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Resources\**" />
+		<EmbeddedResource Remove="Resources\**" />
+		<None Remove="Resources\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zamin.MiniBlog.Core.Domain\Zamin.MiniBlog.Core.Domain.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Zamin.MiniBlog.Core.Domain\Zamin.MiniBlog.Core.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Zamin.Core.Domain.Data"/>
+		<Using Include="Zamin.Core.ApplicationServices.Commands"/>
+		<Using Include="Zamin.Core.ApplicationServices.Queries"/>
+		<Using Include="Zamin.Utilities"/>
+		<Using Include="FluentValidation"/>
+	</ItemGroup>
 
 </Project>

@@ -6,12 +6,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\src\02. Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
-		<ProjectReference Include="..\..\..\..\src\02. Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
 		<ProjectReference Include="..\..\..\..\src\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Using Include="Zamin.Utilities.Extensions"/>
 		<Using Include="Zamin.Core.Domain.Data"/>
 	</ItemGroup>
 

@@ -1,35 +1,33 @@
 ﻿using Zamin.MiniBlog.Core.ApplicationServices.People.Commands.CreatePerson;
 using Zamin.MiniBlog.Core.ApplicationServices.People.Commands.TestExternal;
 using Zamin.Utilities.Services.MessageBus;
-using Microsoft.AspNetCore.Mvc;
 
-namespace Zamin.MiniBlog.EndPoints.Api.Controllers
+namespace Zamin.MiniBlog.EndPoints.Api.Controllers;
+
+[Route("api/[Controller]")]
+public class PeopleController : BaseController
 {
-    [Route("api/[Controller]")]
-    public class PeopleController : BaseController
+    private readonly ISendMessageBus _messageBus;
+
+    public PeopleController(ISendMessageBus messageBus)
     {
-        private readonly ISendMessageBus _messageBus;
+        _messageBus = messageBus;
+    }
+    [HttpPost("TestEvent")]
+    public async Task<IActionResult> TestEvent([FromBody] CreatePersonCommand createPerson)
+    {
 
-        public PeopleController(ISendMessageBus messageBus)
+        return await Create<CreatePersonCommand, long>(createPerson);
+    }
+
+    [HttpGet("TestCommand")]
+    public IActionResult TestCommand([FromQuery] string name)
+    {
+        _messageBus.SendCommandTo("MiniBlogService01", "TestCommand", new TestCommand
         {
-            _messageBus = messageBus;
-        }
-        [HttpPost("TestEvent")]
-        public async Task<IActionResult> TestEvent([FromBody] CreatePersonCommand createPerson)
-        {
+            Name = name
+        });
 
-            return await Create<CreatePersonCommand, long>(createPerson);
-        }
-
-        [HttpGet("TestCommand")]
-        public IActionResult TestCommand([FromQuery] string name)
-        {
-            _messageBus.SendCommandTo("MiniBlogService01", "TestCommand", new TestCommand
-            {
-                Name = name
-            });
-
-            return Ok("Command Sent");
-        }
+        return Ok("Command Sent");
     }
 }

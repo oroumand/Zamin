@@ -1,9 +1,6 @@
-﻿using Zamin.Core.ApplicationServices.Commands;
+﻿namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.TestCommands;
 
-namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.TestCommands
+public class TestCommand : ICommand
 {
-    public class TestCommand : ICommand
-    {
-        public string Name { get; set; }
-    }
+    public string Name { get; set; }
 }

@@ -1,9 +1,7 @@
-﻿using Zamin.Core.Domain.Data;
-using Zamin.MiniBlog.Core.Domain.People.Entities;
+﻿using Zamin.MiniBlog.Core.Domain.People.Entities;
 
-namespace Zamin.MiniBlog.Core.Domain.People.Repositories
+namespace Zamin.MiniBlog.Core.Domain.People.Repositories;
+
+public interface IPersonCommandRepository : ICommandRepository<Person>
 {
-    public interface IPersonCommandRepository : ICommandRepository<Person>
-    {
-    }
 }
