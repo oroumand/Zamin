@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
-using System.Collections.Generic;
 using System.Reflection;
 using Zamin.Utilities.Services.DependentyInjection;
 

@@ -1,7 +1,6 @@
 ﻿using Zamin.Utilities.Configurations;
 using Zamin.Utilities.Services.MessageBus;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

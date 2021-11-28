@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using Zamin.EndPoints.Web;
 using Zamin.EndPoints.Web.StartupExtentions;
 using Zamin.MiniBlog.Infra.Data.Sql.Commands.Common;

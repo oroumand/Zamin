@@ -4,7 +4,6 @@ using Dapper;
 using System.Data.SqlClient;
 using System.Linq;
 using Zamin.Utilities.Configurations;
-using System;
 
 namespace Zamin.Infra.Tools.Localizer.Parrot
 {

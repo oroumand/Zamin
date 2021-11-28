@@ -1,10 +1,10 @@
-﻿namespace Zamin.Utilities.Configurations
+﻿namespace Zamin.Utilities.Configurations;
+
+public enum CacheProvider
 {
-    public enum CacheProvider
-    {
-        MemoryCache,
-        DistributedSqlServerCache,
-        StackExchangeRedisCache,
-        NCacheDistributedCache
-    }
+    MemoryCache,
+    DistributedSqlServerCache,
+    StackExchangeRedisCache,
+    NCacheDistributedCache
 }
+

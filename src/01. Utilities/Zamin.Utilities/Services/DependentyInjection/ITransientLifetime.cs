@@ -1,5 +1,7 @@
 ﻿namespace Zamin.Utilities.Services.DependentyInjection;
-public interface ISingletoneLifetime
+
+public interface ITransientLifetime
 {
+
 }
 

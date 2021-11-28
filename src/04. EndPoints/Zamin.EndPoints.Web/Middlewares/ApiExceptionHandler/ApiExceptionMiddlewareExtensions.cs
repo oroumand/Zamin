@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using System;
-
-
-namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
+﻿namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
 {
     public static class ApiExceptionMiddlewareExtensions
     {

@@ -1,7 +1,5 @@
-﻿using System;
+﻿namespace Zamin.Utilities.Services.MessageBus;
 
-namespace Zamin.Utilities.Services.MessageBus
-{
     public class FakeMessageConsumer : IMessageConsumer
     {
         public void ConsumeCommand(string sender, Parcel parcel)
@@ -21,4 +19,4 @@ namespace Zamin.Utilities.Services.MessageBus
             Console.WriteLine($"Message {parcel.MessageName} of type {type} by Id {parcel.MessageId} from route {parcel.Route} from service {sender} Consumed");
         }
     }
-}
+
