@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Zamin.Infra.Events.Outbox
+namespace Zamin.Infra.Events.Outbox;
+public interface IOutBoxEventItemRepository
 {
-    public interface IOutBoxEventItemRepository
-    {
-        List<OutBoxEventItem> GetOutBoxEventItemsForPublishe(int maxCount = 100);
-        void MarkAsRead(List<OutBoxEventItem> outBoxEventItems);
-    }
+    List<OutBoxEventItem> GetOutBoxEventItemsForPublishe(int maxCount = 100);
+    void MarkAsRead(List<OutBoxEventItem> outBoxEventItems);
 }
