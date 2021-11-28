@@ -1,4 +1,4 @@
-﻿using Zamin.Core.Domain.Data;
+﻿using Zamin.Core.Contracts.ApplicationServices.Queries;
 
 namespace Zamin.MiniBlog.Core.Domain.Writers.QueryModels
 {

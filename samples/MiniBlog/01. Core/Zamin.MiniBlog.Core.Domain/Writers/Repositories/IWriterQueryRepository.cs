@@ -1,6 +1,6 @@
-﻿using Zamin.Core.Domain.Data;
-using Zamin.MiniBlog.Core.Domain.Writers.QueryModels;
+﻿using Zamin.MiniBlog.Core.Domain.Writers.QueryModels;
 using System.Collections.Generic;
+using Zamin.Core.Contracts.Data.Queries;
 
 namespace Zamin.MiniBlog.Core.Domain.Writers.Repositories
 {

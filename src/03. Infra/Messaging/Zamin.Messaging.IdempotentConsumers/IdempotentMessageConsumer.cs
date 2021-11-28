@@ -1,11 +1,11 @@
-﻿using Zamin.Core.ApplicationServices.Commands;
-using Zamin.Core.ApplicationServices.Events;
+﻿using Zamin.Core.ApplicationServices.Events;
 using Zamin.Utilities.Configurations;
 using Zamin.Utilities.Services.MessageBus;
 using Zamin.Utilities.Services.Serializers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Zamin.Core.Contracts.ApplicationServices.Commands;
 
 namespace Zamin.Messaging.IdempotentConsumers
 {

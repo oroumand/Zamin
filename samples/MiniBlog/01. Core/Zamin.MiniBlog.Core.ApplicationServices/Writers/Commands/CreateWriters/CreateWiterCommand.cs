@@ -1,5 +1,5 @@
-﻿using Zamin.Core.ApplicationServices.Commands;
-using System;
+﻿using System;
+using Zamin.Core.Contracts.ApplicationServices.Commands;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreateWriters
 {

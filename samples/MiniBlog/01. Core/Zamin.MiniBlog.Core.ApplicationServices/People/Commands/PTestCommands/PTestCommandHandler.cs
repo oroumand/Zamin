@@ -1,6 +1,7 @@
 ﻿using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Utilities;
 using System.Threading.Tasks;
+using Zamin.Core.Contracts.ApplicationServices.Commands;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.PTestCommands
 {

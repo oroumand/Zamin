@@ -4,6 +4,7 @@ using Zamin.MiniBlog.Core.Domain.Writers.Entities;
 using Zamin.MiniBlog.Core.Domain.Writers.Repositories;
 using Zamin.Utilities;
 using System.Threading.Tasks;
+using Zamin.Core.Contracts.ApplicationServices.Commands;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.Writers.Commands.CreateWriters
 {

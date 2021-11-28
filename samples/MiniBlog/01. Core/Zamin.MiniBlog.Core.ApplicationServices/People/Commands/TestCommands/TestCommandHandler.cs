@@ -3,6 +3,7 @@ using Zamin.MiniBlog.Core.Domain.People.Repositories;
 using Zamin.MiniBlog.Core.Domain.Writers.Repositories;
 using Zamin.Utilities;
 using System.Threading.Tasks;
+using Zamin.Core.Contracts.ApplicationServices.Commands;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.TestCommands
 {

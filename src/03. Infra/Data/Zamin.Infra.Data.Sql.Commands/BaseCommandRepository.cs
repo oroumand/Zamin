@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Zamin.Core.Domain.Data;
 using Zamin.Core.Domain.Entities;
 using Zamin.Core.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,4 @@
-﻿using Zamin.Core.Domain.Data;
-
-namespace Zamin.Infra.Data.Sql.Queries
+﻿namespace Zamin.Infra.Data.Sql.Queries
 {
     public class BaseQueryRepository<TDbContext> : IQueryRepository
         where TDbContext : BaseQueryDbContext

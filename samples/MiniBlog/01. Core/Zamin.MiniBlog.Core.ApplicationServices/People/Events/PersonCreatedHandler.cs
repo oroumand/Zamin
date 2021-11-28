@@ -1,8 +1,8 @@
-﻿using Zamin.Core.ApplicationServices.Events;
-using Zamin.MiniBlog.Core.Domain.People.Events;
+﻿using Zamin.MiniBlog.Core.Domain.People.Events;
 using Zamin.MiniBlog.Core.Domain.People.Repositories;
 using System;
 using System.Threading.Tasks;
+using Zamin.Core.Contracts.ApplicationServices.Events;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.People.Events
 {

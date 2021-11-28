@@ -1,11 +1,10 @@
-﻿using Zamin.Core.ApplicationServices.Common;
-using Zamin.Utilities;
-using System;
-using System.Threading.Tasks;
+﻿using Zamin.Utilities;
+using Zamin.Core.Contracts.ApplicationServices.Commands;
+using Zamin.Core.Contracts.ApplicationServices.Common;
 
-namespace Zamin.Core.ApplicationServices.Commands
-{
-    public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand, TData>
+namespace Zamin.Core.ApplicationServices.Commands;
+
+public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand, TData>
     where TCommand : ICommand<TData>
     {
 
@@ -98,4 +97,4 @@ namespace Zamin.Core.ApplicationServices.Commands
             result.AddMessage(_zaminServices.Translator[message, arguments]);
         }
     }
-}
+

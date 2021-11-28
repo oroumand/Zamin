@@ -1,5 +1,4 @@
-﻿using Zamin.Core.Domain.Data;
-using Zamin.Utilities;
+﻿using Zamin.Utilities;
 using System.Threading.Tasks;
 
 namespace Zamin.Infra.Data.Sql.Commands
