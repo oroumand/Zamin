@@ -1,19 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Version>5.1.3</Version>
-    <Authors>Alireza Oroumand</Authors>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Version>6.0.0</Version>
+		<Nullable>enable</Nullable>
+		<Authors>Alireza Oroumand</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.0.123" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
-    <ProjectReference Include="..\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\02. Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+		<ProjectReference Include="..\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
+	</ItemGroup>
 
 </Project>
