@@ -11,7 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\src\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+	  <ProjectReference Include="..\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
 	</ItemGroup>
 
 </Project>
