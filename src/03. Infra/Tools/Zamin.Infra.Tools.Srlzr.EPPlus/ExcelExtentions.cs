@@ -1,15 +1,11 @@
 ﻿using Zamin.Utilities.Services.Localizations;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 
-namespace Zamin.Infra.Tools.Srlzr.EPPlus
-{
-    public static class TestClass
+namespace Zamin.Infra.Tools.Srlzr.EPPlus;
+public static class TestClass
     {
         public static byte[] ToExcelByteArray<T>(this List<T> list, ITranslator resourceManager, string sheetName = "Result")
         {
@@ -73,4 +69,3 @@ namespace Zamin.Infra.Tools.Srlzr.EPPlus
             return tbl;
         }
     }
-}
