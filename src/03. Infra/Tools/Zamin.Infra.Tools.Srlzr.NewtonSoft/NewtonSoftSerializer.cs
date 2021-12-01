@@ -5,7 +5,6 @@ using Newtonsoft.Json.Serialization;
 namespace Zamin.Infra.Tools.Srlzr.NewtonSoft;
 public class NewtonSoftSerializer : IJsonSerializer
 {
-Zamin.Infra.Tools.Srlzr.NewtonSoft
     public TOutput Deserialize<TOutput>(string input) =>
         string.IsNullOrWhiteSpace(input) ?
             default : JsonConvert.DeserializeObject<TOutput>(input);
