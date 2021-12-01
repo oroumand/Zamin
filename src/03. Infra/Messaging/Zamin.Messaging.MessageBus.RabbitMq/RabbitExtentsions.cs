@@ -1,5 +1,4 @@
 ﻿using Zamin.Utilities.Services.MessageBus;
-using System.Collections.Generic;
 using System.Text;
 using RabbitMQ.Client.Events;
 
