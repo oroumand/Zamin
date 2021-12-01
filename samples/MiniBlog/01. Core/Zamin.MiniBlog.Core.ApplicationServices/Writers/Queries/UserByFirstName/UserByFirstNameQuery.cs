@@ -1,5 +1,4 @@
-﻿using Zamin.Core.ApplicationServices.Queries;
-using Zamin.MiniBlog.Core.Domain.Writers.QueryModels;
+﻿using Zamin.MiniBlog.Core.Domain.Writers.QueryModels;
 using System.Collections.Generic;
 using Zamin.Core.Contracts.ApplicationServices.Queries;
 using Zamin.Core.Contracts.Data.Queries;
