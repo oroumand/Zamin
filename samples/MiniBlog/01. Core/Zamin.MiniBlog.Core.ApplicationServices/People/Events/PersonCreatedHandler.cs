@@ -6,27 +6,18 @@ using System.Threading.Tasks;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.People.Events
 {
-    public class PersonCreatedHandler : IDomainEventHandler<PersonCreated>
-    {
-        private readonly IPersonCommandRepository personCommandRepository;
+    //public class PersonCreatedHandler : IDomainEventHandler<PersonCreated>
+    //{
+    //    public Task Handle(PersonCreated @event)
+    //    {
+    //        Console.WriteLine(
+    //            $"Person : BusinessId = {0} , FirstName = {1} , LastName = {2} , BirthDate = {3}",
+    //            @event.BusinessId,
+    //            @event.FirstName,
+    //            @event.LastName,
+    //            @event.BirthDate);
 
-        public PersonCreatedHandler(IPersonCommandRepository personCommandRepository)
-        {
-            this.personCommandRepository = personCommandRepository;
-        }
-        public Task Handle(PersonCreated Event)
-        {
-            Console.WriteLine(Event.FirstName);
-            return Task.CompletedTask;
-        }
-    }
-
-    public class PersonUpdatedHandler : IDomainEventHandler<PersonUpdated>
-    {
-        public Task Handle(PersonUpdated Event)
-        {
-            Console.WriteLine(Event.FirstName);
-            return Task.CompletedTask;
-        }
-    }
+    //        return Task.CompletedTask;
+    //    }
+    //}
 }

@@ -4,9 +4,9 @@ using Zamin.Utilities;
 
 namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.Common
 {
-    public class MiniBlogUnitOfWork : BaseEntityFrameworkUnitOfWork<MiniblogDbContext>, IMiniblogUnitOfWork
+    public class MiniBlogUnitOfWork : BaseEntityFrameworkUnitOfWork<MiniblogCommandDbContext>, IMiniblogUnitOfWork
     {
-        public MiniBlogUnitOfWork(MiniblogDbContext dbContext, ZaminServices zaminApplicationContext) : base(dbContext, zaminApplicationContext)
+        public MiniBlogUnitOfWork(MiniblogCommandDbContext dbContext, ZaminServices zaminApplicationContext) : base(dbContext, zaminApplicationContext)
         {
         }
     }

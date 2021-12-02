@@ -5,9 +5,9 @@ using Zamin.MiniBlog.Infra.Data.Sql.Commands.Common;
 
 namespace Zamin.MiniBlog.Infra.Data.Sql.Commands.People
 {
-    public class PersonCommandRepository : BaseCommandRepository<Person, MiniblogDbContext>, IPersonCommandRepository
+    public class PersonCommandRepository : BaseCommandRepository<Person, MiniblogCommandDbContext>, IPersonCommandRepository
     {
-        public PersonCommandRepository(MiniblogDbContext dbContext) : base(dbContext)
+        public PersonCommandRepository(MiniblogCommandDbContext dbContext) : base(dbContext)
         {
         }
     }

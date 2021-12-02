@@ -53,8 +53,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Infra.Data.Sql.Querie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Infra.Tools.Srlzr.EPPlus", "src\03. Infra\Tools\Zamin.Infra.Tools.Srlzr.EPPlus\Zamin.Infra.Tools.Srlzr.EPPlus.csproj", "{22DD1F26-2F6B-4A58-9988-2744C176FFD7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{28A42D92-CE3E-4305-8623-FF41657A0314}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Events", "Events", "{7C975EC2-CDEA-451A-980A-EB1B6F326C8C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Core.ApplicationServices", "src\02. Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj", "{6CD3DE1B-42B1-483A-90DB-2713CE01E321}"
@@ -86,6 +84,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.MiniBlog.EndPoints.Mvc", "samples\MiniBlog\03. EndPoints\Zamin.MiniBlog.EndPoints.Mvc\Zamin.MiniBlog.EndPoints.Mvc.csproj", "{8591B04C-7C38-43BA-B903-426884CC69A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Infra.Data.ChangeInterceptors.Sql", "src\03. Infra\Data\Zamin.Infra.Data.ChangeInterceptors.Sql\Zamin.Infra.Data.ChangeInterceptors.Sql.csproj", "{4B775DCB-5A9A-4F73-BCC9-B7D38B3C9C21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{90959C70-E8E7-45DA-9CF9-C83558D58676}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Infra.Data.Sql.Queries", "02.Infra.Data.Sql.Queries", "{253DD5AF-CBBD-4E63-A73E-F8C29624B9FE}"
+	ProjectSection(SolutionItems) = preProject
+		samples\MiniBlog\SolutionItems\02.Infra.Data.Sql.Queries\ScaffoldQueryDbContext.txt = samples\MiniBlog\SolutionItems\02.Infra.Data.Sql.Queries\ScaffoldQueryDbContext.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,6 +250,8 @@ Global
 		{FFD26A4D-99FE-4BF7-96CE-C44B4E76E410} = {8C101615-013D-4D7B-AE65-96803D449CD1}
 		{8591B04C-7C38-43BA-B903-426884CC69A6} = {FB609964-945C-47F8-9907-AB5FA6B40492}
 		{4B775DCB-5A9A-4F73-BCC9-B7D38B3C9C21} = {0D4F6C7C-2BB8-4D6F-BA61-0CDE70BFB60E}
+		{90959C70-E8E7-45DA-9CF9-C83558D58676} = {69BE59C4-9ECB-4F37-87E3-EA2EEBB12523}
+		{253DD5AF-CBBD-4E63-A73E-F8C29624B9FE} = {90959C70-E8E7-45DA-9CF9-C83558D58676}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5D1ECA0-C4FC-4886-ABDA-F867CC0914D9}

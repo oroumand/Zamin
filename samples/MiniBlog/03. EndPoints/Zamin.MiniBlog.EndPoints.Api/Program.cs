@@ -13,7 +13,7 @@ ConfigurationManager Configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddZaminApiServices(Configuration);
-builder.Services.AddDbContext<MiniblogDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
+builder.Services.AddDbContext<MiniblogCommandDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
 builder.Services.AddDbContext<MiniblogQueryDbContext>(c => c.UseSqlServer(Configuration.GetConnectionString("MiniBlogCommand_ConnectionString")));
 
 //Middlewares

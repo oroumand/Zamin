@@ -3,26 +3,30 @@ using Zamin.MiniBlog.Core.Domain.People.Entities;
 using Zamin.MiniBlog.Core.Domain.People.Repositories;
 using Zamin.Utilities;
 using System.Threading.Tasks;
+using System;
 
 namespace Zamin.MiniBlog.Core.ApplicationServices.People.Commands.CreatePerson
 {
-    public class CreatePersonCommandHandler : CommandHandler<CreatePersonCommand, long>
+    public class CreatePersonCommandHandler : CommandHandler<CreatePersonCommand, Guid>
     {
-        private readonly IPersonCommandRepository _personRepository;
+        private readonly IPersonCommandRepository _commandRepository;
 
-        public CreatePersonCommandHandler(ZaminServices zaminServices, IPersonCommandRepository personRepository) : base(zaminServices)
+        public CreatePersonCommandHandler(
+            ZaminServices zaminServices,
+            IPersonCommandRepository commandRepository) : base(zaminServices)
         {
-            _personRepository = personRepository;
-
+            _commandRepository = commandRepository;
         }
 
-        public override  Task<CommandResult<long>> Handle(CreatePersonCommand request)
+        public override async Task<CommandResult<Guid>> Handle(CreatePersonCommand command)
         {
-           // throw new InvalidEntityStateException("test");
-            Person person = new Person(request.FirstName, request.LastName, null);
-            _personRepository.Insert(person);
-             _personRepository.Commit();
-            return OkAsync(person.Id);
+            var person = Person.Create(command.FirstName, command.LastName, command.BirthDate);
+
+            await _commandRepository.InsertAsync(person);
+
+            await _commandRepository.CommitAsync();
+
+            return await OkAsync(person.BusinessId.Value);
         }
     }
 }
