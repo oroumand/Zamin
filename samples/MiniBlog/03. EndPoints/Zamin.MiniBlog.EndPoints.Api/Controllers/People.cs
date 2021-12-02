@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Zamin.MiniBlog.EndPoints.Api.Controllers
 {
     [Route("api/[Controller]")]
+    [ApiExplorerSettings(GroupName = "Person Aggregate")]
     public class PeopleController : BaseController
     {
         private readonly ISendMessageBus _messageBus;
