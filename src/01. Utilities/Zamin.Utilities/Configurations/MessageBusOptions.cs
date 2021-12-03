@@ -1,6 +1,7 @@
 ﻿namespace Zamin.Utilities.Configurations;
 public class MessageBusOptions
 {
+    public bool Enabled { get; set; } = true;
     public string MessageBusTypeName { get; set; } = "RabbitMqMessageBus";
     public string MessageConsumerTypeName { get; set; } = "IdempotentMessageConsumer";
     public RabbitMqOptions RabbitMq { get; set; } = new RabbitMqOptions();
