@@ -23,6 +23,7 @@ namespace Zamin.Infra.Data.Sql.Commands
         private IDbContextTransaction _transaction;
 
         public DbSet<OutBoxEventItem> OutBoxEventItems { get; set; }
+
         private readonly List<EntityChageInterceptorItem> entityChageInterceptorItems = new List<EntityChageInterceptorItem>();
 
         public BaseCommandDbContext(DbContextOptions options) : base(options)
@@ -74,6 +75,7 @@ namespace Zamin.Infra.Data.Sql.Commands
         {
             base.OnModelCreating(builder);
             builder.AddAuditableShadowProperties();
+            builder.AddRowVersionShadowProperty();
             builder.AddBusinessId();
             builder.ApplyConfiguration(new OutBoxEventItemConfig());
         }
@@ -88,9 +90,7 @@ namespace Zamin.Infra.Data.Sql.Commands
             return result;
         }
 
-        public override Task<int> SaveChangesAsync(
-            bool acceptAllChangesOnSuccess,
-            CancellationToken cancellationToken = default)
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
             ChangeTracker.DetectChanges();
             beforeSaveTriggers();
@@ -109,7 +109,6 @@ namespace Zamin.Infra.Data.Sql.Commands
             if (_zaminConfigurations.EntityChangeInterception.Enabled)
                 addEntityChangeInterceptorItems();
         }
-
 
         private void setShadowProperties()
         {

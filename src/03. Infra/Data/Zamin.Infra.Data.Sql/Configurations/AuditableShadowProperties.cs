@@ -12,20 +12,24 @@ namespace Zamin.Infra.Data.Sql.Configurations
 {
     public static class AuditableShadowProperties
     {
-        public static readonly Func<object, int?> EFPropertyCreatedByUserId =
-                                        entity => EF.Property<int?>(entity, CreatedByUserId);
+        public static readonly Func<object, int?> EFPropertyCreatedByUserId = 
+            entity => EF.Property<int?>(entity, CreatedByUserId);
+
         public static readonly string CreatedByUserId = nameof(CreatedByUserId);
 
         public static readonly Func<object, int?> EFPropertyModifiedByUserId =
-                                        entity => EF.Property<int?>(entity, ModifiedByUserId);
+            entity => EF.Property<int?>(entity, ModifiedByUserId);
+
         public static readonly string ModifiedByUserId = nameof(ModifiedByUserId);
 
         public static readonly Func<object, DateTime?> EFPropertyCreatedDateTime =
-                                        entity => EF.Property<DateTime?>(entity, CreatedDateTime);
+            entity => EF.Property<DateTime?>(entity, CreatedDateTime); 
+
         public static readonly string CreatedDateTime = nameof(CreatedDateTime);
 
         public static readonly Func<object, DateTime?> EFPropertyModifiedDateTime =
-                                        entity => EF.Property<DateTime?>(entity, ModifiedDateTime);
+            entity => EF.Property<DateTime?>(entity, ModifiedDateTime);
+
         public static readonly string ModifiedDateTime = nameof(ModifiedDateTime);
 
         public static void AddAuditableShadowProperties(this ModelBuilder modelBuilder)
@@ -48,6 +52,7 @@ namespace Zamin.Infra.Data.Sql.Configurations
 
 
         }
+
         public static void AddBusinessId(this ModelBuilder modelBuilder)
         {
             foreach (var entityType in modelBuilder.Model
@@ -72,9 +77,7 @@ namespace Zamin.Infra.Data.Sql.Configurations
             }
         }
 
-        public static void SetAuditableEntityPropertyValues(
-            this ChangeTracker changeTracker,
-            IUserInfoService userInfoService)
+        public static void SetAuditableEntityPropertyValues(this ChangeTracker changeTracker, IUserInfoService userInfoService)
         {
 
             var userAgent = userInfoService.GetUserAgent();
@@ -136,6 +139,6 @@ namespace Zamin.Infra.Data.Sql.Configurations
 
             return modelBuilder;
         }
-
     }
+
 }
