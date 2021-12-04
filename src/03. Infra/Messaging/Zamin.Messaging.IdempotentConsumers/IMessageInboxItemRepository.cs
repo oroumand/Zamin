@@ -1,8 +1,6 @@
-﻿namespace Zamin.Messaging.IdempotentConsumers
+﻿namespace Zamin.Messaging.IdempotentConsumers;
+public interface IMessageInboxItemRepository
 {
-    public interface IMessageInboxItemRepository
-    {
-        bool AllowReceive(string messageId, string fromService);
-        void Receive(string messageId, string fromService);
-    }
+    bool AllowReceive(string messageId, string fromService);
+    void Receive(string messageId, string fromService);
 }

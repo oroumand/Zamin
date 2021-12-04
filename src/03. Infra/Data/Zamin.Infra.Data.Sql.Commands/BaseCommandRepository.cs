@@ -1,159 +1,153 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Zamin.Core.Domain.Data;
+﻿using System.Linq.Expressions;
 using Zamin.Core.Domain.Entities;
 using Zamin.Core.Domain.ValueObjects;
-using Microsoft.EntityFrameworkCore;
+using Zamin.Core.Contracts.Data.Commands;
 
-namespace Zamin.Infra.Data.Sql.Commands
+namespace Zamin.Infra.Data.Sql.Commands;
+public class BaseCommandRepository<TEntity, TDbContext> : ICommandRepository<TEntity>, IUnitOfWork
+    where TEntity : AggregateRoot
+    where TDbContext : BaseCommandDbContext
 {
-    public class BaseCommandRepository<TEntity, TDbContext> : ICommandRepository<TEntity>, IUnitOfWork
-        where TEntity : AggregateRoot
-        where TDbContext : BaseCommandDbContext
+    protected readonly TDbContext _dbContext;
+
+    public BaseCommandRepository(TDbContext dbContext)
     {
-        protected readonly TDbContext _dbContext;
+        _dbContext = dbContext;
+    }
 
-        public BaseCommandRepository(TDbContext dbContext)
+    void ICommandRepository<TEntity>.Delete(long id)
+    {
+        var entity = _dbContext.Set<TEntity>().Find(id);
+        _dbContext.Set<TEntity>().Remove(entity);
+    }
+
+    void ICommandRepository<TEntity>.Delete(TEntity entity)
+    {
+        _dbContext.Set<TEntity>().Remove(entity);
+    }
+
+    void ICommandRepository<TEntity>.DeleteGraph(long id)
+    {
+        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
+        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+        foreach (var item in graphPath)
         {
-            _dbContext = dbContext;
+            query = query.Include(item);
         }
-
-        void ICommandRepository<TEntity>.Delete(long id)
-        {
-            var entity = _dbContext.Set<TEntity>().Find(id);
+        var entity = query.FirstOrDefault(c => c.Id == id);
+        if (entity?.Id > 0)
             _dbContext.Set<TEntity>().Remove(entity);
-        }
+    }
 
-        void ICommandRepository<TEntity>.Delete(TEntity entity)
-        {
-            _dbContext.Set<TEntity>().Remove(entity);
-        }
+    TEntity ICommandRepository<TEntity>.Get(long id)
+    {
+        return _dbContext.Set<TEntity>().Find(id);
+    }
 
-        void ICommandRepository<TEntity>.DeleteGraph(long id)
-        {
-            var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-            IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-            foreach (var item in graphPath)
-            {
-                query = query.Include(item);
-            }
-            var entity = query.FirstOrDefault(c => c.Id == id);
-            if (entity?.Id > 0)
-                _dbContext.Set<TEntity>().Remove(entity);
-        }
+    public TEntity Get(BusinessId businessId)
+    {
+        return _dbContext.Set<TEntity>().FirstOrDefault(c => c.BusinessId == businessId);
+    }
 
-        TEntity ICommandRepository<TEntity>.Get(long id)
+    TEntity ICommandRepository<TEntity>.GetGraph(long id)
+    {
+        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
+        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+        var temp = graphPath.ToList();
+        foreach (var item in graphPath)
         {
-            return _dbContext.Set<TEntity>().Find(id);
+            query = query.Include(item);
         }
+        return query.FirstOrDefault(c => c.Id == id);
+    }
 
-        public TEntity Get(BusinessId businessId)
-        {
-            return _dbContext.Set<TEntity>().FirstOrDefault(c => c.BusinessId == businessId);
-        }
+    void ICommandRepository<TEntity>.Insert(TEntity entity)
+    {
+        _dbContext.Set<TEntity>().Add(entity);
+    }
 
-        TEntity ICommandRepository<TEntity>.GetGraph(long id)
-        {
-            var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-            IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-            var temp = graphPath.ToList();
-            foreach (var item in graphPath)
-            {
-                query = query.Include(item);
-            }
-            return query.FirstOrDefault(c => c.Id == id);
-        }
+    bool ICommandRepository<TEntity>.Exists(Expression<Func<TEntity, bool>> expression)
+    {
+        return _dbContext.Set<TEntity>().Any(expression);
+    }
 
-        void ICommandRepository<TEntity>.Insert(TEntity entity)
+    public TEntity GetGraph(BusinessId businessId)
+    {
+        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
+        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+        var temp = graphPath.ToList();
+        foreach (var item in graphPath)
         {
-            _dbContext.Set<TEntity>().Add(entity);
+            query = query.Include(item);
         }
+        return query.FirstOrDefault(c => c.BusinessId == businessId);
+    }
 
-        bool ICommandRepository<TEntity>.Exists(Expression<Func<TEntity, bool>> expression)
-        {
-            return _dbContext.Set<TEntity>().Any(expression);
-        }
+    async Task ICommandRepository<TEntity>.InsertAsync(TEntity entity)
+    {
+        await _dbContext.Set<TEntity>().AddAsync(entity);
+    }
+    async Task<TEntity> ICommandRepository<TEntity>.GetAsync(long id)
+    {
+        return await _dbContext.Set<TEntity>().FindAsync(id);
+    }
 
-        public TEntity GetGraph(BusinessId businessId)
-        {
-            var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-            IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-            var temp = graphPath.ToList();
-            foreach (var item in graphPath)
-            {
-                query = query.Include(item);
-            }
-            return query.FirstOrDefault(c => c.BusinessId == businessId);
-        }
+    public async Task<TEntity> GetAsync(BusinessId businessId)
+    {
+        return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(c => c.BusinessId == businessId);
+    }
 
-        async Task ICommandRepository<TEntity>.InsertAsync(TEntity entity)
+    async Task<TEntity> ICommandRepository<TEntity>.GetGraphAsync(long id)
+    {
+        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
+        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+        var temp = graphPath.ToList();
+        foreach (var item in graphPath)
         {
-            await _dbContext.Set<TEntity>().AddAsync(entity);
+            query = query.Include(item);
         }
-        async Task<TEntity> ICommandRepository<TEntity>.GetAsync(long id)
-        {
-            return await _dbContext.Set<TEntity>().FindAsync(id);
-        }
+        return await query.FirstOrDefaultAsync(c => c.Id == id);
+    }
 
-        public async Task<TEntity> GetAsync(BusinessId businessId)
+    public async Task<TEntity> GetGraphAsync(BusinessId businessId)
+    {
+        var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
+        IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
+        var temp = graphPath.ToList();
+        foreach (var item in graphPath)
         {
-            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(c => c.BusinessId == businessId);
+            query = query.Include(item);
         }
+        return await query.FirstOrDefaultAsync(c => c.BusinessId == businessId);
+    }
 
-        async Task<TEntity> ICommandRepository<TEntity>.GetGraphAsync(long id)
-        {
-            var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-            IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-            var temp = graphPath.ToList();
-            foreach (var item in graphPath)
-            {
-                query = query.Include(item);
-            }
-            return await query.FirstOrDefaultAsync(c => c.Id == id);
-        }
+    async Task<bool> ICommandRepository<TEntity>.ExistsAsync(Expression<Func<TEntity, bool>> expression)
+    {
+        return await _dbContext.Set<TEntity>().AnyAsync(expression);
+    }
 
-        public async Task<TEntity> GetGraphAsync(BusinessId businessId)
-        {
-            var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
-            IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-            var temp = graphPath.ToList();
-            foreach (var item in graphPath)
-            {
-                query = query.Include(item);
-            }
-            return await query.FirstOrDefaultAsync(c => c.BusinessId == businessId);
-        }
+    public int Commit()
+    {
+        return _dbContext.SaveChanges();
+    }
 
-        async Task<bool> ICommandRepository<TEntity>.ExistsAsync(Expression<Func<TEntity, bool>> expression)
-        {
-            return await _dbContext.Set<TEntity>().AnyAsync(expression);
-        }
+    public Task<int> CommitAsync()
+    {
+        return _dbContext.SaveChangesAsync();
+    }
 
-        public int Commit()
-        {
-            return _dbContext.SaveChanges();
-        }
+    public void BeginTransaction()
+    {
+        _dbContext.BeginTransaction();
+    }
 
-        public Task<int> CommitAsync()
-        {
-            return _dbContext.SaveChangesAsync();
-        }
+    public void CommitTransaction()
+    {
+        _dbContext.CommitTransaction();
+    }
 
-        public void BeginTransaction()
-        {
-            _dbContext.BeginTransaction();
-        }
-
-        public void CommitTransaction()
-        {
-            _dbContext.CommitTransaction();
-        }
-
-        public void RollbackTransaction()
-        {
-            _dbContext.RollbackTransaction();
-        }
+    public void RollbackTransaction()
+    {
+        _dbContext.RollbackTransaction();
     }
 }

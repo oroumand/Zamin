@@ -2,9 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Version>5.1.3</Version>
+		<Version>6.0.0</Version>
+		<Nullable>enable</Nullable>
 		<Authors>Alireza Oroumand</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -29,11 +32,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Using Include="Microsoft.AspNetCore.Builder"/>
-		<Using Include="Microsoft.AspNetCore.Hosting"/>
-		<Using Include="Microsoft.Extensions.Configuration"/>
-		<Using Include="Microsoft.Extensions.Hosting"/>
-		<Using Include="Serilog"/>
+		<Using Include="Microsoft.AspNetCore.Builder" />
+		<Using Include="Microsoft.AspNetCore.Hosting" />
+		<Using Include="Microsoft.Extensions.Configuration" />
+		<Using Include="Microsoft.Extensions.Hosting" />
+		<Using Include="Microsoft.Extensions.DependencyInjection"/>
+		<Using Include="Microsoft.Extensions.Logging"/>
+		<Using Include="Microsoft.Extensions.DependencyModel"/>
+		<Using Include="System.Reflection"/>
+		<Using Include="Serilog" />
+		<Using Include="Zamin.Core.Contracts.ApplicationServices.Commands"/>
+		<Using Include="Zamin.Core.Contracts.ApplicationServices.Common"/>
+		<Using Include="Zamin.Core.Contracts.ApplicationServices.Queries"/>
+		<Using Include="Zamin.Utilities.Configurations"/>
+		<Using Include="Zamin.Core.Contracts.Data.Commands"/>
+		<Using Include="Zamin.Core.Contracts.Data.Queries"/>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -49,7 +62,6 @@
 		<ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers.Store.Sql\Zamin.Messaging.IdempotentConsumers.Store.Sql.csproj" />
 		<ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers\Zamin.Messaging.IdempotentConsumers.csproj" />
 		<ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.MessageBus.RabbitMq\Zamin.Messaging.MessageBus.RabbitMq.csproj" />
-		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Localization.Microsoft\Zamin.Infra.Localizations.Microsoft.csproj" />
 		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Caching.Microsoft\Zamin.Infra.Tools.Caching.Microsoft.csproj" />
 		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Localizer.Parrot\Zamin.Infra.Tools.Localizer.Parrot.csproj" />
 		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.OM.AutoMapper\Zamin.Infra.Tools.OM.AutoMapper.csproj" />
@@ -58,3 +70,4 @@
 	</ItemGroup>
 
 </Project>
+

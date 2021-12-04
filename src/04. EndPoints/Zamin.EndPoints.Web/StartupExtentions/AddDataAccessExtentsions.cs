@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-using Zamin.Core.Domain.Data;
-
-namespace Zamin.EndPoints.Web.StartupExtentions
+﻿namespace Zamin.EndPoints.Web.StartupExtentions
 {
     /// <summary>
     /// توابع کمکی جهت ثبت نیازمندی‌های لایه داده
