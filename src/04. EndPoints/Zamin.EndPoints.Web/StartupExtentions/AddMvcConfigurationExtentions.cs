@@ -1,12 +1,9 @@
 ﻿using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System.Data.SqlClient;
 using Zamin.EndPoints.Web.Filters;
 using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
-using Zamin.Utilities.Configurations;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {

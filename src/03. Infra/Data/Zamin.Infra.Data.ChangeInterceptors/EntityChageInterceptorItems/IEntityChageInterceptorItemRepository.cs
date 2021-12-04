@@ -1,11 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems
+﻿namespace Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems;
+public interface IEntityChageInterceptorItemRepository
 {
-    public interface IEntityChageInterceptorItemRepository
-    {
-        public void Save(List<EntityChageInterceptorItem> entityChageInterceptorItems);
-        public Task SaveAsync(List<EntityChageInterceptorItem> entityChageInterceptorItems);
-    }
+    public void Save(List<EntityChageInterceptorItem> entityChageInterceptorItems);
+    public Task SaveAsync(List<EntityChageInterceptorItem> entityChageInterceptorItems);
 }

@@ -1,7 +1,6 @@
 ﻿using Zamin.Utilities.Services.Logger;
 using Zamin.Utilities.Services.Serializers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net;
 

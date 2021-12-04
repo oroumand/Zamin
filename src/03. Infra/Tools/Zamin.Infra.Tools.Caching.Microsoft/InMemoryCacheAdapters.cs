@@ -1,39 +1,36 @@
 ﻿using Zamin.Utilities.Services.Chaching;
 using Microsoft.Extensions.Caching.Memory;
-using System;
 
-namespace Zamin.Infra.Tools.Caching.Microsoft
+namespace Zamin.Infra.Tools.Caching.Microsoft;
+public class InMemoryCacheAdapter : ICacheAdapter
 {
-    public class InMemoryCacheAdapter : ICacheAdapter
+    private readonly IMemoryCache _memoryCache;
+
+
+    public InMemoryCacheAdapter(IMemoryCache memoryCache)
     {
-        private readonly IMemoryCache _memoryCache;
+        _memoryCache = memoryCache;
+    }
 
 
-        public InMemoryCacheAdapter(IMemoryCache memoryCache)
+    public void Add<TInput>(string key, TInput obj, DateTime? AbsoluteExpiration, TimeSpan? SlidingExpiration)
+    {
+        _memoryCache.Set(key, obj, new MemoryCacheEntryOptions
         {
-            _memoryCache = memoryCache;
-        }
+            AbsoluteExpiration = AbsoluteExpiration,
+            SlidingExpiration = SlidingExpiration
+        });
+    }
 
+    public TOutput Get<TOutput>(string key)
+    {
+        var result = _memoryCache.TryGetValue(key, out TOutput resultObject);
+        return resultObject;
 
-        public void Add<TInput>(string key, TInput obj, DateTime? AbsoluteExpiration, TimeSpan? SlidingExpiration)
-        {
-            _memoryCache.Set(key, obj, new MemoryCacheEntryOptions
-            {
-                AbsoluteExpiration = AbsoluteExpiration,
-                SlidingExpiration = SlidingExpiration
-            });
-        }
+    }
 
-        public TOutput Get<TOutput>(string key)
-        {
-            var result = _memoryCache.TryGetValue(key, out TOutput resultObject);
-            return resultObject;
-
-        }
-
-        public void RemoveCache(string key)
-        {
-            _memoryCache.Remove(key);
-        }
+    public void RemoveCache(string key)
+    {
+        _memoryCache.Remove(key);
     }
 }
