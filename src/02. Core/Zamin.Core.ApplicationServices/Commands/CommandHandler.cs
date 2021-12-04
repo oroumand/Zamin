@@ -1,17 +1,16 @@
-﻿using Zamin.Core.ApplicationServices.Common;
-using Zamin.Utilities;
-using System;
-using System.Threading.Tasks;
+﻿using Zamin.Utilities;
+using Zamin.Core.Contracts.ApplicationServices.Commands;
+using Zamin.Core.Contracts.ApplicationServices.Common;
 
-namespace Zamin.Core.ApplicationServices.Commands
-{
-    public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand, TData>
+namespace Zamin.Core.ApplicationServices.Commands;
+
+public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand, TData>
     where TCommand : ICommand<TData>
     {
 
         protected readonly ZaminServices _zaminServices;
         protected readonly CommandResult<TData> result = new();
-        [Obsolete(message: "HammonServices Dependency removed from Constructor in the next release")]
+        [Obsolete(message: "ZaminServices Dependency removed from Constructor in the next release")]
         public CommandHandler(ZaminServices zaminServices)
         {
             _zaminServices = zaminServices;
@@ -60,7 +59,7 @@ namespace Zamin.Core.ApplicationServices.Commands
         protected readonly ZaminServices _zaminServices;
         protected readonly CommandResult result = new();
         
-        [Obsolete(message: "HammonServices Dependency removed from Constructor in the next release")]
+        [Obsolete(message: "ZaminServices Dependency removed from Constructor in the next release")]
         public CommandHandler(ZaminServices zaminServices)
         {
             _zaminServices = zaminServices;
@@ -98,4 +97,4 @@ namespace Zamin.Core.ApplicationServices.Commands
             result.AddMessage(_zaminServices.Translator[message, arguments]);
         }
     }
-}
+

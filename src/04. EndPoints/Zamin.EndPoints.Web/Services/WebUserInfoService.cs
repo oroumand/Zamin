@@ -12,6 +12,10 @@ namespace Zamin.EndPoints.Web.Services
 
         public WebUserInfoService(IHttpContextAccessor httpContextAccessor)
         {
+            if(httpContextAccessor == null || httpContextAccessor.HttpContext == null)
+            {
+                throw new ArgumentNullException(nameof(httpContextAccessor));
+            }    
             _httpContext = httpContextAccessor.HttpContext;
         }
 
