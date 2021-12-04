@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems;
 using Zamin.Infra.Events.Outbox;
 using Zamin.Infra.Events.PoolingPublisher;
@@ -8,7 +6,6 @@ using Zamin.Infra.Tools.Caching.Microsoft;
 using Zamin.Infra.Tools.OM.AutoMapper.DipendencyInjections;
 using Zamin.Messaging.IdempotentConsumers;
 using Zamin.Utilities;
-using Zamin.Utilities.Configurations;
 using Zamin.Utilities.Services.Chaching;
 using Zamin.Utilities.Services.Localizations;
 using Zamin.Utilities.Services.Logger;

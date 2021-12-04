@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Zamin.Infra.Data.Sql.Queries
-{
-    public abstract class BaseQueryDbContext : DbContext
+namespace Zamin.Infra.Data.Sql.Queries;
+public abstract class BaseQueryDbContext : DbContext
     {
         public BaseQueryDbContext(DbContextOptions options) : base(options)
         {
@@ -40,4 +36,4 @@ namespace Zamin.Infra.Data.Sql.Queries
 
         }
     }
-}
+

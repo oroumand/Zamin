@@ -1,9 +1,7 @@
 ﻿using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Events;
-using Zamin.Core.ApplicationServices.Queries;
+using Zamin.Core.Contracts.ApplicationServices.Events;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {
