@@ -2,13 +2,15 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Globalization;
-using Zamin.Infra.Data.Sql.Configurations;
 using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
 using Zamin.Infra.Events.Outbox;
 using Zamin.Utilities.Services.Users;
 using Zamin.Utilities.Services.Serializers;
 using Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems;
 using Zamin.Utilities.Configurations;
+using Zamin.Core.Domain.ValueObjects;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Zamin.Infra.Data.Sql.Extensions;
 
 namespace Zamin.Infra.Data.Sql.Commands;
 public abstract class BaseCommandDbContext : DbContext
@@ -61,7 +63,6 @@ public abstract class BaseCommandDbContext : DbContext
     {
         return Entry(entity).Property(propertyName).CurrentValue;
     }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
