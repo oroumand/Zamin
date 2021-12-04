@@ -2,10 +2,6 @@
 using Zamin.Utilities.Configurations;
 using Zamin.Utilities.Services.MessageBus;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Zamin.Infra.Events.PoolingPublisher;
 public class PoolingPublisherHostedService : IHostedService
@@ -61,4 +57,5 @@ public class PoolingPublisherHostedService : IHostedService
     {
         return Task.CompletedTask;
     }
+
 }
