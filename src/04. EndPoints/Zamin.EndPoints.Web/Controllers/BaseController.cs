@@ -4,9 +4,6 @@ using Zamin.Core.ApplicationServices.Events;
 using Zamin.Utilities;
 using Zamin.Utilities.Services.Serializers;
 using Zamin.EndPoints.Web.Extentions;
-using Zamin.Core.Contracts.ApplicationServices.Commands;
-using Zamin.Core.Contracts.ApplicationServices.Common;
-using Zamin.Core.Contracts.ApplicationServices.Queries;
 
 namespace Zamin.EndPoints.Web.Controllers
 {

@@ -1,8 +1,6 @@
 ﻿using Zamin.Core.ApplicationServices.Events;
 using Zamin.Utilities;
 using Microsoft.AspNetCore.Http;
-using Zamin.Core.Contracts.ApplicationServices.Commands;
-using Zamin.Core.Contracts.ApplicationServices.Queries;
 
 namespace Zamin.EndPoints.Web.Extentions
 {
