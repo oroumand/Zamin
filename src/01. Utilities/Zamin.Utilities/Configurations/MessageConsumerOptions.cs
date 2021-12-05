@@ -11,6 +11,9 @@ public class MessageConsumerOptions
 public class SqlMessageInboxStoreOptions
 {
     public string ConnectionString { get; set; } = string.Empty;
+    public string TableName { get; set; }
+    public string SchemaName { get; set; }
+    public bool AutoCreateSqlTable { get; set; }
 }
 public class CommandOptions
 {
