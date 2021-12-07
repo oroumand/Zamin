@@ -1,10 +1,9 @@
 ﻿namespace Zamin.EndPoints.Web;
+
 public class ZaminProgram
 {
     public WebApplicationBuilder Main(string[] args, params string[] appSettingFiles)
     {
-        AddBaseConfigs();
-
         try
         {
             StartLog();
@@ -13,16 +12,17 @@ public class ZaminProgram
         catch (Exception ex)
         {
             FatalLog(ex);
-            return null;
+            throw;
         }
         finally
         {
             CloseAndFlushLog();
         }
     }
+
     public int Main(string[] args, Type startUp, params string[] appSettingFiles)
     {
-        AddBaseConfigs();
+        AddBaseConfigs(appSettingFiles);
 
         try
         {
@@ -40,14 +40,12 @@ public class ZaminProgram
             CloseAndFlushLog();
         }
     }
+
     private WebApplicationBuilder CreateHostBuilder(string[] args, params string[] appSettingFiles)
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        foreach (var item in appSettingFiles)
-        {
-            builder.Configuration.AddJsonFile(item, true);
-        }
+        AddBaseConfigs(builder.Configuration, appSettingFiles);
 
         return builder;
     }
@@ -55,46 +53,76 @@ public class ZaminProgram
         Host.CreateDefaultBuilder(args)
         .ConfigureAppConfiguration((ctx, config) =>
         {
-            foreach (var item in appSettingFiles)
-            {
-                config.AddJsonFile(item, true);
-            }
+            AddBaseConfigs(config, appSettingFiles);
         })
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup(startUp);
             })
         .UseSerilog();
+
     private void AddBaseConfigs(params string[] appSettingFiles)
     {
-        var configuration = CreateConfiguration();
-        AddAppsettings(appSettingFiles);
+        var configuration = CreateConfiguration(appSettingFiles);
         AddLogger(configuration);
     }
-    private IConfiguration CreateConfiguration()
+
+
+    private void AddBaseConfigs(IConfigurationBuilder configurationBuilder, params string[] appSettingFiles)
     {
-        var configBuilder = new ConfigurationBuilder();
-        var configuration = configBuilder.Build();
-        return configuration;
+        var configuration = AddAppsettings(configurationBuilder, appSettingFiles);
+        AddLogger(configuration.Build());
     }
-    private void AddAppsettings(params string[] appSettingFiles)
+
+    private void AddBaseConfigs(ConfigurationManager configurationManager, params string[] appSettingFiles)
+    {
+        AddAppsettings(configurationManager, appSettingFiles);
+
+        AddLogger(configurationManager);
+    }
+
+    private IConfiguration CreateConfiguration(params string[] appSettingFiles)
+    {
+        var configBuilder = new ConfigurationManager();
+        var configurationBuilder = AddAppsettings(configBuilder, appSettingFiles);
+        return configurationBuilder;
+    }
+
+    private ConfigurationManager AddAppsettings(ConfigurationManager configurationManager, params string[] appSettingFiles)
     {
         if (appSettingFiles == null || !appSettingFiles.Any())
         {
             appSettingFiles = new string[] { "appsettings.json" };
         }
-        var configBuilder = new ConfigurationBuilder();
         foreach (var item in appSettingFiles)
         {
-            configBuilder.AddJsonFile(item);
+            configurationManager.AddJsonFile(item);
         }
+
+        return configurationManager;
     }
+
+    private IConfigurationBuilder AddAppsettings(IConfigurationBuilder configurationBuilder, params string[] appSettingFiles)
+    {
+        if (appSettingFiles == null || !appSettingFiles.Any())
+        {
+            appSettingFiles = new string[] { "appsettings.json" };
+        }
+        foreach (var item in appSettingFiles)
+        {
+            configurationBuilder.AddJsonFile(item);
+        }
+
+        return configurationBuilder;
+    }
+
     private void AddLogger(IConfiguration configuration)
     {
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(configuration)
             .CreateLogger();
     }
+
     private void StartLog()
     {
         Log.Information("Starting web host");
@@ -108,4 +136,3 @@ public class ZaminProgram
         Log.CloseAndFlush();
     }
 }
-
