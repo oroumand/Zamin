@@ -6,7 +6,7 @@ namespace Zamin.Infra.Data.Sql.Configurations
     {
         public static readonly string RowVersion = nameof(RowVersion);
 
-        public static void AddRowVersionShadowProperty<TEntity>(EntityTypeBuilder<TEntity> builder) where TEntity : class
+        public static void AddRowVersionShadowProperty<TEntity>(this EntityTypeBuilder<TEntity> builder) where TEntity : class
             => builder.Property<byte[]>(RowVersion).IsRowVersion();
     }
 }
