@@ -1,4 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.OpenApi.Models;
 using System.Data.SqlClient;
 using Zamin.EndPoints.Web.Filters;
@@ -8,8 +9,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 {
     public static class AddApiConfigurationExtentions
     {
-        public static IServiceCollection AddZaminApiServices(this IServiceCollection services,
-            IConfiguration configuration)
+        public static IServiceCollection AddZaminApiServices(this IServiceCollection services, IConfiguration configuration)
         {
             var _zaminConfigurations = new ZaminConfigurationOptions();
             configuration.GetSection(_zaminConfigurations.SectionName).Bind(_zaminConfigurations);
@@ -36,7 +36,31 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             {
                 services.AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc(_zaminConfigurations.Swagger.SwaggerDoc.Name, new OpenApiInfo { Title = _zaminConfigurations.Swagger.SwaggerDoc.Title, Version = _zaminConfigurations.Swagger.SwaggerDoc.Version });
+                    c.SwaggerDoc(_zaminConfigurations.Swagger.SwaggerDoc.Name,
+                        new OpenApiInfo
+                        {
+                            Title = _zaminConfigurations.Swagger.SwaggerDoc.Title,
+                            Version = _zaminConfigurations.Swagger.SwaggerDoc.Version
+                        });
+
+                    c.TagActionsBy(api =>
+                    {
+                        if (api.GroupName != null)
+                        {
+                            return new[] { api.GroupName };
+                        }
+
+                        var controllerActionDescriptor = api.ActionDescriptor as ControllerActionDescriptor;
+
+                        if (controllerActionDescriptor != null)
+                        {
+                            return new[] { controllerActionDescriptor.ControllerName };
+                        }
+
+                        throw new InvalidOperationException("Unable to determine tag for endpoint.");
+                    });
+
+                    c.DocInclusionPredicate((name, api) => true);
                 });
             }
         }
@@ -88,9 +112,5 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 endpoints.MapControllers();
             });
         }
-
-
-
-
     }
 }
