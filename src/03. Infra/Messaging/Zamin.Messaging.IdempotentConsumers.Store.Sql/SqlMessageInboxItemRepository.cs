@@ -1,18 +1,15 @@
-﻿using Zamin.Utilities.Configurations;
+﻿using Dapper;
 using System.Data.SqlClient;
-using Dapper;
-using System.Data;
+using Zamin.Utilities.Configurations;
 
 namespace Zamin.Messaging.IdempotentConsumers.Store.Sql;
 public class SqlMessageInboxItemRepository : IMessageInboxItemRepository
 {
-    private readonly IDbConnection _dbConnection;
     private readonly ZaminConfigurationOptions _configuration;
     readonly string _connectionString;
 
-    public SqlMessageInboxItemRepository(IDbConnection dbConnection, ZaminConfigurationOptions configurations)
+    public SqlMessageInboxItemRepository(ZaminConfigurationOptions configurations)
     {
-        _dbConnection = dbConnection;
         _connectionString = configurations.Messageconsumer.SqlMessageInboxStore.ConnectionString;
         _configuration = configurations;
 
@@ -45,6 +42,8 @@ public class SqlMessageInboxItemRepository : IMessageInboxItemRepository
 
     private void CreateTableIfNeeded()
     {
+        using var connection = new SqlConnection(_connectionString);
+
         string table = _configuration.Messageconsumer.SqlMessageInboxStore.TableName;
         string schema = _configuration.Messageconsumer.SqlMessageInboxStore.SchemaName;
 
@@ -59,6 +58,6 @@ public class SqlMessageInboxItemRepository : IMessageInboxItemRepository
             $"    UNIQUE([OwnerService],[MessageId]))" +
             $" End";
 
-        _dbConnection.Execute(createTable);
+        connection.Execute(createTable);
     }
 }
