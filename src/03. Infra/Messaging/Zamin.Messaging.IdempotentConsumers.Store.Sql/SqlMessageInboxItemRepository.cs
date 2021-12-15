@@ -19,8 +19,13 @@ public class SqlMessageInboxItemRepository : IMessageInboxItemRepository
 
     public bool AllowReceive(string messageId, string fromService)
     {
+
         using var connection = new SqlConnection(_connectionString);
-        string query = "Select Id from [MessageInbox] Where [OwnerService] = @OwnerService and [MessageId] = @MessageId";
+
+        string table = _configuration.Messageconsumer.SqlMessageInboxStore.TableName;
+        string schema = _configuration.Messageconsumer.SqlMessageInboxStore.SchemaName;
+
+        string query = $"Select Id from {schema}.[{table}] Where [OwnerService] = @OwnerService and [MessageId] = @MessageId";
         var result = connection.Query<long>(query, new
         {
             OwnerService = fromService,
@@ -32,7 +37,11 @@ public class SqlMessageInboxItemRepository : IMessageInboxItemRepository
     public void Receive(string messageId, string fromService)
     {
         using var connection = new SqlConnection(_connectionString);
-        string query = "Insert Into [MessageInbox] ([OwnerService] ,[MessageId] ) values(@OwnerService,@MessageId)";
+
+        string table = _configuration.Messageconsumer.SqlMessageInboxStore.TableName;
+        string schema = _configuration.Messageconsumer.SqlMessageInboxStore.SchemaName;
+
+        string query = $"Insert Into {schema}.[{table}] ([OwnerService] ,[MessageId] ) values(@OwnerService,@MessageId)";
         var result = connection.Query<long>(query, new
         {
             OwnerService = fromService,
