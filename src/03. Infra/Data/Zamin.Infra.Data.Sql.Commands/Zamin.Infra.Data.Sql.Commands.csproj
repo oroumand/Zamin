@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Version>6.0.0</Version>
+		<Version>6.0.1</Version>
 		<Nullable>enable</Nullable>
 		<Authors>Alireza Oroumand</Authors>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -12,7 +12,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.0.123" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<Using Include="Microsoft.EntityFrameworkCore" />
