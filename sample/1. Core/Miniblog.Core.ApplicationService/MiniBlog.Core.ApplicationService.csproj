@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\02. Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
+    <ProjectReference Include="..\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />
+    <ProjectReference Include="..\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
