@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\03. Infra\Auth\Zamin.Infra.Auth.AppPartsServices\Zamin.Infra.Auth.ControllerDetectors.csproj" />
     <ProjectReference Include="..\..\..\src\04. EndPoints\Zamin.EndPoints.Web\Zamin.EndPoints.Web.csproj" />
     <ProjectReference Include="..\..\1. Core\Miniblog.Core.ApplicationService\MiniBlog.Core.ApplicationService.csproj" />
     <ProjectReference Include="..\..\1. Core\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />

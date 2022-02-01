@@ -67,7 +67,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Core.Contracts", "src
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{A9CD6765-AE1B-4AB4-978F-C7F376431100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Infra.Auth.AppPartsServices", "src\03. Infra\Auth\Zamin.Infra.Auth.AppPartsServices\Zamin.Infra.Auth.AppPartsServices.csproj", "{1E544B1E-6144-4F8A-AB88-C46AA064F784}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Infra.Auth.ControllerDetectors", "src\03. Infra\Auth\Zamin.Infra.Auth.AppPartsServices\Zamin.Infra.Auth.ControllerDetectors.csproj", "{1E544B1E-6144-4F8A-AB88-C46AA064F784}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{EF176478-44B2-40B2-9C03-F1A9118E5667}"
 EndProject
