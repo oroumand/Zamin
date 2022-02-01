@@ -17,12 +17,14 @@ namespace Miniblog.Core.ApplicationService.Blogs.Commands.CreateBlog
             _blogCommandRepository = blogCommandRepository;
         }
 
+
         public override async Task<CommandResult> Handle(CreateBlogCommand request)
         {
             Blog blog = new(request.BusunessId, request.Title, request.Description);
-            _blogCommandRepository.Insert(blog);
-            return await OkAsync();
-    
+            await _blogCommandRepository.InsertAsync(blog);
+            await _blogCommandRepository.CommitAsync();
+            return Ok();
+
         }
     }
 }

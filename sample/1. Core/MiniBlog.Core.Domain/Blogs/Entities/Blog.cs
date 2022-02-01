@@ -1,5 +1,6 @@
 ﻿using MiniBlog.Core.Domain.Blogs.Events;
 using Zamin.Core.Domain.Entities;
+using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.Domain.Toolkits.ValueObjects;
 using Zamin.Core.Domain.ValueObjects;
 
@@ -19,6 +20,7 @@ namespace MiniBlog.Core.Domain.Blogs.Entities
         }
         public Blog(BusinessId businessId, Title title, Description description)
         {
+            
             BusinessId = businessId;
             Title = title;
             Description = description;
