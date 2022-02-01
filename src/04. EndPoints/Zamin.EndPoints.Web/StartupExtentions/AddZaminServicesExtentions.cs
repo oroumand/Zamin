@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Zamin.Infra.Auth.AppPartsServices.ASPServices;
+using Zamin.Infra.Auth.ControllerDetectors.Data;
 using Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems;
 using Zamin.Infra.Events.Outbox;
 using Zamin.Infra.Events.PoolingPublisher;
@@ -33,6 +35,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             services.AddPoolingPublisher(assembliesForSearch);
             services.AddTransient<ZaminServices>();
             services.AddEntityChangeInterception(assembliesForSearch);
+            services.AddControllerDetectors(assembliesForSearch);
             return services;
         }
 
@@ -113,7 +116,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 
         public static IServiceCollection AddJsonSerializer(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
-            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
                 .AddClasses(c => c.Where(type => type.Name == _zaminConfigurations.JsonSerializerTypeName && typeof(IJsonSerializer).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
@@ -123,7 +126,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 
         public static IServiceCollection AddExcelSerializer(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
-            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
                 .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.ExcelSerializerTypeName && typeof(IExcelSerializer).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
@@ -143,7 +146,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         private static IServiceCollection AddUserInfoService(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch)
         {
-            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
                 .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.UserInfoServiceTypeName && typeof(IUserInfoService).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
@@ -154,7 +157,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         private static IServiceCollection AddTranslator(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch)
         {
-            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
                 .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.Translator.TranslatorTypeName && typeof(ITranslator).IsAssignableFrom(type)))
                 .AsImplementedInterfaces()
@@ -162,11 +165,10 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             return services;
         }
 
-
         private static IServiceCollection AddMessageBus(this IServiceCollection services,
             IEnumerable<Assembly> assembliesForSearch)
         {
-            var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+            var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
 
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
                 .AddClasses(classes => classes.Where(type => type.Name == _zaminConfigurations.MessageBus.MessageConsumerTypeName && typeof(IMessageConsumer).IsAssignableFrom(type)))
@@ -220,6 +222,20 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                         EntityChageInterceptorRepositoryTypeName && typeof(IEntityChageInterceptorItemRepository).IsAssignableFrom(type)))
                     .AsImplementedInterfaces()
                     .WithScopedLifetime());
+            }
+            return services;
+        }
+
+
+        private static IServiceCollection AddControllerDetectors(this IServiceCollection services,
+            IEnumerable<Assembly> assembliesForSearch)
+        {
+            var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
+            if (_zaminConfigurations.AppPart.Enabled)
+            {
+                services.AddTransient<ApplicationPartDetector>();
+                services.AddTransient<AppPartRegistrar>();
+                services.AddTransient<ControllerDetectorRepository>();
             }
             return services;
         }
