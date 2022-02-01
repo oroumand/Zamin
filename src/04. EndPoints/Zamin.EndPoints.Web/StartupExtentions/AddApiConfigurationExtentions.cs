@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using System.Data.SqlClient;
 using Zamin.EndPoints.Web.Filters;
 using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
+using Zamin.Infra.Auth.AppPartsServices.ASPServices;
 
 namespace Zamin.EndPoints.Web.StartupExtentions
 {
@@ -61,7 +62,11 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                     return LogLevel.Error;
                 };
             });
-
+            if (configuration.AppPart.Enabled)
+            {
+                var appPartRegistrar = app.ApplicationServices.GetRequiredService<AppPartRegistrar>();
+                appPartRegistrar.Register();
+            }
             app.UseStatusCodePages();
             if (configuration.Swagger != null && configuration.Swagger.SwaggerDoc != null)
             {

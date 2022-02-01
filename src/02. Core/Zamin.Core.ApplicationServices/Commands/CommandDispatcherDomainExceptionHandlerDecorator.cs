@@ -24,35 +24,35 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
     #endregion
 
     #region Send Commands
-    public override Task<CommandResult> Send<TCommand>(TCommand command)
+    public override async Task<CommandResult> Send<TCommand>(TCommand command)
     {
         try
         {
-            var result = _commandDispatcher.Send(command);
-            var ex = result.Exception;
-            return result;
+            var result =  _commandDispatcher.Send(command);
+            return await result;
         }
         catch (DomainStateException ex)
         {
             _logger.LogError(ZaminEventId.DomainValidationException, ex, "Processing of {CommandType} With value {Command} failed at {StartDateTime} because there are domain exceptions.", command.GetType(), command, DateTime.Now);
-            return DomainExceptionHandlingWithoutReturnValue<TCommand>(ex);
+            return  DomainExceptionHandlingWithoutReturnValue<TCommand>(ex);
+        }
+        catch(AggregateException ex)
+        {
+            if(ex.InnerException is DomainStateException domainStateException)
+            {
+                _logger.LogError(ZaminEventId.DomainValidationException, domainStateException, "Processing of {CommandType} With value {Command} failed at {StartDateTime} because there are domain exceptions.", command.GetType(), command, DateTime.Now);
+                return DomainExceptionHandlingWithoutReturnValue<TCommand>(domainStateException);
+            }
+            throw ex;          
         }
 
     }
 
-    public override Task<CommandResult<TData>> Send<TCommand, TData>(in TCommand command)
+    public override async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command)
     {
         try
         {
-            var result = _commandDispatcher.Send<TCommand, TData>(command);
-            var ex = result.Exception;
-            if (ex != null && ex is AggregateException)
-            {
-                if (ex.InnerException != null && ex.InnerException is DomainStateException)
-                {
-                    throw ex.InnerException;
-                }
-            }
+            var result = await _commandDispatcher.Send<TCommand, TData>(command);
             return result;
 
         }
@@ -61,11 +61,20 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
             _logger.LogError(ZaminEventId.DomainValidationException, ex, "Processing of {CommandType} With value {Command} failed at {StartDateTime} because there are domain exceptions.", command.GetType(), command, DateTime.Now);
             return DomainExceptionHandlingWithReturnValue<TCommand, TData>(ex);
         }
+        catch (AggregateException ex)
+        {
+            if (ex.InnerException is DomainStateException domainStateException)
+            {
+                _logger.LogError(ZaminEventId.DomainValidationException, ex, "Processing of {CommandType} With value {Command} failed at {StartDateTime} because there are domain exceptions.", command.GetType(), command, DateTime.Now);
+                return DomainExceptionHandlingWithReturnValue<TCommand, TData>(domainStateException);
+            }
+            throw ex;
+        }
     }
     #endregion
 
     #region Privaite Methods
-    private Task<CommandResult> DomainExceptionHandlingWithoutReturnValue<TCommand>(DomainStateException ex)
+    private CommandResult DomainExceptionHandlingWithoutReturnValue<TCommand>(DomainStateException ex)
     {
         var commandResult = new CommandResult
         {
@@ -74,10 +83,10 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
 
         commandResult.AddMessage(GetExceptionText(ex));
 
-        return Task.FromResult(commandResult);
+        return commandResult;
     }
 
-    private Task<CommandResult<TData>> DomainExceptionHandlingWithReturnValue<TCommand, TData>(DomainStateException ex)
+    private CommandResult<TData> DomainExceptionHandlingWithReturnValue<TCommand, TData>(DomainStateException ex)
     {
         var commandResult = new CommandResult<TData>()
         {
@@ -86,7 +95,7 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
 
         commandResult.AddMessage(GetExceptionText(ex));
 
-        return Task.FromResult(commandResult);
+        return commandResult;
     }
 
     private string GetExceptionText(DomainStateException domainStateException)

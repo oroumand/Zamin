@@ -16,13 +16,13 @@ namespace Zamin.EndPoints.Web.Controllers
 
         public IActionResult Excel<T>(List<T> list)
         {
-            var serializer = (IExcelSerializer)HttpContext.RequestServices.GetService(typeof(IExcelSerializer));
+            var serializer = (IExcelSerializer)HttpContext.RequestServices.GetRequiredService(typeof(IExcelSerializer));
             var bytes = serializer.ListToExcelByteArray(list);
             return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
         public IActionResult Excel<T>(List<T> list, string fileName)
         {
-            var serializer = (IExcelSerializer)HttpContext.RequestServices.GetService(typeof(IExcelSerializer));
+            var serializer = (IExcelSerializer)HttpContext.RequestServices.GetRequiredService(typeof(IExcelSerializer));
             var bytes = serializer.ListToExcelByteArray(list);
             return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{fileName}.xlsx");
         }
