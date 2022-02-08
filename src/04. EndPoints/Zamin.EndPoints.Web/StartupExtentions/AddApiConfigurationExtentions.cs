@@ -85,7 +85,8 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 builder.AllowAnyHeader();
                 builder.AllowAnyMethod();
             });
-            app.UseHttpsRedirection();
+            if(configuration.UseHttpsRedirection)
+                app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

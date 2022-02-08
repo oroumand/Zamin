@@ -6,6 +6,7 @@ public class ZaminConfigurationOptions
     public string SectionName { get; set; } = "ZaminConfigurations";
     public string ServiceId { get; set; } = "Service01-Instance01";
     public string ServiceName { get; set; } = "Service01";
+    public bool UseHttpsRedirection { get; set; }=false;
     public string JsonSerializerTypeName { get; set; } = "NewtonSoftSerializer";
     public string ExcelSerializerTypeName { get; set; } = "EPPlusExcelSerializer";
     public string UserInfoServiceTypeName { get; set; } = "FakeUserInfoService";

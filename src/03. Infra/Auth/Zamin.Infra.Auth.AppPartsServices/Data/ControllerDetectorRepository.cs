@@ -10,8 +10,8 @@ public class ControllerDetectorRepository
 {
     private readonly ZaminConfigurationOptions _configuration;
     private readonly IDbConnection _dbConnection;
-    private string _selectAllParts = "SELECT c.ApplicationId,app.ServiceName AS 'ApplicationName',a.ControllerId,c.[Name] AS 'ControllerName', a.Id AS ActionId, a.[Name] AS ActionName FROM {0}.{1} AS app LEFT JOIN {0}.{2} AS c ON app.Id = c.ApplicationId LEFT JOIN {0}.{3} AS a ON c.Id = a.ControllerId where app.ServiceName = @ServiceName";
-    private string InsertApplicationCommand = "INSERT INTO {0}.{1}(Id,[ServiceName],[Title])values(@Id,@ServiceName,@ServiceName)";
+    private string _selectAllParts = "SELECT c.ApplicationId,app.ServiceName AS 'ApplicationName',a.ControllerId,c.[Name] AS 'ControllerName', a.BusinessId AS ActionId, a.[Name] AS ActionName FROM {0}.{1} AS app LEFT JOIN {0}.{2} AS c ON app.BusinessId = c.ApplicationId LEFT JOIN {0}.{3} AS a ON c.BusinessId = a.ControllerId where app.ServiceName = @ServiceName";
+    private string InsertApplicationCommand = "INSERT INTO {0}.{1}(BusinessId,[ServiceName],[Title])values(@Id,@ServiceName,@ServiceName)";
     private string InsertControllerCommand = "If (Not Exists(Select * FROM {0}.{1} WHERE Name = @Name and ApplicationId=@ApplicationId)) BEGIN INSERT INTO {0}.{1}([ApplicationId],[Name],[Title])values(@ApplicationId,@Name,@Name) END Select Id FROM dbo.Applications WHERE ServiceName = @ServiceName";
     public ControllerDetectorRepository(ZaminConfigurationOptions configuration)
     {
@@ -34,7 +34,8 @@ public class ControllerDetectorRepository
         string createApplicationTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
             $"TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{applicationTable}' )) Begin " +
             $"CREATE TABLE [{schema}].[{applicationTable}]( " +
-            $"[Id] [UNIQUEIDENTIFIER] NOT NULL Primary Key," +
+            $"Id bigint  Primary Key Identity(1,1)," +
+            $"[BusinessId] [UNIQUEIDENTIFIER] NOT NULL UNIQUE default(newId())," +
             $"ServiceName NVARCHAR(100) NOT NULL UNIQUE," +
             $"Title NVARCHAR(100)," +
             $"[Description] NVARCHAR(500)," +
@@ -44,18 +45,22 @@ public class ControllerDetectorRepository
         string createControllerTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
             $"TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{controllersTable}' )) Begin " +
             $"CREATE TABLE [{schema}].[{controllersTable}]( " +
-            $"[Id] [UNIQUEIDENTIFIER] NOT NULL Primary Key," +
-            $"ApplicationId UNIQUEIDENTIFIER NOT NULL REFERENCES {schema}.{applicationTable}(Id)," +
+            $"Id bigint  Primary Key Identity(1,1)," +
+            $"[BusinessId] [UNIQUEIDENTIFIER] NOT NULL UNIQUE default(newId())," +
+            $"ApplicationId UNIQUEIDENTIFIER NOT NULL REFERENCES {schema}.{applicationTable}(BusinessId)," +
             $"Name NVARCHAR(100) NOT NULL," +
             $"Title NVARCHAR(100)," +
+            $"URL NVARCHAR(500)," +
+            $"LogoName NVARCHAR(500)," +
             $"[Description] NVARCHAR(500)) " +
             $" End";
 
         string createActionTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
             $"TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{actionTable}' )) Begin " +
             $"CREATE TABLE [{schema}].[{actionTable}]( " +
-            $"[Id] [UNIQUEIDENTIFIER] NOT NULL Primary Key," +
-            $"ControllerId UNIQUEIDENTIFIER NOT NULL REFERENCES {schema}.{controllersTable}(Id)," +
+            $"Id bigint Primary Key Identity(1,1)," +
+            $"[BusinessId] [UNIQUEIDENTIFIER] NOT NULL UNIQUE default(newId())," +
+            $"ControllerId UNIQUEIDENTIFIER NOT NULL REFERENCES {schema}.{controllersTable}(BusinessId)," +
             $"Name NVARCHAR(100) NOT NULL," +
             $"Title NVARCHAR(100)," +
             $"[Description] NVARCHAR(500)) " +
@@ -77,10 +82,10 @@ public class ControllerDetectorRepository
     {
         if (actionForInsert != null && actionForInsert.Count > 0)
         {
-            StringBuilder stringBuilder = new StringBuilder($"Insert into {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ActionTableName}(Id,ControllerId,Name,Title) values ");
+            StringBuilder stringBuilder = new StringBuilder($"Insert into {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ActionTableName}(BusinessId,ControllerId,Name,Title) values ");
             for (int i = 0; i < actionForInsert.Count; i++)
             {
-                stringBuilder.Append($"('{actionForInsert[i].Id}','{actionForInsert[i].ControllerId}','{actionForInsert[i].Name}','{actionForInsert[i].Name}')");
+                stringBuilder.Append($"('{actionForInsert[i].BusinessId}','{actionForInsert[i].ControllerId}','{actionForInsert[i].Name}','{actionForInsert[i].Name}')");
 
                 stringBuilder.Append(i == (actionForInsert.Count - 1) ? ";" : ",");
             }
@@ -92,10 +97,10 @@ public class ControllerDetectorRepository
     {
         if (controllerDatas != null && controllerDatas.Count > 0)
         {
-            StringBuilder stringBuilder = new($"Insert into {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ControllerTableName}(Id,ApplicationId,Name,Title) values ");
+            StringBuilder stringBuilder = new($"Insert into {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ControllerTableName}(BusinessId,ApplicationId,Name,Title) values ");
             for (int i = 0; i < controllerDatas.Count; i++)
             {
-                stringBuilder.Append($"('{controllerDatas[i].Id}','{controllerDatas[i].ApplicationId}','{controllerDatas[i].Name}','{controllerDatas[i].Name}')");
+                stringBuilder.Append($"('{controllerDatas[i].BusinessId}','{controllerDatas[i].ApplicationId}','{controllerDatas[i].Name}','{controllerDatas[i].Name}')");
                 stringBuilder.Append(i == (controllerDatas.Count - 1) ? ";" : ",");
             }
             await _dbConnection.ExecuteAsync(stringBuilder.ToString());
@@ -108,7 +113,7 @@ public class ControllerDetectorRepository
         Guid applicationId = Guid.NewGuid();
         var parameters = new DynamicParameters();
         parameters.Add("@ServiceName", _configuration.ServiceName);
-        parameters.Add("@Id", applicationId);
+        parameters.Add("@BusinessId", applicationId);
         await _dbConnection.ExecuteAsync(InsertApplicationCommand, param: parameters, commandType: CommandType.Text);
         return applicationId;
     }

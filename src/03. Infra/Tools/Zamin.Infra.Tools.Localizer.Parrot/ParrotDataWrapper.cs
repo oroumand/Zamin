@@ -33,7 +33,8 @@ public class ParrotDataWrapper
         string createTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
             $"TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{table}' )) Begin " +
             $"CREATE TABLE [{schema}].[{table}]( " +
-            $"[Id] [int] IDENTITY(1,1) NOT NULL Primary Key," +
+            $"Id bigint  Primary Key Identity(1,1)," +
+            $"[BusinessId] [UNIQUEIDENTIFIER] NOT NULL UNIQUE  default(newId())," +
             $"[Key] [nvarchar](255) NOT NULL," +
             $"[Value] [nvarchar](500) NOT NULL," +
             $"[Culture] [nvarchar](5) NULL)" +

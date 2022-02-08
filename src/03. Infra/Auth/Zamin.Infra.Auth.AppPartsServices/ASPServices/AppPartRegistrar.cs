@@ -62,14 +62,14 @@ public class AppPartRegistrar
 
     private async Task InsertExistingApplication(ApplicationData AppPart, List<ApplicationControllerActionDto> oldControllersAndAction)
     {
-        AppPart.Id = oldControllersAndAction.First().ApplicationId;
+        AppPart.BusinessId = oldControllersAndAction.First().ApplicationId;
         AppPart.ControllerDatas.ForEach(controller =>
         {
             var oldController = Enumerable.FirstOrDefault(oldControllersAndAction, c => c.ControllerName == controller.Name);
             if (oldController != null)
             {
-                controller.ApplicationId = AppPart.Id;
-                controller.Id = oldController.ControllerId;
+                controller.ApplicationId = AppPart.BusinessId;
+                controller.BusinessId = oldController.ControllerId;
                 controller.ActionDatas.ForEach(action =>
                 {
                     if (!oldControllersAndAction.Any(c => c.ActionName == action.Name && c.ControllerName == controller.Name))
@@ -89,7 +89,7 @@ public class AppPartRegistrar
     private async Task InsertNewApplication(ApplicationData applicationData)
     {
         var id = await _appDataDbWrapper.InsertApplication();
-        applicationData.Id = id;
+        applicationData.BusinessId = id;
         applicationData.ControllerDatas.ForEach(controller =>
         {
             SetNewControllerData(applicationData, controller);
@@ -107,8 +107,8 @@ public class AppPartRegistrar
 
     private void SetNewControllerData(ApplicationData applicationData, ControllerData controller)
     {
-        controller.ApplicationId = applicationData.Id;
-        controller.Id = Guid.NewGuid();
+        controller.ApplicationId = applicationData.BusinessId;
+        controller.BusinessId = Guid.NewGuid();
         controller.IsNew = true;
         controller.ActionDatas.ForEach((ActionData action) =>
         {
@@ -118,8 +118,8 @@ public class AppPartRegistrar
 
     private void SetNewActionData(ControllerData controller, ActionData action)
     {
-        action.Id = Guid.NewGuid();
-        action.ControllerId = controller.Id;
+        action.BusinessId = Guid.NewGuid();
+        action.ControllerId = controller.BusinessId;
         action.IsNew = true;
     }
 }
