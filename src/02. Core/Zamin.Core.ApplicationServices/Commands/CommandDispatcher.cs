@@ -23,14 +23,14 @@ public class CommandDispatcher : ICommandDispatcher
     #endregion
 
     #region Send Commands
-    public Task<CommandResult> Send<TCommand>(TCommand command) where TCommand : class, ICommand
+    public async Task<CommandResult> Send<TCommand>(TCommand command) where TCommand : class, ICommand
     {
         _stopwatch.Start();
         try
         {
             _logger.LogDebug("Routing command of type {CommandType} With value {Command}  Start at {StartDateTime}", command.GetType(), command, DateTime.Now);
             var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand>>();
-            return handler.Handle(command);
+            return await handler.Handle(command);
 
         }
         catch (InvalidOperationException ex)
@@ -46,17 +46,14 @@ public class CommandDispatcher : ICommandDispatcher
 
     }
 
-    public Task<CommandResult<TData>> Send<TCommand, TData>(in TCommand command) where TCommand : class, ICommand<TData>
+    public async Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command) where TCommand : class, ICommand<TData>
     {
         _stopwatch.Start();
         try
         {
             _logger.LogDebug("Routing command of type {CommandType} With value {Command}  Start at {StartDateTime}", command.GetType(), command, DateTime.Now);
             var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand, TData>>();
-            var result = handler.Handle(command);
-
-            return result;
-
+            return await handler.Handle(command);           
         }
         catch (Exception ex)
         {
@@ -69,6 +66,7 @@ public class CommandDispatcher : ICommandDispatcher
             _logger.LogInformation("Processing the {CommandType} command tooks {Millisecconds} Millisecconds", command.GetType(), _stopwatch.ElapsedMilliseconds);
         }
     }
+
     #endregion
 
 }

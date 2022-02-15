@@ -4,13 +4,15 @@ namespace Zamin.Utilities.Configurations;
 public class ZaminConfigurationOptions
 {
     public string SectionName { get; set; } = "ZaminConfigurations";
-    public string ServiceId { get; set; } = "Service01";
+    public string ServiceId { get; set; } = "Service01-Instance01";
     public string ServiceName { get; set; } = "Service01";
+    public bool UseHttpsRedirection { get; set; }=false;
     public string JsonSerializerTypeName { get; set; } = "NewtonSoftSerializer";
     public string ExcelSerializerTypeName { get; set; } = "EPPlusExcelSerializer";
     public string UserInfoServiceTypeName { get; set; } = "FakeUserInfoService";
     public bool RegisterAutomapperProfiles { get; set; } = true;
     public string AssmblyNameForLoad { get; set; } = string.Empty;
+    public AppPartOptions AppPart { get; set; }= new AppPartOptions();
     public MessageBusOptions MessageBus { get; set; } = new MessageBusOptions();
     public MessageConsumerOptions Messageconsumer { get; set; } = new MessageConsumerOptions();
     public PoolingPublisherOptions PoolingPublisher { get; set; } = new PoolingPublisherOptions();
