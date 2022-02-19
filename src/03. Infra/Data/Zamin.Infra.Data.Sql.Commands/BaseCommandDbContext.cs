@@ -19,14 +19,9 @@ public abstract class BaseCommandDbContext : DbContext
 
     public DbSet<OutBoxEventItem> OutBoxEventItems { get; set; }
 
-    public BaseCommandDbContext(DbContextOptions options) : base(options)
-    {
+    public BaseCommandDbContext(DbContextOptions options) : base(options) { }
 
-    }
-
-    protected BaseCommandDbContext()
-    {
-    }
+    protected BaseCommandDbContext() { }
 
     public void BeginTransaction()
     {
@@ -51,6 +46,11 @@ public abstract class BaseCommandDbContext : DbContext
         _transaction.Commit();
     }
 
+    public object GetShadowPropertyValue(object entity, string propertyName)
+    {
+        return Entry(entity).Property(propertyName).CurrentValue;
+    }
+
     public T GetShadowPropertyValue<T>(object entity, string propertyName) where T : IConvertible
     {
         var value = Entry(entity).Property(propertyName).CurrentValue;
@@ -58,11 +58,7 @@ public abstract class BaseCommandDbContext : DbContext
             ? (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture)
             : default;
     }
-
-    public object GetShadowPropertyValue(object entity, string propertyName)
-    {
-        return Entry(entity).Property(propertyName).CurrentValue;
-    }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -81,9 +77,7 @@ public abstract class BaseCommandDbContext : DbContext
         return result;
     }
 
-    public override Task<int> SaveChangesAsync(
-        bool acceptAllChangesOnSuccess,
-        CancellationToken cancellationToken = default)
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
         ChangeTracker.DetectChanges();
         beforeSaveTriggers();
@@ -102,7 +96,6 @@ public abstract class BaseCommandDbContext : DbContext
         if (_zaminConfigurations.EntityChangeInterception.Enabled)
             addEntityChangeInterceptorItems();
     }
-
 
     private void setShadowProperties()
     {
