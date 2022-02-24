@@ -5,7 +5,7 @@ using Zamin.EndPoints.Web;
 using Zamin.EndPoints.Web.StartupExtentions;
 using Zamin.Utilities.Configurations;
 
-var builder = new ZaminProgram().Main(args, "appsettings.json", "appsettings.zamin.json", "appsettings.serilog.json");
+var builder = new ZaminProgram().Main(args, "appsettings.json", "appsettings.zamin.json", "appsettings.zamin.translations.json", "appsettings.serilog.json");
 
 //Configuration
 ConfigurationManager Configuration = builder.Configuration;

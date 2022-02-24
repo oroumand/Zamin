@@ -14,6 +14,16 @@ public class ParrotTranslatorOptions
     public bool AutoCreateSqlTable { get; set; } = true;
     public string TableName { get; set; } = "ParrotTranslations";
     public string SchemaName { get; set; } = "dbo";
+
+    public bool SeedTranslations = true;
+    public Translation[] Translations { get; set; } = Array.Empty<Translation>();
+}
+
+public class Translation
+{
+    public string Key { get; set; }
+    public string Value { get; set; }
+    public string Culture { get; set; }
 }
 
 public class MicrosoftTranslatorOptions
