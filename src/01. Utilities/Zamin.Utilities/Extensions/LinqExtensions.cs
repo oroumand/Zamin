@@ -54,6 +54,7 @@ public static class LinqExtensions
         }
         return data;
     }
+
     private static T GetItem<T>(DataRow dr, ITranslator resourceManager)
     {
         Type temp = typeof(T);
@@ -99,4 +100,7 @@ public static class LinqExtensions
         ? query.Where(predicate)
         : query;
     }
+
+    public static IQueryable<T> Paged<T>(this IQueryable<T> query,int skip,int take)
+        => query.Skip(skip).Take(take);
 }
