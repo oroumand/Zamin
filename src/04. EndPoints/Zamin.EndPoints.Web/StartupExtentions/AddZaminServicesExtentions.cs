@@ -19,9 +19,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 {
     public static class AddZaminServicesExtentions
     {
-        public static IServiceCollection AddZaminServices(
-            this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
+        public static IServiceCollection AddZaminServices(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
             services.AddCaching();
             services.AddSession();
@@ -36,6 +34,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             services.AddTransient<ZaminServices>();
             services.AddEntityChangeInterception(assembliesForSearch);
             services.AddControllerDetectors(assembliesForSearch);
+
             return services;
         }
 
@@ -83,6 +82,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             }
             return services;
         }
+
         private static IServiceCollection AddSession(this IServiceCollection services)
         {
             var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
@@ -109,6 +109,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             }
             return services;
         }
+
         private static IServiceCollection AddLogging(this IServiceCollection services)
         {
             return services.AddScoped<IScopeInformation, ScopeInformation>();
@@ -143,8 +144,8 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             }
             return services;
         }
-        private static IServiceCollection AddUserInfoService(this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
+
+        private static IServiceCollection AddUserInfoService(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
             var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
@@ -154,8 +155,8 @@ namespace Zamin.EndPoints.Web.StartupExtentions
 
             return services;
         }
-        private static IServiceCollection AddTranslator(this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
+        
+        private static IServiceCollection AddTranslator(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
             var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
             services.Scan(s => s.FromAssemblies(assembliesForSearch)
@@ -165,8 +166,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             return services;
         }
 
-        private static IServiceCollection AddMessageBus(this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
+        private static IServiceCollection AddMessageBus(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
             var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
 
@@ -195,8 +195,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             return services;
         }
 
-        private static IServiceCollection AddPoolingPublisher(this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
+        private static IServiceCollection AddPoolingPublisher(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
             var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
             if (_zaminConfigurations.PoolingPublisher.Enabled)
@@ -211,8 +210,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             return services;
         }
 
-        private static IServiceCollection AddEntityChangeInterception(this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
+        private static IServiceCollection AddEntityChangeInterception(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
             var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
             if (_zaminConfigurations.EntityChangeInterception.Enabled)
@@ -226,9 +224,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             return services;
         }
 
-
-        private static IServiceCollection AddControllerDetectors(this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
+        private static IServiceCollection AddControllerDetectors(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
         {
             var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
             if (_zaminConfigurations.AppPart.Enabled)
