@@ -1,3 +1,5 @@
+
+
 Create Table dbo.Applications
 (
 Id Bigint PRIMARY KEY IDENTITY(1,1),

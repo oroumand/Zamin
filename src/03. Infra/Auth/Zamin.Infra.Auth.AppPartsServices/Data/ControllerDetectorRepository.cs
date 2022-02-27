@@ -10,8 +10,8 @@ public class ControllerDetectorRepository
 {
     private readonly ZaminConfigurationOptions _configuration;
     private readonly IDbConnection _dbConnection;
-    private string _selectAllParts = "SELECT c.ApplicationId,app.ServiceName AS 'ApplicationName',a.ControllerId,c.[Name] AS 'ControllerName', a.BusinessId AS ActionId, a.[Name] AS ActionName FROM {0}.{1} AS app LEFT JOIN {0}.{2} AS c ON app.BusinessId = c.ApplicationId LEFT JOIN {0}.{3} AS a ON c.BusinessId = a.ControllerId where app.ServiceName = @ServiceName";
-    private string InsertApplicationCommand = "INSERT INTO {0}.{1}(BusinessId,[ServiceName],[Title])values(@Id,@ServiceName,@ServiceName)";
+    private string _selectAllParts = "SELECT app.BusinessId as 'ServiceId',app.ServiceName,c.BusinessId as 'ControllerId',c.[Name] AS 'ControllerName', a.BusinessId AS ActionId, a.[Name] AS ActionName FROM {0}.{1} AS app LEFT JOIN {0}.{2} AS c ON app.BusinessId = c.ServiceId LEFT JOIN {0}.{3} AS a ON c.BusinessId = a.ControllerId where app.ServiceName = @ServiceName";
+    private string InsertServiceCommand = "INSERT INTO {0}.{1}(BusinessId,[ServiceName],[Title],ModuleId)values(@BusinessId,@ServiceName,@ServiceName,@ModuleId)";
     private string InsertControllerCommand = "If (Not Exists(Select * FROM {0}.{1} WHERE Name = @Name and ApplicationId=@ApplicationId)) BEGIN INSERT INTO {0}.{1}([ApplicationId],[Name],[Title])values(@ApplicationId,@Name,@Name) END Select Id FROM dbo.Applications WHERE ServiceName = @ServiceName";
     public ControllerDetectorRepository(ZaminConfigurationOptions configuration)
     {
@@ -20,26 +20,63 @@ public class ControllerDetectorRepository
         if (_configuration.AppPart.AutoCreateSqlTable)
             CreateTableIfNeeded();
 
-        InsertApplicationCommand = string.Format(InsertApplicationCommand, _configuration.AppPart.SchemaName, _configuration.AppPart.ApplicationTableName);
-        _selectAllParts = string.Format(_selectAllParts, _configuration.AppPart.SchemaName, _configuration.AppPart.ApplicationTableName, _configuration.AppPart.ControllerTableName, _configuration.AppPart.ActionTableName);
+        InsertServiceCommand = string.Format(InsertServiceCommand, _configuration.AppPart.SchemaName, _configuration.AppPart.ServiceTableName);
+        _selectAllParts = string.Format(_selectAllParts, _configuration.AppPart.SchemaName, _configuration.AppPart.ServiceTableName, _configuration.AppPart.ControllerTableName, _configuration.AppPart.ActionTableName);
     }
 
     private void CreateTableIfNeeded()
     {
+
         string applicationTable = _configuration.AppPart.ApplicationTableName;
+        string moduleTable = _configuration.AppPart.ModuleTableName;
+
+
+        string serviceTable = _configuration.AppPart.ServiceTableName;
         string controllersTable = _configuration.AppPart.ControllerTableName;
         string actionTable = _configuration.AppPart.ActionTableName;
         string schema = _configuration.AppPart.SchemaName;
 
-        string createApplicationTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
+        string createApplicatoinTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
             $"TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{applicationTable}' )) Begin " +
             $"CREATE TABLE [{schema}].[{applicationTable}]( " +
             $"Id bigint  Primary Key Identity(1,1)," +
             $"[BusinessId] [UNIQUEIDENTIFIER] NOT NULL UNIQUE default(newId())," +
+            $"ApplicationName NVARCHAR(100) NOT NULL UNIQUE," +
+            $"Title NVARCHAR(100)," +
+            $"[Description] NVARCHAR(500)," +
+            $"Logo NVARCHAR(500)," +
+            $"[URL] NVARCHAR(500))" +
+            $" End";
+
+
+        string createModeleTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
+            $"TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{moduleTable}' )) Begin " +
+            $"CREATE TABLE [{schema}].[{moduleTable}]( " +
+            $"Id bigint  Primary Key Identity(1,1)," +
+            $"[BusinessId] [UNIQUEIDENTIFIER] NOT NULL UNIQUE default(newId())," +
+            $"ApplicationId UNIQUEIDENTIFIER NOT NULL REFERENCES {schema}.{applicationTable}(BusinessId)," +
+            $"ModuleName NVARCHAR(100) NOT NULL UNIQUE," +
+            $"Title NVARCHAR(100)," +
+            $"[Description] NVARCHAR(500)," +
+            $"[SortOrder] int," +
+            $"Logo NVARCHAR(500)," +
+            $"[URL] NVARCHAR(500))" +
+            $" End";
+
+
+
+        string createServiceTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
+            $"TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{serviceTable}' )) Begin " +
+            $"CREATE TABLE [{schema}].[{serviceTable}]( " +
+            $"Id bigint  Primary Key Identity(1,1)," +
+            $"[BusinessId] [UNIQUEIDENTIFIER] NOT NULL UNIQUE default(newId())," +
+            $"ModuleId UNIQUEIDENTIFIER NOT NULL REFERENCES {schema}.{moduleTable}(BusinessId)," +
             $"ServiceName NVARCHAR(100) NOT NULL UNIQUE," +
             $"Title NVARCHAR(100)," +
             $"[Description] NVARCHAR(500)," +
-             $"Logo NVARCHAR(500))" +
+            $"[SortOrder] int," +
+            $"Logo NVARCHAR(500)," +
+            $"[URL] NVARCHAR(500))" +
             $" End";
 
         string createControllerTable = $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE " +
@@ -47,7 +84,7 @@ public class ControllerDetectorRepository
             $"CREATE TABLE [{schema}].[{controllersTable}]( " +
             $"Id bigint  Primary Key Identity(1,1)," +
             $"[BusinessId] [UNIQUEIDENTIFIER] NOT NULL UNIQUE default(newId())," +
-            $"ApplicationId UNIQUEIDENTIFIER NOT NULL REFERENCES {schema}.{applicationTable}(BusinessId)," +
+            $"ServiceId UNIQUEIDENTIFIER NOT NULL REFERENCES {schema}.{serviceTable}(BusinessId)," +
             $"Name NVARCHAR(100) NOT NULL," +
             $"Title NVARCHAR(100)," +
             $"URL NVARCHAR(500)," +
@@ -66,9 +103,48 @@ public class ControllerDetectorRepository
             $"[Description] NVARCHAR(500)) " +
             $" End";
 
-        _dbConnection.Execute(createApplicationTable);
+        _dbConnection.Execute(createApplicatoinTable);
+        _dbConnection.Execute(createModeleTable);
+        _dbConnection.Execute(createServiceTable);
         _dbConnection.Execute(createControllerTable);
         _dbConnection.Execute(createActionTable);
+    }
+
+    public async Task<ApplicationData> GetApplicationData(string applicationName)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@applicationName", applicationName);
+        var result = await _dbConnection.QueryFirstOrDefaultAsync<ApplicationData>($"Select * from {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ApplicationTableName} Where ApplicationName = @applicationName", parameters);
+        return result;
+    }
+
+    internal async Task<Guid> InsertApplicationData(string applicationName)
+    {
+        Guid applicationId = Guid.NewGuid();
+        var parameters = new DynamicParameters();
+        parameters.Add("@ApplicationName", applicationName);
+        parameters.Add("@BusinessId", applicationId);
+        await _dbConnection.ExecuteAsync($"Insert Into {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ApplicationTableName} (BusinessId,ApplicationName,Title) Values(@BusinessId,@ApplicationName,@ApplicationName)", parameters);
+        return applicationId;
+    }
+
+    public async Task<ModuleData> GetModuleData(Guid applicationId, string moduleName)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@ApplicationId", applicationId);
+        parameters.Add("@ModuleName", moduleName);
+        var result = await _dbConnection.QueryFirstOrDefaultAsync<ModuleData>($"Select * from {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ModuleTableName} Where ApplicationId = @ApplicationId and ModuleName = @ModuleName", parameters);
+        return result;
+    }
+    internal async Task<Guid> InsertModuleData(Guid applicationId, string moduleName)
+    {
+        Guid moduleId = Guid.NewGuid();
+        var parameters = new DynamicParameters();
+        parameters.Add("@ModuleName", moduleName);
+        parameters.Add("@ApplicationId", applicationId);
+        parameters.Add("@BusinessId", moduleId);
+        await _dbConnection.ExecuteAsync($"Insert Into {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ModuleTableName} (BusinessId,ModuleName,ApplicationId,Title) Values(@BusinessId,@ModuleName,@ApplicationId,@ModuleName)", parameters);
+        return moduleId;
     }
 
     public async Task<List<ApplicationControllerActionDto>> GetOldApplicationParts(string serviceName)
@@ -97,24 +173,27 @@ public class ControllerDetectorRepository
     {
         if (controllerDatas != null && controllerDatas.Count > 0)
         {
-            StringBuilder stringBuilder = new($"Insert into {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ControllerTableName}(BusinessId,ApplicationId,Name,Title) values ");
+            StringBuilder stringBuilder = new($"Insert into {_configuration.AppPart.SchemaName}.{_configuration.AppPart.ControllerTableName}(BusinessId,ServiceId,Name,Title) values ");
             for (int i = 0; i < controllerDatas.Count; i++)
             {
-                stringBuilder.Append($"('{controllerDatas[i].BusinessId}','{controllerDatas[i].ApplicationId}','{controllerDatas[i].Name}','{controllerDatas[i].Name}')");
+                stringBuilder.Append($"('{controllerDatas[i].BusinessId}','{controllerDatas[i].ServiceId}','{controllerDatas[i].Name}','{controllerDatas[i].Name}')");
                 stringBuilder.Append(i == (controllerDatas.Count - 1) ? ";" : ",");
             }
-            await _dbConnection.ExecuteAsync(stringBuilder.ToString());
+            var s = stringBuilder.ToString();
+            await _dbConnection.ExecuteAsync(s);
 
         }
     }
 
-    public async Task<Guid> InsertApplication()
+    public async Task<Guid> InsertService(Guid modelId)
     {
+
         Guid applicationId = Guid.NewGuid();
         var parameters = new DynamicParameters();
         parameters.Add("@ServiceName", _configuration.ServiceName);
         parameters.Add("@BusinessId", applicationId);
-        await _dbConnection.ExecuteAsync(InsertApplicationCommand, param: parameters, commandType: CommandType.Text);
+        parameters.Add("@ModuleId", modelId);
+        await _dbConnection.ExecuteAsync(InsertServiceCommand, param: parameters, commandType: CommandType.Text);
         return applicationId;
     }
 }

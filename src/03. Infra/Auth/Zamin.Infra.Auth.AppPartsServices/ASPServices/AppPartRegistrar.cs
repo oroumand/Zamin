@@ -45,9 +45,11 @@ public class AppPartRegistrar
         else
             await InsertNewApplication(AppPart);
 
+
+
     }
 
-    private ApplicationData GetAppPart()
+    private ServiceData GetAppPart()
     {
         var result = _applicationPartDetector.Detect();
         if (result == null)
@@ -57,18 +59,18 @@ public class AppPartRegistrar
 
     private static bool ApplicatoinExists(List<ApplicationControllerActionDto> oldControllersAndAction)
     {
-        return oldControllersAndAction != null && oldControllersAndAction.Count > 1;
+        return oldControllersAndAction != null && oldControllersAndAction.Count > 0;
     }
 
-    private async Task InsertExistingApplication(ApplicationData AppPart, List<ApplicationControllerActionDto> oldControllersAndAction)
+    private async Task InsertExistingApplication(ServiceData AppPart, List<ApplicationControllerActionDto> oldControllersAndAction)
     {
-        AppPart.BusinessId = oldControllersAndAction.First().ApplicationId;
+        AppPart.BusinessId = oldControllersAndAction.First().ServiceId;
         AppPart.ControllerDatas.ForEach(controller =>
         {
             var oldController = Enumerable.FirstOrDefault(oldControllersAndAction, c => c.ControllerName == controller.Name);
             if (oldController != null)
             {
-                controller.ApplicationId = AppPart.BusinessId;
+                controller.ServiceId = AppPart.BusinessId;
                 controller.BusinessId = oldController.ControllerId;
                 controller.ActionDatas.ForEach(action =>
                 {
@@ -86,9 +88,10 @@ public class AppPartRegistrar
         await SaveControllersAndActions(AppPart);
     }
 
-    private async Task InsertNewApplication(ApplicationData applicationData)
+    private async Task InsertNewApplication(ServiceData applicationData)
     {
-        var id = await _appDataDbWrapper.InsertApplication();
+        Guid modelId = await GetModelId();
+        var id = await _appDataDbWrapper.InsertService(modelId);
         applicationData.BusinessId = id;
         applicationData.ControllerDatas.ForEach(controller =>
         {
@@ -97,17 +100,40 @@ public class AppPartRegistrar
         await SaveControllersAndActions(applicationData);
     }
 
-    private async Task SaveControllersAndActions(ApplicationData applicationData)
+    private async Task<Guid> GetModelId()
     {
-        var controllerForInsert = applicationData.ControllerDatas.Where(c=>c.IsNew).ToList();
-        var actionForInsert = applicationData.ControllerDatas.SelectMany(c => c.ActionDatas).Where(c=>c.IsNew).ToList();
+        Guid applicationId = await GetApplicatoinId();
+        ModuleData module = await _appDataDbWrapper.GetModuleData(applicationId, _zaminConfiguration.ModeleName);
+        if (module == null)
+        {
+            var moduleId = await _appDataDbWrapper.InsertModuleData(applicationId, _zaminConfiguration.ModeleName);
+            return moduleId;
+        }
+        return module.BusinessId;
+    }
+
+    private async Task<Guid> GetApplicatoinId()
+    {
+        ApplicationData applicationData = await _appDataDbWrapper.GetApplicationData(_zaminConfiguration.ApplicationName);
+        if (applicationData is null)
+        {
+            var appId = await _appDataDbWrapper.InsertApplicationData(_zaminConfiguration.ApplicationName);
+            return appId;
+        }
+        return applicationData.BusinessId;
+    }
+
+    private async Task SaveControllersAndActions(ServiceData applicationData)
+    {
+        var controllerForInsert = applicationData.ControllerDatas.Where(c => c.IsNew).ToList();
+        var actionForInsert = applicationData.ControllerDatas.SelectMany(c => c.ActionDatas).Where(c => c.IsNew).ToList();
         await _appDataDbWrapper.InsertNewControllers(controllerForInsert);
         await _appDataDbWrapper.InsertNewActions(actionForInsert);
     }
 
-    private void SetNewControllerData(ApplicationData applicationData, ControllerData controller)
+    private void SetNewControllerData(ServiceData applicationData, ControllerData controller)
     {
-        controller.ApplicationId = applicationData.BusinessId;
+        controller.ServiceId = applicationData.BusinessId;
         controller.BusinessId = Guid.NewGuid();
         controller.IsNew = true;
         controller.ActionDatas.ForEach((ActionData action) =>

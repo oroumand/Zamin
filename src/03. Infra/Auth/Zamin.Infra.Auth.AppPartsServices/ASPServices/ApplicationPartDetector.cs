@@ -16,7 +16,7 @@ public class ApplicationPartDetector
         _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
         _zaminConfigurationOptions = zaminConfigurationOptions;
     }
-    public ApplicationData? Detect()
+    public ServiceData? Detect()
     {
 
         var ControllerActionDescriptors = _actionDescriptorCollectionProvider.ActionDescriptors.Items.OfType<ControllerActionDescriptor>().ToList();
@@ -32,7 +32,7 @@ public class ApplicationPartDetector
             }).ToList()
         }).ToList();
 
-        return controllersDatas != null && controllersDatas.Count > 0 ? new ApplicationData
+        return controllersDatas != null && controllersDatas.Count > 0 ? new ServiceData
         {
             ServiceName = _zaminConfigurationOptions.ServiceName,
             ControllerDatas = controllersDatas

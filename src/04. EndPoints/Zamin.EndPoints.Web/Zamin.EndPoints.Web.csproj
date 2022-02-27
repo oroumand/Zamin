@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Version>6.2.0-beta.1</Version>
+				<Version>6.2.0-beta.2</Version>
 		<Nullable>enable</Nullable>
 		<Authors>Alireza Oroumand</Authors>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -54,7 +54,6 @@
 		<ProjectReference Include="..\..\02. Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
 		<ProjectReference Include="..\..\02. Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
 		<ProjectReference Include="..\..\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
-		<ProjectReference Include="..\..\03. Infra\Auth\Zamin.Infra.Auth.AppPartsServices\Zamin.Infra.Auth.ControllerDetectors.csproj" />
 		<ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql.Commands\Zamin.Infra.Data.Sql.Commands.csproj" />
 		<ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql.Queries\Zamin.Infra.Data.Sql.Queries.csproj" />
 		<ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />

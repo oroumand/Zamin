@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Zamin.Infra.Auth.ControllerDetectors.Models;
 public class ApplicationControllerActionDto
 {
-    public Guid ApplicationId { get; set; }
-    public string ApplicationName { get; set; }
+    public Guid ServiceId { get; set; }
+    public string ServiceName { get; set; }
     public Guid ControllerId { get; set; }
     public string ControllerName { get; set; }
     public Guid ActionId { get; set; }

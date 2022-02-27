@@ -3,6 +3,8 @@
 namespace Zamin.Utilities.Configurations;
 public class ZaminConfigurationOptions
 {
+    public string ApplicationName { get; set; } = "ZaminApplication";
+    public string ModeleName { get; set; } = "ZaminModole";
     public string SectionName { get; set; } = "ZaminConfigurations";
     public string ServiceId { get; set; } = "Service01-Instance01";
     public string ServiceName { get; set; } = "Service01";

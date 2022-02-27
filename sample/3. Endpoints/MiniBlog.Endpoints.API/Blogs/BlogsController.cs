@@ -5,7 +5,7 @@ using Zamin.EndPoints.Web.Controllers;
 namespace MiniBlog.Endpoints.API.Blogs
 {
     [Route("api/[controller]")]
-    public class BlogsssController : BaseController
+    public class BlogsController : BaseController
     {
         [HttpPost]
         public async Task<IActionResult> Post(CreateBlogCommand createBlog )
