@@ -125,7 +125,7 @@ public abstract class BaseCommandDbContext : DbContext
                     AggregateTypeName = aggregate.GetType().FullName,
                     EventName = @event.GetType().Name,
                     EventTypeName = @event.GetType().FullName,
-                    EventPayload = serializer.Serilize(@event),
+                    EventPayload = serializer.Serialize(@event),
                     IsProcessed = false
                 });
             }

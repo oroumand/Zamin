@@ -13,5 +13,5 @@ public class NewtonSoftSerializer : IJsonSerializer
         string.IsNullOrWhiteSpace(input) ?
             null : JsonConvert.DeserializeObject(input, type);
 
-    public string Serilize<TInput>(TInput input) => input == null ? string.Empty : JsonConvert.SerializeObject(input, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+    public string Serialize<TInput>(TInput input) => input == null ? string.Empty : JsonConvert.SerializeObject(input, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
 }
