@@ -16,16 +16,16 @@ public class DistributedCacheAdapter : ICacheAdapter
     }
     public void Add<TInput>(string key, TInput obj)
     {
-        _cache.Set("", Encoding.UTF8.GetBytes(_serializer.Serilize(obj)), new DistributedCacheEntryOptions
+        _cache.Set("", Encoding.UTF8.GetBytes(_serializer.Serialize(obj)), new DistributedCacheEntryOptions
         {
 
         });
-        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serilize(obj)));
+        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serialize(obj)));
     }
 
     public void Add<TInput>(string key, TInput obj, DateTime? AbsoluteExpiration, TimeSpan? SlidingExpiration)
     {
-        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serilize(obj)), new DistributedCacheEntryOptions
+        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serialize(obj)), new DistributedCacheEntryOptions
         {
             AbsoluteExpiration = AbsoluteExpiration,
             SlidingExpiration = SlidingExpiration
