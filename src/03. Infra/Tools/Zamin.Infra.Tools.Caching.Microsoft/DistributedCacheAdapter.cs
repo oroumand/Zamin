@@ -18,7 +18,7 @@ public class DistributedCacheAdapter : ICacheAdapter
 
     public void Add<TInput>(string key, TInput obj, DateTime? AbsoluteExpiration, TimeSpan? SlidingExpiration)
     {
-        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serilize(obj)), new DistributedCacheEntryOptions
+        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serialize(obj)), new DistributedCacheEntryOptions
         {
             AbsoluteExpiration = AbsoluteExpiration,
             SlidingExpiration = SlidingExpiration

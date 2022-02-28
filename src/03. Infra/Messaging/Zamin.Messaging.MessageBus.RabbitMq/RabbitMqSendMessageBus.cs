@@ -33,7 +33,7 @@ public class RabbitMqSendMessageBus : IDisposable, ISendMessageBus, IPooledObjec
         Parcel parcel = new Parcel
         {
             MessageId = Guid.NewGuid().ToString(),
-            MessageBody = _jsonSerializer.Serilize(input),
+            MessageBody = _jsonSerializer.Serialize(input),
             MessageName = messageName,
             Route = $"{_configuration.ServiceId}.{messageName}",
             Headers = new Dictionary<string, object>
@@ -49,7 +49,7 @@ public class RabbitMqSendMessageBus : IDisposable, ISendMessageBus, IPooledObjec
         Parcel parcel = new Parcel
         {
             MessageId = Guid.NewGuid().ToString(),
-            MessageBody = _jsonSerializer.Serilize(commandData),
+            MessageBody = _jsonSerializer.Serialize(commandData),
             MessageName = commandName,
             Route = $"{destinationService}.{commandName}",
         };
@@ -62,7 +62,7 @@ public class RabbitMqSendMessageBus : IDisposable, ISendMessageBus, IPooledObjec
         {
             MessageId = Guid.NewGuid().ToString(),
             CorrelationId = correlationId,
-            MessageBody = _jsonSerializer.Serilize(commandData),
+            MessageBody = _jsonSerializer.Serialize(commandData),
             MessageName = commandName,
             Route = $"{destinationService}.{commandName}",
         };
