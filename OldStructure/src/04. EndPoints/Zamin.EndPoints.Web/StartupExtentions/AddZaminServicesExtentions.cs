@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Zamin.Infra.Auth.AppPartsServices.ASPServices;
-using Zamin.Infra.Auth.ControllerDetectors.Data;
 using Zamin.Infra.Data.ChangeInterceptors.EntityChageInterceptorItems;
 using Zamin.Infra.Events.Outbox;
 using Zamin.Infra.Events.PoolingPublisher;
@@ -35,7 +33,6 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             services.AddPoolingPublisher(assembliesForSearch);
             services.AddTransient<ZaminServices>();
             services.AddEntityChangeInterception(assembliesForSearch);
-            services.AddControllerDetectors(assembliesForSearch);
             return services;
         }
 
@@ -226,18 +223,5 @@ namespace Zamin.EndPoints.Web.StartupExtentions
             return services;
         }
 
-
-        private static IServiceCollection AddControllerDetectors(this IServiceCollection services,
-            IEnumerable<Assembly> assembliesForSearch)
-        {
-            var _zaminConfigurations = services.BuildServiceProvider().GetRequiredService<ZaminConfigurationOptions>();
-            if (_zaminConfigurations.AppPart.Enabled)
-            {
-                services.AddTransient<ApplicationPartDetector>();
-                services.AddTransient<AppPartRegistrar>();
-                services.AddTransient<ControllerDetectorRepository>();
-            }
-            return services;
-        }
     }
 }
