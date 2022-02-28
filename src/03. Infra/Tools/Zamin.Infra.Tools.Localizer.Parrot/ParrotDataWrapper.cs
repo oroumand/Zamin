@@ -39,6 +39,7 @@ public class ParrotDataWrapper
             $"[Value] [nvarchar](500) NOT NULL," +
             $"[Culture] [nvarchar](5) NULL)" +
             $" End";
+
         _dbConnection.Execute(createTable);
     }
 

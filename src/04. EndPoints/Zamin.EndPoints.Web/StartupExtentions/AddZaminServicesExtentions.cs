@@ -42,6 +42,7 @@ namespace Zamin.EndPoints.Web.StartupExtentions
         private static IServiceCollection AddCaching(this IServiceCollection services)
         {
             var _zaminConfigurations = services.BuildServiceProvider().GetService<ZaminConfigurationOptions>();
+
             if (_zaminConfigurations?.Caching?.Enable == true)
             {
                 if (_zaminConfigurations.Caching.Provider == CacheProvider.MemoryCache)
@@ -51,6 +52,10 @@ namespace Zamin.EndPoints.Web.StartupExtentions
                 else
                 {
                     services.AddTransient<ICacheAdapter, DistributedCacheAdapter>();
+                    if(_zaminConfigurations.Caching.Provider == CacheProvider.DistributedSqlServerCache && _zaminConfigurations.Caching.DistributedSqlServerCache.AutoCreateSqlTable)
+                    {
+                        DistributedSqlServerCacheExtentions.CreateTable(_zaminConfigurations);
+                    }
                 }
 
                 switch (_zaminConfigurations.Caching.Provider)
