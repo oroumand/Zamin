@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extentions.Chaching.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extentions.MessageBus.Abstractions", "Zamin.Extentions.MessageBus.Abstractions\Zamin.Extentions.MessageBus.Abstractions.csproj", "{06F6D9C4-5B22-4CFF-B278-637005570A37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extentions.DependentyInjection.Abstractions", "Zamin.Extentions.DependentyInjection.Abstractions\Zamin.Extentions.DependentyInjection.Abstractions.csproj", "{AA5C8075-232C-42C0-A4D2-833124D26AFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{06F6D9C4-5B22-4CFF-B278-637005570A37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06F6D9C4-5B22-4CFF-B278-637005570A37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06F6D9C4-5B22-4CFF-B278-637005570A37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA5C8075-232C-42C0-A4D2-833124D26AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA5C8075-232C-42C0-A4D2-833124D26AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA5C8075-232C-42C0-A4D2-833124D26AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA5C8075-232C-42C0-A4D2-833124D26AFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
