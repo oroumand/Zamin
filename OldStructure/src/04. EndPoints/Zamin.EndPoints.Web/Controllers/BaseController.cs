@@ -105,7 +105,6 @@ namespace Zamin.EndPoints.Web.Controllers
             return BadRequest(result.Messages);
         }
 
-
         protected async Task<IActionResult> Query<TQuery, TQueryResult>(TQuery query) where TQuery : class, IQuery<TQueryResult>
         {
             var result = await QueryDispatcher.Execute<TQuery, TQueryResult>(query);
