@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extentions.Chaching.Abstractions", "Zamin.Extentions.Chaching.Abstractions\Zamin.Extentions.Chaching.Abstractions.csproj", "{0792FFC2-5C0F-456A-A060-878F11AF2360}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Chaching.Abstractions", "Zamin.Extensions.Chaching.Abstractions\Zamin.Extensions.Chaching.Abstractions.csproj", "{0792FFC2-5C0F-456A-A060-878F11AF2360}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extentions.MessageBus.Abstractions", "Zamin.Extentions.MessageBus.Abstractions\Zamin.Extentions.MessageBus.Abstractions.csproj", "{06F6D9C4-5B22-4CFF-B278-637005570A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.MessageBus.Abstractions", "Zamin.Extensions.MessageBus.Abstractions\Zamin.Extensions.MessageBus.Abstractions.csproj", "{06F6D9C4-5B22-4CFF-B278-637005570A37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extentions.DependentyInjection.Abstractions", "Zamin.Extentions.DependentyInjection.Abstractions\Zamin.Extentions.DependentyInjection.Abstractions.csproj", "{AA5C8075-232C-42C0-A4D2-833124D26AFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.DependentyInjection.Abstractions", "Zamin.Extensions.DependentyInjection.Abstractions\Zamin.Extensions.DependentyInjection.Abstractions.csproj", "{AA5C8075-232C-42C0-A4D2-833124D26AFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extentions.ObjectMappers.Abstractions", "Zamin.Extentions.ObjectMappers.Abstractions\Zamin.Extentions.ObjectMappers.Abstractions.csproj", "{A9029659-859F-4679-BDC7-767B80F81A7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.ObjectMappers.Abstractions", "Zamin.Extensions.ObjectMappers.Abstractions\Zamin.Extensions.ObjectMappers.Abstractions.csproj", "{A9029659-859F-4679-BDC7-767B80F81A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extentions.Serializers.Abstractions", "Zamin.Extentions.Serializers.Abstractions\Zamin.Extentions.Serializers.Abstractions.csproj", "{23FE027D-C430-46D2-8CA2-F63B5BF1D3EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Serializers.Abstractions", "Zamin.Extensions.Serializers.Abstractions\Zamin.Extensions.Serializers.Abstractions.csproj", "{23FE027D-C430-46D2-8CA2-F63B5BF1D3EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extentions.Translations.Abstractions", "Zamin.Extentions.Translations.Abstractions\Zamin.Extentions.Translations.Abstractions.csproj", "{E06A2949-6D57-4291-B015-71CEC04F810B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Translations.Abstractions", "Zamin.Extensions.Translations.Abstractions\Zamin.Extensions.Translations.Abstractions.csproj", "{E06A2949-6D57-4291-B015-71CEC04F810B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extentions.UsersManagement.Abstractions", "Zamin.Extentions.UsersManagement.Abstractions\Zamin.Extentions.UsersManagement.Abstractions.csproj", "{46F37087-0F20-4966-BB35-6626822B24FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.UsersManagement.Abstractions", "Zamin.Extensions.UsersManagement.Abstractions\Zamin.Extensions.UsersManagement.Abstractions.csproj", "{46F37087-0F20-4966-BB35-6626822B24FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
