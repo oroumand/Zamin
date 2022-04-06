@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Caching.DistributedSqlServerCache", "Zamin.Extensions.Caching.DistributedSqlServerCache\Zamin.Extensions.Caching.DistributedSqlServerCache.csproj", "{B3D921A6-0083-45D0-B221-39C7936254FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.Caching.DistributedSqlServerCache.Sample", "Zamin.Extensions.Caching.DistributedSqlServerCache.Sample\Zamin.Extensions.Caching.DistributedSqlServerCache.Sample.csproj", "{61E3E100-3C24-4107-9213-7BFDFF99A25A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3D921A6-0083-45D0-B221-39C7936254FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D921A6-0083-45D0-B221-39C7936254FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D921A6-0083-45D0-B221-39C7936254FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D921A6-0083-45D0-B221-39C7936254FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61E3E100-3C24-4107-9213-7BFDFF99A25A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61E3E100-3C24-4107-9213-7BFDFF99A25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61E3E100-3C24-4107-9213-7BFDFF99A25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61E3E100-3C24-4107-9213-7BFDFF99A25A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3152EDE-63C7-44A0-9C54-8724938DA3AD}
+	EndGlobalSection
+EndGlobal
