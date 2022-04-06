@@ -30,7 +30,8 @@ public class ParrotSqlRepository
         _selectCommand = string.Format(_selectCommand, configuration.SchemaName, configuration.TableName);
         _insertCommand = string.Format(_insertCommand, configuration.SchemaName, configuration.TableName);
 
-        _timer = new Timer(LoadLocalizationRecords, null, TimeSpan.Zero, TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts));
+        LoadLocalizationRecords(null);
+        _timer = new Timer(LoadLocalizationRecords, null, TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts), TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts));
     }
 
     private void LoadLocalizationRecords(object? state)
