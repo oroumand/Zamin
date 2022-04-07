@@ -8,19 +8,19 @@ namespace Zamin.Extensions.Serializers.EPPlus.Extensions;
 
 public static class ExcelExtentions
 {
-    public static byte[] ToExcelByteArray<T>(this List<T> list, ITranslator resourceManager, string sheetName = "Result")
+    public static byte[] ToExcelByteArray<T>(this List<T> list, ITranslator translator, string sheetName = "Result")
     {
-        using ExcelPackage pck = new ExcelPackage();
+        using ExcelPackage excelPackage = new ExcelPackage();
 
-        ExcelWorksheet ws = pck.Workbook.Worksheets.Add(sheetName);
+        ExcelWorksheet ws = excelPackage.Workbook.Worksheets.Add(sheetName);
 
         var t = typeof(T);
-        var Headings = t.GetProperties();
+        var headings = t.GetProperties();
 
-        for (int i = 0; i < Headings.Count(); i++)
+        for (int i = 0; i < headings.Count(); i++)
         {
 
-            ws.Cells[1, i + 1].Value = resourceManager[Headings[i].Name];
+            ws.Cells[1, i + 1].Value = translator[headings[i].Name];
         }
 
         //populate our Data
@@ -37,34 +37,44 @@ public static class ExcelExtentions
             rng.Style.Font.Color.SetColor(Color.White);
         }
 
-        var array = pck.GetAsByteArray();
+        var array = excelPackage.GetAsByteArray();
+
         return array;
     }
 
     public static DataTable ToDataTableFromExcel(this byte[] bytes)
     {
-        var pck = new ExcelPackage();
-        using (MemoryStream ms = new MemoryStream(bytes))
-            pck.Load(ms);
-        var ws = pck.Workbook.Worksheets.First();
-        DataTable tbl = new DataTable();
+        var excelPackage = new ExcelPackage();
+
+        using (MemoryStream memoryStream = new MemoryStream(bytes))
+            excelPackage.Load(memoryStream);
+
+        var ws = excelPackage.Workbook.Worksheets.First();
+
+        DataTable dataTable = new();
+
         bool hasHeader = true;
+
         foreach (var firstRowCell in ws.Cells[1, 1, 1, ws.Dimension.End.Column])
         {
-            tbl.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("Column {0}", firstRowCell.Start.Column));
+            dataTable.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("Column {0}", firstRowCell.Start.Column));
         }
+
         var startRow = hasHeader ? 2 : 1;
+
         for (var rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
         {
             var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
-            var row = tbl.NewRow();
+            var row = dataTable.NewRow();
             foreach (var cell in wsRow)
             {
                 row[cell.Start.Column - 1] = cell.Text;
             }
-            tbl.Rows.Add(row);
+            dataTable.Rows.Add(row);
         }
-        pck.Dispose();
-        return tbl;
+
+        excelPackage.Dispose();
+
+        return dataTable;
     }
 }

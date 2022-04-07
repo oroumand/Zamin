@@ -23,8 +23,8 @@ public class EPPlusExcelController : ControllerBase
             {
                 file.CopyTo(ms);
                 var fileBytes = ms.ToArray();
-                
-                return Ok(_excelSerializer.ExcelToList<Service>(fileBytes));
+
+                return Ok(_excelSerializer.ExcelToList<ExcelModel>(fileBytes));
             }
 
         return Ok();
@@ -33,12 +33,12 @@ public class EPPlusExcelController : ControllerBase
     [HttpGet("ToExcel")]
     public IActionResult ToExcel([FromQuery] List<string> model)
     {
-        if (model == null || !model.Any())
-            return Ok();
+        if (model == null || !model.Any()) return Ok();
 
-        var services = model.Select(s => new Service() { TITLE = s }).ToList();
+        var services = model.Select(s => new ExcelModel() { Title = s }).ToList();
+
         var result = _excelSerializer.ListToExcelByteArray(services);
+
         return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "services.xlsx");
     }
-
 }

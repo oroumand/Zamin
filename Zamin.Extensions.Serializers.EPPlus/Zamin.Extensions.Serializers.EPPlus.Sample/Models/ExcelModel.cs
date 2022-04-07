@@ -1,6 +1,6 @@
 ﻿namespace Zamin.Extensions.Serializers.EPPlus.Sample.Models;
 
-public class Service
+public class ExcelModel
 {
-    public string TITLE { get; set; }
+    public string Title { get; set; }
 }
