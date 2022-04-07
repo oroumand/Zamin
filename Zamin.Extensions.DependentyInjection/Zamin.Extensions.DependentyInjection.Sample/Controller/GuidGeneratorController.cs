@@ -5,11 +5,11 @@ namespace Zamin.Extensions.DependentyInjection.Sample.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class NumbersController : ControllerBase
+public class GuidGeneratorController : ControllerBase
 {
     private readonly IGetGuidSingletoneService _getRandomNumberSingletoneService;
 
-    public NumbersController(IGetGuidSingletoneService getRandomNumberSingletoneService)
+    public GuidGeneratorController(IGetGuidSingletoneService getRandomNumberSingletoneService)
     {
         _getRandomNumberSingletoneService = getRandomNumberSingletoneService;
     }
