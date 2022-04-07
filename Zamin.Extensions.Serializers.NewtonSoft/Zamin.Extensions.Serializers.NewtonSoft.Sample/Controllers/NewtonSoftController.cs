@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Zamin.Extensions.Serializers.NewtonSoft.Sample.Models;
 using Zamin.Extentions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.Serializers.NewtonSoft.Sample.Controllers;
@@ -15,10 +16,8 @@ public class NewtonSoftController : ControllerBase
     }
 
     [HttpGet("Serilize")]
-    public IActionResult Serilize([FromQuery] Person person)
-            => Ok(_jsonSerializer.Serilize(person));
+    public IActionResult Serilize([FromQuery] Person person) => Ok(_jsonSerializer.Serilize(person));
 
     [HttpGet("Deserialize")]
-    public IActionResult Deserialize([FromQuery] string input)
-        => Ok(_jsonSerializer.Deserialize<Person>(input));
+    public IActionResult Deserialize([FromQuery] string input) => Ok(_jsonSerializer.Deserialize<Person>(input));
 }

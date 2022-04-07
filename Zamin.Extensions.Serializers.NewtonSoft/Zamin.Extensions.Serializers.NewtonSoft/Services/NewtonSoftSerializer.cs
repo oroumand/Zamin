@@ -19,16 +19,14 @@ public class NewtonSoftSerializer : IJsonSerializer, IDisposable
     {
         _logger.LogTrace("Newton Soft Serializer Deserialize with name {input}", input);
 
-        return string.IsNullOrWhiteSpace(input) ?
-            default : JsonConvert.DeserializeObject<TOutput>(input);
+        return string.IsNullOrWhiteSpace(input) ? default : JsonConvert.DeserializeObject<TOutput>(input);
     }
 
     public object Deserialize(string input, Type type)
     {
         _logger.LogTrace("Newton Soft Serializer Deserialize with name {input} and type {type}", input, type);
 
-        return string.IsNullOrWhiteSpace(input) ?
-            default : JsonConvert.DeserializeObject(input, type);
+        return string.IsNullOrWhiteSpace(input) ? default : JsonConvert.DeserializeObject(input, type);
     }
 
     public string Serilize<TInput>(TInput input)

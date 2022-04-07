@@ -7,8 +7,5 @@ namespace Zamin.Extensions.Serializers.NewtonSoft.Extensions.DependencyInjection
 public static class NewtonSoftSerializerServiceCollectionExtensions
 {
     public static IServiceCollection AddNewtonSoftSerializer(this IServiceCollection services)
-    {
-        services.AddSingleton<IJsonSerializer, NewtonSoftSerializer>();
-        return services;
-    }
+        => services.AddSingleton<IJsonSerializer, NewtonSoftSerializer>();
 }
