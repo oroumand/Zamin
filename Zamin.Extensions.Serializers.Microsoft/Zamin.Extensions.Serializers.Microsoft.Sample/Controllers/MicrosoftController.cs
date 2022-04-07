@@ -16,10 +16,8 @@ public class MicrosoftController : ControllerBase
     }
 
     [HttpGet("Serilize")]
-    public IActionResult Serilize([FromQuery] Person person)
-            => Ok(_jsonSerializer.Serilize(person));
+    public IActionResult Serilize([FromQuery] Person person) => Ok(_jsonSerializer.Serilize(person));
 
     [HttpGet("Deserialize")]
-    public IActionResult Deserialize([FromQuery] string input)
-        => Ok(_jsonSerializer.Deserialize<Person>(input));
+    public IActionResult Deserialize([FromQuery] string input) => Ok(_jsonSerializer.Deserialize<Person>(input));
 }

@@ -37,7 +37,6 @@ public class MicrosoftSerializer : IJsonSerializer, IDisposable
         return input == null ? string.Empty : JsonSerializer.Serialize(input, new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true
         });
     }
 
