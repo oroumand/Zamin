@@ -22,19 +22,7 @@ public static class AutoMapperServiceCollectionExtensions
 
         var assemblies = GetAssemblies(option.AssmblyNamesForLoadProfiles);
 
-        var profileTypes = assemblies.SelectMany(x => x.DefinedTypes)
-                                     .Where(type => typeof(Profile).IsAssignableFrom(type))
-                                     .ToList();
-
-        var profiles = new List<Profile>();
-
-        foreach (var profileType in profileTypes)
-        {
-            if (Activator.CreateInstance(profileType) is Profile profile)
-                profiles.Add(profile);
-        }
-
-        return services.AddSingleton<IMapperAdapter>(new AutoMapperAdapter(profiles.ToArray()));
+        return services.AddAutoMapper(assemblies).AddSingleton<IMapperAdapter, AutoMapperAdapter>();
     }
 
     public static IServiceCollection AddAutoMapperProfiles(this IServiceCollection services, Action<AutoMapperOption> setupAction)
@@ -44,19 +32,7 @@ public static class AutoMapperServiceCollectionExtensions
 
         var assemblies = GetAssemblies(option.AssmblyNamesForLoadProfiles);
 
-        var profileTypes = assemblies.SelectMany(x => x.DefinedTypes)
-                                     .Where(type => typeof(Profile).IsAssignableFrom(type))
-                                     .ToList();
-
-        var profiles = new List<Profile>();
-
-        foreach (var profileType in profileTypes)
-        {
-            if (Activator.CreateInstance(profileType) is Profile profile)
-                profiles.Add(profile);
-        }
-
-        return services.AddSingleton<IMapperAdapter>(new AutoMapperAdapter(profiles.ToArray()));
+        return services.AddAutoMapper(assemblies).AddSingleton<IMapperAdapter, AutoMapperAdapter>();
     }
 
     private static List<Assembly> GetAssemblies(string assmblyNames)
