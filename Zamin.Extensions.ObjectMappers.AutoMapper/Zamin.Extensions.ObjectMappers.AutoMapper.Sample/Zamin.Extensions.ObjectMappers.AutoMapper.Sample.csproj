@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>00220fbf-072a-496a-9d63-ab6346c6bf6b</UserSecretsId>
+    <UserSecretsId>8a822127-1a1a-471e-8654-82f2988f099b</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Zamin.Extentions.ObjectMappers.AutoMapper\Zamin.Extentions.ObjectMappers.AutoMapper.csproj" />
+    <ProjectReference Include="..\Zamin.Extensions.ObjectMappers.AutoMapper\Zamin.Extensions.ObjectMappers.AutoMapper.csproj" />
   </ItemGroup>
 
 </Project>

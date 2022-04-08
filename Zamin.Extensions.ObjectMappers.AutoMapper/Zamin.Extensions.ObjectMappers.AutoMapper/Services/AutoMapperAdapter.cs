@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using Zamin.Extentions.ObjectMappers.Abstractions;
 
-namespace Zamin.Extentions.ObjectMappers.AutoMapper.Services;
+namespace Zamin.Extensions.ObjectMappers.AutoMapper.Services;
 
 public class AutoMapperAdapter : IMapperAdapter
 {

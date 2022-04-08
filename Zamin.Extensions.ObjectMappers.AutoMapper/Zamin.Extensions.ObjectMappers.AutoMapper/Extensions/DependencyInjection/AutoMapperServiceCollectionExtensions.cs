@@ -1,13 +1,12 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using System.Reflection;
+using Zamin.Extensions.ObjectMappers.AutoMapper.Options;
+using Zamin.Extensions.ObjectMappers.AutoMapper.Services;
 using Zamin.Extentions.ObjectMappers.Abstractions;
-using Zamin.Extentions.ObjectMappers.AutoMapper.Options;
-using Zamin.Extentions.ObjectMappers.AutoMapper.Services;
 
-namespace Zamin.Extentions.ObjectMappers.AutoMapper.Extensions.DependencyInjection;
+namespace Zamin.Extensions.ObjectMappers.AutoMapper.Extensions.DependencyInjection;
 
 public static class AutoMapperServiceCollectionExtensions
 {

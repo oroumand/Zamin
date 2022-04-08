@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extentions.ObjectMappers.AutoMapper", "Zamin.Extentions.ObjectMappers.AutoMapper\Zamin.Extentions.ObjectMappers.AutoMapper.csproj", "{F53BDD60-5B9C-4439-99A0-D50B1C46173F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.ObjectMappers.AutoMapper", "Zamin.Extensions.ObjectMappers.AutoMapper\Zamin.Extensions.ObjectMappers.AutoMapper.csproj", "{F53BDD60-5B9C-4439-99A0-D50B1C46173F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extentions.ObjectMappers.AutoMapper.Sample", "Zamin.Extentions.ObjectMappers.AutoMapper.Sample\Zamin.Extentions.ObjectMappers.AutoMapper.Sample.csproj", "{BCB564A8-A026-4DEF-936E-3BAB0DACBA93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.ObjectMappers.AutoMapper.Sample", "Zamin.Extensions.ObjectMappers.AutoMapper.Sample\Zamin.Extensions.ObjectMappers.AutoMapper.Sample.csproj", "{512087D8-E1EE-4461-A1CE-1FFA00328483}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{F53BDD60-5B9C-4439-99A0-D50B1C46173F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F53BDD60-5B9C-4439-99A0-D50B1C46173F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F53BDD60-5B9C-4439-99A0-D50B1C46173F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BCB564A8-A026-4DEF-936E-3BAB0DACBA93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCB564A8-A026-4DEF-936E-3BAB0DACBA93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCB564A8-A026-4DEF-936E-3BAB0DACBA93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCB564A8-A026-4DEF-936E-3BAB0DACBA93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512087D8-E1EE-4461-A1CE-1FFA00328483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512087D8-E1EE-4461-A1CE-1FFA00328483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512087D8-E1EE-4461-A1CE-1FFA00328483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512087D8-E1EE-4461-A1CE-1FFA00328483}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

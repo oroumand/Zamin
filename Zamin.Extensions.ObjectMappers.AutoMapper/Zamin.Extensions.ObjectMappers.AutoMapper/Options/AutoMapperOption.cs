@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.ObjectMappers.AutoMapper.Options;
+﻿namespace Zamin.Extensions.ObjectMappers.AutoMapper.Options;
 
 public class AutoMapperOption
 {

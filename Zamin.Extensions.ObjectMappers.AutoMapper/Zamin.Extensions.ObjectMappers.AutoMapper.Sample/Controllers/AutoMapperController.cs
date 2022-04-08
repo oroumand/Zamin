@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Zamin.Extensions.ObjectMappers.AutoMapper.Sample.Models;
 using Zamin.Extentions.ObjectMappers.Abstractions;
-using Zamin.Extentions.ObjectMappers.AutoMapper.Sample.Models;
 
-namespace Zamin.Extentions.ObjectMappers.AutoMapper.Sample.Controllers
+namespace Zamin.Extensions.ObjectMappers.AutoMapper.Sample.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -15,7 +14,7 @@ namespace Zamin.Extentions.ObjectMappers.AutoMapper.Sample.Controllers
             _mapperAdapter = mapperAdapter;
         }
         [HttpGet("MapPersonToStudent")]
-        public IActionResult MapPersonToStudent([FromQuery]Person model)
+        public IActionResult MapPersonToStudent([FromQuery] Person model)
         {
             var student = _mapperAdapter.Map<Person, Student>(model);
             return Ok(student);
