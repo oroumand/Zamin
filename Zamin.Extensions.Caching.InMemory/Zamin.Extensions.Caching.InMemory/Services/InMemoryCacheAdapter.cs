@@ -19,36 +19,36 @@ public class InMemoryCacheAdapter : ICacheAdapter
 
     public void Add<TInput>(string key, TInput obj, DateTime? absoluteExpiration, TimeSpan? slidingExpiration)
     {
-        _logger.LogInformation("InMemoryCache Adapter Cache {obj} with key : {key} " +
-                               ", with data : {data} " +
-                               ", with absoluteExpiration : {absoluteExpiration} " +
-                               ", with slidingExpiration : {slidingExpiration}",
-                               typeof(TInput),
-                               key,
-                               JsonSerializer.Serialize(obj),
-                               absoluteExpiration.ToString(),
-                               slidingExpiration.ToString());
+        _logger.LogTrace("InMemoryCache Adapter Cache {obj} with key : {key} " +
+                         ", with data : {data} " +
+                         ", with absoluteExpiration : {absoluteExpiration} " +
+                         ", with slidingExpiration : {slidingExpiration}",
+                         typeof(TInput),
+                         key,
+                         JsonSerializer.Serialize(obj),
+                         absoluteExpiration.ToString(),
+                         slidingExpiration.ToString());
 
         _memoryCache.Set(key, obj);
     }
 
     public TOutput Get<TOutput>(string key)
     {
-        _logger.LogInformation("InMemoryCache Adapter Try Get Cache with key : {key}" , key);
+        _logger.LogTrace("InMemoryCache Adapter Try Get Cache with key : {key}" , key);
 
         var result = _memoryCache.TryGetValue(key, out TOutput resultObject);
 
         if (result)
-            _logger.LogInformation("InMemoryCache Adapter Successful Get Cache with key : {key}", key);
+            _logger.LogTrace("InMemoryCache Adapter Successful Get Cache with key : {key}", key);
         else
-            _logger.LogInformation("InMemoryCache Adapter Failed Get Cache with key : {key}", key);
+            _logger.LogTrace("InMemoryCache Adapter Failed Get Cache with key : {key}", key);
 
         return resultObject;
     }
 
     public void RemoveCache(string key)
     {
-        _logger.LogInformation("InMemoryCache Adapter Remove Cache with key : {key}", key);
+        _logger.LogTrace("InMemoryCache Adapter Remove Cache with key : {key}", key);
 
         _memoryCache.Remove(key);
     }
