@@ -17,10 +17,4 @@
     <ProjectReference Include="..\Zamin.Extensions.DependentyInjection\Zamin.Extensions.DependentyInjection.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Zamin.Extensions.DependentyInjection.Abstractions">
-      <HintPath>..\..\Zamin.Extensions.Abstractions\Zamin.Extensions.DependentyInjection.Abstractions\bin\Debug\net6.0\Zamin.Extensions.DependentyInjection.Abstractions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
