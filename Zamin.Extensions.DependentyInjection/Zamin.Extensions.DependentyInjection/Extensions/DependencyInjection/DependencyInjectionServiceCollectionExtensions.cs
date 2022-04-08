@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using System.Reflection;
-using Zamin.Extensions.DependentyInjection.Extensions.Options;
+using Zamin.Extensions.DependentyInjection.Options;
 using Zamin.Extentions.DependentyInjection.Abstractions;
 
 namespace Zamin.Extensions.DependentyInjection.Extensions.DependencyInjection;
@@ -33,7 +33,7 @@ public static class DependencyInjectionServiceCollectionExtensions
             .AddWithScopeLifetime(option.AssmblyNamesForLoad)
             .AddWithSingletoneLifetime(option.AssmblyNamesForLoad)
             .Configure(setupAction);
-        
+
         return services;
     }
 
