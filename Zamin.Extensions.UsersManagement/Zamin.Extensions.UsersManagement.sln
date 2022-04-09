@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.UsersManagement", "Zamin.Extensions.UsersManagement\Zamin.Extensions.UsersManagement.csproj", "{81569A0B-1669-4B99-ABDE-42F016D90E74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.UsersManagement.Sample", "Zamin.Extensions.UsersManagement.Sample\Zamin.Extensions.UsersManagement.Sample.csproj", "{27F8CD35-7383-4F8C-AC86-C7AD4C635DB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81569A0B-1669-4B99-ABDE-42F016D90E74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81569A0B-1669-4B99-ABDE-42F016D90E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81569A0B-1669-4B99-ABDE-42F016D90E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81569A0B-1669-4B99-ABDE-42F016D90E74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27F8CD35-7383-4F8C-AC86-C7AD4C635DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27F8CD35-7383-4F8C-AC86-C7AD4C635DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27F8CD35-7383-4F8C-AC86-C7AD4C635DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27F8CD35-7383-4F8C-AC86-C7AD4C635DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8A2116B-B3C2-4982-8716-77360B9C0692}
+	EndGlobalSection
+EndGlobal
