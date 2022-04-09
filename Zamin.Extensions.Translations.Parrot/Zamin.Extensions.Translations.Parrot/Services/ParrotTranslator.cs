@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+using Zamin.Extensions.Translations.Parrot.Database;
 using Zamin.Extensions.Translations.Parrot.Options;
 using Zamin.Extentions.Translations.Abstractions;
 
