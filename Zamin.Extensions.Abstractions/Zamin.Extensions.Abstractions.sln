@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Chaching.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.MessageBus.Abstractions", "Zamin.Extensions.MessageBus.Abstractions\Zamin.Extensions.MessageBus.Abstractions.csproj", "{06F6D9C4-5B22-4CFF-B278-637005570A37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.DependentyInjection.Abstractions", "Zamin.Extensions.DependentyInjection.Abstractions\Zamin.Extensions.DependentyInjection.Abstractions.csproj", "{AA5C8075-232C-42C0-A4D2-833124D26AFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.DependencyInjection.Abstractions", "Zamin.Extensions.DependentyInjection.Abstractions\Zamin.Extensions.DependencyInjection.Abstractions.csproj", "{AA5C8075-232C-42C0-A4D2-833124D26AFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.ObjectMappers.Abstractions", "Zamin.Extensions.ObjectMappers.Abstractions\Zamin.Extensions.ObjectMappers.Abstractions.csproj", "{A9029659-859F-4679-BDC7-767B80F81A7F}"
 EndProject

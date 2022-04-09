@@ -14,10 +14,10 @@ builder.Services.AddSwaggerGen();
 /// </summary>
 builder.Services.AddParrotTranslator(c =>
 {
-    c.ConnectionString = "Server=.; Initial Catalog=MyTranslatorDb; User Id=sa; Password=1qaz!QAZ";
+    c.ConnectionString = "Server=.; Initial Catalog=LocationMicroCommandDb; User Id=sa; Password=1qaz!QAZ";
     c.AutoCreateSqlTable = true;
     c.SchemaName = "dbo";
-    c.TableName = "Motarjem";
+    c.TableName = "ParrotTranslations";
     c.ReloadDataIntervalInMinuts = 1;
 });
 var app = builder.Build();
