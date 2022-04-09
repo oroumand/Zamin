@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.Serializers.NewtonSoft", "Zamin.Extensions.Serializers.NewtonSoft\Zamin.Extensions.Serializers.NewtonSoft.csproj", "{A7664D01-7B66-45F8-841B-05D6818560A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.Serializers.NewtonSoft.Sample", "Zamin.Extensions.Serializers.NewtonSoft.Sample\Zamin.Extensions.Serializers.NewtonSoft.Sample.csproj", "{757AF59D-1BF8-4934-AD71-3B19FC234E1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7664D01-7B66-45F8-841B-05D6818560A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7664D01-7B66-45F8-841B-05D6818560A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7664D01-7B66-45F8-841B-05D6818560A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7664D01-7B66-45F8-841B-05D6818560A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{757AF59D-1BF8-4934-AD71-3B19FC234E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{757AF59D-1BF8-4934-AD71-3B19FC234E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{757AF59D-1BF8-4934-AD71-3B19FC234E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{757AF59D-1BF8-4934-AD71-3B19FC234E1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDB37FF5-540D-4104-BC65-D6B6D259A1BD}
+	EndGlobalSection
+EndGlobal
