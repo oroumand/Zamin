@@ -1,3 +1,4 @@
+﻿using Zamin.Extensions.Serializers.EPPlus.Extensions.DependencyInjection;
 using Zamin.Extensions.Translations.Parrot.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,17 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-/// <summary>
-/// برای فعال سازی مترجم باید تنظیمات مرتبط با دیتابیس و محدوده زمانی که داده‌ها از دیتابیس بارگذاری مجدد می‌شود را تعیین کنیم.
-/// </summary>
 builder.Services.AddParrotTranslator(c =>
 {
-    c.ConnectionString = "Server=; Initial Catalog=; User Id=; Password=";
+    c.ConnectionString = "Server =; Database= ;User Id = sa;Password=; MultipleActiveResultSets=true";
     c.AutoCreateSqlTable = true;
     c.SchemaName = "dbo";
     c.TableName = "ParrotTranslations";
     c.ReloadDataIntervalInMinuts = 1;
 });
+builder.Services.AddEPPlusExcelSerializer();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
