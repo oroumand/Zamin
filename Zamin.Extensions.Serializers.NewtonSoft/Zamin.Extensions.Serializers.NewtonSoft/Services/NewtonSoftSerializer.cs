@@ -29,7 +29,7 @@ public class NewtonSoftSerializer : IJsonSerializer, IDisposable
         return string.IsNullOrWhiteSpace(input) ? default : JsonConvert.DeserializeObject(input, type);
     }
 
-    public string Serilize<TInput>(TInput input)
+    public string Serialize<TInput>(TInput input)
     {
         _logger.LogTrace("Newton Soft Serializer Serilize with name {input}", input);
 

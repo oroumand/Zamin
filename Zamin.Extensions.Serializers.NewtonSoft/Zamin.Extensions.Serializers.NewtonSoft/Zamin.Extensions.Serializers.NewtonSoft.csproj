@@ -14,6 +14,6 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="1.0.0-beta.1" />
+		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="1.0.0-beta.2" />
 	</ItemGroup>
 </Project>

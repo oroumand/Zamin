@@ -30,7 +30,7 @@ public class MicrosoftSerializer : IJsonSerializer, IDisposable
             default : JsonSerializer.Deserialize(input, type, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
 
-    public string Serilize<TInput>(TInput input)
+    public string Serialize<TInput>(TInput input)
     {
         _logger.LogTrace("Microsoft Serializer Serilize with name {input}", input);
 

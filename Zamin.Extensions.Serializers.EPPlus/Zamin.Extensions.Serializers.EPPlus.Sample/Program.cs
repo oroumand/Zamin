@@ -1,4 +1,4 @@
-using Zamin.Extensions.Serializers.EPPlus.Extensions.DependencyInjection;
+﻿using Zamin.Extensions.Serializers.EPPlus.Extensions.DependencyInjection;
 using Zamin.Extensions.Translations.Parrot.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddParrotTranslator(c =>
 {
-    c.ConnectionString = "Server =.; Database=DataDb ;User Id = sa;Password=qwerty; MultipleActiveResultSets=true";
+    c.ConnectionString = "Server =; Database= ;User Id = sa;Password=; MultipleActiveResultSets=true";
     c.AutoCreateSqlTable = true;
     c.SchemaName = "dbo";
     c.TableName = "ParrotTranslations";

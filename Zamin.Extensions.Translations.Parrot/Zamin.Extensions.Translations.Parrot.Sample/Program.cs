@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 /// </summary>
 builder.Services.AddParrotTranslator(c =>
 {
-    c.ConnectionString = "Server=.; Initial Catalog=LocationMicroCommandDb; User Id=sa; Password=1qaz!QAZ";
+    c.ConnectionString = "Server=; Initial Catalog=; User Id=; Password=";
     c.AutoCreateSqlTable = true;
     c.SchemaName = "dbo";
     c.TableName = "ParrotTranslations";
