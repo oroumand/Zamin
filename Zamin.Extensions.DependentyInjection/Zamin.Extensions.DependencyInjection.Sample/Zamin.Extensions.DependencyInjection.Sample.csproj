@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>311351ba-24f2-4d05-8582-f366921c8e0f</UserSecretsId>
+    <UserSecretsId>e2ad8ac8-e7fd-42b0-82e1-0f953db88f04</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Zamin.Extensions.DependentyInjection\Zamin.Extensions.DependentyInjection.csproj" />
+    <ProjectReference Include="..\Zamin.Extensions.DependencyInjection\Zamin.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>

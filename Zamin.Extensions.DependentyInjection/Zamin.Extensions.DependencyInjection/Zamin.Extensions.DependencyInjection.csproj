@@ -15,7 +15,7 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
 		<PackageReference Include="Scrutor" Version="3.3.0" />
-		<PackageReference Include="Zamin.Extensions.DependentyInjection.Abstractions" Version="1.0.0-beta.1" />
+		<PackageReference Include="Zamin.Extensions.DependencyInjection.Abstractions" Version="1.0.0-beta.2" />
 	</ItemGroup>
 
 </Project>

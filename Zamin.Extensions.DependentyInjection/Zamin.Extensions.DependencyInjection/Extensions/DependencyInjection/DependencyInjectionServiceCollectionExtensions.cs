@@ -2,10 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using System.Reflection;
-using Zamin.Extensions.DependentyInjection.Options;
-using Zamin.Extentions.DependentyInjection.Abstractions;
+using Zamin.Extensions.DependencyInjection.Abstractions;
+using Zamin.Extensions.DependencyInjection.Options;
 
-namespace Zamin.Extensions.DependentyInjection.Extensions.DependencyInjection;
+namespace Zamin.Extensions.DependencyInjection.Extensions.DependencyInjection;
 
 public static class DependencyInjectionServiceCollectionExtensions
 {

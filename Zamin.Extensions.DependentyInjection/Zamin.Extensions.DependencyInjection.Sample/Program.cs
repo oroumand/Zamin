@@ -1,4 +1,4 @@
-using Zamin.Extensions.DependentyInjection.Extensions.DependencyInjection;
+﻿using Zamin.Extensions.DependencyInjection.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

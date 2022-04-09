@@ -4,19 +4,19 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:10658",
-      "sslPort": 44314
+      "applicationUrl": "http://localhost:5000",
+      "sslPort": 5001
     }
   },
   "profiles": {
-    "Zamin.Extensions.DependentyInjection.Sample": {
+    "Zamin.Extensions.DependencyInjection.Sample": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7044;http://localhost:5044",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "dotnetRunMessages": true
     },
     "IIS Express": {

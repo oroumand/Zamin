@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extensions.DependentyInjection.Sample.Services;
+﻿namespace Zamin.Extensions.DependencyInjection.Sample.Services;
 
 public class GetGuidSingletoneService : IGetGuidSingletoneService
 {
