@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Zamin.Extentions.Translations.Abstractions;
 
 namespace Zamin.Extensions.Translations.Parrot.Sample.Controllers;
@@ -18,6 +17,5 @@ public class ParrotController : ControllerBase
     public IActionResult Get(string key)
     {
         return Ok(_translator.GetString(key));
-
     }
 }
