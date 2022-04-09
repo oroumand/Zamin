@@ -13,7 +13,9 @@ public class DistributedSqlCacheAdapter : ICacheAdapter
     private readonly IJsonSerializer _serializer;
     private readonly ILogger<DistributedSqlCacheAdapter> _logger;
 
-    public DistributedSqlCacheAdapter(IDistributedCache cache, IJsonSerializer serializer, ILogger<DistributedSqlCacheAdapter> logger)
+    public DistributedSqlCacheAdapter(IDistributedCache cache,
+                                      IJsonSerializer serializer,
+                                      ILogger<DistributedSqlCacheAdapter> logger)
     {
         _cache = cache;
         _serializer = serializer;
@@ -30,7 +32,7 @@ public class DistributedSqlCacheAdapter : ICacheAdapter
                          ", with slidingExpiration : {slidingExpiration}",
                          typeof(TInput),
                          key,
-                         _serializer.Serilize(obj),
+                         _serializer.Serialize(obj),
                          absoluteExpiration.ToString(),
                          slidingExpiration.ToString());
 
@@ -40,7 +42,7 @@ public class DistributedSqlCacheAdapter : ICacheAdapter
             SlidingExpiration = slidingExpiration
         };
 
-        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serilize(obj)),option);
+        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serialize(obj)),option);
     }
 
     public TOutput Get<TOutput>(string key)
@@ -49,7 +51,9 @@ public class DistributedSqlCacheAdapter : ICacheAdapter
 
         if (!string.IsNullOrWhiteSpace(result))
         {
-            _logger.LogTrace("DistributedCache Sql Adapter Successful Get Cache with key : {key}", key);
+            _logger.LogTrace("DistributedCache Sql Adapter Successful Get Cache with key : {key} and data : {data}",
+                             key,
+                             _serializer.Serialize(result));
 
             return _serializer.Deserialize<TOutput>(result);
         }

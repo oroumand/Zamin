@@ -1,18 +1,22 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
 using Zamin.Extentions.Chaching.Abstractions;
+using Zamin.Extentions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.Caching.InMemory.Services;
 
 public class InMemoryCacheAdapter : ICacheAdapter
 {
     private readonly IMemoryCache _memoryCache;
+    private readonly IJsonSerializer _jsonSerializer;
     private readonly ILogger<InMemoryCacheAdapter> _logger;
 
-    public InMemoryCacheAdapter(IMemoryCache memoryCache, ILogger<InMemoryCacheAdapter> logger)
+    public InMemoryCacheAdapter(IMemoryCache memoryCache,
+                                IJsonSerializer jsonSerializer,
+                                ILogger<InMemoryCacheAdapter> logger)
     {
         _memoryCache = memoryCache;
+        _jsonSerializer = jsonSerializer;
         _logger = logger;
         _logger.LogInformation("InMemoryCache Adapter Start working");
     }
@@ -25,7 +29,7 @@ public class InMemoryCacheAdapter : ICacheAdapter
                          ", with slidingExpiration : {slidingExpiration}",
                          typeof(TInput),
                          key,
-                         JsonSerializer.Serialize(obj),
+                         _jsonSerializer.Serialize(obj),
                          absoluteExpiration.ToString(),
                          slidingExpiration.ToString());
 
@@ -34,12 +38,14 @@ public class InMemoryCacheAdapter : ICacheAdapter
 
     public TOutput Get<TOutput>(string key)
     {
-        _logger.LogTrace("InMemoryCache Adapter Try Get Cache with key : {key}" , key);
+        _logger.LogTrace("InMemoryCache Adapter Try Get Cache with key : {key}", key);
 
         var result = _memoryCache.TryGetValue(key, out TOutput resultObject);
 
         if (result)
-            _logger.LogTrace("InMemoryCache Adapter Successful Get Cache with key : {key}", key);
+            _logger.LogTrace("InMemoryCache Adapter Successful Get Cache with key : {key} and data : {data}",
+                             key,
+                             _jsonSerializer.Serialize(resultObject));
         else
             _logger.LogTrace("InMemoryCache Adapter Failed Get Cache with key : {key}", key);
 
