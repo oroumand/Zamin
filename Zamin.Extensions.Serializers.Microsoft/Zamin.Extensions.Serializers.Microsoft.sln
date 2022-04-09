@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.Serializers.Microsoft", "Zamin.Extensions.Serializers.Microsoft\Zamin.Extensions.Serializers.Microsoft.csproj", "{EB5C08D9-24AF-4854-BC08-148CD7E63B51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.Serializers.Microsoft.Sample", "Zamin.Extensions.Serializers.Microsoft.Sample\Zamin.Extensions.Serializers.Microsoft.Sample.csproj", "{BC13AA35-5E48-4CA3-81FA-BE41DDF31272}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB5C08D9-24AF-4854-BC08-148CD7E63B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB5C08D9-24AF-4854-BC08-148CD7E63B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB5C08D9-24AF-4854-BC08-148CD7E63B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB5C08D9-24AF-4854-BC08-148CD7E63B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC13AA35-5E48-4CA3-81FA-BE41DDF31272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC13AA35-5E48-4CA3-81FA-BE41DDF31272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC13AA35-5E48-4CA3-81FA-BE41DDF31272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC13AA35-5E48-4CA3-81FA-BE41DDF31272}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D0B0F63-A948-4636-9F5C-E71BAA749B5B}
+	EndGlobalSection
+EndGlobal
