@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <div class="align-items-start d-flex flex-column">
+        <span>First Name: @_userInfoService.GetFirstName()</span>
+        <span>Last Name: @_userInfoService.GetLastName()</span>
+        <span>Username: @_userInfoService.GetUsername()</span>
+        <span>Id: @_userInfoService.UserId()</span>
+        <span>Ip: @_userInfoService.GetUserIp()</span>
+        <span>UserAgent: @_userInfoService.GetUserAgent()</span>
+    </div>
+</div>

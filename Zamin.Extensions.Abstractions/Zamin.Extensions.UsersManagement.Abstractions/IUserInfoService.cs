@@ -1,4 +1,5 @@
 ﻿namespace Zamin.Extentions.UsersManagement.Abstractions;
+
 public interface IUserInfoService
 {
     string GetUserAgent();

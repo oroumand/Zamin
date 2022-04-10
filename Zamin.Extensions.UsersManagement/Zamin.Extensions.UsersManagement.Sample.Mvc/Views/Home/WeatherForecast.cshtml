@@ -1,0 +1,40 @@
+﻿@model List<WeatherForecast>
+
+@{
+    ViewData["Title"] = "Weather Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Weather</h1>
+    <div>
+        @if(Model != null && Model.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>TemperatureC</th>
+                        <th>TemperatureF</th>
+                        <th>Summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Date</td>
+                            <td>@item.TemperatureC</td>
+                            <td>@item.TemperatureF</td>
+                            <td>@item.Summary</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <span>something is wrong!!!</span>            
+        }
+    </div>
+      
+</div>
