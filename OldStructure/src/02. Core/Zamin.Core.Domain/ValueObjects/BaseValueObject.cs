@@ -10,9 +10,24 @@ public abstract class BaseValueObject<TValueObject> : IEquatable<TValueObject>
 {
     public bool Equals(TValueObject other) => this == other;
 
-    public override bool Equals(object obj) => (obj is TValueObject otherObject) && ObjectIsEqual(otherObject);
+    //public override bool Equals(object obj) => (obj is TValueObject otherObject) && ObjectIsEqual(otherObject);
 
-    public override int GetHashCode() => ObjectGetHashCode();
+    public override bool Equals(object obj)
+    {
+        if(obj is TValueObject otherObject)
+        {
+            return GetEqualityComponents().SequenceEqual(otherObject.GetEqualityComponents());
+        }
+        return false;
+    }
+    public override int GetHashCode()
+    {
+        return GetEqualityComponents()
+            .Select(x => x != null ? x.GetHashCode() : 0)
+            .Aggregate((x, y) => x ^ y);
+    }
+    protected abstract IEnumerable<object> GetEqualityComponents();
+    //public override int GetHashCode() => ObjectGetHashCode();
     public abstract bool ObjectIsEqual(TValueObject otherObject);
     public abstract int ObjectGetHashCode();
 
