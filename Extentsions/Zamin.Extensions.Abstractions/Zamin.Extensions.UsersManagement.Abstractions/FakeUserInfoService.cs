@@ -37,8 +37,8 @@ public class FakeUserInfoService : IUserInfoService
         return true;
     }
 
-    public int UserId()
+    public string UserId()
     {
-        return 1;
+        return "1";
     }
 }

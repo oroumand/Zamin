@@ -2,9 +2,19 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<Version>6.3.0-beta.1</Version>
 		<Nullable>enable</Nullable>
+		<Authors>Alireza Oroumand</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="NewFolder\**" />
+	  <EmbeddedResource Remove="NewFolder\**" />
+	  <None Remove="NewFolder\**" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.0.123" />
@@ -15,10 +25,6 @@
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
 		<PackageReference Include="Zamin.Extensions.Chaching.Abstractions" Version="1.0.0-beta.1" />
 		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="1.0.0-beta.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="NewFolder\" />
 	</ItemGroup>
 
 </Project>
