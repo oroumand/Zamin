@@ -2,7 +2,7 @@
 using Zamin.Extensions.Serializers.EPPlus.Services;
 using Zamin.Extentions.Serializers.Abstractions;
 
-namespace Zamin.Extensions.Serializers.EPPlus.Extensions.DependencyInjection;
+namespace Zamin.Extensions.DependencyInjection;
 
 public static class EPPlusExcelSerializerServiceCollectionExtensions
 {

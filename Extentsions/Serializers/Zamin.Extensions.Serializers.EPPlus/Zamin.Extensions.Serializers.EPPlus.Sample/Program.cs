@@ -1,5 +1,4 @@
-﻿using Zamin.Extensions.Serializers.EPPlus.Extensions.DependencyInjection;
-using Zamin.Extensions.Translations.Parrot.Extensions.DependencyInjection;
+﻿using Zamin.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
