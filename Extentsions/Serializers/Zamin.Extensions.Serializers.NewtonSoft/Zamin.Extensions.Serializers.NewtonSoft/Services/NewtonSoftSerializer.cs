@@ -36,8 +36,5 @@ public class NewtonSoftSerializer : IJsonSerializer, IDisposable
         return input == null ? string.Empty : JsonConvert.SerializeObject(input, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
     }
 
-    public void Dispose()
-    {
-        _logger.LogInformation("Newton Soft Serializer Stop working");
-    }
+    public void Dispose() => _logger.LogInformation("Newton Soft Serializer Stop working");
 }

@@ -4,7 +4,7 @@ using Zamin.Extensions.Translations.Parrot.Options;
 using Zamin.Extensions.Translations.Parrot.Services;
 using Zamin.Extentions.Translations.Abstractions;
 
-namespace Zamin.Extensions.Translations.Parrot.Extensions.DependencyInjection;
+namespace Zamin.Extensions.DependencyInjection;
 
 public static class ParrotTranslatorServiceCollectionExtensions
 {
