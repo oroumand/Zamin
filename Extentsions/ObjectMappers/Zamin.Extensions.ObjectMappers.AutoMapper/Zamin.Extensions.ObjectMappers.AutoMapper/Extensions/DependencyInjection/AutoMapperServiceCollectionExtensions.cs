@@ -6,8 +6,7 @@ using Zamin.Extensions.ObjectMappers.AutoMapper.Options;
 using Zamin.Extensions.ObjectMappers.AutoMapper.Services;
 using Zamin.Extentions.ObjectMappers.Abstractions;
 
-namespace Zamin.Extensions.ObjectMappers.AutoMapper.Extensions.DependencyInjection;
-
+namespace Zamin.Extensions.DependencyInjection;
 public static class AutoMapperServiceCollectionExtensions
 {
     public static IServiceCollection AddAutoMapperProfiles(this IServiceCollection services,
