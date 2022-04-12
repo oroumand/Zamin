@@ -1,4 +1,5 @@
-﻿using Zamin.Extensions.Serializers.NewtonSoft.Extensions.DependencyInjection;
+﻿
+using Zamin.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

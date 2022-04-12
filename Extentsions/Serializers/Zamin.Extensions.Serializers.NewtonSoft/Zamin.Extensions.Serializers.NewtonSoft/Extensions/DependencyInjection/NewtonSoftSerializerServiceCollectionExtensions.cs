@@ -2,7 +2,7 @@
 using Zamin.Extensions.Serializers.NewtonSoft.Services;
 using Zamin.Extentions.Serializers.Abstractions;
 
-namespace Zamin.Extensions.Serializers.NewtonSoft.Extensions.DependencyInjection;
+namespace Zamin.Extensions.DependencyInjection;
 
 public static class NewtonSoftSerializerServiceCollectionExtensions
 {
