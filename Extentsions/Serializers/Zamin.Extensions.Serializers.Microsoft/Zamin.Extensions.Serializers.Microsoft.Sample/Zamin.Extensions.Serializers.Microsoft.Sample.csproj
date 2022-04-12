@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="1.0.0-beta.2" />
+    <PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="6.3.0-beta.1" />
   </ItemGroup>
 
   <ItemGroup>
