@@ -8,7 +8,6 @@ namespace Zamin.Extensions.UsersManagement.Services;
 public class WebUserInfoService : IUserInfoService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private const string AccessList = "";
 
     public WebUserInfoService(IHttpContextAccessor httpContextAccessor)
     {
@@ -24,8 +23,8 @@ public class WebUserInfoService : IUserInfoService
     public string GetUserIp()
         => _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
 
-    public int UserId()
-        => int.Parse(_httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.NameIdentifier) ?? "0");
+    public string UserId()
+        => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.NameIdentifier);
 
     public string GetUsername()
         => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.Name);
@@ -41,17 +40,5 @@ public class WebUserInfoService : IUserInfoService
         return string.Equals(UserId().ToString(), userId, StringComparison.OrdinalIgnoreCase);
     }
 
-    [Obsolete]
-    public virtual bool HasAccess(string accessKey)
-    {
-        var result = false;
 
-        if (!string.IsNullOrWhiteSpace(accessKey))
-        {
-            var accessList = _httpContextAccessor.HttpContext.User?.GetClaim(AccessList)?.Split(',').ToList() ?? new List<string>();
-            result = accessList.Any(key => string.Equals(key, accessKey, StringComparison.OrdinalIgnoreCase));
-        }
-
-        return result;
-    }
 }
