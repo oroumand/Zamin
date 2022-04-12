@@ -2,7 +2,7 @@
 using Zamin.Extensions.Serializers.Microsoft.Services;
 using Zamin.Extentions.Serializers.Abstractions;
 
-namespace Zamin.Extensions.Serializers.Microsoft.Extensions.DependencyInjection;
+namespace Zamin.Extensions.DependencyInjection;
 
 public static class MicrosoftSerializerServiceCollectionExtensions
 {
