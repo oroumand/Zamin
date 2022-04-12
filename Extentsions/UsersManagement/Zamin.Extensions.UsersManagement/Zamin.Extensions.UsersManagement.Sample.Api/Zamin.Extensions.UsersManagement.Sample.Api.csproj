@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 	<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.3" />
+	<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="6.3.0-beta.1" />
   </ItemGroup>
 
   <ItemGroup>
