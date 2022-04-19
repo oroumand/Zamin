@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.Chaching.Abstractions;
+﻿namespace Zamin.Extensions.Caching.Abstractions;
 public interface ICacheAdapter
 {
     void Add<TInput>(string key, TInput obj, DateTime? AbsoluteExpiration, TimeSpan? SlidingExpiration);

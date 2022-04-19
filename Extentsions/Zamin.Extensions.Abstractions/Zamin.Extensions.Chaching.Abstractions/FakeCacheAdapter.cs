@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.Chaching.Abstractions;
+﻿namespace Zamin.Extensions.Caching.Abstractions;
 
 public class FakeCacheAdapter : ICacheAdapter
 {
