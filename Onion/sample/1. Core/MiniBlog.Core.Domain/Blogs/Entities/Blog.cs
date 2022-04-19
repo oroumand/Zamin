@@ -1,6 +1,5 @@
 ﻿using MiniBlog.Core.Domain.Blogs.Events;
 using Zamin.Core.Domain.Entities;
-using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.Domain.Toolkits.ValueObjects;
 using Zamin.Core.Domain.ValueObjects;
 
