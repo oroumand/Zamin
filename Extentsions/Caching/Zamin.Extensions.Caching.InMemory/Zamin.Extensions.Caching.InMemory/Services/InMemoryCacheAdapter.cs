@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using Zamin.Extentions.Chaching.Abstractions;
+using Zamin.Extensions.Caching.Abstractions;
 using Zamin.Extentions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.Caching.InMemory.Services;

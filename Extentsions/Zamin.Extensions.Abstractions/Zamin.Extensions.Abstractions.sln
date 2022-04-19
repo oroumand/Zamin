@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Chaching.Abstractions", "Zamin.Extensions.Chaching.Abstractions\Zamin.Extensions.Chaching.Abstractions.csproj", "{0792FFC2-5C0F-456A-A060-878F11AF2360}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Caching.Abstractions", "Zamin.Extensions.Chaching.Abstractions\Zamin.Extensions.Caching.Abstractions.csproj", "{0792FFC2-5C0F-456A-A060-878F11AF2360}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.MessageBus.Abstractions", "Zamin.Extensions.MessageBus.Abstractions\Zamin.Extensions.MessageBus.Abstractions.csproj", "{06F6D9C4-5B22-4CFF-B278-637005570A37}"
 EndProject
@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Translatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.UsersManagement.Abstractions", "Zamin.Extensions.UsersManagement.Abstractions\Zamin.Extensions.UsersManagement.Abstractions.csproj", "{46F37087-0F20-4966-BB35-6626822B24FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.Logger.Abstractions", "Zamin.Extensions.Logger.Abstractions\Zamin.Extensions.Logger.Abstractions.csproj", "{879E01CF-FA64-4B74-8733-0314DB70BB05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Logger.Abstractions", "Zamin.Extensions.Logger.Abstractions\Zamin.Extensions.Logger.Abstractions.csproj", "{879E01CF-FA64-4B74-8733-0314DB70BB05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

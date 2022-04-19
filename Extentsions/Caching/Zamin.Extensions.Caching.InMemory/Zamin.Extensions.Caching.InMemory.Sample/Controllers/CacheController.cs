@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Zamin.Extentions.Chaching.Abstractions;
+using Zamin.Extensions.Caching.Abstractions;
 
 namespace Zamin.Extensions.Caching.InMemory.Sample.Controllers;
 
