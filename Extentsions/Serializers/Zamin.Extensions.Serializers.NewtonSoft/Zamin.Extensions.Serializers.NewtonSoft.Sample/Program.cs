@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddNewtonSoftSerializer();
+builder.Services.AddZaminNewtonSoftSerializer();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

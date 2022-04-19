@@ -9,12 +9,12 @@ using Zamin.Extentions.ObjectMappers.Abstractions;
 namespace Zamin.Extensions.DependencyInjection;
 public static class AutoMapperServiceCollectionExtensions
 {
-    public static IServiceCollection AddAutoMapperProfiles(this IServiceCollection services,
+    public static IServiceCollection AddZaminAutoMapperProfiles(this IServiceCollection services,
                                                           IConfiguration configuration,
                                                           string sectionName)
-        => services.AddAutoMapperProfiles(configuration.GetSection(sectionName));
+        => services.AddZaminAutoMapperProfiles(configuration.GetSection(sectionName));
 
-    public static IServiceCollection AddAutoMapperProfiles(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddZaminAutoMapperProfiles(this IServiceCollection services, IConfiguration configuration)
     {
         var option = configuration.Get<AutoMapperOption>();
 
@@ -23,7 +23,7 @@ public static class AutoMapperServiceCollectionExtensions
         return services.AddAutoMapper(assemblies).AddSingleton<IMapperAdapter, AutoMapperAdapter>();
     }
 
-    public static IServiceCollection AddAutoMapperProfiles(this IServiceCollection services, Action<AutoMapperOption> setupAction)
+    public static IServiceCollection AddZaminAutoMapperProfiles(this IServiceCollection services, Action<AutoMapperOption> setupAction)
     {
         var option = new AutoMapperOption();
         setupAction.Invoke(option);

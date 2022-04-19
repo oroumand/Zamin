@@ -2,7 +2,7 @@
 using Zamin.Extensions.Caching.Abstractions;
 using Zamin.Extensions.Caching.InMemory.Services;
 
-namespace Zamin.Extensions.Caching.InMemory.Extensions.DependencyInjection;
+namespace Zamin.Extensions.DependencyInjection;
 
 public static class InMemoryCachingServiceCollectionExtensions
 {

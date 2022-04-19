@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddRedisDistributedCache(option =>
+builder.Services.AddZaminRedisDistributedCache(option =>
 {
     option.Configuration = "localhost:9191,password=123456";
     option.InstanceName = "Zamin.Sample.";

@@ -6,7 +6,7 @@ namespace Zamin.Extensions.DependencyInjection;
 
 public static class UserInfoServiceCollectionExtensions
 {
-    public static IServiceCollection AddWebUserInfoService(this IServiceCollection services,bool useFake=false)
+    public static IServiceCollection AddZaminWebUserInfoService(this IServiceCollection services,bool useFake=false)
     {
         if(useFake)
         {

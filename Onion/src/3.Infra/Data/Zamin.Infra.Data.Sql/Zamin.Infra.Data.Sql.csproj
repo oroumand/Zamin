@@ -18,6 +18,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
 		<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
 
 	</ItemGroup>

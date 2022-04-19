@@ -25,9 +25,6 @@ public abstract class BaseOutboxCommandDbContext : BaseCommandDbContext
         builder.ApplyConfiguration(new OutBoxEventItemConfig());
     }
 
-
-
-
     protected override void BeforeSaveTriggers()
     {
         base.BeforeSaveTriggers();

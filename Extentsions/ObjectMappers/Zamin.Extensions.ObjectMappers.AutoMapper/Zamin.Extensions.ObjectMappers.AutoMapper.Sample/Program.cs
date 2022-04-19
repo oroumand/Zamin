@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapperProfiles(option =>
+builder.Services.AddZaminAutoMapperProfiles(option =>
 {
     option.AssmblyNamesForLoadProfiles = "Zamin";
 });

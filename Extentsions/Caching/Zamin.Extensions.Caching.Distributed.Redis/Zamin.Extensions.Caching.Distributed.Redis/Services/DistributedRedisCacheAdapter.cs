@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using System.Text;
-using Zamin.Extentions.Chaching.Abstractions;
+using Zamin.Extensions.Caching.Abstractions;
 using Zamin.Extentions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.Caching.Distributed.Redis.Services;

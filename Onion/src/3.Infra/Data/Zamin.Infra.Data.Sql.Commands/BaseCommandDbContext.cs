@@ -5,6 +5,9 @@ using System.Globalization;
 using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
 using Zamin.Infra.Data.Sql.Extensions;
 using Zamin.Extentions.UsersManagement.Abstractions;
+using Zamin.Infra.Data.Sql.ValueConversions;
+using Zamin.Core.Domain.Toolkits.ValueObjects;
+using Zamin.Core.Domain.ValueObjects;
 
 namespace Zamin.Infra.Data.Sql.Commands;
 public abstract class BaseCommandDbContext : DbContext
@@ -60,10 +63,17 @@ public abstract class BaseCommandDbContext : DbContext
     {
         base.OnModelCreating(builder);
         builder.AddAuditableShadowProperties();
-        builder.AddBusinessId();
-        builder.ApplyConfiguration(new OutBoxEventItemConfig());
     }
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+        configurationBuilder.Properties<Description>().HaveConversion<DescriptionConversion>();
+        configurationBuilder.Properties<Title>().HaveConversion<TitleConversion>();
+        configurationBuilder.Properties<BusinessId>().HaveConversion<BusinessIdConversion>();
+        configurationBuilder.Properties<LegalNationalId>().HaveConversion<LegalNationalId>();
+        configurationBuilder.Properties<NationalCode>().HaveConversion<NationalCodeConversion>();
 
+    }
     public override int SaveChanges()
     {
         ChangeTracker.DetectChanges();

@@ -27,15 +27,12 @@ public class ParrotTranslator : ITranslator, IDisposable
 
     public string this[string name] { get => GetString(name); set => throw new NotImplementedException(); }
 
-    public string this[string name, string culture] { get => GetString(name, culture); set => throw new NotImplementedException(); }
 
     public string this[string name, params string[] arguments] { get => GetString(name, arguments); set => throw new NotImplementedException(); }
 
-    public string this[string name, string culture, params string[] arguments] { get => GetString(name, culture, arguments); set => throw new NotImplementedException(); }
 
     public string this[char separator, params string[] names] { get => GetConcateString(separator, names); set => throw new NotImplementedException(); }
 
-    public string this[char separator, string culture, params string[] names] { get => GetConcateString(culture, separator, names); set => throw new NotImplementedException(); }
 
     public string GetString(string name)
     {
@@ -44,12 +41,6 @@ public class ParrotTranslator : ITranslator, IDisposable
         return _localizer.Get(name, _currentCulture);
     }
 
-    public string GetString(string name, string culture)
-    {
-        _logger.LogTrace("Parrot Translator GetString with name {name} and culture {culture}", name, culture);
-
-        return _localizer.Get(name, culture);
-    }
 
     public string GetString(string pattern, params string[] arguments)
     {
@@ -71,26 +62,6 @@ public class ParrotTranslator : ITranslator, IDisposable
         return pattern;
     }
 
-    public string GetString(string pattern, string culture, params string[] arguments)
-    {
-        _logger.LogTrace("Parrot Translator GetString with pattern {pattern} and culture {culture} and arguments {arguments} ", pattern, culture, arguments);
-
-        for (int i = 0; i < arguments.Length; i++)
-        {
-            arguments[i] = GetString(arguments[i], culture);
-        }
-
-        pattern = GetString(pattern, culture);
-
-        for (int i = 0; i < arguments.Length; i++)
-        {
-            string placeHolder = $"{{{i}}}";
-            pattern = pattern.Replace(placeHolder, arguments[i]);
-        }
-
-        return pattern;
-    }
-
     public string GetConcateString(char separator = ' ', params string[] names)
     {
         _logger.LogTrace("Parrot Translator GetConcateString with separator {separator} and names {names}", separator, names);
@@ -98,18 +69,6 @@ public class ParrotTranslator : ITranslator, IDisposable
         for (int i = 0; i < names.Length; i++)
         {
             names[i] = GetString(names[i]);
-        }
-
-        return string.Join(separator, names);
-    }
-
-    public string GetConcateString(string culture, char separator = ' ', params string[] names)
-    {
-        _logger.LogTrace("Parrot Translator GetConcateString with separator {separator} and culture {culture} and names {names}", separator, culture, names);
-
-        for (int i = 0; i < names.Length; i++)
-        {
-            names[i] = GetString(names[i], culture);
         }
 
         return string.Join(separator, names);

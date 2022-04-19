@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Zamin.Extentions.Chaching.Abstractions;
+﻿using Microsoft.AspNetCore.Mvc;
+using Zamin.Extensions.Caching.Abstractions;
 
 namespace Zamin.Extensions.Caching.DistributedSqlServerCache.Sample.Controllers
 {

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using System.Net;
 using Zamin.Extentions.Serializers.Abstractions;
 using Zamin.Extensions.Logger.Abstractions;
@@ -62,7 +61,7 @@ namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
             var level = _options.DetermineLogLevel?.Invoke(exception) ?? LogLevel.Error;
             _logger.Log(level, exception, "BADNESS!!! " + innerExMessage + " -- {ErrorId}.", error.Id);
 
-            var result = JsonConvert.SerializeObject(error);
+            var result = _serializer.Serialize(error);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             return context.Response.WriteAsync(result);

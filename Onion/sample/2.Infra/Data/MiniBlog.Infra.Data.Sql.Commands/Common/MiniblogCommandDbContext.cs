@@ -11,10 +11,10 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Common
         public MiniblogCommandDbContext(DbContextOptions<MiniblogCommandDbContext> options) : base(options)
         {
         }
-        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            configurationBuilder.Properties<Description>().HaveConversion<DescriptionConversion>();
-            configurationBuilder.Properties<Title>().HaveConversion<TitleConversion>();         
+            base.OnConfiguring(optionsBuilder);
         }
+
     }
 }

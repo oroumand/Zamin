@@ -26,9 +26,9 @@ public static class AuditableShadowProperties
                                                .GetEntityTypes())
         {
             modelBuilder.Entity(entityType.ClrType)
-                        .Property<string>(CreatedByUserId);
+                        .Property<string>(CreatedByUserId).HasMaxLength(50);
             modelBuilder.Entity(entityType.ClrType)
-                        .Property<string>(ModifiedByUserId);
+                        .Property<string>(ModifiedByUserId).HasMaxLength(50);
             modelBuilder.Entity(entityType.ClrType)
                         .Property<DateTime?>(CreatedDateTime);
             modelBuilder.Entity(entityType.ClrType)

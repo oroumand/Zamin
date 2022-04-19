@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using Zamin.Extentions.Chaching.Abstractions;
+using Zamin.Extensions.Caching.Abstractions;
 using Zamin.Extentions.ObjectMappers.Abstractions;
 using Zamin.Extentions.Serializers.Abstractions;
 using Zamin.Extentions.Translations.Abstractions;

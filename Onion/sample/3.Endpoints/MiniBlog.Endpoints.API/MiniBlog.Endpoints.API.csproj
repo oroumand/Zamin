@@ -7,11 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="6.3.0-beta.2" />
+    <PackageReference Include="Zamin.Extensions.ObjectMappers.AutoMapper" Version="6.3.0-beta.2" />
+    <PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="6.3.0-beta.2" />
+    <PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="6.3.0-beta.3" />
+    <PackageReference Include="Zamin.Extensions.UsersManagement" Version="6.3.0-beta.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\4.EndPoints\Zamin.EndPoints.Web\Zamin.EndPoints.Web.csproj" />
+    <ProjectReference Include="..\..\1.Core\Miniblog.Core.ApplicationService\MiniBlog.Core.ApplicationService.csproj" />
+    <ProjectReference Include="..\..\1.Core\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />
+    <ProjectReference Include="..\..\1.Core\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\2.Infra\Data\MiniBlog.Infra.Data.Sql.Commands\MiniBlog.Infra.Data.Sql.Commands.csproj" />
+    <ProjectReference Include="..\..\2.Infra\Data\MiniBlog.Infra.Data.Sql.Queries\MiniBlog.Infra.Data.Sql.Queries.csproj" />
   </ItemGroup>
 
 </Project>

@@ -13,9 +13,9 @@ builder.Services.AddSwaggerGen();
 /// <summary>
 /// برای فعال سازی مترجم باید تنظیمات مرتبط با دیتابیس و محدوده زمانی که داده‌ها از دیتابیس بارگذاری مجدد می‌شود را تعیین کنیم.
 /// </summary>
-builder.Services.AddParrotTranslator(c =>
+builder.Services.AddZaminParrotTranslator(c =>
 {
-    c.ConnectionString = "Server=; Initial Catalog=; User Id=; Password=";
+    c.ConnectionString = "Server=.; Initial Catalog=MiniBlogDb; User Id=sa; Password=1qaz!QAZ";
     c.AutoCreateSqlTable = true;
     c.SchemaName = "dbo";
     c.TableName = "ParrotTranslations";

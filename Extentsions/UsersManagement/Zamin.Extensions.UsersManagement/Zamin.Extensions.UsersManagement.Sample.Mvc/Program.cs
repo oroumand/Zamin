@@ -17,7 +17,7 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddWebUserInfoService();
+builder.Services.AddZaminWebUserInfoService();
 
 var app = builder.Build();
 
