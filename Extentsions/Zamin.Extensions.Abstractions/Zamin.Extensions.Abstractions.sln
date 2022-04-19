@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Translatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.UsersManagement.Abstractions", "Zamin.Extensions.UsersManagement.Abstractions\Zamin.Extensions.UsersManagement.Abstractions.csproj", "{46F37087-0F20-4966-BB35-6626822B24FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.Logger.Abstractions", "Zamin.Extensions.Logger.Abstractions\Zamin.Extensions.Logger.Abstractions.csproj", "{879E01CF-FA64-4B74-8733-0314DB70BB05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{46F37087-0F20-4966-BB35-6626822B24FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46F37087-0F20-4966-BB35-6626822B24FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46F37087-0F20-4966-BB35-6626822B24FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{879E01CF-FA64-4B74-8733-0314DB70BB05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{879E01CF-FA64-4B74-8733-0314DB70BB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{879E01CF-FA64-4B74-8733-0314DB70BB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{879E01CF-FA64-4B74-8733-0314DB70BB05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

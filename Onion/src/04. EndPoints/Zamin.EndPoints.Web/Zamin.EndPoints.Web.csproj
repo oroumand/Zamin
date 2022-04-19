@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+				<Version>6.2.0-beta.3</Version>
+		<Nullable>enable</Nullable>
+		<Authors>Alireza Oroumand</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.1" />
+		<PackageReference Include="Microsoft.OpenApi" Version="1.3.0-preview" />
+		<PackageReference Include="Scrutor" Version="3.3.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="4.1.1-dev-00229" />
+		<PackageReference Include="Serilog.Sinks.ElasticSearch" Version="8.5.0-alpha0003" />
+		<PackageReference Include="Serilog.Sinks.Http" Version="8.0.0-beta.9" />
+		<PackageReference Include="Serilog.Sinks.MongoDB" Version="5.1.1" />
+		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.0-dev-00405" />
+		<PackageReference Include="Serilog.Sinks.RabbitMQ" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.Seq" Version="5.1.0" />
+		<PackageReference Include="Serilog.Sinks.Telegram" Version="0.2.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.AspNetCore.Builder" />
+		<Using Include="Microsoft.AspNetCore.Hosting" />
+		<Using Include="Microsoft.Extensions.Configuration" />
+		<Using Include="Microsoft.Extensions.Hosting" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Extensions.Logging" />
+		<Using Include="Microsoft.Extensions.DependencyModel" />
+		<Using Include="System.Reflection" />
+		<Using Include="Serilog" />
+		<Using Include="Zamin.Core.Contracts.ApplicationServices.Commands" />
+		<Using Include="Zamin.Core.Contracts.ApplicationServices.Common" />
+		<Using Include="Zamin.Core.Contracts.ApplicationServices.Queries" />
+		<Using Include="Zamin.Utilities.Configurations" />
+		<Using Include="Zamin.Core.Contracts.Data.Commands" />
+		<Using Include="Zamin.Core.Contracts.Data.Queries" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\01. Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
+		<ProjectReference Include="..\..\02. Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
+		<ProjectReference Include="..\..\02. Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
+		<ProjectReference Include="..\..\02. Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql.Commands\Zamin.Infra.Data.Sql.Commands.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql.Queries\Zamin.Infra.Data.Sql.Queries.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Data\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Events\Zamin.Infra.Events.Outbox\Zamin.Infra.Events.Outbox.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Events\Zamin.Infra.Events.PoolingPublisher\Zamin.Infra.Events.PoolingPublisher.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers.Store.Sql\Zamin.Messaging.IdempotentConsumers.Store.Sql.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.IdempotentConsumers\Zamin.Messaging.IdempotentConsumers.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Messaging\Zamin.Messaging.MessageBus.RabbitMq\Zamin.Messaging.MessageBus.RabbitMq.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Caching.Microsoft\Zamin.Infra.Tools.Caching.Microsoft.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Localizer.Parrot\Zamin.Infra.Tools.Localizer.Parrot.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.OM.AutoMapper\Zamin.Infra.Tools.OM.AutoMapper.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Srlzr.EPPlus\Zamin.Infra.Tools.Srlzr.EPPlus.csproj" />
+		<ProjectReference Include="..\..\03. Infra\Tools\Zamin.Infra.Tools.Srlzr.NewtonSoft\Zamin.Infra.Tools.Srlzr.NewtonSoft.csproj" />
+	</ItemGroup>
+
+</Project>
+
