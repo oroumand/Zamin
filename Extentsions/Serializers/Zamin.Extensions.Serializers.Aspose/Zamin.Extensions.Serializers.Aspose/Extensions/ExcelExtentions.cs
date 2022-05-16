@@ -36,7 +36,7 @@ public static class ExcelExtentions
     {
         Workbook workbook = new Workbook(new MemoryStream(bytes));
 
-        var worksheet = workbook.Worksheets[1];
+        var worksheet = workbook.Worksheets[0];
 
         DataTable dataTable = new();
 
