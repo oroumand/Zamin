@@ -16,10 +16,5 @@ public class AsposesExcelSerializer : IExcelSerializer
 
     public DataTable ExcelToDataTable(byte[] bytes) => bytes.ToDataTableFromExcel();
 
-    public List<T> ExcelToList<T>(byte[] bytes)
-    {
-
-        var a = bytes.ToDataTableFromExcel();
-       return  a.ToList<T>();
-    }
+    public List<T> ExcelToList<T>(byte[] bytes) => bytes.ToDataTableFromExcel().ToList<T>();
 }

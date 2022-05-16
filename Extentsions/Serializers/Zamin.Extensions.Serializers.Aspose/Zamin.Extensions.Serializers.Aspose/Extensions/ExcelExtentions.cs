@@ -38,37 +38,27 @@ public static class ExcelExtentions
 
         var worksheet = workbook.Worksheets[1];
 
-        //int totalRows = worksheet.Cells.MaxRow + 1;
-        //int totalColumns = worksheet.Cells.MaxColumn + 1;
-
-        //ExportTableOptions options = new ExportTableOptions();
-        //options.PlotVisibleColumns = false;
-
-        //DataTable dataTable = worksheet.Cells.ExportDataTable(0, 0, totalRows, totalColumns, false);
-
-
         DataTable dataTable = new();
 
         bool hasHeader = true;
 
-        for (int i = 0; i < worksheet.Cells.MaxDataColumn; i++)
+        foreach (Cell item in worksheet.Cells.Rows[0])
         {
-
+            dataTable.Columns.Add(hasHeader ? item.StringValue : string.Format("Column {0}", item.Name));
         }
 
+        if (hasHeader)
+            worksheet.Cells.Rows.RemoveAt(0);
 
-        //var startRow = hasHeader ? 2 : 1;
-
-        //for (var rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
-        //{
-        //    var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
-        //    var row = dataTable.NewRow();
-        //    foreach (var cell in wsRow)
-        //    {
-        //        row[cell.Start.Column - 1] = cell.Text;
-        //    }
-        //    dataTable.Rows.Add(row);
-        //}
+        foreach (Row item in worksheet.Cells.Rows)
+        {
+            var dr = dataTable.NewRow();
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+            {
+                dr[i] = item[i].StringValue;
+            }
+            dataTable.Rows.Add(dr);
+        }
 
         return dataTable;
     }
