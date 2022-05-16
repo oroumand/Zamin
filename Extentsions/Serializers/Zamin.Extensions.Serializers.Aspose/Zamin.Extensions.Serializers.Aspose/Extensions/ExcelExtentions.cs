@@ -32,39 +32,44 @@ public static class ExcelExtentions
         return array;
     }
 
-    //public static DataTable ToDataTableFromExcel(this byte[] bytes)
-    //{
-    //    var excelPackage = new ExcelPackage();
+    public static DataTable ToDataTableFromExcel(this byte[] bytes)
+    {
+        Workbook workbook = new Workbook(new MemoryStream(bytes));
 
-    //    using (MemoryStream memoryStream = new MemoryStream(bytes))
-    //        excelPackage.Load(memoryStream);
+        var worksheet = workbook.Worksheets[1];
 
-    //    var ws = excelPackage.Workbook.Worksheets.First();
+        //int totalRows = worksheet.Cells.MaxRow + 1;
+        //int totalColumns = worksheet.Cells.MaxColumn + 1;
 
-    //    DataTable dataTable = new();
+        //ExportTableOptions options = new ExportTableOptions();
+        //options.PlotVisibleColumns = false;
 
-    //    bool hasHeader = true;
+        //DataTable dataTable = worksheet.Cells.ExportDataTable(0, 0, totalRows, totalColumns, false);
 
-    //    foreach (var firstRowCell in ws.Cells[1, 1, 1, ws.Dimension.End.Column])
-    //    {
-    //        dataTable.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("Column {0}", firstRowCell.Start.Column));
-    //    }
 
-    //    var startRow = hasHeader ? 2 : 1;
+        DataTable dataTable = new();
 
-    //    for (var rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
-    //    {
-    //        var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
-    //        var row = dataTable.NewRow();
-    //        foreach (var cell in wsRow)
-    //        {
-    //            row[cell.Start.Column - 1] = cell.Text;
-    //        }
-    //        dataTable.Rows.Add(row);
-    //    }
+        bool hasHeader = true;
 
-    //    excelPackage.Dispose();
+        for (int i = 0; i < worksheet.Cells.MaxDataColumn; i++)
+        {
 
-    //    return dataTable;
-    //}
+        }
+
+
+        //var startRow = hasHeader ? 2 : 1;
+
+        //for (var rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
+        //{
+        //    var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
+        //    var row = dataTable.NewRow();
+        //    foreach (var cell in wsRow)
+        //    {
+        //        row[cell.Start.Column - 1] = cell.Text;
+        //    }
+        //    dataTable.Rows.Add(row);
+        //}
+
+        return dataTable;
+    }
 }

@@ -40,6 +40,6 @@ public class AsposeExcelController : ControllerBase
 
         var result = _excelSerializer.ListToExcelByteArray(services);
 
-        return File(result, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "services.xlsx");
+        return File(result, "application/vnd.ms-excel", "services.xls");
     }
 }
