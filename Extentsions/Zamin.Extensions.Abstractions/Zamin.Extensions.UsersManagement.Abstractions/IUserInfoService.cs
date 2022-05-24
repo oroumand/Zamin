@@ -8,5 +8,6 @@ public interface IUserInfoService
     string GetFirstName();
     string GetLastName();
     string GetUsername();
+    string? GetClaim(string claimType);
     bool IsCurrentUser(string userId);
 }

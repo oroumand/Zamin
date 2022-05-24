@@ -15,13 +15,13 @@ public class ParrotTranslator : ITranslator, IDisposable
     public ParrotTranslator(IOptions<ParrotTranslatorOptions> configuration, ILogger<ParrotTranslator> logger)
     {
         _currentCulture = CultureInfo.CurrentCulture.ToString();
-        if(string.IsNullOrWhiteSpace(_currentCulture))
+        _logger = logger;
+        if (string.IsNullOrWhiteSpace(_currentCulture))
         {
             _currentCulture = "en-US";
             _logger.LogInformation("Parrot Translator current culture is null and set to en-US");
         }
         _localizer = new ParrotSqlRepository(configuration.Value, logger);
-        _logger = logger;
         _logger.LogInformation("Parrot Translator Start working with culture {Culture}", _currentCulture);
     }
 
