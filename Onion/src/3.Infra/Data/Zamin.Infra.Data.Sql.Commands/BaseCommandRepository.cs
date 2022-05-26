@@ -101,7 +101,6 @@ public class BaseCommandRepository<TEntity, TDbContext> : ICommandRepository<TEn
     {
         var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
         IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-        var temp = graphPath.ToList();
         foreach (var item in graphPath)
         {
             query = query.Include(item);
@@ -113,7 +112,6 @@ public class BaseCommandRepository<TEntity, TDbContext> : ICommandRepository<TEn
     {
         var graphPath = _dbContext.GetIncludePaths(typeof(TEntity));
         IQueryable<TEntity> query = _dbContext.Set<TEntity>().AsQueryable();
-        var temp = graphPath.ToList();
         foreach (var item in graphPath)
         {
             query = query.Include(item);

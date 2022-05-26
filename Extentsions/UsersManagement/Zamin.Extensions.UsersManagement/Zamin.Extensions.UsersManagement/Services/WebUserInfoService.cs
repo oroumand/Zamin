@@ -24,7 +24,7 @@ public class WebUserInfoService : IUserInfoService
         => _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
 
     public string UserId()
-        => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.NameIdentifier);
+        => _httpContextAccessor?.HttpContext.User?.GetClaim(ClaimTypes.NameIdentifier);
 
     public string GetUsername()
         => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.Name);
@@ -40,5 +40,6 @@ public class WebUserInfoService : IUserInfoService
         return string.Equals(UserId().ToString(), userId, StringComparison.OrdinalIgnoreCase);
     }
 
-
+    public string? GetClaim(string claimType)
+        => _httpContextAccessor.HttpContext.User?.GetClaim(claimType);
 }

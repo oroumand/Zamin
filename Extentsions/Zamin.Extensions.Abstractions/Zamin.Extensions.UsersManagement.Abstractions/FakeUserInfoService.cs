@@ -2,6 +2,11 @@
 
 public class FakeUserInfoService : IUserInfoService
 {
+    public string? GetClaim(string claimType)
+    {
+        return claimType;
+    }
+
     public string GetFirstName()
     {
         return "FirstName";

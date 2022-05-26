@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Zamin.Core.Domain.Entities;
 using Zamin.Extentions.UsersManagement.Abstractions;
 
 namespace Zamin.Infra.Data.Sql.Extensions;
@@ -23,7 +24,7 @@ public static class AuditableShadowProperties
     public static void AddAuditableShadowProperties(this ModelBuilder modelBuilder)
     {
         foreach (var entityType in modelBuilder.Model
-                                               .GetEntityTypes())
+                                               .GetEntityTypes().Where(c => typeof(Entity).IsAssignableFrom(c.ClrType)))
         {
             modelBuilder.Entity(entityType.ClrType)
                         .Property<string>(CreatedByUserId).HasMaxLength(50);
