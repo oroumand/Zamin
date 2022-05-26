@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>dotnet-MiniBlog.Endpoints.WorkerService-ABF7A7D6-259C-4FBA-A3F2-F2F950DAC8CF</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+		<PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="6.3.0-beta.2" />
+		<PackageReference Include="Zamin.Extensions.ObjectMappers.AutoMapper" Version="6.3.0-beta.2" />
+		<PackageReference Include="Zamin.Extensions.Serializers.EPPlus" Version="6.3.0-beta.1" />
+		<PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="6.3.0-beta.2" />
+		<PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="6.3.0-beta.4" />
+		<PackageReference Include="Zamin.Extensions.UsersManagement" Version="6.3.0-beta.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\1.Core\Miniblog.Core.ApplicationService\MiniBlog.Core.ApplicationService.csproj" />
+	  <ProjectReference Include="..\..\1.Core\MiniBlog.Core.Contracts\MiniBlog.Core.Contracts.csproj" />
+	  <ProjectReference Include="..\..\1.Core\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
+	  <ProjectReference Include="..\..\2.Infra\Data\MiniBlog.Infra.Data.Sql.Commands\MiniBlog.Infra.Data.Sql.Commands.csproj" />
+	  <ProjectReference Include="..\..\2.Infra\Data\MiniBlog.Infra.Data.Sql.Queries\MiniBlog.Infra.Data.Sql.Queries.csproj" />
+	  <ProjectReference Include="..\MiniBlog.Endpoints.API\MiniBlog.Endpoints.API.csproj" />
+	</ItemGroup>
+	
+</Project>

@@ -23,7 +23,6 @@ namespace Miniblog.Core.ApplicationService.Blogs.Commands.CreateBlog
             await _blogCommandRepository.InsertAsync(blog);
             await _blogCommandRepository.CommitAsync();
             return Ok();
-
         }
     }
 }
