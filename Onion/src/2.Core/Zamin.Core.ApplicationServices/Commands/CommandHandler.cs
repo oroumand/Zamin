@@ -10,7 +10,6 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
 
     protected readonly ZaminServices _zaminServices;
     protected readonly CommandResult<TData> result = new();
-    [Obsolete(message: "ZaminServices Dependency removed from Constructor in the next release")]
     public CommandHandler(ZaminServices zaminServices)
     {
         _zaminServices = zaminServices;

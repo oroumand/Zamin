@@ -27,4 +27,27 @@ public abstract class Entity
     /// برای اینکه بتوان از همین Entityها برای فرایند ذخیره سازی و بازیابی از دیتابیس به کمک ORMها استفاده کرد، ضروری است که سازنده پیش‌فرض با سطح دسترسی بالا مثل Protected یا Private ایجاد شود.
     /// </summary>
     protected Entity() { }
+
+
+    #region Equality Check
+    public bool Equals(Entity? other) => this == other;
+    public override bool Equals(object? obj)=>
+         obj is Entity otherObject && Id == otherObject.Id;
+
+    public override int GetHashCode() => Id.GetHashCode();
+    public static bool operator ==(Entity left, Entity right)
+    {
+        if (left is null && right is null)
+            return true;
+
+        if (left is null || right is null)
+            return false;
+
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(Entity left, Entity right)
+        => !(right == left);
+
+    #endregion
 }

@@ -18,5 +18,15 @@ public static class StringExtensions
     public static string ToUnderscoreCase(this string input)=>
         string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString())).ToLower();
 
+    public static byte[] ToByteArray(this string input)
+    {
+        return System.Text.Encoding.UTF8.GetBytes(input);
+    }
+
+    public static string FromByteArray(this byte[] input)
+    {
+        return System.Text.Encoding.UTF8.GetString(input);
+    }
+
 
 }

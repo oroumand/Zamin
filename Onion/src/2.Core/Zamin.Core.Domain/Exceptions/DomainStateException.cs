@@ -31,7 +31,7 @@ public abstract class DomainStateException : Exception
         for (int i = 0; i < Parameters.Length; i++)
         {
             string placeHolder = $"{{{i}}}";
-            result = Message.Replace(placeHolder, Parameters[i]);
+            result = result.Replace(placeHolder, Parameters[i]);
         }
 
         return result;

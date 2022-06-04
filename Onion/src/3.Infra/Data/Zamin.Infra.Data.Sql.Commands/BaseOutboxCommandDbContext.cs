@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Infrastructure;
 using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
-using Zamin.Infra.Data.Sql.Extensions;
 using Zamin.Extentions.UsersManagement.Abstractions;
 using Zamin.Extentions.Serializers.Abstractions;
+using Zamin.Infra.Data.Sql.Commands.Extensions;
 
 namespace Zamin.Infra.Data.Sql.Commands;
 

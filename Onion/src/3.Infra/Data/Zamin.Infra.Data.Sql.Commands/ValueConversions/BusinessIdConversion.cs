@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zamin.Core.Domain.ValueObjects;
 
-namespace Zamin.Infra.Data.Sql.ValueConversions
+namespace Zamin.Infra.Data.Sql.Commands.ValueConversions
 {
     public class BusinessIdConversion : ValueConverter<BusinessId, Guid>
     {

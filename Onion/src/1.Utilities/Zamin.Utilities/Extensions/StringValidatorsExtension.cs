@@ -117,46 +117,37 @@ public static class StringValidatorsExtension
         return false;
     }
 
-    public static bool IsLengthBetween(this string nationalCode, int minLength, int maxLenght)
+    public static bool IsLengthBetween(this string input, int minLength, int maxLenght)
     {
-        if (nationalCode.Length <= maxLenght && nationalCode.Length >= minLength)
+        if (input.Length <= maxLenght && input.Length >= minLength)
             return true;
         return false;
     }
 
-    public static bool IsLengthLessThan(this string nationalCode, int lenght)
+    public static bool IsLengthLessThan(this string input, int lenght)
     {
-        return nationalCode.Length < lenght;
+        return input.Length < lenght;
     }
 
-    public static bool IsLengthLessThanOrEqual(this string nationalCode, int lenght)
+    public static bool IsLengthLessThanOrEqual(this string input, int lenght)
     {
-        return nationalCode.Length <= lenght;
+        return input.Length <= lenght;
     }
 
-    public static bool IsLengthGreaterThan(this string nationalCode, int lenght)
+    public static bool IsLengthGreaterThan(this string input, int lenght)
     {
-        return nationalCode.Length > lenght;
+        return input.Length > lenght;
     }
 
-    public static bool IsLengthGreaterThanOrEqual(this string nationalCode, int lenght)
+    public static bool IsLengthGreaterThanOrEqual(this string input, int lenght)
     {
-        return nationalCode.Length >= lenght;
+        return input.Length >= lenght;
     }
 
-    public static bool IsLengthEqual(this string nationalCode, int lenght)
+    public static bool IsLengthEqual(this string input, int lenght)
     {
-        return nationalCode.Length == lenght;
-    }
-
-    public static byte[] ToByteArray(this string input)
-    {
-        return System.Text.Encoding.UTF8.GetBytes(input);
+        return input.Length == lenght;
     }
 
 
-    public static string FromByteArray(this byte[] input)
-    {
-        return System.Text.Encoding.UTF8.GetString(input);
-    }
 }

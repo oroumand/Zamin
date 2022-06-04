@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Globalization;
 using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
-using Zamin.Infra.Data.Sql.Extensions;
 using Zamin.Extentions.UsersManagement.Abstractions;
-using Zamin.Infra.Data.Sql.ValueConversions;
 using Zamin.Core.Domain.Toolkits.ValueObjects;
 using Zamin.Core.Domain.ValueObjects;
+using Zamin.Infra.Data.Sql.Commands.ValueConversions;
+using Zamin.Infra.Data.Sql.Commands.Extensions;
 
 namespace Zamin.Infra.Data.Sql.Commands;
 public abstract class BaseCommandDbContext : DbContext
