@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Utilities.SoftwarePartDetector", "Zamin.Utilities.SoftwarepartDetector\Zamin.Utilities.SoftwarePartDetector.csproj", "{6C3B39CA-09A2-4C2A-98CB-789686DE4759}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Utilities.SoftwarePartDetector.Sample", "Zamin.Utilities.SoftwarePartDetector.Sample\Zamin.Utilities.SoftwarePartDetector.Sample.csproj", "{5BFC8ED2-43B1-4BF0-B4ED-185530855D12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6C3B39CA-09A2-4C2A-98CB-789686DE4759}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C3B39CA-09A2-4C2A-98CB-789686DE4759}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C3B39CA-09A2-4C2A-98CB-789686DE4759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BFC8ED2-43B1-4BF0-B4ED-185530855D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BFC8ED2-43B1-4BF0-B4ED-185530855D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BFC8ED2-43B1-4BF0-B4ED-185530855D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BFC8ED2-43B1-4BF0-B4ED-185530855D12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
