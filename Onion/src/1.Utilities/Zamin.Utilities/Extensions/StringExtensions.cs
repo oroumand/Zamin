@@ -2,6 +2,28 @@
 
 public static class StringExtensions
 {
+    public const char ArabicYeChar = (char)1610;
+    public const char PersianYeChar = (char)1740;
+
+    public const char ArabicKeChar = (char)1603;
+    public const char PersianKeChar = (char)1705;
+
+
+
+
+    public static string ApplyCorrectYeKe(this object data)
+    {
+        return data == null ? null : ApplyCorrectYeKe(data.ToString());
+    }
+
+    public static string ApplyCorrectYeKe(this string data)
+    {
+        return string.IsNullOrWhiteSpace(data) ?
+                    string.Empty :
+                    data.Replace(ArabicYeChar, PersianYeChar).Replace(ArabicKeChar, PersianKeChar).Trim();
+    }
+
+
     public static long ToSafeLong(this string input, long replacement = long.MinValue) =>
          long.TryParse(input, out long result) ? result : replacement;
     public static long? ToSafeNullableLong(this string input) =>

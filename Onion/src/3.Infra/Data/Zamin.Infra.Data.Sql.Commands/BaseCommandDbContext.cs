@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Globalization;
-using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
-using Zamin.Extentions.UsersManagement.Abstractions;
 using Zamin.Core.Domain.Toolkits.ValueObjects;
 using Zamin.Core.Domain.ValueObjects;
 using Zamin.Infra.Data.Sql.Commands.ValueConversions;
@@ -74,39 +71,10 @@ public abstract class BaseCommandDbContext : DbContext
         configurationBuilder.Properties<NationalCode>().HaveConversion<NationalCodeConversion>();
 
     }
-    public override int SaveChanges()
-    {
-        ChangeTracker.DetectChanges();
-        BeforeSaveTriggers();
-        ChangeTracker.AutoDetectChangesEnabled = false;
-        var result = base.SaveChanges();
-        ChangeTracker.AutoDetectChangesEnabled = true;
-        return result;
-    }
 
-    public override Task<int> SaveChangesAsync(
-        bool acceptAllChangesOnSuccess,
-        CancellationToken cancellationToken = default)
-    {
-        ChangeTracker.DetectChanges();
-        BeforeSaveTriggers();
-        ChangeTracker.AutoDetectChangesEnabled = false;
-        var result = base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
-        ChangeTracker.AutoDetectChangesEnabled = true;
-        return result;
-    }
 
-    protected virtual void BeforeSaveTriggers()
-    {
-        SetShadowProperties();
-    }
 
-    private void SetShadowProperties()
-    {
-        var userInfoService = this.GetService<IUserInfoService>();
-        ChangeTracker.SetAuditableEntityPropertyValues(userInfoService);
-    }
-    
+
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);
