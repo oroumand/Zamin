@@ -28,7 +28,7 @@ public static class HostingExtensions
             option.AssmblyNamesForLoadProfiles = "Miniblog";
         });
 
-        builder.Services.AddZaminNewtonSoftSerializer();
+        builder.Services.AddZaminMicrosoftSerializer();
 
         builder.Services.AddZaminInMemoryCaching();
 

@@ -25,7 +25,6 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
             var events = aggregate.GetEvents();
             foreach (var @event in events)
             {
-                var result = serializer.Serialize(@event);
                 eventData.Context.Add(new OutBoxEventItem
                 {
                     EventId = Guid.NewGuid(),
