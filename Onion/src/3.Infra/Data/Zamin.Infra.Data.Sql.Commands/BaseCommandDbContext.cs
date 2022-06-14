@@ -72,9 +72,6 @@ public abstract class BaseCommandDbContext : DbContext
 
     }
 
-
-
-
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);

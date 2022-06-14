@@ -11,6 +11,7 @@ public class OutBoxEventItemConfig : IEntityTypeConfiguration<OutBoxEventItem>
         builder.Property(c => c.AggregateName).HasMaxLength(255);
         builder.Property(c => c.EventTypeName).HasMaxLength(500);
         builder.Property(c => c.AggregateTypeName).HasMaxLength(500);
+        builder.ToTable("OutBoxEventItems");
     }
 }
 

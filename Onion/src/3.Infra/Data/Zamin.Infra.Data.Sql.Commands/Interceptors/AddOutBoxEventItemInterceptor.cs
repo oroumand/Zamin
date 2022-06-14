@@ -11,6 +11,12 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
     {
+        AddOutbox(eventData);
+        return base.SavingChanges(eventData, result);
+    }
+
+    private static void AddOutbox(DbContextEventData eventData)
+    {
         var changedAggregates = eventData.Context.ChangeTracker.GetAggregatesWithEvent();
         var userInfoService = eventData.Context.GetService<IUserInfoService>();
         var serializer = eventData.Context.GetService<IJsonSerializer>();
@@ -19,7 +25,7 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
             var events = aggregate.GetEvents();
             foreach (var @event in events)
             {
-                
+                var result = serializer.Serialize(@event);
                 eventData.Context.Add(new OutBoxEventItem
                 {
                     EventId = Guid.NewGuid(),
@@ -35,6 +41,12 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
                 });
             }
         }
-        return base.SavingChanges(eventData, result);
+    }
+
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+    {
+        AddOutbox(eventData);
+
+        return base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 }
