@@ -2,10 +2,10 @@
 
 public enum SoftwarePartType
 {
-    Application = 1,
-    Module =2,
-    Service=3,
-    Controller=4,
-    Action=5,
-    Other=6
+    Other = 0,
+    Software = 1,
+    Module = 2,
+    Service = 3,
+    Controller = 4,
+    Action = 5,
 }
