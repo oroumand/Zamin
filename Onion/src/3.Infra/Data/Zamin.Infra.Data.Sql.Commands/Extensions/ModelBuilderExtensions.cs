@@ -2,7 +2,7 @@
 using Zamin.Core.Domain.Entities;
 using Zamin.Core.Domain.ValueObjects;
 
-namespace Zamin.Infra.Data.Sql.Extensions;
+namespace Zamin.Infra.Data.Sql.Commands.Extensions;
 public static class ModelBuilderExtensions
 {
     public static void AddBusinessId(this ModelBuilder modelBuilder)

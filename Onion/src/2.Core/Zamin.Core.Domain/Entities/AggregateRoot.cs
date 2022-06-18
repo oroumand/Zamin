@@ -1,4 +1,5 @@
-﻿using Zamin.Core.Domain.Events;
+﻿using System.Reflection;
+using Zamin.Core.Domain.Events;
 
 namespace Zamin.Core.Domain.Entities;
 /// <summary>
@@ -23,7 +24,21 @@ public abstract class AggregateRoot : Entity
     {
         if (events == null || !events.Any()) return;
         foreach (var @event in events)
-            ((dynamic)this).On((dynamic)@event);
+        {
+            Mutate(@event);
+        }
+    }
+
+    protected void Apply(IDomainEvent @event)
+    {
+        Mutate(@event);
+        AddEvent(@event);
+    }
+
+    private void Mutate(IDomainEvent @event)
+    {
+        var onMethod = this.GetType().GetMethod("On", BindingFlags.Instance | BindingFlags.NonPublic, new Type[] { @event.GetType() });
+        onMethod.Invoke(this, new[] { @event });
     }
 
     /// <summary>

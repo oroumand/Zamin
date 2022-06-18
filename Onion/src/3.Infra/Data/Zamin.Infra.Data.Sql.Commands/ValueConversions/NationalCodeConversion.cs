@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zamin.Core.Domain.Toolkits.ValueObjects;
 
-namespace Zamin.Infra.Data.Sql.ValueConversions
+namespace Zamin.Infra.Data.Sql.Commands.ValueConversions
 {
     public class NationalCodeConversion : ValueConverter<NationalCode, string>
     {

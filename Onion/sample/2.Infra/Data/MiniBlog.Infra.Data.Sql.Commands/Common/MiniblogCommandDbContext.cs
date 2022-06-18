@@ -5,7 +5,7 @@ using Zamin.Infra.Data.Sql.Commands;
 
 namespace MiniBlog.Infra.Data.Sql.Commands.Common
 {
-    public class MiniblogCommandDbContext : BaseCommandDbContext
+    public class MiniblogCommandDbContext : BaseOutboxCommandDbContext
     {
         public DbSet<Blog> Blogs { get; set; }
         public MiniblogCommandDbContext(DbContextOptions<MiniblogCommandDbContext> options) : base(options)
