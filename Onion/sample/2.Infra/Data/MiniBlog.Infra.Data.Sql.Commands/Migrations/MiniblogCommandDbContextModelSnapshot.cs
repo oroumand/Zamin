@@ -17,7 +17,7 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-preview.3.22175.1")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -30,11 +30,12 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<Guid?>("BusinessId")
+                    b.Property<Guid>("BusinessId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedByUserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("CreatedDateTime")
                         .HasColumnType("datetime2");
@@ -44,7 +45,8 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModifiedByUserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("ModifiedDateTime")
                         .HasColumnType("datetime2");
@@ -103,7 +105,7 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
 
                     b.HasKey("OutBoxEventItemId");
 
-                    b.ToTable("OutBoxEventItem");
+                    b.ToTable("OutBoxEventItems", (string)null);
                 });
 #pragma warning restore 612, 618
         }

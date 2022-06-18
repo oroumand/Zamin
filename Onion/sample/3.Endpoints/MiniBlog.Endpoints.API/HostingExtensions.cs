@@ -3,6 +3,7 @@ using MiniBlog.Infra.Data.Sql.Commands.Common;
 using MiniBlog.Infra.Data.Sql.Queries.Common;
 using Serilog;
 using Zamin.Extensions.DependencyInjection;
+using Zamin.Infra.Data.Sql.Commands.Interceptors;
 
 namespace MiniBlog.Endpoints.API;
 
@@ -31,7 +32,7 @@ public static class HostingExtensions
 
         builder.Services.AddZaminInMemoryCaching();
 
-        builder.Services.AddDbContext<MiniblogCommandDbContext>(c=>c.UseSqlServer(cnn));
+        builder.Services.AddDbContext<MiniblogCommandDbContext>(c=>c.UseSqlServer(cnn).AddInterceptors(new SetPersianYeKeInterceptor(), new AddOutBoxEventItemInterceptor(), new AddAuditDataInterceptor()));
         builder.Services.AddDbContext<MiniblogQueryDbContext>(c => c.UseSqlServer(cnn));
 
         builder.Services.AddZaminApiCore("Zamin", "MiniBlog");

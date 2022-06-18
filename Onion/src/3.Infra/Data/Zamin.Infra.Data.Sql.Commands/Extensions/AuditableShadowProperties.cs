@@ -2,14 +2,14 @@
 using Zamin.Core.Domain.Entities;
 using Zamin.Extentions.UsersManagement.Abstractions;
 
-namespace Zamin.Infra.Data.Sql.Extensions;
+namespace Zamin.Infra.Data.Sql.Commands.Extensions;
 public static class AuditableShadowProperties
 {
-    public static readonly Func<object, string?> EFPropertyCreatedByUserId =
+    public static readonly Func<object, string> EFPropertyCreatedByUserId =
                                     entity => EF.Property<string>(entity, CreatedByUserId);
     public static readonly string CreatedByUserId = nameof(CreatedByUserId);
 
-    public static readonly Func<object, string?> EFPropertyModifiedByUserId =
+    public static readonly Func<object, string> EFPropertyModifiedByUserId =
                                     entity => EF.Property<string>(entity, ModifiedByUserId);
     public static readonly string ModifiedByUserId = nameof(ModifiedByUserId);
 
@@ -47,14 +47,14 @@ public static class AuditableShadowProperties
         var now = DateTime.UtcNow;
         var userId = userInfoService.UserId();
 
-        var modifiedEntries = changeTracker.Entries().Where(x => x.State == EntityState.Modified);
+        var modifiedEntries = changeTracker.Entries<Entity>().Where(x => x.State == EntityState.Modified);
         foreach (var modifiedEntry in modifiedEntries)
         {
             modifiedEntry.Property(ModifiedDateTime).CurrentValue = now;
             modifiedEntry.Property(ModifiedByUserId).CurrentValue = userId;
         }
 
-        var addedEntries = changeTracker.Entries().Where(x => x.State == EntityState.Added);
+        var addedEntries = changeTracker.Entries<Entity>().Where(x => x.State == EntityState.Added);
         foreach (var addedEntry in addedEntries)
         {
             addedEntry.Property(CreatedDateTime).CurrentValue = now;

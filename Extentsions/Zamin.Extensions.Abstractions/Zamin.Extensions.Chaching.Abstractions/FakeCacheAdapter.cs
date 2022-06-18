@@ -6,6 +6,5 @@ public class FakeCacheAdapter : ICacheAdapter
 
     public TOutput Get<TOutput>(string key) => default;
 
-
     public void RemoveCache(string key) { }
 }

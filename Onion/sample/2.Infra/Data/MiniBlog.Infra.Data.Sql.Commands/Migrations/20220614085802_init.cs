@@ -5,10 +5,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
 {
-    /// <inheritdoc />
     public partial class init : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -19,11 +17,11 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedByUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedByUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModifiedByUserId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    BusinessId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,7 +29,7 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OutBoxEventItem",
+                name: "OutBoxEventItems",
                 columns: table => new
                 {
                     OutBoxEventItemId = table.Column<long>(type: "bigint", nullable: false)
@@ -49,18 +47,17 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OutBoxEventItem", x => x.OutBoxEventItemId);
+                    table.PrimaryKey("PK_OutBoxEventItems", x => x.OutBoxEventItemId);
                 });
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Blogs");
 
             migrationBuilder.DropTable(
-                name: "OutBoxEventItem");
+                name: "OutBoxEventItems");
         }
     }
 }
