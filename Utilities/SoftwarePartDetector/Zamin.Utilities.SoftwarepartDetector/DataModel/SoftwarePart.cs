@@ -2,6 +2,6 @@
 public class SoftwarePart
 {
     public string Name { get; set; }=String.Empty;
-    public SoftwarePartType ApplicationPartType { get; set; }
+    public SoftwarePartType SoftwarePartType { get; set; }
     public List<SoftwarePart> Children { get; set; } = new List<SoftwarePart>();
 }
