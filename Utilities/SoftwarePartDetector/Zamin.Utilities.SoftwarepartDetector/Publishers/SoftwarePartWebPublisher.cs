@@ -5,6 +5,7 @@ using Zamin.Utilities.SoftwarePartDetector.DataModel;
 using Zamin.Utilities.SoftwarePartDetector.Options;
 
 namespace Zamin.Utilities.SoftwarePartDetector.Publishers;
+
 public class SoftwarePartWebPublisher : ISoftwarePartPublisher
 {
     private readonly HttpClient httpClient;
@@ -17,14 +18,11 @@ public class SoftwarePartWebPublisher : ISoftwarePartPublisher
     }
     public async Task Publish(SoftwarePart softwarePart)
     {
-        //var objectForSend = new
-        //{
-        //    softWarePart = softwarePart
-        //};
         httpClient.BaseAddress = new Uri(_softwarePartDetectorOptions.DestinationServiceBaseAddress);
 
-        HttpContent httpContent =
-            new StringContent(JsonConvert.SerializeObject(softwarePart), Encoding.UTF8, "application/json");
+        HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(new { SoftwarePart = softwarePart}),
+                                                    Encoding.UTF8,
+                                                    "application/json");
 
         await httpClient.PostAsync(_softwarePartDetectorOptions.DestinationServicePath, httpContent);
 
