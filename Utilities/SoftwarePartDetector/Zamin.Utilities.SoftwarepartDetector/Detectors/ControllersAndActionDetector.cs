@@ -22,7 +22,7 @@ public class ControllersAndActionDetector
 
             foreach (var item in controllerActionDescriptors)
             {
-                var attribute = item.ControllerTypeInfo.GetCustomAttributes(typeof(SoftwarePartDetectorAttribute), false).FirstOrDefault() as SoftwarePartDetectorAttribute;
+                var attribute = item.ControllerTypeInfo.GetCustomAttributes(typeof(SoftwarePartControllerOptionAttribute), false).FirstOrDefault() as SoftwarePartControllerOptionAttribute;
                 result.Add(new SoftwarePartController
                 {
                     Module = attribute?.Module,

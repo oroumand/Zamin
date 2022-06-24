@@ -26,6 +26,6 @@ public class SoftwarePartDetectorService
                                                        _softwarePartDetectorOption.ModuleName,
                                                        _softwarePartDetectorOption.ServiceName);
         if (parts != null)
-            await _partWebPublisher.Publish(parts);
+            await _partWebPublisher.PublishAsync(parts);
     }
 }
