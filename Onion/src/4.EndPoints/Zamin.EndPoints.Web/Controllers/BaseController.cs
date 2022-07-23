@@ -108,14 +108,20 @@ namespace Zamin.EndPoints.Web.Controllers
         protected async Task<IActionResult> Query<TQuery, TQueryResult>(TQuery query) where TQuery : class, IQuery<TQueryResult>
         {
             var result = await QueryDispatcher.Execute<TQuery, TQueryResult>(query);
-            if (result.Status == ApplicationServiceStatus.NotFound || result.Data == null)
+
+            if (result.Status.Equals(ApplicationServiceStatus.InvalidDomainState) || result.Status.Equals(ApplicationServiceStatus.ValidationError))
+            {
+                return BadRequest(result.Messages);
+            }
+            else if (result.Status.Equals(ApplicationServiceStatus.NotFound) || result.Data == null)
             {
                 return StatusCode((int)HttpStatusCode.NoContent);
             }
-            else if (result.Status == ApplicationServiceStatus.Ok)
+            else if (result.Status.Equals(ApplicationServiceStatus.Ok))
             {
                 return Ok(result.Data);
             }
+
             return BadRequest(result.Messages);
         }
     }

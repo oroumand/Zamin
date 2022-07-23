@@ -24,7 +24,6 @@ public class QueryDispatcher : IQueryDispatcher
     #endregion
 
     #region Query Dispatcher
-
     public Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query) where TQuery : class, IQuery<TData>
     {
 
@@ -46,12 +45,6 @@ public class QueryDispatcher : IQueryDispatcher
             _stopwatch.Stop();
             _logger.LogInformation(ZaminEventId.PerformanceMeasurement, "Processing the {QueryType} command tooks {Millisecconds} Millisecconds", query.GetType(), _stopwatch.ElapsedMilliseconds);
         }
-
-
     }
-
     #endregion
-
-
 }
-

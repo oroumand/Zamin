@@ -15,7 +15,7 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
         _zaminServices = zaminServices;
     }
 
-    public abstract Task<CommandResult<TData>> Handle(TCommand request);
+    public abstract Task<CommandResult<TData>> Handle(TCommand command);
     protected virtual Task<CommandResult<TData>> OkAsync(TData data)
     {
         result._data = data;
@@ -61,7 +61,7 @@ where TCommand : ICommand
     {
         _zaminServices = zaminServices;
     }
-    public abstract Task<CommandResult> Handle(TCommand request);
+    public abstract Task<CommandResult> Handle(TCommand command);
 
     protected virtual Task<CommandResult> OkAsync()
     {

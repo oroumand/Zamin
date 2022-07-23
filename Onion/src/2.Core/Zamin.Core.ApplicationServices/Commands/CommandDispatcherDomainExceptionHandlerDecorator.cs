@@ -7,6 +7,7 @@ using Zamin.Extensions.Logger.Abstractions;
 using Zamin.Extentions.Translations.Abstractions;
 
 namespace Zamin.Core.ApplicationServices.Commands;
+
 public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatcherDecorator
 {
     #region Fields
@@ -15,12 +16,13 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
     #endregion
 
     #region Constructors
-    public CommandDispatcherDomainExceptionHandlerDecorator(CommandDispatcher commandDispatcher, IServiceProvider serviceProvider, ILogger<CommandDispatcherDomainExceptionHandlerDecorator> logger) : base(commandDispatcher)
+    public CommandDispatcherDomainExceptionHandlerDecorator(CommandDispatcher commandDispatcher,
+                                                            IServiceProvider serviceProvider,
+                                                            ILogger<CommandDispatcherDomainExceptionHandlerDecorator> logger) : base(commandDispatcher)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
-
     #endregion
 
     #region Send Commands
