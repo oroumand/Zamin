@@ -16,8 +16,6 @@ public class ParrotController : ControllerBase
     [HttpGet(Name = "GetTranslation")]
     public IActionResult Get(string key)
     {
-        var temp = _translator["Required", "Description"];
-       var aa =  _translator["Required", "Description", "500"];
         return Ok(_translator.GetString(key));
     }
 }
