@@ -4,5 +4,5 @@ namespace Zamin.Utilities.SoftwarePartDetector.Publishers;
 
 public interface ISoftwarePartPublisher
 {
-    Task Publish(SoftwarePart softwarePart);
+    Task PublishAsync(SoftwarePart softwarePart);
 }

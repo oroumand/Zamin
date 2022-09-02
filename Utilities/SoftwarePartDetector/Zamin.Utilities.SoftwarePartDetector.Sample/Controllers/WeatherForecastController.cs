@@ -5,7 +5,7 @@ namespace Zamin.Utilities.SoftwarePartDetector.Sample.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[SoftwarePartDetector(service: "service01", module: "module01")]
+[SoftwarePartControllerOption(service: "service01", module: "module01")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]

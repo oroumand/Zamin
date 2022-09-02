@@ -1,32 +1,42 @@
-﻿using Microsoft.Extensions.Options;
+﻿using IdentityModel.Client;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
+using Zamin.Utilities.SoftwarePartDetector.Authentications;
 using Zamin.Utilities.SoftwarePartDetector.DataModel;
 using Zamin.Utilities.SoftwarePartDetector.Options;
 
 namespace Zamin.Utilities.SoftwarePartDetector.Publishers;
+
 public class SoftwarePartWebPublisher : ISoftwarePartPublisher
 {
-    private readonly HttpClient httpClient;
+    private readonly HttpClient _httpClient;
     private readonly SoftwarePartDetectorOptions _softwarePartDetectorOptions;
-    public SoftwarePartWebPublisher(HttpClient httpClient, IOptions<SoftwarePartDetectorOptions> softwarePartDetectorOption)
+    private readonly ISoftwarePartAuthentication _softwarePartLogin;
+    public SoftwarePartWebPublisher(HttpClient httpClient,
+                                    IOptions<SoftwarePartDetectorOptions> softwarePartDetectorOption,
+                                    ISoftwarePartAuthentication softwarePartLogin)
     {
-        this.httpClient = httpClient;
+        _httpClient = httpClient;
         _softwarePartDetectorOptions = softwarePartDetectorOption.Value;
+        _softwarePartLogin = softwarePartLogin;
 
     }
-    public async Task Publish(SoftwarePart softwarePart)
+    public async Task PublishAsync(SoftwarePart softwarePart)
     {
-        //var objectForSend = new
-        //{
-        //    softWarePart = softwarePart
-        //};
-        httpClient.BaseAddress = new Uri(_softwarePartDetectorOptions.DestinationServiceBaseAddress);
+        _httpClient.BaseAddress = new Uri(_softwarePartDetectorOptions.DestinationServiceBaseAddress);
 
-        HttpContent httpContent =
-            new StringContent(JsonConvert.SerializeObject(softwarePart), Encoding.UTF8, "application/json");
+        if (_softwarePartDetectorOptions.OAuth.Enabled)
+        {
+            var token = await _softwarePartLogin.LoginAsync();
 
-        await httpClient.PostAsync(_softwarePartDetectorOptions.DestinationServicePath, httpContent);
+            _httpClient.SetBearerToken(token.AccessToken);
+        }
 
+        HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(new { SoftwarePart = softwarePart }),
+                                                    Encoding.UTF8,
+                                                    "application/json");
+
+        await _httpClient.PostAsync(_softwarePartDetectorOptions.DestinationServicePath, httpContent);
     }
 }

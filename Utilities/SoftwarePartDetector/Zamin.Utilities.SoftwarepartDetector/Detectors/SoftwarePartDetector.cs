@@ -22,7 +22,7 @@ public class SoftwarePartDetector
             SoftwarePartType = SoftwarePartType.Software
         };
 
-        var controllers = await _controllersAndActionDetector.Detect2();
+        var controllers = await _controllersAndActionDetector.Detect();
 
         foreach (var controller in controllers)
         {
@@ -81,7 +81,7 @@ public class SoftwarePartDetector
             }
         };
 
-        var controllers = await _controllersAndActionDetector.Detect2();
+        var controllers = await _controllersAndActionDetector.Detect();
 
         foreach (var controller in controllers)
         {
@@ -147,7 +147,7 @@ public class SoftwarePartDetector
             }
         };
 
-        var controllers = await _controllersAndActionDetector.Detect2();
+        var controllers = await _controllersAndActionDetector.Detect();
 
         foreach (var controller in controllers)
         {
