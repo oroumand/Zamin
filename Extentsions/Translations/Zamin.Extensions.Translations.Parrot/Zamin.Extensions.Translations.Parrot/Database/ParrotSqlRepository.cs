@@ -18,7 +18,6 @@ public class ParrotSqlRepository
     private readonly string _selectCommand = "Select * from [{0}].[{1}]";
     private readonly string _insertCommand = "INSERT INTO [{0}].[{1}]([Key],[Value],[Culture]) VALUES (@Key,@Value,@Culture) select SCOPE_IDENTITY()";
 
-
     public ParrotSqlRepository(ParrotTranslatorOptions configuration, ILogger logger)
     {
         _configuration = configuration;
@@ -34,23 +33,15 @@ public class ParrotSqlRepository
 
         LoadLocalizationRecords(null);
 
+        SeedData();
+
+        LoadLocalizationRecords(null);
+
         _timer = new Timer(LoadLocalizationRecords,
-                       null,
-                       TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts),
-                       TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts));
-        
-    }
+                           null,
+                           TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts),
+                           TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts));
 
-    private void LoadLocalizationRecords(object? state)
-    {
-        lock (_locker)
-        {
-            _logger.LogInformation("Parrot Translator load localization recored at {DateTime}", DateTime.Now);
-
-            _localizationRecords = _dbConnection.Query<LocalizationRecord>(_selectCommand, commandType: CommandType.Text).ToList();
-
-            _logger.LogInformation("Parrot Translator loaded localization recored at {DateTime}. Total record count is {RecordCount}", DateTime.Now, _localizationRecords.Count);
-        }
     }
 
     private void CreateTableIfNeeded()
@@ -80,6 +71,42 @@ public class ParrotSqlRepository
             throw;
         }
 
+    }
+
+    private void LoadLocalizationRecords(object? state)
+    {
+        lock (_locker)
+        {
+            _logger.LogInformation("Parrot Translator load localization recored at {DateTime}", DateTime.Now);
+
+            _localizationRecords = _dbConnection.Query<LocalizationRecord>(_selectCommand, commandType: CommandType.Text).ToList();
+
+            _logger.LogInformation("Parrot Translator loaded localization recored at {DateTime}. Total record count is {RecordCount}", DateTime.Now, _localizationRecords.Count);
+        }
+    }
+
+    private void SeedData()
+    {
+        string values = string.Empty;
+
+        foreach (var translation in _configuration.DefaultTranslations)
+        {
+            if (_localizationRecords.FirstOrDefault(c => c.Key.Equals(translation.Key) && c.Culture.Equals(translation.Culture)) is null)
+                values = values + ',' + $"(N'{translation.Key}',N'{translation.Value}',N'{translation.Culture}')";
+        }
+
+        if (values.Length > 0)
+        {
+            values = values.Remove(0, 1);
+
+            string _command = $"INSERT INTO [{_configuration.SchemaName}].[{_configuration.TableName}]([Key],[Value],[Culture]) VALUES {values}";
+
+            using IDbConnection db = new SqlConnection(_configuration.ConnectionString);
+
+            db.ExecuteAsync(_command, commandType: CommandType.Text);
+
+            db.Dispose();
+        }
     }
 
     public string Get(string key, string culture)
@@ -114,5 +141,4 @@ public class ParrotSqlRepository
         }
 
     }
-
 }

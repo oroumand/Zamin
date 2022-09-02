@@ -6,5 +6,13 @@ public class ParrotTranslatorOptions
     public string TableName { get; set; } = "ParrotTranslations";
     public string SchemaName { get; set; } = "dbo";
     public int ReloadDataIntervalInMinuts { get; set; }
+    public DefaultTranslationOption[] DefaultTranslations { get; set; } = Array.Empty<DefaultTranslationOption>();
 
+}
+
+public class DefaultTranslationOption
+{
+    public string Key { get; set; }
+    public string Value { get; set; }
+    public string Culture { get; set; }
 }

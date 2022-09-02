@@ -1,5 +1,6 @@
 
 using Zamin.Extensions.DependencyInjection;
+using Zamin.Extensions.Translations.Parrot.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,13 @@ builder.Services.AddZaminParrotTranslator(c =>
     c.SchemaName = "dbo";
     c.TableName = "ParrotTranslations";
     c.ReloadDataIntervalInMinuts = 1;
+    c.DefaultTranslations = new DefaultTranslationOption[]
+    {
+        new() { Key = "TITLE", Value = "عنوان", Culture = "fa-IR" },
+        new() { Key = "TITLE", Value = "Title", Culture = "en-US" },
+    };
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
