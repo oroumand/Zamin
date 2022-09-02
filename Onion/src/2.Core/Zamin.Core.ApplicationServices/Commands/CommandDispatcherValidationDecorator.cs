@@ -6,6 +6,7 @@ using Zamin.Core.Contracts.ApplicationServices.Common;
 using Zamin.Extensions.Logger.Abstractions;
 
 namespace Zamin.Core.ApplicationServices.Commands;
+
 public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
 {
     #region Fields
@@ -15,8 +16,8 @@ public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
 
     #region Constructors
     public CommandDispatcherValidationDecorator(CommandDispatcherDomainExceptionHandlerDecorator commandDispatcher,
-                                                IServiceProvider serviceProvider, ILogger<CommandDispatcherValidationDecorator> logger)
-                                                : base(commandDispatcher)
+                                                IServiceProvider serviceProvider,
+                                                ILogger<CommandDispatcherValidationDecorator> logger) : base(commandDispatcher)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;

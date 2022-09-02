@@ -1,6 +1,7 @@
 ﻿using Zamin.Core.Contracts.ApplicationServices.Commands;
 
 namespace Zamin.Core.ApplicationServices.Commands;
+
 public abstract class CommandDispatcherDecorator : ICommandDispatcher
 {
     #region Fields

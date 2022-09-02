@@ -48,5 +48,5 @@ public abstract class QueryHandler<TQuery, TData> : IQueryHandler<TQuery, TData>
     {
         result.AddMessage(_zaminServices.Translator[message, arguments]);
     }
-    public abstract Task<QueryResult<TData>> Handle(TQuery request);
+    public abstract Task<QueryResult<TData>> Handle(TQuery query);
 }
