@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Zamin.Utilities.SoftwarePartDetector;
+using Zamin.Utilities.SoftwarePartDetector.Authentications;
 using Zamin.Utilities.SoftwarePartDetector.Options;
 using Zamin.Utilities.SoftwarePartDetector.Publishers;
 using Zamin.Utilities.SoftwarePartDetector.Services;
@@ -8,28 +9,38 @@ using Zamin.Utilities.SoftwarePartDetector.Services;
 namespace Zamin.Extensions.DependencyInjection;
 public static class SoftwarePartDetectorServiceCollectionExtensions
 {
-    public static IServiceCollection AddSoftwarePartDetector(this IServiceCollection services,IConfiguration configuration)
+    public static IServiceCollection AddSoftwarePartDetector(this IServiceCollection services, IConfiguration configuration, string sectionName)
+        => services.AddSoftwarePartDetector(configuration.GetSection(sectionName));
+
+    public static IServiceCollection AddSoftwarePartDetector(this IServiceCollection services, IConfiguration configuration)
+        => services.AddServices(configuration.Get<SoftwarePartDetectorOptions>()).Configure<SoftwarePartDetectorOptions>(configuration);
+
+    public static IServiceCollection AddSoftwarePartDetector(this IServiceCollection services, Action<SoftwarePartDetectorOptions> setupAction)
     {
-        services.AddHttpClient<SoftwarePartWebPublisher>();
-        services.AddSingleton<ControllersAndActionDetector>();
-        services.AddSingleton<SoftwarePartDetector>();
-        services.AddSingleton<ISoftwarePartPublisher,SoftwarePartWebPublisher>();
-        services.AddSingleton<SoftwarePartDetectorService>();
-        services.Configure<SoftwarePartDetectorOptions>(configuration);
-        return services;
+        var option = new SoftwarePartDetectorOptions();
+
+        setupAction.Invoke(option);
+
+        return services.AddServices(option).Configure(setupAction);
     }
-    public static IServiceCollection AddSoftwarePartDetector(this IServiceCollection services, IConfiguration configuration,string sectionName)
-    {
-        services.AddSoftwarePartDetector(configuration.GetSection(sectionName));
-        return services;
-    }
-    public static IServiceCollection AddSoftwarePartDetector(this IServiceCollection services,Action<SoftwarePartDetectorOptions> setupAction)
+
+    private static IServiceCollection AddServices(this IServiceCollection services, SoftwarePartDetectorOptions option)
     {
         services.AddTransient<ControllersAndActionDetector>();
         services.AddTransient<SoftwarePartDetector>();
         services.AddTransient<ISoftwarePartPublisher, SoftwarePartWebPublisher>();
+        services.AddTransient<ISoftwarePartAuthentication, SoftwarePartAuthentication>();
         services.AddTransient<SoftwarePartDetectorService>();
-        services.Configure(setupAction);
+
+        var publisherHttpClient = services.AddHttpClient<ISoftwarePartPublisher, SoftwarePartWebPublisher>();
+        var oidcHttpClient = services.AddHttpClient<ISoftwarePartAuthentication, SoftwarePartAuthentication>();
+
+        if (option.FakeSSL)
+        {
+            publisherHttpClient.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true });
+            oidcHttpClient.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true });
+        }
+
         return services;
     }
 }

@@ -17,15 +17,16 @@ namespace MiniBlog.Core.Domain.Blogs.Entities
         {
 
         }
-        public Blog(BusinessId businessId, Title title, Description description)
+        public Blog(Title title, Description description)
         {
-            
-            BusinessId = businessId;
             Title = title;
             Description = description;
-            AddEvent(new BlogCreated(businessId.Value.ToString(), Title.Value, Description.Value));
-        } 
+            AddEvent(new BlogCreated(BusinessId.Value.ToString(), Title.Value, Description.Value));
+        }
         #endregion
 
+        #region Commands
+        public static Blog Create(Title title, Description description) => new(title, description); 
+        #endregion
     }
 }

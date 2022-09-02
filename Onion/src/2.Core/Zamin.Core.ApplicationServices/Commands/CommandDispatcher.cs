@@ -5,6 +5,7 @@ using Zamin.Core.Contracts.ApplicationServices.Commands;
 using Zamin.Extensions.Logger.Abstractions;
 
 namespace Zamin.Core.ApplicationServices.Commands;
+
 public class CommandDispatcher : ICommandDispatcher
 {
     #region Fields
@@ -68,5 +69,4 @@ public class CommandDispatcher : ICommandDispatcher
     }
 
     #endregion
-
 }

@@ -20,12 +20,12 @@ public class SoftwarePartDetectorService
     public async Task Run()
     {
         if (string.IsNullOrEmpty(_softwarePartDetectorOption.ApplicationName))
-            throw new ArgumentNullException("ApplicationName in SoftwarePartDetectorOption is null");
+            throw new ArgumentNullException("SoftwareName in SoftwarePartDetectorOption is null");
 
         var parts = await _softwarePartDetector.Detect(_softwarePartDetectorOption.ApplicationName,
                                                        _softwarePartDetectorOption.ModuleName,
                                                        _softwarePartDetectorOption.ServiceName);
         if (parts != null)
-            await _partWebPublisher.Publish(parts);
+            await _partWebPublisher.PublishAsync(parts);
     }
 }

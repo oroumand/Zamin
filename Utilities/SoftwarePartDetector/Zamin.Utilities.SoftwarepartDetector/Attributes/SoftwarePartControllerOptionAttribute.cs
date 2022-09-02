@@ -1,12 +1,11 @@
 ﻿namespace Zamin.Utilities.SoftwarePartDetector.Attributes;
 
-[AttributeUsage(AttributeTargets.Class)]
-public class SoftwarePartDetectorAttribute : Attribute
+public class SoftwarePartControllerOptionAttribute : Attribute
 {
     private string? _module { get; set; }
     private string? _service { get; set; }
 
-    public SoftwarePartDetectorAttribute(string? service , string? module = null)
+    public SoftwarePartControllerOptionAttribute(string? service , string? module = null)
     {
         if (string.IsNullOrWhiteSpace(service))
             throw new ArgumentNullException(nameof(service));
