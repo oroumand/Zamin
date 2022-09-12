@@ -1,6 +1,6 @@
 ﻿namespace Zamin.Utilities.Extensions;
 
-public static class GuidExtention
+public static class GuidExtensions
 {
     public static bool IsNullOrEmpty(this Guid? guid) => guid == null || guid == default;
 

@@ -1,6 +1,6 @@
 ﻿namespace Zamin.Utilities.Extensions;
 
-public static class DateTimeExtentions
+public static class DateTimeExtensions
 {
     public static long ToUnixTimeMillisecond(this DateTime dateTime, TimeZoneInfo timeZoneInfo)
         => TimeZoneInfo.ConvertTime(new DateTimeOffset(dateTime), timeZoneInfo).ToUnixTimeMilliseconds();
