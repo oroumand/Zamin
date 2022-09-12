@@ -1,4 +1,6 @@
-﻿namespace Zamin.Utilities.Extensions;
+﻿using System.Globalization;
+
+namespace Zamin.Utilities.Extensions;
 
 public static class DateTimeExtentions
 {
@@ -29,4 +31,9 @@ public static class DateTimeExtentions
     public static DateTime ToUtcDateTime(this long unixTimeMilliseconds) => unixTimeMilliseconds.ToDateTime(TimeZoneInfo.Utc);
 
     public static DateTime? ToUtcDateTime(this long? unixTimeMilliseconds) => unixTimeMilliseconds.ToDateTime(TimeZoneInfo.Utc);
+    public static string ToShamsiDateStirng(this DateTime date)
+    {
+        PersianCalendar persianCalendar = new PersianCalendar();
+        return $"{persianCalendar.GetYear(date)}/{persianCalendar.GetMonth(date)}/{persianCalendar.GetDayOfMonth(date)}";
+    }
 }
