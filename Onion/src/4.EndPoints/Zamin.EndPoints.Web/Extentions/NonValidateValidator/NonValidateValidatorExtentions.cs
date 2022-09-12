@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Zamin.EndPoints.Web.Extentions.NonValidateValidator;
 
@@ -14,11 +13,5 @@ public static class NonValidateValidatorExtentions
             services.Add(new ServiceDescriptor(typeof(IObjectModelValidator), _ => new NonValidatingValidator(), ServiceLifetime.Singleton));
         }
         return services;
-    }
-}
-public class NonValidatingValidator : IObjectModelValidator
-{
-    public void Validate(ActionContext actionContext, ValidationStateDictionary? validationState, string prefix, object? model)
-    {
     }
 }
