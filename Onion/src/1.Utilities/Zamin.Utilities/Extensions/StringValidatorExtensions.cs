@@ -1,7 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
 namespace Zamin.Utilities.Extensions;
-public static class StringValidatorsExtension
+
+public static class StringValidatorExtensions
 {
 
     /// <summary>

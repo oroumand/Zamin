@@ -35,9 +35,9 @@ public static class StringExtensions
     public static int? ToSafeNullableInt(this string input) =>
         int.TryParse(input, out int result) ? result : null;
 
-    public static string ToStringOrEmpty(this string? input)=> input ?? string.Empty;
+    public static string ToStringOrEmpty(this string? input) => input ?? string.Empty;
 
-    public static string ToUnderscoreCase(this string input)=>
+    public static string ToUnderscoreCase(this string input) =>
         string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString())).ToLower();
 
     public static byte[] ToByteArray(this string input)

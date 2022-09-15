@@ -16,21 +16,21 @@ public abstract class BaseQueryDbContext : DbContext
         {
             base.OnModelCreating(modelBuilder);
         }
-        public override int SaveChanges()
+        public sealed override int SaveChanges()
         {
             throw new NotSupportedException();
         }
-        public override int SaveChanges(bool acceptAllChangesOnSuccess)
-        {
-            throw new NotSupportedException();
-
-        }
-        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        public sealed override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             throw new NotSupportedException();
 
         }
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public sealed override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+        {
+            throw new NotSupportedException();
+
+        }
+        public sealed override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             throw new NotSupportedException();
 
