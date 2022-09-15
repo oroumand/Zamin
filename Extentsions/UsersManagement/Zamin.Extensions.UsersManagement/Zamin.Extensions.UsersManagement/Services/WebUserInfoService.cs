@@ -24,16 +24,16 @@ public class WebUserInfoService : IUserInfoService
         => _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
 
     public string UserId()
-        => _httpContextAccessor?.HttpContext.User?.GetClaim(ClaimTypes.NameIdentifier);
+        => _httpContextAccessor?.HttpContext.User?.GetClaim(ClaimTypes.NameIdentifier) ?? string.Empty;
 
     public string GetUsername()
-        => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.Name);
+        => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.Name) ?? string.Empty;
 
     public string GetFirstName()
-        => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.GivenName);
+        => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.GivenName) ?? string.Empty;
 
     public string GetLastName()
-        => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.Surname);
+        => _httpContextAccessor.HttpContext.User?.GetClaim(ClaimTypes.Surname) ?? string.Empty;
 
     public bool IsCurrentUser(string userId)
     {
