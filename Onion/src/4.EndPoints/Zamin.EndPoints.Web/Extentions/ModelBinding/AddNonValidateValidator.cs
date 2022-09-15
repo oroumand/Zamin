@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-
-namespace Zamin.EndPoints.Web.Extentions.NonValidatingValidator;
+using Zamin.EndPoints.Web.ModelBinding;
+namespace Zamin.EndPoints.Web.Extentions.ModelBinding;
 
 public static class NonValidatingValidatorExtentions
 {

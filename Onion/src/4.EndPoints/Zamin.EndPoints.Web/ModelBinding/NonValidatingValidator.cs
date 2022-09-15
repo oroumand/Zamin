@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace Zamin.EndPoints.Web.Extentions.NonValidatingValidator;
+namespace Zamin.EndPoints.Web.ModelBinding;
 
-public class NonValidatingValidator : IObjectModelValidator
+public sealed class NonValidatingValidator : IObjectModelValidator
 {
     public void Validate(ActionContext actionContext, ValidationStateDictionary validationState, string prefix, object model)
     {
