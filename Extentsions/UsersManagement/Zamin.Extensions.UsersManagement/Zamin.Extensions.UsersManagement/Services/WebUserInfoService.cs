@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using Zamin.Extensions.UsersManagement.Extensions;
+using Zamin.Extensions.UsersManagement.Options;
 using Zamin.Extentions.UsersManagement.Abstractions;
 
 namespace Zamin.Extensions.UsersManagement.Services;
@@ -8,13 +10,15 @@ namespace Zamin.Extensions.UsersManagement.Services;
 public class WebUserInfoService : IUserInfoService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly UserManagementOptions _configuration;
 
-    public WebUserInfoService(IHttpContextAccessor httpContextAccessor)
+    public WebUserInfoService(IHttpContextAccessor httpContextAccessor, IOptions<UserManagementOptions> configuration)
     {
         if (httpContextAccessor == null || httpContextAccessor.HttpContext == null)
             throw new ArgumentNullException(nameof(httpContextAccessor));
 
         _httpContextAccessor = httpContextAccessor;
+        _configuration = configuration.Value;
     }
 
     public string GetUserAgent()
@@ -42,4 +46,12 @@ public class WebUserInfoService : IUserInfoService
 
     public string? GetClaim(string claimType)
         => _httpContextAccessor.HttpContext.User?.GetClaim(claimType);
+
+    public string UserIdOrDefault() => UserIdOrDefault(_configuration.DefaultUserId);
+
+    public string UserIdOrDefault(string defaultValue)
+    {
+        string userId = UserId();
+        return string.IsNullOrEmpty(userId) ? defaultValue : userId;
+    }
 }

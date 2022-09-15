@@ -17,7 +17,10 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddZaminWebUserInfoService();
+builder.Services.AddZaminWebUserInfoService(c =>
+{
+    c.DefaultUserId = "1";
+});
 
 var app = builder.Build();
 

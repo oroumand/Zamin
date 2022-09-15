@@ -44,7 +44,10 @@ builder.Services.AddAuthentication("token")
     });
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddZaminWebUserInfoService();
+builder.Services.AddZaminWebUserInfoService(c =>
+{
+    c.DefaultUserId = "1";
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
