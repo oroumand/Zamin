@@ -2,6 +2,16 @@
 
 public class FakeUserInfoService : IUserInfoService
 {
+    private readonly string _defaultUserId;
+
+    public FakeUserInfoService():this("1")
+    {
+
+    }
+    public FakeUserInfoService(string defaultUserId)
+    {
+        _defaultUserId = defaultUserId;
+    }
     public string? GetClaim(string claimType)
     {
         return claimType;
@@ -46,4 +56,8 @@ public class FakeUserInfoService : IUserInfoService
     {
         return "1";
     }
+
+    public string UserIdOrDefault()=>_defaultUserId;
+
+    public string UserIdOrDefault(string defaultValue)=>defaultValue;
 }
