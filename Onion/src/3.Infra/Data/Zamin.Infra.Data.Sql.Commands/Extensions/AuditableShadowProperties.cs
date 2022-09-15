@@ -45,7 +45,7 @@ public static class AuditableShadowProperties
         var userAgent = userInfoService.GetUserAgent();
         var userIp = userInfoService.GetUserIp();
         var now = DateTime.UtcNow;
-        var userId = userInfoService.UserId();
+        var userId = userInfoService.UserIdOrDefault();
 
         var modifiedEntries = changeTracker.Entries<Entity>().Where(x => x.State == EntityState.Modified);
         foreach (var modifiedEntry in modifiedEntries)

@@ -21,7 +21,7 @@ public static class HostingExtensions
             c.ReloadDataIntervalInMinuts = 1;
         });
 
-        builder.Services.AddZaminWebUserInfoService(true);
+        builder.Services.AddZaminWebUserInfoService(c=> { c.DefaultUserId = "1"; },true);
 
         builder.Services.AddZaminAutoMapperProfiles(option =>
         {

@@ -28,7 +28,7 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
                 eventData.Context.Add(new OutBoxEventItem
                 {
                     EventId = Guid.NewGuid(),
-                    AccuredByUserId = userInfoService.UserId().ToString(),
+                    AccuredByUserId = userInfoService.UserIdOrDefault(),
                     AccuredOn = DateTime.Now,
                     AggregateId = aggregate.BusinessId.ToString(),
                     AggregateName = aggregate.GetType().Name,
