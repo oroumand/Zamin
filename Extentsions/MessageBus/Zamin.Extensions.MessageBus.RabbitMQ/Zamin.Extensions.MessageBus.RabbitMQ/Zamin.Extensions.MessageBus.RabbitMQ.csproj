@@ -2,8 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<Version>6.0.0-beta.1</Version>
 		<Nullable>enable</Nullable>
+		<Authors>Alireza Oroumand</Authors>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
