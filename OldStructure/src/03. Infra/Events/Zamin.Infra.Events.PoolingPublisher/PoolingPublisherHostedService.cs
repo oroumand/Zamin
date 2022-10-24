@@ -37,7 +37,6 @@ public class PoolingPublisherHostedService : IHostedService
                     MessageBody = item.EventPayload,
                     MessageId = item.EventId.ToString(),
                     MessageName = item.EventName,
-                    Route = $"{_configuration.ServiceId}.{item.EventName}",
                     Headers = new Dictionary<string, object>
                     {
                         ["AccuredByUserId"] = item.AccuredByUserId,
