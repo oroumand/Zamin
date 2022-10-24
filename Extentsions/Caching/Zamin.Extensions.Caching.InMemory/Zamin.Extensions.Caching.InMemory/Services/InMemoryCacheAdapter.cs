@@ -33,10 +33,10 @@ public class InMemoryCacheAdapter : ICacheAdapter
                          absoluteExpiration.ToString(),
                          slidingExpiration.ToString());
 
-        _memoryCache.Set(key, obj, new MemoryCacheEntryOptions()
+        _memoryCache.Set(key, obj, new MemoryCacheEntryOptions
         {
             AbsoluteExpiration = absoluteExpiration,
-            SlidingExpiration = slidingExpiration
+            SlidingExpiration = slidingExpiration,
         });
     }
 
