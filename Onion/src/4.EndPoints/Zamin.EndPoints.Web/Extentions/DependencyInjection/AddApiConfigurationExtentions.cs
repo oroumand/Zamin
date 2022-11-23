@@ -9,10 +9,7 @@ public static class AddApiConfigurationExtentions
 {
     public static IServiceCollection AddZaminApiCore(this IServiceCollection services, params string[] assemblyNamesForLoad)
     {
-        services.AddControllers(options =>
-        {
-            options.Filters.Add(typeof(TrackActionPerformanceFilter));
-        }).AddFluentValidation();
+        services.AddControllers().AddFluentValidation();
         services.AddZaminDependencies(assemblyNamesForLoad);
 
         return services;
