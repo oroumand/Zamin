@@ -11,7 +11,7 @@ public static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        string cnn = "Server=.; Initial Catalog=MiniBlogDb; User Id=sa; Password=1qaz!QAZ";
+        string cnn = "Server=.; Initial Catalog=MiniBlogDb; User Id=sa; Password=1qaz!QAZ;Encrypt=false";
         builder.Services.AddZaminParrotTranslator(c =>
         {
             c.ConnectionString = cnn;

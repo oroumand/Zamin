@@ -25,11 +25,8 @@ namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
             _translator = translator;
         }
 
-        public async Task Invoke(HttpContext context, IScopeInformation scopeInfo /* other dependencies */)
+        public async Task Invoke(HttpContext context)
         {
-            using IDisposable hostScope = _logger.BeginScope(scopeInfo.HostScopeInfo);
-            using IDisposable requestScope = _logger.BeginScope(scopeInfo.RequestScopeInfo);
-
             try
             {
                 await _next(context);
@@ -37,11 +34,6 @@ namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
             catch (Exception ex)
             {
                 await HandleExceptionAsync(context, ex);
-            }
-            finally
-            {
-                hostScope.Dispose();
-                requestScope.Dispose();
             }
         }
 

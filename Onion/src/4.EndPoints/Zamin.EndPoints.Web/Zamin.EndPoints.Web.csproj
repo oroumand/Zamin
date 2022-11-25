@@ -16,10 +16,6 @@
 		<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="6.0.4" />
 		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.4" />
 		<PackageReference Include="Scrutor" Version="4.1.0" />
-		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
-		<PackageReference Include="Serilog.Sinks.ElasticSearch" Version="8.5.0-alpha0003" />
-		<PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.0" />
-		<PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
 	</ItemGroup>
 
@@ -40,7 +36,6 @@
 		<Using Include="Microsoft.Extensions.Logging" />
 		<Using Include="Microsoft.Extensions.DependencyModel" />
 		<Using Include="System.Reflection" />
-		<Using Include="Serilog" />
 		<Using Include="Zamin.Core.Contracts.ApplicationServices.Commands" />
 		<Using Include="Zamin.Core.Contracts.ApplicationServices.Common" />
 		<Using Include="Zamin.Core.Contracts.ApplicationServices.Queries" />

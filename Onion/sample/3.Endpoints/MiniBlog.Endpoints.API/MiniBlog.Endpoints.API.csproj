@@ -20,6 +20,7 @@
     <PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="6.3.0-beta.2" />
     <PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="6.3.0-beta.5" />
     <PackageReference Include="Zamin.Extensions.UsersManagement" Version="6.3.0-beta.5" />
+    <PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="6.0.0-beta.1" />
   </ItemGroup>
 
   <ItemGroup>
