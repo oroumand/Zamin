@@ -30,7 +30,6 @@ public static class SerilogServiceCollectionExtensions
 
     private static WebApplicationBuilder AddServices(WebApplicationBuilder builder)
     {
-        builder.Services.AddHttpContextAccessor();
         builder.Services.AddTransient<ZaminUserInfoEnricher>();
         builder.Services.AddTransient<ZaminApplicaitonEnricher>();
         

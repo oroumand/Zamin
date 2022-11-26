@@ -1,4 +1,5 @@
 ﻿using Serilog;
+using Zamin.Extensions.DependencyInjection;
 
 namespace Zamin.Utilities.SerilogRegistration.Sample;
 
@@ -7,6 +8,10 @@ public static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddControllers();
+        builder.Services.AddZaminWebUserInfoService(c =>
+        {
+            c.DefaultUserId = "1";
+        }, true) ;
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         return builder.Build();

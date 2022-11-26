@@ -9,6 +9,7 @@ SerilogExtensions.RunWithSerilogExceptionHandling(() =>
         c.ApplicationName = "SerilogRegistration";
         c.ServiceName = "SampleService";
         c.ServiceVersion = "1.0";
+        c.ServiceId= Guid.NewGuid().ToString();
     }).ConfigureServices().ConfigurePipeline();
     app.Run();
 });

@@ -17,6 +17,7 @@ public class ZaminApplicaitonEnricher : ILogEventEnricher
         var applicationNameProperty = propertyFactory.CreateProperty(nameof(_options.ApplicationName), _options.ApplicationName);
         var serviceNameProperty = propertyFactory.CreateProperty(nameof(_options.ServiceName), _options.ServiceName);
         var serviceVersionProperty = propertyFactory.CreateProperty(nameof(_options.ServiceVersion), _options.ServiceVersion);
+        var serviceIdProperty = propertyFactory.CreateProperty(nameof(_options.ServiceId), _options.ServiceId);
         var machineNameProperty = propertyFactory.CreateProperty(nameof(Environment.MachineName), Environment.MachineName);
         var entryPointProperty = propertyFactory.CreateProperty("EntryPoint", Assembly.GetEntryAssembly().GetName().Name);
 
@@ -25,6 +26,7 @@ public class ZaminApplicaitonEnricher : ILogEventEnricher
         logEvent.AddPropertyIfAbsent(serviceVersionProperty);
         logEvent.AddPropertyIfAbsent(machineNameProperty);
         logEvent.AddPropertyIfAbsent(entryPointProperty);
+        logEvent.AddPropertyIfAbsent(serviceIdProperty);
 
     }
 }

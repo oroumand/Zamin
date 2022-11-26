@@ -1,29 +1,39 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Serilog.Core;
 using Serilog.Events;
+using Zamin.Extentions.UsersManagement.Abstractions;
 
 namespace Zamin.Utilities.SerilogRegistration.Enrichers;
 
 public class ZaminUserInfoEnricher : ILogEventEnricher
 {
-    readonly IHttpContextAccessor _httpContextAccessor;
-    public ZaminUserInfoEnricher(IHttpContextAccessor httpContextAccessor)
+    private readonly IUserInfoService _userInfoService;
+
+    public ZaminUserInfoEnricher(IUserInfoService userInfoService)
     {
-        _httpContextAccessor = httpContextAccessor;
+        this._userInfoService = userInfoService;
     }
 
     public void Enrich(LogEvent logEvent, ILogEventPropertyFactory factory)
     {
         string userName;
         string UserId;
+        string UserIp;
 
 
-        userName = _httpContextAccessor?.HttpContext?.User?.Identity?.Name ?? "Unknown";
-        UserId = _httpContextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(a => a.Type == "sub")?.Value ?? "Unknown";
+        userName = _userInfoService.GetUsername();
+        if(string.IsNullOrEmpty(userName))
+        {
+            userName = "Unknown";
+        }
+        UserId = _userInfoService.UserIdOrDefault();
+        UserIp = _userInfoService.GetUserIp();
 
         var userNameProperty = factory.CreateProperty("UserName", userName);
         var userIdProperty = factory.CreateProperty("UserId", UserId);
+        var userIpProperty = factory.CreateProperty("UserIp", UserIp);
         logEvent.AddPropertyIfAbsent(userNameProperty);
         logEvent.AddPropertyIfAbsent(userIdProperty);
+        logEvent.AddPropertyIfAbsent(userIpProperty);
     }
 }
