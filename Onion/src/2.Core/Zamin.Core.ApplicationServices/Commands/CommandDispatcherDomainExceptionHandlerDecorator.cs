@@ -16,13 +16,14 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
     #endregion
 
     #region Constructors
-    public CommandDispatcherDomainExceptionHandlerDecorator(CommandDispatcher commandDispatcher,
-                                                            IServiceProvider serviceProvider,
-                                                            ILogger<CommandDispatcherDomainExceptionHandlerDecorator> logger) : base(commandDispatcher)
+    public CommandDispatcherDomainExceptionHandlerDecorator(IServiceProvider serviceProvider,
+                                                            ILogger<CommandDispatcherDomainExceptionHandlerDecorator> logger)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
+
+    public override int Order => 2;
     #endregion
 
     #region Send Commands
@@ -30,22 +31,22 @@ public class CommandDispatcherDomainExceptionHandlerDecorator : CommandDispatche
     {
         try
         {
-            var result =  _commandDispatcher.Send(command);
+            var result = _commandDispatcher.Send(command);
             return await result;
         }
         catch (DomainStateException ex)
         {
             _logger.LogError(ZaminEventId.DomainValidationException, ex, "Processing of {CommandType} With value {Command} failed at {StartDateTime} because there are domain exceptions.", command.GetType(), command, DateTime.Now);
-            return  DomainExceptionHandlingWithoutReturnValue<TCommand>(ex);
+            return DomainExceptionHandlingWithoutReturnValue<TCommand>(ex);
         }
-        catch(AggregateException ex)
+        catch (AggregateException ex)
         {
-            if(ex.InnerException is DomainStateException domainStateException)
+            if (ex.InnerException is DomainStateException domainStateException)
             {
                 _logger.LogError(ZaminEventId.DomainValidationException, domainStateException, "Processing of {CommandType} With value {Command} failed at {StartDateTime} because there are domain exceptions.", command.GetType(), command, DateTime.Now);
                 return DomainExceptionHandlingWithoutReturnValue<TCommand>(domainStateException);
             }
-            throw ex;          
+            throw ex;
         }
 
     }

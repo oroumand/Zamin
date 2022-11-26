@@ -31,6 +31,7 @@ public class CommandDispatcher : ICommandDispatcher
         {
             _logger.LogDebug("Routing command of type {CommandType} With value {Command}  Start at {StartDateTime}", command.GetType(), command, DateTime.Now);
             var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand>>();
+
             return await handler.Handle(command);
 
         }

@@ -6,15 +6,19 @@ public abstract class CommandDispatcherDecorator : ICommandDispatcher
 {
     #region Fields
     protected ICommandDispatcher _commandDispatcher;
+    public abstract int Order { get;}
     #endregion
 
     #region Constructors
-    public CommandDispatcherDecorator(ICommandDispatcher commandDispatcher)
+    public CommandDispatcherDecorator()
+    {
+    }
+
+    #endregion
+    public void SetCommandDispatcher(ICommandDispatcher commandDispatcher)
     {
         _commandDispatcher = commandDispatcher;
     }
-    #endregion
-
     #region Abstract Send Commands
     public abstract Task<CommandResult> Send<TCommand>(TCommand command) where TCommand : class, ICommand;
 

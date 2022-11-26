@@ -15,13 +15,14 @@ public class CommandDispatcherValidationDecorator : CommandDispatcherDecorator
     #endregion
 
     #region Constructors
-    public CommandDispatcherValidationDecorator(CommandDispatcherDomainExceptionHandlerDecorator commandDispatcher,
-                                                IServiceProvider serviceProvider,
-                                                ILogger<CommandDispatcherValidationDecorator> logger) : base(commandDispatcher)
+    public CommandDispatcherValidationDecorator(IServiceProvider serviceProvider,
+                                                ILogger<CommandDispatcherValidationDecorator> logger)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;
     }
+
+    public override int Order => 1;
     #endregion
 
     #region Send Commands

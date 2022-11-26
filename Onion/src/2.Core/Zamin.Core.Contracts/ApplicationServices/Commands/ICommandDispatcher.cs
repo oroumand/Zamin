@@ -22,4 +22,4 @@ public interface ICommandDispatcher
     /// <returns></returns>
     Task<CommandResult<TData>> Send<TCommand, TData>(TCommand command) where TCommand : class, ICommand<TData>;
 }
-
+     

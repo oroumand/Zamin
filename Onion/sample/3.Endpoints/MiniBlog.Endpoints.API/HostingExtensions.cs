@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MiniBlog.Endpoints.API.CommandDecorator;
 using MiniBlog.Infra.Data.Sql.Commands.Common;
 using MiniBlog.Infra.Data.Sql.Queries.Common;
 using Serilog;
+using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Infra.Data.Sql.Commands.Interceptors;
 
@@ -11,7 +13,7 @@ public static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        string cnn = "Server=.; Initial Catalog=MiniBlogDb; User Id=sa; Password=1qaz!QAZ;Encrypt=false";
+        string cnn = "Server=10.100.8.173; Initial Catalog=MiniBlogDb; User Id=sa; Password=2wsx@WSX;Encrypt=false";
         builder.Services.AddZaminParrotTranslator(c =>
         {
             c.ConnectionString = cnn;
@@ -20,7 +22,7 @@ public static class HostingExtensions
             c.TableName = "ParrotTranslations";
             c.ReloadDataIntervalInMinuts = 1;
         });
-
+        builder.Services.AddSingleton<CommandDispatcherDecorator, CustomCommandDecorator>();
         builder.Services.AddZaminWebUserInfoService(c=> { c.DefaultUserId = "1"; },true);
 
         builder.Services.AddZaminAutoMapperProfiles(option =>

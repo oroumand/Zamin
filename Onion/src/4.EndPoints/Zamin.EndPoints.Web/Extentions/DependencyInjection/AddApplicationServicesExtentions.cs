@@ -26,9 +26,38 @@ public static class AddApplicationServicesExtentions
     private static IServiceCollection AddCommandDispatcherDecorators(this IServiceCollection services)
     {
         services.AddTransient<CommandDispatcher, CommandDispatcher>();
-        services.AddTransient<CommandDispatcherDomainExceptionHandlerDecorator, CommandDispatcherDomainExceptionHandlerDecorator>();
-        services.AddTransient<CommandDispatcherValidationDecorator, CommandDispatcherValidationDecorator>();
-        services.AddTransient<ICommandDispatcher, CommandDispatcherValidationDecorator>();
+        services.AddTransient<CommandDispatcherDecorator, CommandDispatcherDomainExceptionHandlerDecorator>();
+        services.AddTransient<CommandDispatcherDecorator, CommandDispatcherValidationDecorator>();
+
+        services.AddTransient<ICommandDispatcher>(c =>
+        {
+            var commandDispatcher = c.GetRequiredService<CommandDispatcher>();
+            var decorators = c.GetServices<CommandDispatcherDecorator>().ToList();
+            if(decorators?.Any() == true)
+            {
+                decorators = decorators.OrderBy(c=>c.Order).ToList();
+                var listFinalIndex = decorators.Count() - 1;
+                for (int i = 0; i <= listFinalIndex; i++)
+                {
+                    if(i == listFinalIndex)
+                    {
+                        decorators[i].SetCommandDispatcher(commandDispatcher);
+
+                    }
+                    else
+                    {
+                        decorators[i].SetCommandDispatcher(decorators[i + 1]);
+                    }
+                }
+                return decorators[0];
+            }
+            return commandDispatcher;
+            //var domainExceptionDispatcher = c.GetRequiredService<CommandDispatcherDomainExceptionHandlerDecorator>();
+            //domainExceptionDispatcher.SetCommandDispatcher(commandDispatcher);
+            //var validationDispatcher = c.GetRequiredService<CommandDispatcherValidationDecorator>();
+            //validationDispatcher.SetCommandDispatcher(domainExceptionDispatcher);
+            //return validationDispatcher;
+        });
         return services;
     }
 
@@ -40,7 +69,7 @@ public static class AddApplicationServicesExtentions
     {
         services.AddTransient<QueryDispatcher, QueryDispatcher>();
         services.AddTransient<QueryDispatcherDomainExceptionHandlerDecorator, QueryDispatcherDomainExceptionHandlerDecorator>();
-        services.AddTransient<QueryDispatcherValidationDecorator, QueryDispatcherValidationDecorator>();
+        services.AddTransient<QueryDispatcherValidationDecorator, QueryDispatcherValidationDecorator>();        
         services.AddTransient<IQueryDispatcher, QueryDispatcherValidationDecorator>();
         return services;
     }
