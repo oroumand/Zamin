@@ -4,17 +4,27 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>50feefd7-6360-44e7-85b6-bdc2f6fcb980</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Events\**" />
+    <Content Remove="Events\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <None Remove="Events\**" />
+  </ItemGroup>
 
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
 
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
     <PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="6.3.0-beta.2" />
+    <PackageReference Include="Zamin.Extensions.Events.PollingPublisher" Version="6.0.0-beta.5" />
+    <PackageReference Include="Zamin.Extensions.MessageBus.RabbitMQ" Version="6.0.0-beta.1" />
     <PackageReference Include="Zamin.Extensions.ObjectMappers.AutoMapper" Version="6.3.0-beta.2" />
     <PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="6.3.0-beta.3" />
     <PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="6.3.0-beta.2" />

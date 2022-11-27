@@ -12,12 +12,12 @@ public class QueryDispatcherValidationDecorator : QueryDispatcherDecorator
     #region Fields
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<QueryDispatcherValidationDecorator> _logger;
+    public override int Order => 1;
     #endregion
 
     #region Constructors
-    public QueryDispatcherValidationDecorator(QueryDispatcherDomainExceptionHandlerDecorator queryDispatcher,
-                                              IServiceProvider serviceProvider,
-                                              ILogger<QueryDispatcherValidationDecorator> logger) : base(queryDispatcher)
+    public QueryDispatcherValidationDecorator(IServiceProvider serviceProvider,
+                                              ILogger<QueryDispatcherValidationDecorator> logger)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;

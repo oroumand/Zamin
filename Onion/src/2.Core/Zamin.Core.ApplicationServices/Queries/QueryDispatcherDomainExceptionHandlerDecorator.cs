@@ -13,12 +13,12 @@ public class QueryDispatcherDomainExceptionHandlerDecorator : QueryDispatcherDec
     #region Fields
     private readonly IServiceProvider _serviceProvider;
     private readonly ILogger<QueryDispatcherDomainExceptionHandlerDecorator> _logger;
+    public override int Order => 2;
     #endregion
 
     #region Constructors
-    public QueryDispatcherDomainExceptionHandlerDecorator(QueryDispatcher queryDispatcher,
-                                                          IServiceProvider serviceProvider,
-                                                          ILogger<QueryDispatcherDomainExceptionHandlerDecorator> logger) : base(queryDispatcher)
+    public QueryDispatcherDomainExceptionHandlerDecorator(IServiceProvider serviceProvider,
+                                                          ILogger<QueryDispatcherDomainExceptionHandlerDecorator> logger)
     {
         _serviceProvider = serviceProvider;
         _logger = logger;

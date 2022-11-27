@@ -1,6 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
 using System.Data.SqlClient;
-using Zamin.EndPoints.Web.Filters;
 using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
 
 namespace Zamin.Extensions.DependencyInjection;
@@ -14,7 +13,6 @@ public static class AddApiConfigurationExtentions
 
         return services;
     }
-
 
     public static void UseZaminApiExceptionHandler(this IApplicationBuilder app)
     {
@@ -39,8 +37,4 @@ public static class AddApiConfigurationExtentions
         });
 
     }
-
-
-
-
 }

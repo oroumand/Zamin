@@ -1,6 +1,6 @@
-﻿using Zamin.Utilities;
-using Zamin.Core.Contracts.ApplicationServices.Common;
+﻿using Zamin.Core.Contracts.ApplicationServices.Common;
 using Zamin.Core.Contracts.ApplicationServices.Queries;
+using Zamin.Utilities;
 
 namespace Zamin.Core.ApplicationServices.Queries;
 public abstract class QueryHandler<TQuery, TData> : IQueryHandler<TQuery, TData>
@@ -23,7 +23,6 @@ public abstract class QueryHandler<TQuery, TData> : IQueryHandler<TQuery, TData>
         return result;
     }
 
-
     protected virtual Task<QueryResult<TData>> ResultAsync(TData data)
     {
         var status = data != null ? ApplicationServiceStatus.Ok : ApplicationServiceStatus.NotFound;
@@ -40,13 +39,16 @@ public abstract class QueryHandler<TQuery, TData> : IQueryHandler<TQuery, TData>
     {
         _zaminServices = zaminServices;
     }
+
     protected void AddMessage(string message)
     {
         result.AddMessage(_zaminServices.Translator[message]);
     }
+
     protected void AddMessage(string message, params string[] arguments)
     {
         result.AddMessage(_zaminServices.Translator[message, arguments]);
     }
+
     public abstract Task<QueryResult<TData>> Handle(TQuery query);
 }
