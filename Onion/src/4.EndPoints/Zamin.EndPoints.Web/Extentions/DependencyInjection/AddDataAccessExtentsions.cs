@@ -4,7 +4,6 @@
 /// </summary>
 public static class AddDataAccessExtentsions
 {
-
     public static IServiceCollection AddZaminDataAccess(
         this IServiceCollection services,
         IEnumerable<Assembly> assembliesForSearch) =>

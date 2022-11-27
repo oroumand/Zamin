@@ -1,5 +1,4 @@
-﻿using Zamin.Extensions.Logger.Abstractions;
-using Zamin.Utilities;
+﻿using Zamin.Utilities;
 
 namespace Zamin.Extensions.DependencyInjection;
 public static class AddZaminServicesExtentions
@@ -10,5 +9,4 @@ public static class AddZaminServicesExtentions
         services.AddTransient<ZaminServices>();
         return services;
     }
-
 }

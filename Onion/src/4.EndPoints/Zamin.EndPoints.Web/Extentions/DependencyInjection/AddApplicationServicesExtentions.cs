@@ -8,20 +8,18 @@ namespace Zamin.Extensions.DependencyInjection;
 
 public static class AddApplicationServicesExtentions
 {
-    public static IServiceCollection AddZaminApplicationServices(
-        this IServiceCollection services,
-        IEnumerable<Assembly> assembliesForSearch) =>
-        services
-            .AddCommandHandlers(assembliesForSearch)
-            .AddCommandDispatcherDecorators()
-            .AddQueryHandlers(assembliesForSearch)
-            .AddQueryDispatcherDecorators()
-            .AddEventHandlers(assembliesForSearch)
-            .AddFluentValidators(assembliesForSearch);
+    public static IServiceCollection AddZaminApplicationServices(this IServiceCollection services,
+                                                                 IEnumerable<Assembly> assembliesForSearch)
+        => services.AddCommandHandlers(assembliesForSearch)
+                   .AddCommandDispatcherDecorators()
+                   .AddQueryHandlers(assembliesForSearch)
+                   .AddQueryDispatcherDecorators()
+                   .AddEventHandlers(assembliesForSearch)
+                   .AddEventDispatcherDecorators()
+                   .AddFluentValidators(assembliesForSearch);
 
-    private static IServiceCollection AddCommandHandlers(this IServiceCollection services,
-        IEnumerable<Assembly> assembliesForSearch) =>
-        services.AddWithTransientLifetime(assembliesForSearch, typeof(ICommandHandler<>), typeof(ICommandHandler<,>));
+    private static IServiceCollection AddCommandHandlers(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
+        => services.AddWithTransientLifetime(assembliesForSearch, typeof(ICommandHandler<>), typeof(ICommandHandler<,>));
 
     private static IServiceCollection AddCommandDispatcherDecorators(this IServiceCollection services)
     {
@@ -33,13 +31,13 @@ public static class AddApplicationServicesExtentions
         {
             var commandDispatcher = c.GetRequiredService<CommandDispatcher>();
             var decorators = c.GetServices<CommandDispatcherDecorator>().ToList();
-            if(decorators?.Any() == true)
+            if (decorators?.Any() == true)
             {
-                decorators = decorators.OrderBy(c=>c.Order).ToList();
-                var listFinalIndex = decorators.Count() - 1;
+                decorators = decorators.OrderBy(c => c.Order).ToList();
+                var listFinalIndex = decorators.Count - 1;
                 for (int i = 0; i <= listFinalIndex; i++)
                 {
-                    if(i == listFinalIndex)
+                    if (i == listFinalIndex)
                     {
                         decorators[i].SetCommandDispatcher(commandDispatcher);
 
@@ -52,32 +50,83 @@ public static class AddApplicationServicesExtentions
                 return decorators[0];
             }
             return commandDispatcher;
-            //var domainExceptionDispatcher = c.GetRequiredService<CommandDispatcherDomainExceptionHandlerDecorator>();
-            //domainExceptionDispatcher.SetCommandDispatcher(commandDispatcher);
-            //var validationDispatcher = c.GetRequiredService<CommandDispatcherValidationDecorator>();
-            //validationDispatcher.SetCommandDispatcher(domainExceptionDispatcher);
-            //return validationDispatcher;
         });
         return services;
     }
 
-    private static IServiceCollection AddQueryHandlers(this IServiceCollection services,
-        IEnumerable<Assembly> assembliesForSearch) =>
-        services.AddWithTransientLifetime(assembliesForSearch, typeof(IQueryHandler<,>), typeof(IQueryDispatcher));
+    private static IServiceCollection AddQueryHandlers(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
+        => services.AddWithTransientLifetime(assembliesForSearch, typeof(IQueryHandler<,>));
 
     private static IServiceCollection AddQueryDispatcherDecorators(this IServiceCollection services)
     {
         services.AddTransient<QueryDispatcher, QueryDispatcher>();
-        services.AddTransient<QueryDispatcherDomainExceptionHandlerDecorator, QueryDispatcherDomainExceptionHandlerDecorator>();
-        services.AddTransient<QueryDispatcherValidationDecorator, QueryDispatcherValidationDecorator>();        
-        services.AddTransient<IQueryDispatcher, QueryDispatcherValidationDecorator>();
+        services.AddTransient<QueryDispatcherDecorator, QueryDispatcherDomainExceptionHandlerDecorator>();
+        services.AddTransient<QueryDispatcherDecorator, QueryDispatcherValidationDecorator>();
+
+        services.AddTransient<IQueryDispatcher>(c =>
+        {
+            var queryDispatcher = c.GetRequiredService<QueryDispatcher>();
+            var decorators = c.GetServices<QueryDispatcherDecorator>().ToList();
+            if (decorators?.Any() == true)
+            {
+                decorators = decorators.OrderBy(c => c.Order).ToList();
+                var listFinalIndex = decorators.Count - 1;
+                for (int i = 0; i <= listFinalIndex; i++)
+                {
+                    if (i == listFinalIndex)
+                    {
+                        decorators[i].SetQueryDispatcher(queryDispatcher);
+
+                    }
+                    else
+                    {
+                        decorators[i].SetQueryDispatcher(decorators[i + 1]);
+                    }
+                }
+                return decorators[0];
+            }
+            return queryDispatcher;
+        });
         return services;
     }
 
-    private static IServiceCollection AddEventHandlers(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch) =>
-           services.AddWithTransientLifetime(assembliesForSearch, typeof(IDomainEventHandler<>), typeof(IEventDispatcher));
+    private static IServiceCollection AddEventHandlers(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
+        => services.AddWithTransientLifetime(assembliesForSearch, typeof(IDomainEventHandler<>));
 
-    private static IServiceCollection AddFluentValidators(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch) =>
-    services.AddValidatorsFromAssemblies(assembliesForSearch);
+    private static IServiceCollection AddEventDispatcherDecorators(this IServiceCollection services)
+    {
+        services.AddTransient<EventDispatcher, EventDispatcher>();
+        services.AddTransient<EventDispatcherDecorator, EventDispatcherDomainExceptionHandlerDecorator>();
+        services.AddTransient<EventDispatcherDecorator, EventDispatcherValidationDecorator>();
+
+        services.AddTransient<IEventDispatcher>(c =>
+        {
+            var queryDispatcher = c.GetRequiredService<EventDispatcher>();
+            var decorators = c.GetServices<EventDispatcherDecorator>().ToList();
+            if (decorators?.Any() == true)
+            {
+                decorators = decorators.OrderBy(c => c.Order).ToList();
+                var listFinalIndex = decorators.Count - 1;
+                for (int i = 0; i <= listFinalIndex; i++)
+                {
+                    if (i == listFinalIndex)
+                    {
+                        decorators[i].SetEventDispatcher(queryDispatcher);
+
+                    }
+                    else
+                    {
+                        decorators[i].SetEventDispatcher(decorators[i + 1]);
+                    }
+                }
+                return decorators[0];
+            }
+            return queryDispatcher;
+        });
+        return services;
+    }
+
+    private static IServiceCollection AddFluentValidators(this IServiceCollection services, IEnumerable<Assembly> assembliesForSearch)
+        => services.AddValidatorsFromAssemblies(assembliesForSearch);
 }
 
