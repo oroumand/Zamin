@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PersonContext>(c => c.UseSqlServer("Server=10.100.8.173;User Id=sa;Password=2wsx@WSX; Initial catalog=PersonDbTrace;Encrypt=false"));
 builder.Services.AddZaminTraceJeager(c =>
 {
-    c.AgentHost= "10.100.7.201";
+    c.AgentHost= "localhost";
     c.ApplicationName = "Zamin";
     c.ServiceName = "OpenTelemetrySample";
     c.ServiceVersion= "1.0.0";
