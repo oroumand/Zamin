@@ -1,15 +1,11 @@
-﻿using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using MiniBlog.Core.ApplicationService.Blogs.Events;
+﻿using Microsoft.EntityFrameworkCore;
 using MiniBlog.Endpoints.API.CustomDecorators;
-using MiniBlog.Endpoints.API.Events;
 using MiniBlog.Infra.Data.Sql.Commands.Common;
 using MiniBlog.Infra.Data.Sql.Queries.Common;
 using Serilog;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Events;
 using Zamin.Core.ApplicationServices.Queries;
-using Zamin.EndPoints.Web.Extentions.DependencyInjection;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Infra.Data.Sql.Commands.Interceptors;
 
@@ -50,21 +46,22 @@ public static class HostingExtensions
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
 
-        builder.Services.AddZaminRabbitMqMessageBus(c =>
-        {
-            c.PerssistMessage = true;
-            c.ExchangeName = "SampleExchange";
-            c.ApplicationName = "SampleApplciatoin";
-            c.Url = @"amqp://guest:guest@localhost:5672/";
-        });
+        //builder.Services.AddZaminRabbitMqMessageBus(c =>
+        //{
+        //    c.PerssistMessage = true;
+        //    c.ExchangeName = "SampleExchange";
+        //    c.ApplicationName = "SampleApplciatoin";
+        //    c.Url = @"amqp://guest:guest@localhost:5672/";
+        //});
 
-        builder.Services.AddZaminPollingPublisher(c =>
-        {
-            c.ApplicationName = "SampleApplciatoin";
-            c.ConnectionString = cnn;
-            c.SelectCommand = "SELECT TOP (@Count) * FROM [MiniBlogDb].[dbo].[OutBoxEventItems] WHERE IsProcessed = 0";
-            c.UpdateCommand = "UPDATE [MiniBlogDb].[dbo].[OutBoxEventItems] SET IsProcessed = 1 WHERE OutBoxEventItemId In @Ids";
-        });
+        //builder.Services.AddZaminPollingPublisher(c =>
+        //{
+        //    c.ApplicationName = "SampleApplciatoin";
+        //    c.ConnectionString = cnn;
+        //    c.SelectCommand = "SELECT TOP (@Count) * FROM [MiniBlogDb].[dbo].[OutBoxEventItems] WHERE IsProcessed = 0";
+        //    c.UpdateCommand = "UPDATE [MiniBlogDb].[dbo].[OutBoxEventItems] SET IsProcessed = 1 WHERE OutBoxEventItemId In @Ids";
+        //});
+
         builder.Services.AddSwaggerGen();
         return builder.Build();
     }
