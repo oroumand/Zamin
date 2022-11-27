@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetryRegistration", "OpenTelemetryRegistration\OpenTelemetryRegistration.csproj", "{BAB2EF21-E1D3-4EFD-84EB-29835140B8AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetryRegistration.Sample", "OpenTelemetryRegistration.Sample\OpenTelemetryRegistration.Sample.csproj", "{9AECEBA8-E998-4109-8DF1-5EAA5A57F0D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BAB2EF21-E1D3-4EFD-84EB-29835140B8AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAB2EF21-E1D3-4EFD-84EB-29835140B8AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAB2EF21-E1D3-4EFD-84EB-29835140B8AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAB2EF21-E1D3-4EFD-84EB-29835140B8AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AECEBA8-E998-4109-8DF1-5EAA5A57F0D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AECEBA8-E998-4109-8DF1-5EAA5A57F0D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AECEBA8-E998-4109-8DF1-5EAA5A57F0D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AECEBA8-E998-4109-8DF1-5EAA5A57F0D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F67115B-9360-43A1-81EF-091A281F8918}
+	EndGlobalSection
+EndGlobal
