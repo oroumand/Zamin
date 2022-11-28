@@ -41,7 +41,7 @@ public class QueryDispatcher : IQueryDispatcher
         finally
         {
             _stopwatch.Stop();
-            _logger.LogInformation(ZaminEventId.PerformanceMeasurement, "Processing the {QueryType} command tooks {Millisecconds} Millisecconds", query.GetType(), _stopwatch.ElapsedMilliseconds);
+            _logger.LogInformation(ZaminEventId.PerformanceMeasurement, "Processing the {QueryType} query tooks {Millisecconds} Millisecconds", query.GetType(), _stopwatch.ElapsedMilliseconds);
         }
     }
     #endregion

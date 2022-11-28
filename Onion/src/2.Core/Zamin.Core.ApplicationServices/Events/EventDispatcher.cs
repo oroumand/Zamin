@@ -47,7 +47,7 @@ public class EventDispatcher : IEventDispatcher
         finally
         {
             _stopwatch.Stop();
-            _logger.LogDebug("Total number of handler for {EventType} is {Count}", @event.GetType(), counter);
+            _logger.LogDebug("Total number of handler for {EventType} is {Count} ,EventHandlers tooks {Millisecconds} Millisecconds", @event.GetType(), counter, _stopwatch.ElapsedMilliseconds);
         }
     }
     #endregion

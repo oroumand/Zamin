@@ -2,6 +2,7 @@
 using MiniBlog.Endpoints.API.CustomDecorators;
 using MiniBlog.Infra.Data.Sql.Commands.Common;
 using MiniBlog.Infra.Data.Sql.Queries.Common;
+using OpenTelemetryRegistration.Extensions.DependencyInjection;
 using Serilog;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Events;
@@ -61,6 +62,15 @@ public static class HostingExtensions
         //    c.SelectCommand = "SELECT TOP (@Count) * FROM [MiniBlogDb].[dbo].[OutBoxEventItems] WHERE IsProcessed = 0";
         //    c.UpdateCommand = "UPDATE [MiniBlogDb].[dbo].[OutBoxEventItems] SET IsProcessed = 1 WHERE OutBoxEventItemId In @Ids";
         //});
+
+        builder.Services.AddZaminTraceJeager(c =>
+        {
+            c.AgentHost = "localhost";
+            c.ApplicationName = "Zamin";
+            c.ServiceName = "OpenTelemetrySample";
+            c.ServiceVersion = "1.0.0";
+            c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
+        });
 
         builder.Services.AddSwaggerGen();
         return builder.Build();

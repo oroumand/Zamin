@@ -27,17 +27,17 @@ public class QueryDispatcherValidationDecorator : QueryDispatcherDecorator
     #region Query Dispatcher
     public override async Task<QueryResult<TData>> Execute<TQuery, TData>(TQuery query)
     {
-        _logger.LogDebug(ZaminEventId.CommandValidation, "Validating query of type {QueryType} With value {Query}  start at :{StartDateTime}", query.GetType(), query, DateTime.Now);
+        _logger.LogDebug(ZaminEventId.QueryValidation, "Validating query of type {QueryType} With value {Query}  start at :{StartDateTime}", query.GetType(), query, DateTime.Now);
 
         var validationResult = Validate<TQuery, QueryResult<TData>>(query);
 
         if (validationResult != null)
         {
-            _logger.LogInformation(ZaminEventId.CommandValidation, "Validating query of type {QueryType} With value {Query}  failed. Validation errors are: {ValidationErrors}", query.GetType(), query, validationResult.Messages);
+            _logger.LogInformation(ZaminEventId.QueryValidation, "Validating query of type {QueryType} With value {Query}  failed. Validation errors are: {ValidationErrors}", query.GetType(), query, validationResult.Messages);
             return validationResult;
         }
 
-        _logger.LogDebug(ZaminEventId.CommandValidation, "Validating query of type {QueryType} With value {Query}  finished at :{EndDateTime}", query.GetType(), query, DateTime.Now);
+        _logger.LogDebug(ZaminEventId.QueryValidation, "Validating query of type {QueryType} With value {Query}  finished at :{EndDateTime}", query.GetType(), query, DateTime.Now);
         return await _queryDispatcher.Execute<TQuery, TData>(query);
     }
     #endregion
