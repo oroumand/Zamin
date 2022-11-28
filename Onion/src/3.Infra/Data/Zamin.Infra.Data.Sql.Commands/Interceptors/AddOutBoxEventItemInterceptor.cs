@@ -23,7 +23,7 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
         foreach (var aggregate in changedAggregates)
         {
             var events = aggregate.GetEvents();
-            foreach (var @event in events)
+            foreach (object @event in events)
             {
                 eventData.Context.Add(new OutBoxEventItem
                 {
