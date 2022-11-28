@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OpenTelemetryRegistration.Sample.Models;
+using Zamin.Utilities.OpenTelemetryRegistration.Sample.Models;
 
-namespace OpenTelemetryRegistration.Sample.Controllers
+namespace Zamin.Utilities.OpenTelemetryRegistration.Sample.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -21,7 +21,7 @@ namespace OpenTelemetryRegistration.Sample.Controllers
         }
         [HttpPost(Name = "SavePerson")]
 
-        public async Task<IActionResult> Save([FromBody]Person person)
+        public async Task<IActionResult> Save([FromBody] Person person)
         {
             await context.People.AddAsync(person);
             await context.SaveChangesAsync();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
-namespace OpenTelemetryRegistration.Sample.Models
+namespace Zamin.Utilities.OpenTelemetryRegistration.Sample.Models
 {
     public class Person
     {
@@ -12,7 +12,7 @@ namespace OpenTelemetryRegistration.Sample.Models
 
     }
 
-    public class PersonContext:DbContext
+    public class PersonContext : DbContext
     {
         public PersonContext(DbContextOptions options) : base(options)
         {

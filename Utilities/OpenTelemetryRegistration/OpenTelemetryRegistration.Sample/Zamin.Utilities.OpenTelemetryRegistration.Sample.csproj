@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OpenTelemetryRegistration\OpenTelemetryRegistration.csproj" />
+    <ProjectReference Include="..\OpenTelemetryRegistration\Zamin.Utilities.OpenTelemetryRegistration.csproj" />
   </ItemGroup>
 
 </Project>

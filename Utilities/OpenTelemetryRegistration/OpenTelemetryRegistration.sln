@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetryRegistration", "OpenTelemetryRegistration\OpenTelemetryRegistration.csproj", "{BAB2EF21-E1D3-4EFD-84EB-29835140B8AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Utilities.OpenTelemetryRegistration", "OpenTelemetryRegistration\Zamin.Utilities.OpenTelemetryRegistration.csproj", "{BAB2EF21-E1D3-4EFD-84EB-29835140B8AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTelemetryRegistration.Sample", "OpenTelemetryRegistration.Sample\OpenTelemetryRegistration.Sample.csproj", "{9AECEBA8-E998-4109-8DF1-5EAA5A57F0D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Utilities.OpenTelemetryRegistration.Sample", "OpenTelemetryRegistration.Sample\Zamin.Utilities.OpenTelemetryRegistration.Sample.csproj", "{9AECEBA8-E998-4109-8DF1-5EAA5A57F0D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

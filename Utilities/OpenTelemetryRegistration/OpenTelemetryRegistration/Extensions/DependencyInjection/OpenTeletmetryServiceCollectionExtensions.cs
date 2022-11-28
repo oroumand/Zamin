@@ -5,9 +5,9 @@ using Microsoft.Extensions.Options;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using OpenTelemetryRegistration.Options;
+using Zamin.Utilities.OpenTelemetryRegistration.Options;
 
-namespace OpenTelemetryRegistration.Extensions.DependencyInjection;
+namespace Zamin.Utilities.OpenTelemetryRegistration.Extensions.DependencyInjection;
 public static class OpenTeletmetryServiceCollectionExtensions
 {
     public static IServiceCollection AddZaminTraceJeager(this IServiceCollection services, IConfiguration configuration)
@@ -46,12 +46,12 @@ public static class OpenTeletmetryServiceCollectionExtensions
                 c.AgentHost = options.AgentHost;
                 c.AgentPort = options.AgentPort;
                 c.ExportProcessorType = options.ExportProcessorType;
-                c.MaxPayloadSizeInBytes = options.MaxPayloadSizeInBytes;                
+                c.MaxPayloadSizeInBytes = options.MaxPayloadSizeInBytes;
             })
             .AddSource(serviceName)
             .SetResourceBuilder(
                 ResourceBuilder.CreateDefault()
-                    .AddService(serviceName: serviceName, serviceVersion: options.ServiceVersion,serviceInstanceId:options.ServiceId))
+                    .AddService(serviceName: serviceName, serviceVersion: options.ServiceVersion, serviceInstanceId: options.ServiceId))
             .AddHttpClientInstrumentation()
             .AddAspNetCoreInstrumentation()
             .AddSqlClientInstrumentation()

@@ -1,6 +1,6 @@
 ﻿using OpenTelemetry;
 
-namespace OpenTelemetryRegistration.Options;
+namespace Zamin.Utilities.OpenTelemetryRegistration.Options;
 public class OpenTeletmetryOptions
 {
     public string ApplicationName { get; set; }
