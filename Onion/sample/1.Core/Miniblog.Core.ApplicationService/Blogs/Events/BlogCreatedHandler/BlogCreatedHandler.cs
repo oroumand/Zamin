@@ -2,6 +2,7 @@
 using MiniBlog.Core.Contracts.Blogs.Commands;
 using MiniBlog.Core.Domain.Blogs.Entities;
 using MiniBlog.Core.Domain.Blogs.Events;
+using System.Diagnostics;
 using Zamin.Core.Contracts.ApplicationServices.Events;
 using Zamin.Utilities;
 
@@ -19,6 +20,8 @@ public class BlogCreatedHandler : IDomainEventHandler<BlogCreated>
     }
     public async Task Handle(BlogCreated Event)
     {
+        var activity = Activity.Current;
+
         Person person = new Person
         {
             FirstName = "Arash",

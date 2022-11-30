@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using System.Diagnostics;
 using Zamin.Extensions.MessageBus.RabbitMQ.Options;
@@ -13,14 +14,16 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
         #region Fields And Properties
         private readonly IModel _channel;
         private readonly IJsonSerializer _jsonSerializer;
+        private readonly ILogger<RabbitMqSendMessageBus> _logger;
         private readonly RabbitMqOptions _rabbitMqOptions;
         #endregion
 
         #region Constructors
 
-        public RabbitMqSendMessageBus(IConnection connection, IJsonSerializer jsonSerializer, IOptions<RabbitMqOptions> rabbitMqOptions)
+        public RabbitMqSendMessageBus(IConnection connection, IJsonSerializer jsonSerializer, IOptions<RabbitMqOptions> rabbitMqOptions,ILogger<RabbitMqSendMessageBus> logger)
         {
             _jsonSerializer = jsonSerializer;
+            _logger = logger;
             _rabbitMqOptions = rabbitMqOptions.Value;
             _channel = connection.CreateModel();
             _channel.ExchangeDeclare(_rabbitMqOptions.ExchangeName, ExchangeType.Topic, true, false, null);
@@ -91,6 +94,7 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
             basicProperties.Headers = parcel?.Headers;
             basicProperties.Type = parcel.MessageName;
             _channel.BasicPublish(_rabbitMqOptions.ExchangeName, parcel.Route, basicProperties, parcel.MessageBody.ToByteArray());
+            _logger.LogDebug("Message Sent {MessageName}",parcel.MessageName);
         }
         #endregion
 

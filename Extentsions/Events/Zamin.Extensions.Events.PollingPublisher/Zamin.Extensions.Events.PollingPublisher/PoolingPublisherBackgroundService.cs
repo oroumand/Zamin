@@ -79,7 +79,7 @@ namespace Zamin.Extensions.Events.PollingPublisher
             var trace = new Activity("PublishUsingPoolingPublisher");
             if (item.TraceId != null && item.SpanId != null)
             {
-                trace.SetParentId(ActivityTraceId.CreateFromBytes(System.Text.Encoding.UTF8.GetBytes(item.TraceId)), ActivitySpanId.CreateFromBytes(System.Text.Encoding.UTF8.GetBytes(item.SpanId)));
+                trace.SetParentId($"00-{item.TraceId}-{item.SpanId}-00");
             }
             trace.Start();
             return trace;
