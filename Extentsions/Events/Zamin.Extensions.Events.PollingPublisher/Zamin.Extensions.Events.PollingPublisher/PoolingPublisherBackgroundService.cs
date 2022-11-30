@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
 using Zamin.Extensions.Events.PollingPublisher.DataAccess;
+using Zamin.Extensions.Events.PollingPublisher.Model;
 using Zamin.Extensions.Events.PollingPublisher.Options;
 using Zamin.Extentions.MessageBus.Abstractions;
 
@@ -34,13 +36,14 @@ namespace Zamin.Extensions.Events.PollingPublisher
                     var outboxItems = _outBoxEventItemRepository.GetOutBoxEventItemsForPublishe(_options.SendCount);
                     foreach (var item in outboxItems)
                     {
+                        using Activity trace = StartChildActivity(item);
                         _sendMessageBus.Send(new Parcel
                         {
                             CorrelationId = item.AggregateId,
                             MessageBody = item.EventPayload,
                             MessageId = item.EventId.ToString(),
                             MessageName = item.EventName,
-                            Route = $"{_options.ApplicationName}.{item.EventName}",
+                            Route = $"{_options.ApplicationName}.event.{item.EventName}",
                             Headers = new Dictionary<string, object>
                             {
                                 ["AccuredByUserId"] = item.AccuredByUserId,
@@ -52,7 +55,6 @@ namespace Zamin.Extensions.Events.PollingPublisher
                         });
                         item.IsProcessed = true;
                         _logger.LogDebug("event {eventName} with {EventId} sent from {ApplicaotinName} at {DateTime}", item.EventName, item.EventId, _options.ApplicationName, DateTime.Now);
-
                     }
                     _outBoxEventItemRepository.MarkAsRead(outboxItems);
                     if (outboxItems.Any())
@@ -70,6 +72,17 @@ namespace Zamin.Extensions.Events.PollingPublisher
 
             }
             _logger.LogInformation("PoolingPublisherBackgroundService stop working for {ApplicationName} at {DateTime}", _options.ApplicationName, DateTime.Now);
+        }
+
+        private static Activity StartChildActivity(OutBoxEventItem item)
+        {
+            var trace = new Activity("PublishUsingPoolingPublisher");
+            if (item.TraceId != null && item.SpanId != null)
+            {
+                trace.SetParentId(ActivityTraceId.CreateFromBytes(System.Text.Encoding.UTF8.GetBytes(item.TraceId)), ActivitySpanId.CreateFromBytes(System.Text.Encoding.UTF8.GetBytes(item.SpanId)));
+            }
+            trace.Start();
+            return trace;
         }
     }
 }

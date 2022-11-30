@@ -81,7 +81,7 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
         {
             if (parcel is null)
                 throw new ArgumentNullException(nameof(parcel));
-            Activity childActivity = StartActivity(parcel);
+            Activity childActivity = StartChildActivity(parcel);
             AddActivityHeaders(parcel, childActivity);
 
             var basicProperties = _channel.CreateBasicProperties();
@@ -107,7 +107,7 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
             }
         }
 
-        private Activity StartActivity(Parcel parcel)
+        private Activity StartChildActivity(Parcel parcel)
         {
             var child = new Activity("SendParcel");
             child.AddTag("ParcelName", parcel.MessageName);
