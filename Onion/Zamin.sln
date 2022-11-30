@@ -55,7 +55,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBlog.Infra.Data.Sql.Que
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Endpoints", "3. Endpoints", "{6B3484A3-098C-4922-9CE1-501F05B9A683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.Endpoints.API", "sample\3.Endpoints\MiniBlog.Endpoints.API\MiniBlog.Endpoints.API.csproj", "{0A096841-155A-4A97-A47B-69B4C9452A58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBlog.Endpoints.API", "sample\3.Endpoints\MiniBlog.Endpoints.API\MiniBlog.Endpoints.API.csproj", "{0A096841-155A-4A97-A47B-69B4C9452A58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

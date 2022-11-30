@@ -1,4 +1,6 @@
 using Zamin.Extensions.DependencyInjection;
+using Zamin.Extensions.MessageBus.RabbitMQ.Sample.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +11,7 @@ builder.Services.AddZaminRabbitMqMessageBus(c =>
 {
     c.PerssistMessage = true;
     c.ExchangeName = "SampleExchange";
-    c.ApplicationName = "SampleApplciatoin";
+    c.ServiceName = "SampleApplciatoin";
     c.Url = @"amqp://guest:guest@localhost:5672/";
 });
 
@@ -18,7 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
+app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("SampleApplciatoin", "PersonEvent"));
+app.Services.ReceiveCommandFromRabbitMqMessageBus("PersonCommand");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

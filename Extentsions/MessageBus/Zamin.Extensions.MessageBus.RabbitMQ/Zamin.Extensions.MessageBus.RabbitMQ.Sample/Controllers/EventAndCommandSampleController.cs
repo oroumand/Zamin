@@ -20,5 +20,12 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ.Sample.Controllers
             _sendMessageBus.Publish(personEvent);
             return Ok();
         }
+
+        [HttpPost("SendCommand")]
+        public IActionResult SendCommand([FromBody] PersonCommand PersonCommand)
+        {
+            _sendMessageBus.SendCommandTo("SampleApplciatoin", "PersonCommand", PersonCommand);
+            return Ok();
+        }
     }
 }

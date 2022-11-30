@@ -47,21 +47,26 @@ public static class HostingExtensions
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
 
-        //builder.Services.AddZaminRabbitMqMessageBus(c =>
-        //{
-        //    c.PerssistMessage = true;
-        //    c.ExchangeName = "SampleExchange";
-        //    c.ApplicationName = "SampleApplciatoin";
-        //    c.Url = @"amqp://guest:guest@localhost:5672/";
-        //});
+        builder.Services.AddZaminRabbitMqMessageBus(c =>
+        {
+            c.PerssistMessage = true;
+            c.ExchangeName = "MiniBlogExchange";
+            c.ServiceName = "MiniBlog";
+            c.Url = @"amqp://guest:guest@localhost:5672/";
+        });
 
-        //builder.Services.AddZaminPollingPublisher(c =>
-        //{
-        //    c.ApplicationName = "SampleApplciatoin";
-        //    c.ConnectionString = cnn;
-        //    c.SelectCommand = "SELECT TOP (@Count) * FROM [MiniBlogDb].[dbo].[OutBoxEventItems] WHERE IsProcessed = 0";
-        //    c.UpdateCommand = "UPDATE [MiniBlogDb].[dbo].[OutBoxEventItems] SET IsProcessed = 1 WHERE OutBoxEventItemId In @Ids";
-        //});
+        builder.Services.AddZaminPollingPublisher(c =>
+        {
+            c.ApplicationName = "MiniBlog";
+            c.ConnectionString = cnn;
+            c.SelectCommand = "SELECT TOP (@Count) * FROM [MiniBlogDb].[dbo].[OutBoxEventItems] WHERE IsProcessed = 0";
+            c.UpdateCommand = "UPDATE [MiniBlogDb].[dbo].[OutBoxEventItems] SET IsProcessed = 1 WHERE OutBoxEventItemId In @Ids";
+        });
+        builder.Services.AddZaminMessageInbox(c =>
+        {
+            c.ApplicationName = "MiniBlog";
+            c.ConnectionString = cnn;
+        });
 
         builder.Services.AddZaminTraceJeager(c =>
         {
@@ -71,7 +76,7 @@ public static class HostingExtensions
             c.ServiceVersion = "1.0.0";
             c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
         });
-
+        
         builder.Services.AddSwaggerGen();
         return builder.Build();
     }
@@ -92,7 +97,7 @@ public static class HostingExtensions
         app.UseAuthorization();
 
         app.MapControllers();
-
+        app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
         return app;
     }

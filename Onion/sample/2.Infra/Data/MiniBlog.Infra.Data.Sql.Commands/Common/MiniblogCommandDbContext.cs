@@ -8,6 +8,7 @@ namespace MiniBlog.Infra.Data.Sql.Commands.Common
     public class MiniblogCommandDbContext : BaseOutboxCommandDbContext
     {
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Person> People { get; set; }
         public MiniblogCommandDbContext(DbContextOptions<MiniblogCommandDbContext> options) : base(options)
         {
         }

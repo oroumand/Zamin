@@ -14,4 +14,5 @@ namespace MiniBlog.Core.Domain.Blogs.Events
             Description = description;
         }
     }
+
 }
