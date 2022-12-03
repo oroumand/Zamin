@@ -2,13 +2,13 @@
 
 public class FakeMessageConsumer : IMessageConsumer
 {
-    public bool ConsumeCommand(string sender, Parcel parcel)
+    public async Task<bool> ConsumeCommandAsync(string sender, Parcel parcel)
     {
         Consume("command", sender, parcel);
         return true;
     }
 
-    public bool ConsumeEvent(string sender, Parcel parcel)
+    public async Task<bool> ConsumeEventAsync(string sender, Parcel parcel)
     {
         Consume("event", sender, parcel);
         return true;

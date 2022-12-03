@@ -2,7 +2,7 @@
 
 public interface IMessageConsumer
 {
-    bool ConsumeEvent(string sender, Parcel parcel);
+    Task<bool> ConsumeEventAsync(string sender, Parcel parcel);
 
-    bool ConsumeCommand(string sender, Parcel parcel);
+    Task<bool> ConsumeCommandAsync(string sender, Parcel parcel);
 }
