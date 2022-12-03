@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zamin.Extensions.MessageBus.MessageInbox.Sql\Zamin.Extensions.MessageBus.MessageInbox.Sql.csproj" />
     <ProjectReference Include="..\Zamin.Extensions.MessageBus.MessageInbox\Zamin.Extensions.MessageBus.MessageInbox.csproj" />
   </ItemGroup>
 

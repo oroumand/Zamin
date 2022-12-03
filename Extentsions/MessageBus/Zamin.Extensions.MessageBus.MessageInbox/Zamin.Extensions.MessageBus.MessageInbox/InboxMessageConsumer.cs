@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.DependencyModel;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System.Reflection;
 using Zamin.Core.Contracts.ApplicationServices.Commands;
 using Zamin.Core.Contracts.ApplicationServices.Events;
 using Zamin.Core.Domain.Events;
-using Zamin.Extensions.MessageBus.MessageInbox.DataAccess;
-using Zamin.Extensions.MessageBus.MessageInbox.Options;
+using Zamin.Extensions.MessageBus.MessageInbox.Abstractions;
+using Zamin.Extensions.MessageBus.MessageInbox.Abstractions.Options;
 using Zamin.Extentions.MessageBus.Abstractions;
 using Zamin.Extentions.Serializers.Abstractions;
 
@@ -19,7 +18,12 @@ public class InboxMessageConsumer : IMessageConsumer
     private readonly IMessageInboxItemRepository _messageInboxItemRepository;
     private readonly List<Type> _domainEventTypes = new();
     private readonly List<Type> _commandTypes = new();
-    public InboxMessageConsumer(IOptions<MessageInboxOptions> messageInboxOptions,  IJsonSerializer jsonSerializer, IMessageInboxItemRepository messageInboxItemRepository, ICommandDispatcher commandDispatcher=null, IEventDispatcher eventDispatcher = null)
+
+    public InboxMessageConsumer(IOptions<MessageInboxOptions> messageInboxOptions,
+                                IJsonSerializer jsonSerializer,
+                                IMessageInboxItemRepository messageInboxItemRepository,
+                                ICommandDispatcher commandDispatcher = null,
+                                IEventDispatcher eventDispatcher = null)
     {
         _messageInboxOptions = messageInboxOptions.Value;
         _eventDispatcher = eventDispatcher;
@@ -31,7 +35,7 @@ public class InboxMessageConsumer : IMessageConsumer
         _commandTypes.AddRange(assemblies.SelectMany(assembly => assembly.GetTypes().Where(c => c.IsAssignableTo(typeof(ICommand)) && c.IsClass).ToList()).ToList());
     }
 
-    public void ConsumeCommand(string sender, Parcel parcel)
+    public Task<bool> ConsumeCommandAsync(string sender, Parcel parcel)
     {
         throw new NotImplementedException();
         //if (_messageInboxItemRepository.AllowReceive(parcel.MessageId, sender))
@@ -44,8 +48,10 @@ public class InboxMessageConsumer : IMessageConsumer
         //}
     }
 
-    public void ConsumeEvent(string sender, Parcel parcel)
+    public async Task<bool> ConsumeEventAsync(string sender, Parcel parcel)
     {
+        var eventReceived = false;
+
         if (_messageInboxItemRepository.AllowReceive(parcel.MessageId, sender))
         {
             var eventType = _domainEventTypes.FirstOrDefault(c => c.Name == parcel.MessageName);
@@ -53,8 +59,14 @@ public class InboxMessageConsumer : IMessageConsumer
             {
                 dynamic @event = _jsonSerializer.Deserialize(parcel.MessageBody, eventType);
                 _eventDispatcher.PublishDomainEventAsync(@event);
-                _messageInboxItemRepository.Receive(parcel.MessageId, sender);
+                eventReceived = _messageInboxItemRepository.Receive(parcel.MessageId, sender);
             }
         }
+        else
+        {
+            eventReceived = true;
+        }
+
+        return eventReceived;
     }
 }

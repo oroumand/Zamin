@@ -5,7 +5,11 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.MessageBus.MessageInbox", "Zamin.Extensions.MessageBus.MessageInbox\Zamin.Extensions.MessageBus.MessageInbox.csproj", "{A25B1F16-FC9C-414A-B83E-E263C4D3D997}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.MessageBus.MessageInbox.Sample", "Zamin.Extensions.MessageBus.MessageInbox.Sample\Zamin.Extensions.MessageBus.MessageInbox.Sample.csproj", "{08CF1F05-B31A-4BB6-8DB2-B8AFABB4AC33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.MessageBus.MessageInbox.Sample", "Zamin.Extensions.MessageBus.MessageInbox.Sample\Zamin.Extensions.MessageBus.MessageInbox.Sample.csproj", "{08CF1F05-B31A-4BB6-8DB2-B8AFABB4AC33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.MessageBus.MessageInbox.Abstractions", "Zamin.Extensions.MessageBus.MessageInbox.Abstractions\Zamin.Extensions.MessageBus.MessageInbox.Abstractions.csproj", "{A33447C8-268C-4475-9B4D-C6D7EDE3D8CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.MessageBus.MessageInbox.Sql", "Zamin.Extensions.MessageBus.MessageInbox.Sql\Zamin.Extensions.MessageBus.MessageInbox.Sql.csproj", "{C3F33317-9ED1-4337-88C1-7C9E9CFCF3E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{08CF1F05-B31A-4BB6-8DB2-B8AFABB4AC33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08CF1F05-B31A-4BB6-8DB2-B8AFABB4AC33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08CF1F05-B31A-4BB6-8DB2-B8AFABB4AC33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A33447C8-268C-4475-9B4D-C6D7EDE3D8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A33447C8-268C-4475-9B4D-C6D7EDE3D8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A33447C8-268C-4475-9B4D-C6D7EDE3D8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A33447C8-268C-4475-9B4D-C6D7EDE3D8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3F33317-9ED1-4337-88C1-7C9E9CFCF3E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3F33317-9ED1-4337-88C1-7C9E9CFCF3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3F33317-9ED1-4337-88C1-7C9E9CFCF3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3F33317-9ED1-4337-88C1-7C9E9CFCF3E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
