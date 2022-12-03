@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Zamin.Infra.Data.Sql.Extentions;
 using Zamin.Infra.Data.Sql.Queries;
 
 namespace MiniBlog.Infra.Data.Sql.Queries.Common
@@ -18,7 +19,7 @@ namespace MiniBlog.Infra.Data.Sql.Queries.Common
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server =.; Database = MiniBlogDb; User Id =sa; Password= 1qaz!QAZ; MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server =.; Database=MiniBlogDb ;User Id = sa;Password=1qaz!QAZ; MultipleActiveResultSets=true; Encrypt = false");
             }
         }
 
@@ -29,6 +30,8 @@ namespace MiniBlog.Infra.Data.Sql.Queries.Common
                 entity.Property(e => e.CreatedByUserId).HasMaxLength(50);
 
                 entity.Property(e => e.ModifiedByUserId).HasMaxLength(50);
+
+                entity.AddDeletedShadowProperty().IgnoreDeletedQueryFilter();
             });
 
             modelBuilder.Entity<OutBoxEventItem>(entity =>

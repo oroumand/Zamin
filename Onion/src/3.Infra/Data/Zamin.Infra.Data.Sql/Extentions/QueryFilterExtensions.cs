@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Zamin.Infra.Data.Sql.Commands.Extensions;
+namespace Zamin.Infra.Data.Sql.Extentions;
 
 public static class QueryFilterExtensions
 {

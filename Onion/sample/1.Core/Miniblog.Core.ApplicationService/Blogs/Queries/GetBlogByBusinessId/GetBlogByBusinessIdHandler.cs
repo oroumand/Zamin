@@ -2,7 +2,6 @@
 using MiniBlog.Core.Contracts.Blogs.Queries.GetBlogByBusinessId;
 using Zamin.Core.ApplicationServices.Queries;
 using Zamin.Core.Contracts.ApplicationServices.Queries;
-using Zamin.Core.Domain.Exceptions;
 using Zamin.Utilities;
 
 namespace MiniBlog.Core.ApplicationService.Blogs.Queries.GetBlogByBusinessId;

@@ -40,12 +40,24 @@ public static class HostingExtensions
 
         builder.Services.AddZaminInMemoryCaching();
 
-        builder.Services.AddDbContext<MiniblogCommandDbContext>(c => c.UseSqlServer(cnn).AddInterceptors(new SetPersianYeKeInterceptor(), new AddOutBoxEventItemInterceptor(), new AddAuditDataInterceptor()));
+        builder.Services.AddDbContext<MiniblogCommandDbContext>(c => c.UseSqlServer(cnn).AddInterceptors(new SetPersianYeKeInterceptor(),
+                                                                                                         new AddOutBoxEventItemInterceptor(),
+                                                                                                         new AddAuditDataInterceptor(),
+                                                                                                         new DeletedShadowPropertyInterceptor()));
         builder.Services.AddDbContext<MiniblogQueryDbContext>(c => c.UseSqlServer(cnn));
 
         builder.Services.AddZaminApiCore("Zamin", "MiniBlog");
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
+
+        builder.Services.AddZaminTraceJeager(c =>
+        {
+            c.AgentHost = "localhost";
+            c.ApplicationName = "Zamin";
+            c.ServiceName = "OpenTelemetrySample";
+            c.ServiceVersion = "1.0.0";
+            c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
+        });
 
         builder.Services.AddZaminRabbitMqMessageBus(c =>
         {
@@ -62,21 +74,13 @@ public static class HostingExtensions
             c.SelectCommand = "SELECT TOP (@Count) * FROM [MiniBlogDb].[dbo].[OutBoxEventItems] WHERE IsProcessed = 0";
             c.UpdateCommand = "UPDATE [MiniBlogDb].[dbo].[OutBoxEventItems] SET IsProcessed = 1 WHERE OutBoxEventItemId In @Ids";
         });
+
         builder.Services.AddZaminMessageInbox(c =>
         {
             c.ApplicationName = "MiniBlog";
             c.ConnectionString = cnn;
         });
 
-        builder.Services.AddZaminTraceJeager(c =>
-        {
-            c.AgentHost = "localhost";
-            c.ApplicationName = "Zamin";
-            c.ServiceName = "OpenTelemetrySample";
-            c.ServiceVersion = "1.0.0";
-            c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
-        });
-        
         builder.Services.AddSwaggerGen();
         return builder.Build();
     }
@@ -97,7 +101,7 @@ public static class HostingExtensions
         app.UseAuthorization();
 
         app.MapControllers();
-        app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
+        //app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
         return app;
     }

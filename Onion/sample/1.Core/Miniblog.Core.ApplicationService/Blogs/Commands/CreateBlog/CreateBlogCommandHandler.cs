@@ -3,12 +3,11 @@ using MiniBlog.Core.Contracts.Blogs.Commands.CreateBlog;
 using MiniBlog.Core.Domain.Blogs.Entities;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Contracts.ApplicationServices.Commands;
-using Zamin.Core.Domain.Exceptions;
 using Zamin.Utilities;
 
 namespace Miniblog.Core.ApplicationService.Blogs.Commands.CreateBlog
 {
-    public class CreateBlogCommandHandler : CommandHandler<CreateBlogCommand,Guid>
+    public class CreateBlogCommandHandler : CommandHandler<CreateBlogCommand, Guid>
     {
 
         private readonly IBlogCommandRepository _blogCommandRepository;
