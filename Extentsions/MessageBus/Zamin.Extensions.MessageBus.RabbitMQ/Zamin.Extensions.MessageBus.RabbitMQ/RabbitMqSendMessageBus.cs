@@ -17,8 +17,9 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
         #endregion
 
         #region Constructors
-
-        public RabbitMqSendMessageBus(IConnection connection, IJsonSerializer jsonSerializer, IOptions<RabbitMqOptions> rabbitMqOptions)
+        public RabbitMqSendMessageBus(IConnection connection,
+                                      IJsonSerializer jsonSerializer,
+                                      IOptions<RabbitMqOptions> rabbitMqOptions)
         {
             _jsonSerializer = jsonSerializer;
             _rabbitMqOptions = rabbitMqOptions.Value;
@@ -92,6 +93,15 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
             basicProperties.Type = parcel.MessageName;
             _channel.BasicPublish(_rabbitMqOptions.ExchangeName, parcel.Route, basicProperties, parcel.MessageBody.ToByteArray());
         }
+        public void Dispose()
+        {
+            if (_channel != null)
+            {
+                if (_channel.IsOpen)
+                    _channel.Close();
+                _channel.Dispose();
+            }
+        }
         #endregion
 
         #region Private methods
@@ -114,14 +124,5 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
             return child;
         } 
         #endregion
-        public void Dispose()
-        {
-            if (_channel != null)
-            {
-                if (_channel.IsOpen)
-                    _channel.Close();
-                _channel.Dispose();
-            }
-        }
     }
 }

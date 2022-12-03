@@ -1,14 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using Zamin.Extentions.MessageBus.Abstractions;
 using Microsoft.Extensions.Options;
-using Zamin.Extensions.MessageBus.RabbitMQ.Options;
-using Microsoft.Extensions.Configuration;
-using System.Runtime.InteropServices;
-using Zamin.Extensions.MessageBus.RabbitMQ.Extensions;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Diagnostics;
+using Zamin.Extensions.MessageBus.RabbitMQ.Extensions;
+using Zamin.Extensions.MessageBus.RabbitMQ.Options;
+using Zamin.Extentions.MessageBus.Abstractions;
 
 namespace Zamin.Extensions.MessageBus.RabbitMQ;
 public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
@@ -21,7 +19,10 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
     private readonly string _commandQueueName;
     private IServiceScopeFactory _serviceScopeFactory;
 
-    public RabbitMqReceiveMessageBus(IConnection connection, ILogger<RabbitMqReceiveMessageBus> logger, IOptions<RabbitMqOptions> rabbitMqOptions, IServiceScopeFactory serviceScopeFactory)
+    public RabbitMqReceiveMessageBus(IConnection connection,
+                                     ILogger<RabbitMqReceiveMessageBus> logger,
+                                     IOptions<RabbitMqOptions> rabbitMqOptions,
+                                     IServiceScopeFactory serviceScopeFactory)
     {
         _logger = logger;
         _rabbitMqOptions = rabbitMqOptions.Value;
@@ -35,24 +36,7 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         CreateEventQueue();
     }
 
-    private void CreateEventQueue()
-    {
-        var consumer = new EventingBasicConsumer(_channel);
-        consumer.Received += Consumer_EventReceived;
-        var queue = _channel.QueueDeclare(_eventQueueName, true, false, false);
-        _channel.BasicConsume(queue.QueueName, true, consumer);
-        _logger.LogInformation("Event Queue With Name {queueName} Created.", queue.QueueName);
-    }
-
-    private void CreateCommandQueue()
-    {
-        var consumer = new EventingBasicConsumer(_channel);
-        consumer.Received += Consumer_CommandReceived;
-        var queue = _channel.QueueDeclare(_commandQueueName, true, false, false);
-        _channel.BasicConsume(queue.QueueName, true, consumer);
-        _logger.LogInformation("Command Queue With Name {commandName} Created.", queue.QueueName);
-    }
-
+    #region Public methods
     public void Subscribe(string serviceId, string eventName)
     {
         var route = $"{serviceId}.{RabbitMqSendMessageBusConstants.@event}.{eventName}";
@@ -67,14 +51,33 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         _logger.LogInformation("Command With CommandName: {commandName} Binded.", commandName);
     }
 
-    private void Consumer_EventReceived(object sender, BasicDeliverEventArgs e)
+    public void Dispose()
+    {
+        _channel.Close();
+        _connection.Close();
+    }
+    #endregion
+
+    #region Private methods
+    private void CreateEventQueue()
+    {
+        var consumer = new EventingBasicConsumer(_channel);
+        consumer.Received += Consumer_EventReceived;
+        var queue = _channel.QueueDeclare(_eventQueueName, true, false, false);
+        _channel.BasicConsume(queue.QueueName, false, consumer);
+        _logger.LogInformation("Event Queue With Name {queueName} Created.", queue.QueueName);
+    }
+
+    private async void Consumer_EventReceived(object sender, BasicDeliverEventArgs e)
     {
         using (IServiceScope scope = _serviceScopeFactory.CreateScope())
         {
             try
             {
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-                consumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel());
+                var received = await consumer.ConsumeEventAsync(e.BasicProperties.AppId, e.ToParcel());
+                if (received)
+                    _channel.BasicAck(e.DeliveryTag, false);
             }
             catch (Exception ex)
             {
@@ -86,7 +89,16 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
     }
 
-    private void Consumer_CommandReceived(object sender, BasicDeliverEventArgs e)
+    private void CreateCommandQueue()
+    {
+        var consumer = new EventingBasicConsumer(_channel);
+        consumer.Received += Consumer_CommandReceived;
+        var queue = _channel.QueueDeclare(_commandQueueName, true, false, false);
+        _channel.BasicConsume(queue.QueueName, false, consumer);
+        _logger.LogInformation("Command Queue With Name {commandName} Created.", queue.QueueName);
+    }
+
+    private async void Consumer_CommandReceived(object sender, BasicDeliverEventArgs e)
     {
         using (IServiceScope scope = _serviceScopeFactory.CreateScope())
         {
@@ -94,7 +106,9 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
             {
                 Activity span = StartChildActivity(e);
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-                consumer.ConsumeCommand(e.BasicProperties.AppId, e.ToParcel());
+                var received = await consumer.ConsumeCommandAsync(e.BasicProperties.AppId, e.ToParcel());
+                if (received)
+                    _channel.BasicAck(e.DeliveryTag,false);
             }
             catch (Exception ex)
             {
@@ -118,11 +132,5 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         span.Start();
         return span;
     }
-
-    public void Dispose()
-    {
-        _channel.Close();
-        _connection.Close();
-    }
+    #endregion
 }
-
