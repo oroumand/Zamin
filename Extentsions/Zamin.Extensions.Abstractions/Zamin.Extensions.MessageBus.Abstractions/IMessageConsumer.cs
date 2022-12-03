@@ -2,6 +2,7 @@
 
 public interface IMessageConsumer
 {
-    void ConsumeEvent(string sender, Parcel parcel);
-    void ConsumeCommand(string sender, Parcel parcel);
+    bool ConsumeEvent(string sender, Parcel parcel);
+
+    bool ConsumeCommand(string sender, Parcel parcel);
 }
