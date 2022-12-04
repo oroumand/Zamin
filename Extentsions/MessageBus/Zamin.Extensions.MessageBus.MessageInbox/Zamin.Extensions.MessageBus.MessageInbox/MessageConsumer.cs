@@ -1,31 +1,26 @@
-﻿using Microsoft.Extensions.Options;
-using System.Reflection;
+﻿using System.Reflection;
 using Zamin.Core.Contracts.ApplicationServices.Commands;
 using Zamin.Core.Contracts.ApplicationServices.Events;
 using Zamin.Core.Domain.Events;
 using Zamin.Extensions.MessageBus.MessageInbox.Abstractions;
-using Zamin.Extensions.MessageBus.MessageInbox.Abstractions.Options;
 using Zamin.Extentions.MessageBus.Abstractions;
 using Zamin.Extentions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.MessageBus.MessageInbox;
-public class InboxMessageConsumer : IMessageConsumer
+public class MessageConsumer : IMessageConsumer
 {
-    private readonly MessageInboxOptions _messageInboxOptions;
     private readonly IEventDispatcher _eventDispatcher;
     private readonly IJsonSerializer _jsonSerializer;
     private readonly ICommandDispatcher _commandDispatcher;
-    private readonly IMessageInboxItemRepository _messageInboxItemRepository;
+    private readonly IMessageInboxRepository _messageInboxItemRepository;
     private readonly List<Type> _domainEventTypes = new();
     private readonly List<Type> _commandTypes = new();
 
-    public InboxMessageConsumer(IOptions<MessageInboxOptions> messageInboxOptions,
-                                IJsonSerializer jsonSerializer,
-                                IMessageInboxItemRepository messageInboxItemRepository,
+    public MessageConsumer(IJsonSerializer jsonSerializer,
+                                IMessageInboxRepository messageInboxItemRepository,
                                 ICommandDispatcher commandDispatcher = null,
                                 IEventDispatcher eventDispatcher = null)
     {
-        _messageInboxOptions = messageInboxOptions.Value;
         _eventDispatcher = eventDispatcher;
         _jsonSerializer = jsonSerializer;
         _commandDispatcher = commandDispatcher;
@@ -50,7 +45,7 @@ public class InboxMessageConsumer : IMessageConsumer
 
     public async Task<bool> ConsumeEventAsync(string sender, Parcel parcel)
     {
-        var eventReceived = false;
+        var isEventReceived = false;
 
         if (_messageInboxItemRepository.AllowReceive(parcel.MessageId, sender))
         {
@@ -59,14 +54,14 @@ public class InboxMessageConsumer : IMessageConsumer
             {
                 dynamic @event = _jsonSerializer.Deserialize(parcel.MessageBody, eventType);
                 _eventDispatcher.PublishDomainEventAsync(@event);
-                eventReceived = _messageInboxItemRepository.Receive(parcel.MessageId, sender);
+                isEventReceived = _messageInboxItemRepository.Receive(parcel.MessageId, sender);
             }
         }
         else
         {
-            eventReceived = true;
+            isEventReceived = true;
         }
 
-        return eventReceived;
+        return isEventReceived;
     }
 }

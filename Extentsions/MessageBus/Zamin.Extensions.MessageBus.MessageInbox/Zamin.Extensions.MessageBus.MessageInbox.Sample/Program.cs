@@ -22,16 +22,17 @@ builder.Services.AddZaminRabbitMqMessageBus(c =>
     c.Url = @"amqp://guest:guest@localhost:9672/";
 });
 
-//zamin MessageInbox
-builder.Services.AddZaminMessageInbox(c =>
+//zamin MessageInboxConsumer
+builder.Services.AddZaminMessageInboxConsumer();
+
+//zamin MessageInbox Repository
+builder.Services.AddZaminSqlMessageInboxRepository(o =>
 {
-    c.ApplicationName = "MiniBlog";
-    c.ConnectionString = "Server=.;Initial Catalog=MiniBlogDb;User Id=sa; Password=1qaz!QAZ;Encrypt=false";
-    c.AutoCreateSqlTable = true;
-    c.TableName = "MessageInbox";
-    c.SchemaName = "dbo";
+    o.ConnectionString = "Server=.;Initial Catalog=MiniBlogDb;User Id=sa; Password=1qaz!QAZ;Encrypt=false";
+    o.AutoCreateSqlTable = true;
+    o.TableName = "MessageInbox";
+    o.SchemaName = "dbo";
 });
-builder.Services.AddZaminSqlMessageInboxItemRepository();
 
 builder.Services.AddSwaggerGen();
 

@@ -1,6 +1,6 @@
 ﻿namespace Zamin.Extensions.MessageBus.MessageInbox.Abstractions;
 
-public class FakeMessageInboxItemRepository : IMessageInboxItemRepository
+public class FakeMessageInboxRepository : IMessageInboxRepository
 {
     public bool AllowReceive(string messageId, string fromService) => true;
 
