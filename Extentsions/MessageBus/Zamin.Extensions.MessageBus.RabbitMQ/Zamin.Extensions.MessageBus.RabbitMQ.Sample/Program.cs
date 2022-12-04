@@ -13,9 +13,9 @@ builder.Services.AddZaminNewtonSoftSerializer();
 builder.Services.AddZaminRabbitMqMessageBus(c =>
 {
     c.PerssistMessage = true;
-    c.ExchangeName = "ZamminRabbitMQ";
-    c.ServiceName = "SampleApplciatoin";
-    c.Url = @"amqp://guest:guest@localhost:9672/";
+    c.ExchangeName = "ZamminRabbitMqExchange";
+    c.ServiceName = "ZamminRabbitMqService";
+    c.Url = @"amqp://guest:guest@localhost:5672/";
 });
 
 //microsoft
