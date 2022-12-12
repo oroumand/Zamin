@@ -5,7 +5,7 @@ using Zamin.Core.Contracts.ApplicationServices.Events;
 using Zamin.Core.Domain.Events;
 using Zamin.Extensions.MessageBus.Abstractions;
 using Zamin.Extensions.MessageBus.MessageInbox.Options;
-using Zamin.Extentions.Serializers.Abstractions;
+using Zamin.Extensions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.MessageBus.MessageInbox;
 public class InboxMessageConsumer : IMessageConsumer
@@ -17,7 +17,7 @@ public class InboxMessageConsumer : IMessageConsumer
     private readonly IMessageInboxItemRepository _messageInboxItemRepository;
     private readonly List<Type> _domainEventTypes = new();
     private readonly List<Type> _commandTypes = new();
-    public InboxMessageConsumer(IOptions<MessageInboxOptions> messageInboxOptions,  IJsonSerializer jsonSerializer, IMessageInboxItemRepository messageInboxItemRepository, ICommandDispatcher commandDispatcher=null, IEventDispatcher eventDispatcher = null)
+    public InboxMessageConsumer(IOptions<MessageInboxOptions> messageInboxOptions, IJsonSerializer jsonSerializer, IMessageInboxItemRepository messageInboxItemRepository, ICommandDispatcher commandDispatcher = null, IEventDispatcher eventDispatcher = null)
     {
         _messageInboxOptions = messageInboxOptions.Value;
         _eventDispatcher = eventDispatcher;

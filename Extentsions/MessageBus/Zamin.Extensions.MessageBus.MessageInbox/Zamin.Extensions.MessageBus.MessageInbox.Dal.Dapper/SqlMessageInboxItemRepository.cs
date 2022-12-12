@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Data;
@@ -17,16 +16,16 @@ public class SqlMessageInboxItemRepository : IMessageInboxItemRepository
     private readonly string _insertQuery;
     private readonly ILogger<SqlMessageInboxItemRepository> _logger;
 
-    public SqlMessageInboxItemRepository(IOptions<MessageInboxDalDapperOptions> options,ILogger<SqlMessageInboxItemRepository> logger)
+    public SqlMessageInboxItemRepository(IOptions<MessageInboxDalDapperOptions> options, ILogger<SqlMessageInboxItemRepository> logger)
     {
         _options = options.Value;
         _selectQuery = $"Select Id from {_options.SchemaName}.{_options.TableName} Where [OwnerService] = @OwnerService and [MessageId] = @MessageId";
         _insertQuery = $"Insert Into {_options.SchemaName}.{_options.TableName} ([OwnerService] ,[MessageId],[Payload] ) values(@OwnerService,@MessageId,@Payload)";
         _dbConnection = new SqlConnection(_options.ConnectionString);
-
+        _logger = logger;
         if (_options.AutoCreateSqlTable)
             CreateTableIfNeeded();
-        _logger = logger;
+
     }
 
     public bool AllowReceive(string messageId, string fromService)
@@ -39,7 +38,7 @@ public class SqlMessageInboxItemRepository : IMessageInboxItemRepository
         return result < 1;
     }
 
-    public void Receive(string messageId, string fromService,string payload)
+    public void Receive(string messageId, string fromService, string payload)
     {
         _dbConnection.Execute(_insertQuery, new
         {

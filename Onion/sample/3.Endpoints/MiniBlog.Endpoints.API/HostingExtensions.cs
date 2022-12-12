@@ -56,7 +56,6 @@ public static class HostingExtensions
             c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
         });
 
-
         builder.Services.AddZaminRabbitMqMessageBus(c =>
         {
             c.PerssistMessage = false;
@@ -70,12 +69,25 @@ public static class HostingExtensions
             c.ApplicationName = "MiniBlog";
             c.ConnectionString = cnn;           
         });
+     
         builder.Services.AddZaminPollingPublisher(c =>
         {
             c.SendInterval = 1000;
             c.SendCount = 100;
             c.ExceptionInterval = 10000;
             c.ApplicationName = "MiniBlog";
+        });
+
+
+        builder.Services.AddZaminMessageInbox(c =>
+        {
+            c.ApplicationName = "MiniBlog";
+        });
+        builder.Services.AddZaminMessageInboxDalSql(c =>
+        {
+            //c.TableName = "MessageInbox";
+            c.SchemaName = "dbo";
+            c.ConnectionString = cnn;
         });
 
         builder.Services.AddSwaggerGen();
@@ -98,6 +110,7 @@ public static class HostingExtensions
         }
 
         app.UseHttpsRedirection();
+        app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
         app.UseAuthorization();
 

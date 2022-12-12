@@ -19,6 +19,12 @@ builder.Services.AddZaminRabbitMqMessageBus(c =>
 builder.Services.AddZaminMessageInbox(c =>
 {
     c.ApplicationName = "SampleApplciatoinReceiver";
+    //c.ConnectionString = "Server=.;Initial Catalog=InboxDb;User Id=sa; Password=1qaz!QAZ;Encrypt=false";
+});
+builder.Services.AddZaminMessageInboxDalSql(c =>
+{
+    //c.TableName = "MessageInbox";
+    c.SchemaName = "dbo";
     c.ConnectionString = "Server=.;Initial Catalog=InboxDb;User Id=sa; Password=1qaz!QAZ;Encrypt=false";
 });
 var app = builder.Build();

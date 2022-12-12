@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Zamin.Extensions.Events.Outbox.Dal.EF" Version="6.0.0-beta.2" />
+    <PackageReference Include="Zamin.Extensions.Events.Outbox.Dal.EF" Version="6.0.0-beta.3" />
   </ItemGroup>
 
   <ItemGroup>
