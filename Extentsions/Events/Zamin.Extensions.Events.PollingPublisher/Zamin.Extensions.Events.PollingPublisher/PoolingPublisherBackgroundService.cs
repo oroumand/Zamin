@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using Zamin.Extensions.Events.Abstractions;
 using Zamin.Extensions.Events.PollingPublisher.Options;
-using Zamin.Extentions.MessageBus.Abstractions;
+using Zamin.Extensions.MessageBus.Abstractions;
 
 namespace Zamin.Extensions.Events.PollingPublisher
 {
