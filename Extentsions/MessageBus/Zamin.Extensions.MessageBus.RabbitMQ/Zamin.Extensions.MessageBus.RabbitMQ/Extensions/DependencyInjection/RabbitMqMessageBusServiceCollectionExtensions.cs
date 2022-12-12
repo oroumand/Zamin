@@ -5,7 +5,7 @@ using RabbitMQ.Client;
 using Zamin.Extensions.MessageBus.Abstractions;
 using Zamin.Extensions.MessageBus.RabbitMQ.Options;
 
-namespace Zamin.Extensions.MessageBus.RabbitMQ.Extensions.DependencyInjection;
+namespace Zamin.Extensions.DependencyInjection;
 
 public static class RabbitMqMessageBusServiceCollectionExtensions
 {
