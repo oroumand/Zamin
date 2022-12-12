@@ -7,6 +7,7 @@ using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Events;
 using Zamin.Core.ApplicationServices.Queries;
 using Zamin.Extensions.DependencyInjection;
+using Zamin.Extensions.Events.PollingPublisher.Dal.Dapper.Extensions.DependencyInjection;
 using Zamin.Infra.Data.Sql.Commands.Interceptors;
 using Zamin.Utilities.OpenTelemetryRegistration.Extensions.DependencyInjection;
 
@@ -50,13 +51,41 @@ public static class HostingExtensions
         builder.Services.AddZaminTraceJeager(c =>
         {
             c.AgentHost = "localhost";
-            c.ApplicationName = "Zamin";
+            c.ApplicationName = "MiniBlog";
             c.ServiceName = "OpenTelemetrySample";
             c.ServiceVersion = "1.0.0";
             c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
         });
-        
+
+
+        builder.Services.AddZaminRabbitMqMessageBus(c =>
+        {
+            c.PerssistMessage = false;
+            c.ExchangeName = "MiniBlogExchange";
+            c.ServiceName = "MiniBlogAPI";
+            c.Url = @"amqp://guest:guest@localhost:5672/";
+        });
+
+        builder.Services.AddZaminPollingPublisherDalSql(c =>
+        {
+            c.ApplicationName = "MiniBlog";
+            c.ConnectionString = cnn;
+               public string SelectCommand { get; set; } = "Select top (@Count) * from OutBoxEventItems where IsProcessed = 0";
+    public string UpdateCommand { get; set; } = "Update OutBoxEventItems set IsProcessed = 1 where OutBoxEventItemId in @Ids";
+});
+        builder.Services.AddZaminPollingPublisher(c =>
+        {
+            c.SendInterval = 1000;
+            c.SendCount = 100;
+            c.ExceptionInterval = 10000;
+            c.ApplicationName = "MiniBlog";
+        });
+
         builder.Services.AddSwaggerGen();
+
+
+
+        
         return builder.Build();
     }
 
