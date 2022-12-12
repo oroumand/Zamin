@@ -2,16 +2,18 @@
 
 public class FakeMessageConsumer : IMessageConsumer
 {
-    public void ConsumeCommand(string sender, Parcel parcel)
+    public async Task<bool> ConsumeCommand(string sender, Parcel parcel)
     {
         Consume("command", sender, parcel);
+        return true;
     }
 
 
 
-    public void ConsumeEvent(string sender, Parcel parcel)
+    public async Task<bool> ConsumeEvent(string sender, Parcel parcel)
     {
         Consume("event", sender, parcel);
+        return true;
     }
 
     private static void Consume(string type, string sender, Parcel parcel)
