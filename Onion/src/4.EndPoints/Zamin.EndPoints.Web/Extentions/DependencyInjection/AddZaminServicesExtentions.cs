@@ -1,7 +1,7 @@
 ﻿using Zamin.Utilities;
 
 namespace Zamin.Extensions.DependencyInjection;
-public static class AddZaminServicesExtentions
+public static class AddZaminServicesExtensions
 {
     public static IServiceCollection AddZaminUntilityServices(
         this IServiceCollection services)

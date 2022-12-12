@@ -4,7 +4,7 @@ using Zamin.Core.Contracts.ApplicationServices.Common;
 using Zamin.Core.Contracts.ApplicationServices.Queries;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Extensions.Logger.Abstractions;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Zamin.Core.ApplicationServices.Queries;
 

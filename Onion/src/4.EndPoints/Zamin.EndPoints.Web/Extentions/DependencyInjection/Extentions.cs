@@ -2,7 +2,7 @@
 
 namespace Zamin.Extensions.DependencyInjection;
 
-public static class Extentions
+public static class Extensions
 {
 
     public static IServiceCollection AddZaminDependencies(this IServiceCollection services,

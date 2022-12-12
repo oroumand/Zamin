@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using Zamin.Extensions.Caching.Abstractions;
-using Zamin.Extentions.ObjectMappers.Abstractions;
-using Zamin.Extentions.Serializers.Abstractions;
-using Zamin.Extentions.Translations.Abstractions;
-using Zamin.Extentions.UsersManagement.Abstractions;
+using Zamin.Extensions.ObjectMappers.Abstractions;
+using Zamin.Extensions.Serializers.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
+using Zamin.Extensions.UsersManagement.Abstractions;
 
 namespace Zamin.Utilities;
 

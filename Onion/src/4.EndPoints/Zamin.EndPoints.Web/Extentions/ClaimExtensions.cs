@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace Zamin.EndPoints.Web.Extentions
+namespace Zamin.EndPoints.Web.Extensions
 {
     public static class ClaimExtensions
     {

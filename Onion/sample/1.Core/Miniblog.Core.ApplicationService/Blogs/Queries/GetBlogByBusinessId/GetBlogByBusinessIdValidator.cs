@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using MiniBlog.Core.Contracts.Blogs.Queries.GetBlogByBusinessId;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace MiniBlog.Core.ApplicationService.Blogs.Queries.GetBlogByBusinessId;
 

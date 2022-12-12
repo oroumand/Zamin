@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Zamin.Infra.Data.Sql.Commands.Extensions;
-using Zamin.Extentions.UsersManagement.Abstractions;
+using Zamin.Extensions.UsersManagement.Abstractions;
 
 namespace Zamin.Infra.Data.Sql.Commands.Interceptors;
 

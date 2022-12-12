@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MiniBlog.Core.Contracts.Blogs.Commands.CreateBlog;
 using Zamin.Core.Domain.Toolkits.ValueObjects;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Miniblog.Core.ApplicationService.Blogs.Commands.CreateBlog
 {

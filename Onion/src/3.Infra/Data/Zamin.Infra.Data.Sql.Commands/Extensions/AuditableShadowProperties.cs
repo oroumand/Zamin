@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Zamin.Core.Domain.Entities;
-using Zamin.Extentions.UsersManagement.Abstractions;
+using Zamin.Extensions.UsersManagement.Abstractions;
 
 namespace Zamin.Infra.Data.Sql.Commands.Extensions;
 public static class AuditableShadowProperties

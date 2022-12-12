@@ -2,9 +2,9 @@
 using Zamin.Core.Contracts.ApplicationServices.Events;
 using Zamin.Utilities;
 
-namespace Zamin.EndPoints.Web.Extentions
+namespace Zamin.EndPoints.Web.Extensions
 {
-    public static class HttpContextExtentions
+    public static class HttpContextExtensions
     {
         public static ICommandDispatcher CommandDispatcher(this HttpContext httpContext) =>
             (ICommandDispatcher)httpContext.RequestServices.GetService(typeof(ICommandDispatcher));

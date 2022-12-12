@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Serilog.Core;
+﻿using Serilog.Core;
 using Serilog.Events;
-using Zamin.Extentions.UsersManagement.Abstractions;
+using Zamin.Extensions.UsersManagement.Abstractions;
 
 namespace Zamin.Utilities.SerilogRegistration.Enrichers;
 
@@ -22,7 +21,7 @@ public class ZaminUserInfoEnricher : ILogEventEnricher
 
 
         userName = _userInfoService.GetUsername();
-        if(string.IsNullOrEmpty(userName))
+        if (string.IsNullOrEmpty(userName))
         {
             userName = "Unknown";
         }

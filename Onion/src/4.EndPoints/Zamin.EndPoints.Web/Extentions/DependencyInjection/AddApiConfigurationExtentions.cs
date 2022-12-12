@@ -4,7 +4,7 @@ using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
 
 namespace Zamin.Extensions.DependencyInjection;
 
-public static class AddApiConfigurationExtentions
+public static class AddApiConfigurationExtensions
 {
     public static IServiceCollection AddZaminApiCore(this IServiceCollection services, params string[] assemblyNamesForLoad)
     {

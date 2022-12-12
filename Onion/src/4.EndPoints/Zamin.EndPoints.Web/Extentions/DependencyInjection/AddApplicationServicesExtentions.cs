@@ -6,7 +6,7 @@ using Zamin.Core.Contracts.ApplicationServices.Events;
 
 namespace Zamin.Extensions.DependencyInjection;
 
-public static class AddApplicationServicesExtentions
+public static class AddApplicationServicesExtensions
 {
     public static IServiceCollection AddZaminApplicationServices(this IServiceCollection services,
                                                                  IEnumerable<Assembly> assembliesForSearch)

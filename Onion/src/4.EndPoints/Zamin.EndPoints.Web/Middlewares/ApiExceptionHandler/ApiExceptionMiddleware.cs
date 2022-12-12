@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Net;
-using Zamin.Extentions.Serializers.Abstractions;
+using Zamin.Extensions.Serializers.Abstractions;
 using Zamin.Extensions.Logger.Abstractions;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler
 {

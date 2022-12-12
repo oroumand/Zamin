@@ -11,7 +11,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.4" />
-		<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="6.3.0-beta.3" />
+		<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="6.3.0-beta.4" />
 	</ItemGroup>
 	<ItemGroup>
 		<Using Include="Microsoft.EntityFrameworkCore" />
