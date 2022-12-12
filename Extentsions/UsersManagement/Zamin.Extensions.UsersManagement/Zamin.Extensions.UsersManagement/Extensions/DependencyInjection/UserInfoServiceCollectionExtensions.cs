@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Zamin.Extensions.UsersManagement.Options;
 using Zamin.Extensions.UsersManagement.Services;
-using Zamin.Extentions.UsersManagement.Abstractions;
+using Zamin.Extensions.UsersManagement.Abstractions;
 
 namespace Zamin.Extensions.DependencyInjection;
 

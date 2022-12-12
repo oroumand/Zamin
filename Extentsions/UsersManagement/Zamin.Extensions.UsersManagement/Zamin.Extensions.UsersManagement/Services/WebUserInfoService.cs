@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using Zamin.Extensions.UsersManagement.Extensions;
 using Zamin.Extensions.UsersManagement.Options;
-using Zamin.Extentions.UsersManagement.Abstractions;
+using Zamin.Extensions.UsersManagement.Abstractions;
 
 namespace Zamin.Extensions.UsersManagement.Services;
 
