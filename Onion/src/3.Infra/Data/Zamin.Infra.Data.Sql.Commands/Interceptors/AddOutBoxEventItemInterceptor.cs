@@ -4,6 +4,7 @@ using Zamin.Infra.Data.Sql.Commands.Extensions;
 using Zamin.Extentions.UsersManagement.Abstractions;
 using Zamin.Extentions.Serializers.Abstractions;
 using Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
+using System.Diagnostics;
 
 namespace Zamin.Infra.Data.Sql.Commands.Interceptors;
 
@@ -20,6 +21,13 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
         var changedAggregates = eventData.Context.ChangeTracker.GetAggregatesWithEvent();
         var userInfoService = eventData.Context.GetService<IUserInfoService>();
         var serializer = eventData.Context.GetService<IJsonSerializer>();
+        string traceId = string.Empty;
+        string spanId = string.Empty;
+        if(Activity.Current != null)
+        {
+            traceId = Activity.Current.TraceId.ToHexString();
+            spanId= Activity.Current.SpanId.ToHexString();
+        }
         foreach (var aggregate in changedAggregates)
         {
             var events = aggregate.GetEvents();
@@ -36,6 +44,8 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
                     EventName = @event.GetType().Name,
                     EventTypeName = @event.GetType().FullName,
                     EventPayload = serializer.Serialize(@event),
+                    TraceId= traceId,
+                    SpanId= spanId,
                     IsProcessed = false
                 });
             }

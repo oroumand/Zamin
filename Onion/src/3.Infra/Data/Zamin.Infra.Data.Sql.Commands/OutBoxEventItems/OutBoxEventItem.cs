@@ -11,6 +11,8 @@ public class OutBoxEventItem
     public string EventName { get; set; }
     public string EventTypeName { get; set; }
     public string EventPayload { get; set; }
+    public string? TraceId { get; set; }
+    public string? SpanId { get; set; }
     public bool IsProcessed { get; set; }
 }
 

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.Runtime.InteropServices;
 using Zamin.Extensions.MessageBus.RabbitMQ.Extensions;
 using System.Diagnostics;
+using System;
 
 namespace Zamin.Extensions.MessageBus.RabbitMQ;
 public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
@@ -74,6 +75,8 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         {
             try
             {
+                Activity span = StartChildActivity(e);
+                _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
                 consumer.ConsumeEventAsync(e.BasicProperties.AppId, e.ToParcel()).Wait();
             }
@@ -83,8 +86,6 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
                 throw ex;
             }
         }
-        var message = e;
-        _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
     }
 
     private void Consumer_CommandReceived(object sender, BasicDeliverEventArgs e)
@@ -94,6 +95,7 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
             try
             {
                 Activity span = StartChildActivity(e);
+                _logger.LogDebug("Command Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
                 consumer.ConsumeCommand(e.BasicProperties.AppId, e.ToParcel());
             }
@@ -103,8 +105,6 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
                 throw ex;
             }
         }
-        var message = e;
-        _logger.LogDebug("Command Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
 
     }
 
@@ -113,8 +113,8 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
         var span = new Activity("RabbitMqCommandReceived");
         span.AddTag("ApplicationName", _rabbitMqOptions.ServiceName);
         if (e.BasicProperties != null && e.BasicProperties.Headers != null && e.BasicProperties.Headers.ContainsKey("TraceId") && e.BasicProperties.Headers.ContainsKey("SpanId"))
-        {
-            span.SetParentId(ActivityTraceId.CreateFromBytes(System.Text.Encoding.UTF8.GetBytes(e.BasicProperties.Headers["TraceId"].ToString())), ActivitySpanId.CreateFromBytes(System.Text.Encoding.UTF8.GetBytes(e.BasicProperties.Headers["SpanId"].ToString())));
+        {            
+            span.SetParentId($"00-{System.Text.Encoding.UTF8.GetString(e.BasicProperties.Headers["TraceId"] as byte[])}-{System.Text.Encoding.UTF8.GetString(e.BasicProperties.Headers["SpanId"] as byte[])}-00");
         }
         span.Start();
         return span;
