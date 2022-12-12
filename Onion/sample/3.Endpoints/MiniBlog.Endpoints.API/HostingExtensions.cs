@@ -2,7 +2,6 @@
 using MiniBlog.Endpoints.API.CustomDecorators;
 using MiniBlog.Infra.Data.Sql.Commands.Common;
 using MiniBlog.Infra.Data.Sql.Queries.Common;
-using OpenTelemetryRegistration.Extensions.DependencyInjection;
 using Serilog;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Events;

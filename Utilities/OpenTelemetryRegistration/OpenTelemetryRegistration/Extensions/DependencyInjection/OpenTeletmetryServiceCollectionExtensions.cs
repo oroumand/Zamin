@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OpenTelemetry.Metrics;
@@ -7,7 +6,7 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Zamin.Utilities.OpenTelemetryRegistration.Options;
 
-namespace Zamin.Utilities.OpenTelemetryRegistration.Extensions.DependencyInjection;
+namespace Zamin.Extensions.DependencyInjection;
 public static class OpenTeletmetryServiceCollectionExtensions
 {
     public static IServiceCollection AddZaminTraceJeager(this IServiceCollection services, IConfiguration configuration)
