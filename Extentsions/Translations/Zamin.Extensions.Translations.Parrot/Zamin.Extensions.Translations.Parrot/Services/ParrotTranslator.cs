@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using System.Globalization;
 using Zamin.Extensions.Translations.Parrot.Database;
 using Zamin.Extensions.Translations.Parrot.Options;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Zamin.Extensions.Translations.Parrot.Services;
 public class ParrotTranslator : ITranslator, IDisposable

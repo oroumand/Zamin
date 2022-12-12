@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Zamin.Extensions.Translations.Parrot.Sample.Controllers;
 [Route("api/[controller]")]

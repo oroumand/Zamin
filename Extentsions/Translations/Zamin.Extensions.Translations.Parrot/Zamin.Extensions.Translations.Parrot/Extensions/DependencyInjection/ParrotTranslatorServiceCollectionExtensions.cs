@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Zamin.Extensions.Translations.Parrot.Options;
 using Zamin.Extensions.Translations.Parrot.Services;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Zamin.Extensions.DependencyInjection;
 
