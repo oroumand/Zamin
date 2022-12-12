@@ -16,7 +16,7 @@ public static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        string cnn = "Server =10.100.8.173; Database = MiniBlogDb; User Id = sa; Password = 2wsx@WSX; MultipleActiveResultSets = true; Encrypt = false";
+        string cnn = "Server =.; Database = MiniBlogDb; User Id = sa; Password = 1qaz!QAZ; MultipleActiveResultSets = true; Encrypt = false";
         builder.Services.AddZaminParrotTranslator(c =>
         {
             c.ConnectionString = cnn;
@@ -45,33 +45,11 @@ public static class HostingExtensions
 
         builder.Services.AddZaminApiCore("Zamin", "MiniBlog");
         builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
-
-        builder.Services.AddZaminRabbitMqMessageBus(c =>
-        {
-            c.PerssistMessage = true;
-            c.ExchangeName = "MiniBlogExchange";
-            c.ServiceName = "MiniBlog";
-            c.Url = @"amqp://guest:guest@10.100.8.173:5672/";
-        });
-
-        builder.Services.AddZaminPollingPublisher(c =>
-        {
-            c.ApplicationName = "MiniBlog";
-            c.ConnectionString = cnn;
-            c.SelectCommand = "SELECT TOP (@Count) * FROM [MiniBlogDb].[dbo].[OutBoxEventItems] WHERE IsProcessed = 0";
-            c.UpdateCommand = "UPDATE [MiniBlogDb].[dbo].[OutBoxEventItems] SET IsProcessed = 1 WHERE OutBoxEventItemId In @Ids";
-            c.SendCount = 1000;
-        });
-        builder.Services.AddZaminMessageInbox(c =>
-        {
-            c.ApplicationName = "MiniBlog";
-            c.ConnectionString = cnn;
-        });
+        builder.Services.AddEndpointsApiExplorer();      
 
         builder.Services.AddZaminTraceJeager(c =>
         {
-            c.AgentHost = "1.100.7.201";
+            c.AgentHost = "localhost";
             c.ApplicationName = "Zamin";
             c.ServiceName = "OpenTelemetrySample";
             c.ServiceVersion = "1.0.0";
@@ -98,7 +76,6 @@ public static class HostingExtensions
         app.UseAuthorization();
 
         app.MapControllers();
-        app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
         return app;
     }
