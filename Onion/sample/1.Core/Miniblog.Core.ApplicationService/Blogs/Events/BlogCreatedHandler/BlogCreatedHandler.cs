@@ -19,15 +19,24 @@ public class BlogCreatedHandler : IDomainEventHandler<BlogCreated>
     }
     public async Task Handle(BlogCreated Event)
     {
-        Person person = new Person
+        try
         {
-            FirstName = "Arash",
-            LastName = "Azhdari",
-        };
-        await _personCommandRepository.InsertAsync(person);
-        await _personCommandRepository.CommitAsync();
+            Person person = new Person
+            {
+                FirstName = DateTime.Now.ToString(),
+                LastName = DateTime.Now.ToLongTimeString(),
+            };
+            await _personCommandRepository.InsertAsync(person);
+            await _personCommandRepository.CommitAsync();
 
-        _logger.LogInformation("Handeled {Event} in BlogCreatedHandler",Event.GetType().Name);
-        await Task.CompletedTask;
+            _logger.LogInformation("Handeled {Event} in BlogCreatedHandler", Event.GetType().Name);
+            await Task.CompletedTask;
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
+
     }
 }

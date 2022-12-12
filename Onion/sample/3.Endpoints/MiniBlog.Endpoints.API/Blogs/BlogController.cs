@@ -9,11 +9,18 @@ namespace MiniBlog.Endpoints.API.Blogs
     public class BlogController : BaseController
     {
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateBlog(CreateBlogCommand createBlog) 
-            => await Create<CreateBlogCommand,Guid>(createBlog);
+        public async Task<IActionResult> CreateBlog(CreateBlogCommand createBlog)
+            => await Create<CreateBlogCommand, Guid>(createBlog);
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetBlogByBusinessId(GetBlogByBusinessIdQuery query) 
-            => await Query<GetBlogByBusinessIdQuery,BlogQr>(query);
+        public async Task<IActionResult> GetBlogByBusinessId(GetBlogByBusinessIdQuery query)
+            => await Query<GetBlogByBusinessIdQuery, BlogQr>(query);
+
+        [HttpGet("/Clear")]
+        public bool Clear()
+        {
+            GC.Collect(2);
+            return true;
+        }
     }
 }

@@ -31,7 +31,7 @@ public class InboxMessageConsumer : IMessageConsumer
         _commandTypes.AddRange(assemblies.SelectMany(assembly => assembly.GetTypes().Where(c => c.IsAssignableTo(typeof(ICommand)) && c.IsClass).ToList()).ToList());
     }
 
-    public void ConsumeCommand(string sender, Parcel parcel)
+    public Task<bool> ConsumeCommandAsync(string sender, Parcel parcel)
     {
         throw new NotImplementedException();
         //if (_messageInboxItemRepository.AllowReceive(parcel.MessageId, sender))
@@ -44,7 +44,7 @@ public class InboxMessageConsumer : IMessageConsumer
         //}
     }
 
-    public void ConsumeEvent(string sender, Parcel parcel)
+    public async Task<bool> ConsumeEventAsync(string sender, Parcel parcel)
     {
         if (_messageInboxItemRepository.AllowReceive(parcel.MessageId, sender))
         {
@@ -52,9 +52,10 @@ public class InboxMessageConsumer : IMessageConsumer
             if (eventType != null)
             {
                 dynamic @event = _jsonSerializer.Deserialize(parcel.MessageBody, eventType);
-                _eventDispatcher.PublishDomainEventAsync(@event);
+                await _eventDispatcher.PublishDomainEventAsync(@event);
                 _messageInboxItemRepository.Receive(parcel.MessageId, sender);
             }
         }
+        return true;
     }
 }

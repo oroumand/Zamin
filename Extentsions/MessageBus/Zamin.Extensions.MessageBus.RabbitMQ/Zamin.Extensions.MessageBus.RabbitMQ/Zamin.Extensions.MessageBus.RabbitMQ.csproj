@@ -15,7 +15,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
 		<PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
-		<PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="6.3.0-beta.1" />
+		<PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="6.3.0-beta.2" />
 		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="6.3.0-beta.1" />
 		<PackageReference Include="Zamin.Utilities" Version="6.3.0-beta.8" />
 	</ItemGroup>

@@ -24,7 +24,7 @@ public class EventDispatcher : IEventDispatcher
     #endregion
 
     #region Event Dispatcher
-    public Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class, IDomainEvent
+    public async Task PublishDomainEventAsync<TDomainEvent>(TDomainEvent @event) where TDomainEvent : class, IDomainEvent
     {
         _stopwatch.Start();
         int counter = 0;
@@ -32,12 +32,13 @@ public class EventDispatcher : IEventDispatcher
         {
             _logger.LogDebug("Routing event of type {EventType} With value {Event}  Start at {StartDateTime}", @event.GetType(), @event, DateTime.Now);
             var handlers = _serviceProvider.GetServices<IDomainEventHandler<TDomainEvent>>();
+            List<Task> tasks = new List<Task>();
             foreach (var handler in handlers)
             {
                 counter++;
-                handler.Handle(@event);
+                tasks.Add(handler.Handle(@event));
             }
-            return Task.CompletedTask;
+            await Task.WhenAll(tasks);
         }
         catch (InvalidOperationException ex)
         {

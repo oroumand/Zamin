@@ -38,6 +38,7 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
     private void CreateEventQueue()
     {
         var consumer = new EventingBasicConsumer(_channel);
+        
         consumer.Received += Consumer_EventReceived;
         var queue = _channel.QueueDeclare(_eventQueueName, true, false, false);
         _channel.BasicConsume(queue.QueueName, true, consumer);
@@ -74,7 +75,7 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
             try
             {
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-                consumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel());
+                consumer.ConsumeEventAsync(e.BasicProperties.AppId, e.ToParcel()).Wait();
             }
             catch (Exception ex)
             {

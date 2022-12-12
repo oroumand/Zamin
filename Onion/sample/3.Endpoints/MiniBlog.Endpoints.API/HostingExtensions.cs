@@ -16,11 +16,11 @@ public static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        string cnn = "Server =.; Database = MiniBlogDb; User Id = sa; Password = 1qaz!QAZ; MultipleActiveResultSets = true; Encrypt = false";
+        string cnn = "Server =10.100.8.173; Database = MiniBlogDb; User Id = sa; Password = 2wsx@WSX; MultipleActiveResultSets = true; Encrypt = false";
         builder.Services.AddZaminParrotTranslator(c =>
         {
             c.ConnectionString = cnn;
-            c.AutoCreateSqlTable = false;
+            c.AutoCreateSqlTable = true;
             c.SchemaName = "dbo";
             c.TableName = "ParrotTranslations";
             c.ReloadDataIntervalInMinuts = 1;
@@ -52,7 +52,7 @@ public static class HostingExtensions
             c.PerssistMessage = true;
             c.ExchangeName = "MiniBlogExchange";
             c.ServiceName = "MiniBlog";
-            c.Url = @"amqp://guest:guest@localhost:5672/";
+            c.Url = @"amqp://guest:guest@10.100.8.173:5672/";
         });
 
         builder.Services.AddZaminPollingPublisher(c =>
@@ -61,6 +61,7 @@ public static class HostingExtensions
             c.ConnectionString = cnn;
             c.SelectCommand = "SELECT TOP (@Count) * FROM [MiniBlogDb].[dbo].[OutBoxEventItems] WHERE IsProcessed = 0";
             c.UpdateCommand = "UPDATE [MiniBlogDb].[dbo].[OutBoxEventItems] SET IsProcessed = 1 WHERE OutBoxEventItemId In @Ids";
+            c.SendCount = 1000;
         });
         builder.Services.AddZaminMessageInbox(c =>
         {
@@ -70,7 +71,7 @@ public static class HostingExtensions
 
         builder.Services.AddZaminTraceJeager(c =>
         {
-            c.AgentHost = "localhost";
+            c.AgentHost = "1.100.7.201";
             c.ApplicationName = "Zamin";
             c.ServiceName = "OpenTelemetrySample";
             c.ServiceVersion = "1.0.0";
