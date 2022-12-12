@@ -4,8 +4,7 @@ using Zamin.Extensions.Events.Abstractions;
 using Zamin.Extensions.Events.PollingPublisher.Dal.Dapper.DataAccess;
 using Zamin.Extensions.Events.PollingPublisher.Dal.Dapper.Options;
 
-namespace Zamin.Extensions.Events.PollingPublisher.Dal.Dapper.Extensions.DependencyInjection;
-
+namespace Zamin.Extensions.DependencyInjection;
 public static class PollingPublisherServiceCollectionExtensions
 {
     public static IServiceCollection AddZaminPollingPublisherDalSql(this IServiceCollection services, IConfiguration configuration)

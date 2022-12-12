@@ -7,7 +7,6 @@ using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Events;
 using Zamin.Core.ApplicationServices.Queries;
 using Zamin.Extensions.DependencyInjection;
-using Zamin.Extensions.Events.PollingPublisher.Dal.Dapper.Extensions.DependencyInjection;
 using Zamin.Infra.Data.Sql.Commands.Interceptors;
 using Zamin.Utilities.OpenTelemetryRegistration.Extensions.DependencyInjection;
 
@@ -69,9 +68,7 @@ public static class HostingExtensions
         builder.Services.AddZaminPollingPublisherDalSql(c =>
         {
             c.ApplicationName = "MiniBlog";
-            c.ConnectionString = cnn;
-            //c.SelectCommand = "Select top (@Count) * from zamin.OutBoxEventItems where IsProcessed = 0";
-            //c.UpdateCommand= "Update zamin.OutBoxEventItems set IsProcessed = 1 where OutBoxEventItemId in @Ids";
+            c.ConnectionString = cnn;           
         });
         builder.Services.AddZaminPollingPublisher(c =>
         {
