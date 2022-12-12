@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Zamin.Extensions.Events.Outbox.Core.Model;
+using Zamin.Extensions.Events.Abstractions;
 
 namespace Zamin.Extensions.Events.Outbox.Dal.EF.Configs;
 

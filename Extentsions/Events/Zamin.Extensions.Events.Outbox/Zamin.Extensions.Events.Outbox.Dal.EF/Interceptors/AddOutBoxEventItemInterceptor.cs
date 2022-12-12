@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Zamin.Extentions.Serializers.Abstractions;
 using System.Diagnostics;
-using Zamin.Extentions.UsersManagement.Abstractions;
 using Zamin.Core.Domain.Entities;
-using Zamin.Extensions.Events.Outbox.Core.Model;
+using Zamin.Extensions.Events.Abstractions;
+using Zamin.Extentions.Serializers.Abstractions;
+using Zamin.Extentions.UsersManagement.Abstractions;
 
 namespace Zamin.Extensions.Events.Outbox.Dal.EF.Interceptors;
 

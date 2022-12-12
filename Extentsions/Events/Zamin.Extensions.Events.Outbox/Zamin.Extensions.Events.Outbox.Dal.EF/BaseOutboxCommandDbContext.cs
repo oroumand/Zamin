@@ -1,4 +1,4 @@
-﻿using Zamin.Extensions.Events.Outbox.Core.Model;
+﻿using Zamin.Extensions.Events.Abstractions;
 using Zamin.Extensions.Events.Outbox.Dal.EF.Configs;
 using Zamin.Extensions.Events.Outbox.Dal.EF.Interceptors;
 using Zamin.Infra.Data.Sql.Commands;
