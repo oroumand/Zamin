@@ -31,7 +31,7 @@
     <PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="6.3.0-beta.6" />
     <PackageReference Include="Zamin.Extensions.UsersManagement" Version="6.3.0-beta.6" />
     <PackageReference Include="Zamin.Utilities.OpenTelemetryRegistration" Version="6.0.0-beta.1" />
-    <PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="6.1.0-beta.1" />
+    <PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="6.1.0-beta.2" />
   </ItemGroup>
 
   <ItemGroup>

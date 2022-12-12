@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
-		<Version>6.3.0-beta.3</Version>
+		<Version>6.3.0-beta.4</Version>
 		<Nullable>enable</Nullable>
 		<Authors>Alireza Oroumand</Authors>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -16,7 +16,7 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
 		<PackageReference Include="Zamin.Extensions.Caching.Abstractions" Version="6.3.0-beta.1" />
-		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="1.0.0-beta.2" />
+		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="6.3.0-beta.2" />
 	</ItemGroup>
 	
 </Project>
