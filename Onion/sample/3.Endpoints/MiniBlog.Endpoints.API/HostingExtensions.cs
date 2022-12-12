@@ -110,6 +110,7 @@ public static class HostingExtensions
         }
 
         app.UseHttpsRedirection();
+       
         app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
         app.UseAuthorization();
