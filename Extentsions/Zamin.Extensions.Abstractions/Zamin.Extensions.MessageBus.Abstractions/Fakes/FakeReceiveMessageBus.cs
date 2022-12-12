@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using Zamin.Extensions.MessageBus.Abstractions;
 
-namespace Zamin.Extentions.MessageBus.Abstractions.Fakes;
+namespace Zamin.Extensions.MessageBus.Abstractions.Fakes;
 
 public class FakeReceiveMessageBus : IReceiveMessageBus
 {

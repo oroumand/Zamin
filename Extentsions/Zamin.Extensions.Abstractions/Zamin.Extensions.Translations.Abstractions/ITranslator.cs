@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.Translations.Abstractions;
+﻿namespace Zamin.Extensions.Translations.Abstractions;
 
 public interface ITranslator
 {

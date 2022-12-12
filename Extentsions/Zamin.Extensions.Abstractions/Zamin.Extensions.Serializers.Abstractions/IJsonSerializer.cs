@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.Serializers.Abstractions;
+﻿namespace Zamin.Extensions.Serializers.Abstractions;
 
 public interface IJsonSerializer
 {

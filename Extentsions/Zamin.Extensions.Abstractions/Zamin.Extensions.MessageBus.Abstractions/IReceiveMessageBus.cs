@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.MessageBus.Abstractions;
+﻿namespace Zamin.Extensions.MessageBus.Abstractions;
 
 public interface IReceiveMessageBus
 {

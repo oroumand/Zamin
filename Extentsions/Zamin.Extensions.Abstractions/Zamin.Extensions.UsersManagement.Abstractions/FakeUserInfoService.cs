@@ -1,10 +1,10 @@
-﻿namespace Zamin.Extentions.UsersManagement.Abstractions;
+﻿namespace Zamin.Extensions.UsersManagement.Abstractions;
 
 public class FakeUserInfoService : IUserInfoService
 {
     private readonly string _defaultUserId;
 
-    public FakeUserInfoService():this("1")
+    public FakeUserInfoService() : this("1")
     {
 
     }
@@ -57,7 +57,7 @@ public class FakeUserInfoService : IUserInfoService
         return "1";
     }
 
-    public string UserIdOrDefault()=>_defaultUserId;
+    public string UserIdOrDefault() => _defaultUserId;
 
-    public string UserIdOrDefault(string defaultValue)=>defaultValue;
+    public string UserIdOrDefault(string defaultValue) => defaultValue;
 }

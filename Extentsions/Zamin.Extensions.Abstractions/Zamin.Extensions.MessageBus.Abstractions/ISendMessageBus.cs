@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.MessageBus.Abstractions;
+﻿namespace Zamin.Extensions.MessageBus.Abstractions;
 /// <summary>
 /// جهت ارسال پیام از این زیر ساخت اتستفاده می‌شود
 /// پیام ها می‌توانند در قالب دستوری باشند که به سرویسی خاص ارسال می‌شوند یا پیامی عمومی که برای همه ارسال می‌شود

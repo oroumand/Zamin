@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.UsersManagement.Abstractions;
+﻿namespace Zamin.Extensions.UsersManagement.Abstractions;
 
 public interface IUserInfoService
 {

@@ -1,4 +1,4 @@
-﻿namespace Zamin.Extentions.MessageBus.Abstractions.Fakes;
+﻿namespace Zamin.Extensions.MessageBus.Abstractions.Fakes;
 
 public class FakeMessageConsumer : IMessageConsumer
 {
