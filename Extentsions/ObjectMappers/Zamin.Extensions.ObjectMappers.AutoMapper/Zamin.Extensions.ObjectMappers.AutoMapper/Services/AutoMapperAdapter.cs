@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
-using Zamin.Extentions.ObjectMappers.Abstractions;
+using Zamin.Extensions.ObjectMappers.Abstractions;
 
 namespace Zamin.Extensions.ObjectMappers.AutoMapper.Services;
 

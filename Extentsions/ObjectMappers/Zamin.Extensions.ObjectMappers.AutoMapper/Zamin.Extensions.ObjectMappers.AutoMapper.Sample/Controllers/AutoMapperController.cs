@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Zamin.Extensions.ObjectMappers.AutoMapper.Sample.Models;
-using Zamin.Extentions.ObjectMappers.Abstractions;
+using Zamin.Extensions.ObjectMappers.Abstractions;
 
 namespace Zamin.Extensions.ObjectMappers.AutoMapper.Sample.Controllers
 {
