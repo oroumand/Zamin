@@ -31,7 +31,6 @@ public static class MessageInboxServiceCollectionExtensions
 
     private static void AddServices(IServiceCollection services)
     {
-        services.AddSingleton<IMessageInboxItemRepository, SqlMessageInboxItemRepository>();
         services.AddScoped<IMessageConsumer, InboxMessageConsumer>();
     }
 }

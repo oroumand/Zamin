@@ -1,12 +1,10 @@
-﻿using Microsoft.Extensions.DependencyModel;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using System.Reflection;
 using Zamin.Core.Contracts.ApplicationServices.Commands;
 using Zamin.Core.Contracts.ApplicationServices.Events;
 using Zamin.Core.Domain.Events;
-using Zamin.Extensions.MessageBus.MessageInbox.DataAccess;
+using Zamin.Extensions.MessageBus.Abstractions;
 using Zamin.Extensions.MessageBus.MessageInbox.Options;
-using Zamin.Extentions.MessageBus.Abstractions;
 using Zamin.Extentions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.MessageBus.MessageInbox;

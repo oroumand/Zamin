@@ -13,15 +13,15 @@
 
 
 	<ItemGroup>
-	  <PackageReference Include="Dapper" Version="2.0.123" />
-	  <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Dapper" Version="2.0.123" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
-	  <PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
-	  <PackageReference Include="Zamin.Core.Contracts" Version="6.3.0-beta.9" />
-	  <PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="6.3.0-beta.2" />
-	  <PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="6.3.0-beta.1" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
+		<PackageReference Include="Zamin.Core.Contracts" Version="6.3.0-beta.9" />
+		<PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="6.3.0-beta.3" />
+		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="6.3.0-beta.1" />
 	</ItemGroup>
 
 </Project>

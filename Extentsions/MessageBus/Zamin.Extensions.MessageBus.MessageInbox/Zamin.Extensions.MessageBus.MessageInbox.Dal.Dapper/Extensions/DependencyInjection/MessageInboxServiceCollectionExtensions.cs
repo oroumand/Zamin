@@ -1,28 +1,27 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Zamin.Extensions.MessageBus.MessageInbox;
-using Zamin.Extensions.MessageBus.MessageInbox.DataAccess;
-using Zamin.Extensions.MessageBus.MessageInbox.Options;
-using Zamin.Extentions.MessageBus.Abstractions;
+using Zamin.Extensions.MessageBus.Abstractions;
+using Zamin.Extensions.MessageBus.MessageInbox.Dal.Dapper;
+using Zamin.Extensions.MessageBus.MessageInbox.Dal.Dapper.Options;
 
 namespace Zamin.Extensions.DependencyInjection;
 
 public static class MessageInboxServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminMessageInbox(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddZaminMessageInboxDalSql(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<MessageInboxOptions>(configuration);
+        services.Configure<MessageInboxDalDapperOptions>(configuration);
         AddServices(services);
         return services;
     }
 
-    public static IServiceCollection AddZaminMessageInbox(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    public static IServiceCollection AddZaminMessageInboxDalSql(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
-        services.AddZaminMessageInbox(configuration.GetSection(sectionName));
+        services.AddZaminMessageInboxDalSql(configuration.GetSection(sectionName));
         return services;
     }
 
-    public static IServiceCollection AddZaminMessageInbox(this IServiceCollection services, Action<MessageInboxOptions> setupAction)
+    public static IServiceCollection AddZaminMessageInboxDalSql(this IServiceCollection services, Action<MessageInboxDalDapperOptions> setupAction)
     {
         services.Configure(setupAction);
         AddServices(services);
@@ -32,6 +31,5 @@ public static class MessageInboxServiceCollectionExtensions
     private static void AddServices(IServiceCollection services)
     {
         services.AddSingleton<IMessageInboxItemRepository, SqlMessageInboxItemRepository>();
-        services.AddScoped<IMessageConsumer, InboxMessageConsumer>();
     }
 }
