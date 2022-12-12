@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Zamin.Extensions.Serializers.NewtonSoft.Services;
-using Zamin.Extentions.Serializers.Abstractions;
+using Zamin.Extensions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.DependencyInjection;
 
