@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniBlog.Core.Domain.Blogs.Entities;
-using Zamin.Core.Domain.Toolkits.ValueObjects;
 using Zamin.Infra.Data.Sql.Commands;
 
 namespace MiniBlog.Infra.Data.Sql.Commands.Common
 {
-    public class MiniblogCommandDbContext : BaseOutboxCommandDbContext
+    public class MiniblogCommandDbContext : BaseCommandDbContext
     {
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Person> People { get; set; }

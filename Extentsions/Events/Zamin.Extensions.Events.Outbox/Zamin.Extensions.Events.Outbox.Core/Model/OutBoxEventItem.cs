@@ -1,4 +1,4 @@
-﻿namespace Zamin.Infra.Data.Sql.Commands.OutBoxEventItems;
+﻿namespace Zamin.Extensions.Events.Outbox.Core.Model;
 public class OutBoxEventItem
 {
     public long OutBoxEventItemId { get; set; }
