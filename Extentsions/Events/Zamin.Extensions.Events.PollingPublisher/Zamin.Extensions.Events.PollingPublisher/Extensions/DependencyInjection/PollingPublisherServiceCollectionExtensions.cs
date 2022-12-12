@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Zamin.Extensions.Events.PollingPublisher;
-using Zamin.Extensions.Events.PollingPublisher.DataAccess;
 using Zamin.Extensions.Events.PollingPublisher.Options;
 
 namespace Zamin.Extensions.DependencyInjection;
@@ -30,8 +29,6 @@ public static class PollingPublisherServiceCollectionExtensions
 
     private static void AddServices(IServiceCollection services)
     {
-        services.AddSingleton<IOutBoxEventItemRepository, SqlOutBoxEventItemRepository>();
-
         services.AddHostedService<PoolingPublisherBackgroundService>();
     }
 }

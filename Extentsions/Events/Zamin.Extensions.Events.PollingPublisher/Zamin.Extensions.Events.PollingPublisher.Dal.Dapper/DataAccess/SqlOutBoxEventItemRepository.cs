@@ -1,26 +1,21 @@
-﻿using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Zamin.Extensions.Events.PollingPublisher.Model;
-using Zamin.Extensions.Events.PollingPublisher.Options;
 using Dapper;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Zamin.Extensions.Events.Abstractions;
+using Zamin.Extensions.Events.PollingPublisher.Dal.Dapper.Options;
 
-namespace Zamin.Extensions.Events.PollingPublisher.DataAccess
+namespace Zamin.Extensions.Events.PollingPublisher.Dal.Dapper.DataAccess
 {
 
     public class SqlOutBoxEventItemRepository : IOutBoxEventItemRepository
     {
-        private readonly PollingPublisherOptions _options;
+        private readonly PollingPublisherDalRedisOptions _options;
         private readonly IDbConnection _dbConnection;
         private readonly ILogger<SqlOutBoxEventItemRepository> _logger;
 
-        public SqlOutBoxEventItemRepository(IOptions<PollingPublisherOptions> options, ILogger<SqlOutBoxEventItemRepository> logger)
+        public SqlOutBoxEventItemRepository(IOptions<PollingPublisherDalRedisOptions> options, ILogger<SqlOutBoxEventItemRepository> logger)
         {
             _options = options.Value;
             _dbConnection = new SqlConnection(_options.ConnectionString);

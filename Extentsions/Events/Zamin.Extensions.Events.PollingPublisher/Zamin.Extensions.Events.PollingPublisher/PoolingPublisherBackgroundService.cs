@@ -3,8 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
-using Zamin.Extensions.Events.PollingPublisher.DataAccess;
-using Zamin.Extensions.Events.PollingPublisher.Model;
+using Zamin.Extensions.Events.Abstractions;
 using Zamin.Extensions.Events.PollingPublisher.Options;
 using Zamin.Extentions.MessageBus.Abstractions;
 
