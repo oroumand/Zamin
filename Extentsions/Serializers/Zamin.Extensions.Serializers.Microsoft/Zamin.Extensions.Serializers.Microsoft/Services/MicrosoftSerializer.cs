@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Text.Json;
-using Zamin.Extentions.Serializers.Abstractions;
+using Zamin.Extensions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.Serializers.Microsoft.Services;
 
