@@ -70,9 +70,9 @@ public static class HostingExtensions
         {
             c.ApplicationName = "MiniBlog";
             c.ConnectionString = cnn;
-               public string SelectCommand { get; set; } = "Select top (@Count) * from OutBoxEventItems where IsProcessed = 0";
-    public string UpdateCommand { get; set; } = "Update OutBoxEventItems set IsProcessed = 1 where OutBoxEventItemId in @Ids";
-});
+            //c.SelectCommand = "Select top (@Count) * from zamin.OutBoxEventItems where IsProcessed = 0";
+            //c.UpdateCommand= "Update zamin.OutBoxEventItems set IsProcessed = 1 where OutBoxEventItemId in @Ids";
+        });
         builder.Services.AddZaminPollingPublisher(c =>
         {
             c.SendInterval = 1000;
