@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using Zamin.Extensions.MessageBus.Abstractions;
+using Zamin.Extensions.MessageBus.RabbitMQ;
 using Zamin.Extensions.MessageBus.RabbitMQ.Options;
 
 namespace Zamin.Extensions.DependencyInjection;

@@ -1,26 +1,18 @@
 using Zamin.Extensions.DependencyInjection;
-using Zamin.Extensions.MessageBus.RabbitMQ.Extensions.DependencyInjection;
-using Zamin.Extensions.MessageBus.RabbitMQ.Sample.Models;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-builder.Services.AddZaminNewtonSoftSerializer();
-builder.Services.AddZaminRabbitMqMessageBus(c =>
+WebApplication.CreateBuilder(args).Services.AddControllers();
+WebApplication.CreateBuilder(args).Services.AddZaminNewtonSoftSerializer();
+WebApplication.CreateBuilder(args).Services.AddZaminRabbitMqMessageBus(c =>
 {
     c.PerssistMessage = true;
     c.ExchangeName = "SampleExchange";
     c.ServiceName = "SampleApplciatoin";
     c.Url = @"amqp://guest:guest@localhost:5672/";
 });
+WebApplication.CreateBuilder(args).Services.AddEndpointsApiExplorer();
+WebApplication.CreateBuilder(args).Services.AddSwaggerGen();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
+var app = WebApplication.CreateBuilder(args).Build();
 app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("SampleApplciatoin", "PersonEvent"));
 app.Services.ReceiveCommandFromRabbitMqMessageBus("PersonCommand");
 // Configure the HTTP request pipeline.
