@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Zamin.Extensions.MessageBus.Abstractions;
 using Zamin.Extensions.MessageBus.MessageInbox;
-using Zamin.Extensions.MessageBus.MessageInbox.DataAccess;
 using Zamin.Extensions.MessageBus.MessageInbox.Options;
-using Zamin.Extentions.MessageBus.Abstractions;
 
 namespace Zamin.Extensions.DependencyInjection;
 

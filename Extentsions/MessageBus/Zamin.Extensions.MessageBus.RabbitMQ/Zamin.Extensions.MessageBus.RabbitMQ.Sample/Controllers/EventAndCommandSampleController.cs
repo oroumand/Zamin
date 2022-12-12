@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Zamin.Extensions.MessageBus.RabbitMQ.Sample.Models;
-using Zamin.Extentions.MessageBus.Abstractions;
+using Zamin.Extensions.MessageBus.Abstractions;
 
 namespace Zamin.Extensions.MessageBus.RabbitMQ.Sample.Controllers
 {

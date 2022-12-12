@@ -1,4 +1,5 @@
 using Zamin.Extensions.DependencyInjection;
+using Zamin.Extensions.MessageBus.RabbitMQ.Extensions.DependencyInjection;
 using Zamin.Extensions.MessageBus.RabbitMQ.Sample.Models;
 
 var builder = WebApplication.CreateBuilder(args);

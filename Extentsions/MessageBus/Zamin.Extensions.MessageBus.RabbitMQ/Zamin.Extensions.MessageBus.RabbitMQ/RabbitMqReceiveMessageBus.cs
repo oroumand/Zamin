@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
-using Zamin.Extentions.MessageBus.Abstractions;
+using Zamin.Extensions.MessageBus.Abstractions;
 using Microsoft.Extensions.Options;
 using Zamin.Extensions.MessageBus.RabbitMQ.Options;
 using Microsoft.Extensions.Configuration;
@@ -78,7 +78,7 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
                 Activity span = StartChildActivity(e);
                 _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-                consumer.ConsumeEventAsync(e.BasicProperties.AppId, e.ToParcel()).Wait();
+                consumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel()).Wait();
             }
             catch (Exception ex)
             {
@@ -97,7 +97,7 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
                 Activity span = StartChildActivity(e);
                 _logger.LogDebug("Command Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-                consumer.ConsumeCommand(e.BasicProperties.AppId, e.ToParcel());
+                consumer.ConsumeCommand(e.BasicProperties.AppId, e.ToParcel()).Wait();
             }
             catch (Exception ex)
             {

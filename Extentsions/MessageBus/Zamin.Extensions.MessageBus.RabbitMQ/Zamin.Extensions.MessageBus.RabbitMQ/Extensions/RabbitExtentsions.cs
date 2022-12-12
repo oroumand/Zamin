@@ -1,13 +1,13 @@
 ﻿using RabbitMQ.Client.Events;
 using System.Text;
-using Zamin.Extentions.MessageBus.Abstractions;
+using Zamin.Extensions.MessageBus.Abstractions;
 
 namespace Zamin.Extensions.MessageBus.RabbitMQ.Extensions;
-static class RabbitExtentsions
+static class RabbitExtensions
 {
     public static Parcel ToParcel(this BasicDeliverEventArgs basicDeliverEventArgs)
     {
-        Parcel parcel = new Parcel
+        Parcel parcel = new()
         {
             CorrelationId = basicDeliverEventArgs?.BasicProperties?.CorrelationId,
             MessageId = basicDeliverEventArgs?.BasicProperties.MessageId,

@@ -3,8 +3,8 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using System.Diagnostics;
 using Zamin.Extensions.MessageBus.RabbitMQ.Options;
-using Zamin.Extentions.MessageBus.Abstractions;
-using Zamin.Extentions.Serializers.Abstractions;
+using Zamin.Extensions.MessageBus.Abstractions;
+using Zamin.Extensions.Serializers.Abstractions;
 using Zamin.Utilities.Extensions;
 
 namespace Zamin.Extensions.MessageBus.RabbitMQ

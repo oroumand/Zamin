@@ -29,7 +29,7 @@ public class InboxMessageConsumer : IMessageConsumer
         _commandTypes.AddRange(assemblies.SelectMany(assembly => assembly.GetTypes().Where(c => c.IsAssignableTo(typeof(ICommand)) && c.IsClass).ToList()).ToList());
     }
 
-    public Task<bool> ConsumeCommandAsync(string sender, Parcel parcel)
+    public Task<bool> ConsumeCommand(string sender, Parcel parcel)
     {
         throw new NotImplementedException();
         //if (_messageInboxItemRepository.AllowReceive(parcel.MessageId, sender))
@@ -39,10 +39,10 @@ public class InboxMessageConsumer : IMessageConsumer
         //    dynamic command = _jsonSerializer.Deserialize(parcel.MessageBody, commandType);
         //    _commandDispatcher.Send(command);
         //    _messageInboxItemRepository.Receive(parcel.MessageId, sender);
-        //}
-    }
+        //}    }
 
-    public async Task<bool> ConsumeEventAsync(string sender, Parcel parcel)
+    }
+    public async Task<bool> ConsumeEvent(string sender, Parcel parcel)
     {
         if (_messageInboxItemRepository.AllowReceive(parcel.MessageId, sender))
         {
@@ -51,7 +51,7 @@ public class InboxMessageConsumer : IMessageConsumer
             {
                 dynamic @event = _jsonSerializer.Deserialize(parcel.MessageBody, eventType);
                 await _eventDispatcher.PublishDomainEventAsync(@event);
-                _messageInboxItemRepository.Receive(parcel.MessageId, sender);
+                _messageInboxItemRepository.Receive(parcel.MessageId, sender, parcel.MessageBody);
             }
         }
         return true;
