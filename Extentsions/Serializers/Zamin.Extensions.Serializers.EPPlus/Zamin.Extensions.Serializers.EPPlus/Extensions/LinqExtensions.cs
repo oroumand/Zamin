@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Reflection;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Zamin.Extensions.Serializers.EPPlus.Extensions;
 

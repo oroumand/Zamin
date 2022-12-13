@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Zamin.Extensions.Serializers.EPPlus.Sample.Models;
-using Zamin.Extentions.Serializers.Abstractions;
+using Zamin.Extensions.Serializers.Abstractions;
 
 namespace Zamin.Extensions.Serializers.EPPlus.Sample.Controllers;
 
