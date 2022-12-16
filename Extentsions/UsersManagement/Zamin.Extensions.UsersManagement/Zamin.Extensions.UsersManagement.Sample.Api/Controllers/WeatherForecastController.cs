@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Zamin.Extensions.UsersManagement.Abstractions;
 using Zamin.Extensions.UsersManagement.Sample.Api.Models;
 
 namespace Zamin.Extensions.UsersManagement.Sample.Api.Controllers;
@@ -9,12 +10,19 @@ namespace Zamin.Extensions.UsersManagement.Sample.Api.Controllers;
 [Route("api/[controller]")]
 public class WeatherForecastController : ControllerBase
 {
+    public WeatherForecastController(IUserInfoService userInfoService)
+    {
+        var user = HttpContext.User;
+
+        _userInfoService = userInfoService;
+    }
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly IUserInfoService _userInfoService;
 
     public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {

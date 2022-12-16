@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Text.Json;
+using Zamin.Extensions.UsersManagement.Abstractions;
 using Zamin.Extensions.UsersManagement.Sample.Mvc.Models;
 
 namespace Zamin.Extensions.UsersManagement.Sample.Mvc.Controllers;
@@ -12,14 +13,24 @@ namespace Zamin.Extensions.UsersManagement.Sample.Mvc.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IUserInfoService _userInfoService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IUserInfoService userInfoService)
     {
+
+
+        var auserInfoService = userInfoService;
         _logger = logger;
+        _userInfoService = userInfoService;
     }
 
     public async Task<IActionResult> Index()
-        => View();
+    {
+        var user = HttpContext.User;
+        var claim = HttpContext.User.Claims.ToList();
+        var t = _userInfoService.GetClaim("name");
+        return View();
+    }
 
     public async Task<IActionResult> WeatherForecast()
     {
