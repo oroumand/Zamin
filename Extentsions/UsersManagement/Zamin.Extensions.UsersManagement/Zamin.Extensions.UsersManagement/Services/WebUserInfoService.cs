@@ -14,7 +14,7 @@ public class WebUserInfoService : IUserInfoService
 
     public WebUserInfoService(IHttpContextAccessor httpContextAccessor, IOptions<UserManagementOptions> configuration)
     {
-        _httpContextAccessor = httpContextAccessor;
+        _httpContextAccessor = httpContextAccessor;
         _configuration = configuration.Value;
     }
 
