@@ -31,7 +31,7 @@
     <PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="7.0.0-beta.1" />
     <PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="7.0.0-beta.1" />
     <PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="7.0.0-beta.1" />
-    <PackageReference Include="Zamin.Extensions.UsersManagement" Version="7.0.0-beta.1" />
+    <PackageReference Include="Zamin.Extensions.UsersManagement" Version="7.0.0-beta.2" />
     <PackageReference Include="Zamin.Utilities.OpenTelemetryRegistration" Version="7.0.0-beta.1" />
     <PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="7.0.0-beta.1" />
   </ItemGroup>
