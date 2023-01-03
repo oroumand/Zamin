@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Zamin.Extensions.Serializers.EPPlus.Extensions;
-using Zamin.Extentions.Serializers.Abstractions;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Serializers.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Zamin.Extensions.Serializers.EPPlus.Services;
 

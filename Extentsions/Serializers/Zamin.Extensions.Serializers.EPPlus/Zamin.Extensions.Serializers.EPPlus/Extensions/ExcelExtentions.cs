@@ -2,11 +2,11 @@
 using OfficeOpenXml.Style;
 using System.Data;
 using System.Drawing;
-using Zamin.Extentions.Translations.Abstractions;
+using Zamin.Extensions.Translations.Abstractions;
 
 namespace Zamin.Extensions.Serializers.EPPlus.Extensions;
 
-public static class ExcelExtentions
+public static class ExcelExtensions
 {
     public static byte[] ToExcelByteArray<T>(this List<T> list, ITranslator translator, string sheetName = "Result")
     {

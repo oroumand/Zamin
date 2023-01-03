@@ -8,9 +8,9 @@ namespace Zamin.Extensions.DependencyInjection;
 
 public static class UserInfoServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminWebUserInfoService(this IServiceCollection services, IConfiguration configuration, bool useFake=false)
+    public static IServiceCollection AddZaminWebUserInfoService(this IServiceCollection services, IConfiguration configuration, bool useFake = false)
     {
-        if(useFake)
+        if (useFake)
         {
             services.AddSingleton<IUserInfoService, FakeUserInfoService>();
 

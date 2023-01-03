@@ -8,7 +8,6 @@ using Zamin.Core.ApplicationServices.Events;
 using Zamin.Core.ApplicationServices.Queries;
 using Zamin.Extensions.DependencyInjection;
 using Zamin.Infra.Data.Sql.Commands.Interceptors;
-using Zamin.Utilities.OpenTelemetryRegistration.Extensions.DependencyInjection;
 
 namespace MiniBlog.Endpoints.API;
 

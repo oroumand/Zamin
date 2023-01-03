@@ -9,7 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddParrotTranslator(c =>
+builder.Services.AddZaminParrotTranslator(c =>
 {
     c.ConnectionString = "Server =; Database= ;User Id = sa;Password=; MultipleActiveResultSets=true";
     c.AutoCreateSqlTable = true;

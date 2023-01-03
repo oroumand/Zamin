@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Zamin.Utilities.OpenTelemetryRegistration.Extensions.DependencyInjection;
+using Zamin.Extensions.DependencyInjection;
 using Zamin.Utilities.OpenTelemetryRegistration.Sample.Models;
 
 var builder = WebApplication.CreateBuilder(args);
