@@ -9,10 +9,13 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
 	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="IdentityModel" Version="6.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
+		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="7.0.0-beta.1" />
 	</ItemGroup>
+	
 </Project>

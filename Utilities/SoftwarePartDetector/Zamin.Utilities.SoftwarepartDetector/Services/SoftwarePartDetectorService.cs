@@ -11,7 +11,8 @@ public class SoftwarePartDetectorService
     private readonly SoftwarePartDetectorOptions _softwarePartDetectorOption;
 
     public SoftwarePartDetectorService(SoftwarePartDetector softwarePartDetector,
-        ISoftwarePartPublisher partWebPublisher, IOptions<SoftwarePartDetectorOptions> softwarePartDetectorOption)
+                                       ISoftwarePartPublisher partWebPublisher,
+                                       IOptions<SoftwarePartDetectorOptions> softwarePartDetectorOption)
     {
         _softwarePartDetector = softwarePartDetector;
         _partWebPublisher = partWebPublisher;
@@ -22,10 +23,10 @@ public class SoftwarePartDetectorService
         if (string.IsNullOrEmpty(_softwarePartDetectorOption.ApplicationName))
             throw new ArgumentNullException("SoftwareName in SoftwarePartDetectorOption is null");
 
-        var parts = await _softwarePartDetector.Detect(_softwarePartDetectorOption.ApplicationName,
-                                                       _softwarePartDetectorOption.ModuleName,
-                                                       _softwarePartDetectorOption.ServiceName);
-        if (parts != null)
-            await _partWebPublisher.PublishAsync(parts);
+        var softwareParts = await _softwarePartDetector.Detect(_softwarePartDetectorOption.ApplicationName,
+                                                               _softwarePartDetectorOption.ModuleName,
+                                                               _softwarePartDetectorOption.ServiceName);
+        if (softwareParts != null)
+            await _partWebPublisher.PublishAsync(softwareParts);
     }
 }
