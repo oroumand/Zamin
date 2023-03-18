@@ -5,14 +5,15 @@ namespace Zamin.Utilities.SoftwarePartDetector.Sample.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+[SoftwarePartControllerOption(service: "SoftwareServiceCustomService", module: "SoftwareServiceCustomModule")]
+public class WeatherForecastCustomController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    [HttpGet("GetWeatherForecast")]
+    [HttpGet("GetWeatherForecastCustom")]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
