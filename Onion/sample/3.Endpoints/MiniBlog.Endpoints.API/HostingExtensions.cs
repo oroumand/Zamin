@@ -15,7 +15,7 @@ public static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        string cnn = "Server =.; Database = MiniBlogDb; User Id = sa; Password = 1qaz!QAZ; MultipleActiveResultSets = true; Encrypt = false";
+        string cnn = "Server =10.100.7.202,1433; Database = MiniBlogDb; User Id = sa; Password = 55MS@B1M3gary; MultipleActiveResultSets = true; Encrypt = false";
         builder.Services.AddZaminParrotTranslator(c =>
         {
             c.ConnectionString = cnn;
@@ -46,48 +46,48 @@ public static class HostingExtensions
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();      
 
-        builder.Services.AddZaminTraceJeager(c =>
-        {
-            c.AgentHost = "localhost";
-            c.ApplicationName = "MiniBlog";
-            c.ServiceName = "OpenTelemetrySample";
-            c.ServiceVersion = "1.0.0";
-            c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
-        });
+        //builder.Services.AddZaminTraceJeager(c =>
+        //{
+        //    c.AgentHost = "localhost";
+        //    c.ApplicationName = "MiniBlog";
+        //    c.ServiceName = "OpenTelemetrySample";
+        //    c.ServiceVersion = "1.0.0";
+        //    c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
+        //});
 
-        builder.Services.AddZaminRabbitMqMessageBus(c =>
-        {
-            c.PerssistMessage = false;
-            c.ExchangeName = "MiniBlogExchange";
-            c.ServiceName = "MiniBlogAPI";
-            c.Url = @"amqp://guest:guest@localhost:5672/";
-        });
+        //builder.Services.AddZaminRabbitMqMessageBus(c =>
+        //{
+        //    c.PerssistMessage = false;
+        //    c.ExchangeName = "MiniBlogExchange";
+        //    c.ServiceName = "MiniBlogAPI";
+        //    c.Url = @"amqp://guest:guest@localhost:5672/";
+        //});
 
-        builder.Services.AddZaminPollingPublisherDalSql(c =>
-        {
-            c.ApplicationName = "MiniBlog";
-            c.ConnectionString = cnn;           
-        });
+        //builder.Services.AddZaminPollingPublisherDalSql(c =>
+        //{
+        //    c.ApplicationName = "MiniBlog";
+        //    c.ConnectionString = cnn;           
+        //});
      
-        builder.Services.AddZaminPollingPublisher(c =>
-        {
-            c.SendInterval = 1000;
-            c.SendCount = 100;
-            c.ExceptionInterval = 10000;
-            c.ApplicationName = "MiniBlog";
-        });
+        //builder.Services.AddZaminPollingPublisher(c =>
+        //{
+        //    c.SendInterval = 1000;
+        //    c.SendCount = 100;
+        //    c.ExceptionInterval = 10000;
+        //    c.ApplicationName = "MiniBlog";
+        //});
 
 
-        builder.Services.AddZaminMessageInbox(c =>
-        {
-            c.ApplicationName = "MiniBlog";
-        });
-        builder.Services.AddZaminMessageInboxDalSql(c =>
-        {
-            //c.TableName = "MessageInbox";
-            c.SchemaName = "dbo";
-            c.ConnectionString = cnn;
-        });
+        //builder.Services.AddZaminMessageInbox(c =>
+        //{
+        //    c.ApplicationName = "MiniBlog";
+        //});
+        //builder.Services.AddZaminMessageInboxDalSql(c =>
+        //{
+        //    //c.TableName = "MessageInbox";
+        //    c.SchemaName = "dbo";
+        //    c.ConnectionString = cnn;
+        //});
 
         builder.Services.AddSwaggerGen();
 
@@ -110,7 +110,7 @@ public static class HostingExtensions
 
         app.UseHttpsRedirection();
        
-        app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
+       // app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
         app.UseAuthorization();
 
