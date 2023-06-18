@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Zamin.Extensions.UsersManagement" Version="7.0.0-beta.2" />
+    <PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="7.0.0-beta.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zamin.Extensions.ChangeDataLog.Hamster\Zamin.Extensions.ChangeDataLog.Hamster.csproj" />
+    <ProjectReference Include="..\Zamin.Extensions.ChangeDataLog.Sql\Zamin.Extensions.ChangeDataLog.Sql.csproj" />
+  </ItemGroup>
+
+</Project>
