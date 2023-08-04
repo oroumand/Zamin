@@ -48,6 +48,7 @@ namespace Zamin.EndPoints.Web.Controllers
             return BadRequest(result.Messages);
         }
 
+
         protected async Task<IActionResult> Edit<TCommand, TCommandResult>(TCommand command) where TCommand : class, ICommand<TCommandResult>
         {
             var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command);
@@ -82,7 +83,7 @@ namespace Zamin.EndPoints.Web.Controllers
             var result = await CommandDispatcher.Send<TCommand, TCommandResult>(command);
             if (result.Status == ApplicationServiceStatus.Ok)
             {
-                return StatusCode((int)HttpStatusCode.NoContent, result.Data);
+                return StatusCode((int)HttpStatusCode.OK, result.Data);
             }
             else if (result.Status == ApplicationServiceStatus.NotFound)
             {
@@ -96,7 +97,7 @@ namespace Zamin.EndPoints.Web.Controllers
             var result = await CommandDispatcher.Send(command);
             if (result.Status == ApplicationServiceStatus.Ok)
             {
-                return StatusCode((int)HttpStatusCode.NoContent);
+                return StatusCode((int)HttpStatusCode.OK);
             }
             else if (result.Status == ApplicationServiceStatus.NotFound)
             {
@@ -104,6 +105,7 @@ namespace Zamin.EndPoints.Web.Controllers
             }
             return BadRequest(result.Messages);
         }
+
 
         protected async Task<IActionResult> Query<TQuery, TQueryResult>(TQuery query) where TQuery : class, IQuery<TQueryResult>
         {
