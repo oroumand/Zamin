@@ -3,6 +3,6 @@ using Zamin.Core.Contracts.Data.Commands;
 
 namespace MiniBlog.Core.Contracts.Blogs.Commands;
 
-public interface IBlogCommandRepository : ICommandRepository<Blog>
+public interface IBlogCommandRepository : ICommandRepository<Blog, int>
 {
 }

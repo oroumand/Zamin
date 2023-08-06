@@ -5,13 +5,19 @@ namespace Zamin.Core.Domain.Entities;
 /// کلاس پایه برای تمامی Entityها موجود در سامانه
 /// </summary>
 
-public abstract class Entity
+public abstract class Entity<TId>
+          where TId : struct,
+          IComparable,
+          IComparable<TId>,
+          IConvertible,
+          IEquatable<TId>,
+          IFormattable
 {
     /// <summary>
     /// شناسه عددی Entityها
     /// صرفا برای ذخیره در دیتابیس و سادگی کار مورد استفاده قرار بگیرید.
     /// </summary>
-    public long Id { get; protected set; }
+    public TId Id { get; protected set; }
 
     /// <summary>
     /// شناسه Entity
@@ -30,12 +36,12 @@ public abstract class Entity
 
 
     #region Equality Check
-    public bool Equals(Entity? other) => this == other;
+    public bool Equals(Entity<TId>? other) => this == other;
     public override bool Equals(object? obj)=>
-         obj is Entity otherObject && Id == otherObject.Id;
+         obj is Entity<TId> otherObject && Id.Equals(otherObject.Id);
 
     public override int GetHashCode() => Id.GetHashCode();
-    public static bool operator ==(Entity left, Entity right)
+    public static bool operator ==(Entity<TId> left, Entity<TId> right)
     {
         if (left is null && right is null)
             return true;
@@ -46,8 +52,14 @@ public abstract class Entity
         return left.Equals(right);
     }
 
-    public static bool operator !=(Entity left, Entity right)
+    public static bool operator !=(Entity<TId> left, Entity<TId> right)
         => !(right == left);
 
     #endregion
+}
+
+
+public abstract class Entity : Entity<long>
+{
+
 }

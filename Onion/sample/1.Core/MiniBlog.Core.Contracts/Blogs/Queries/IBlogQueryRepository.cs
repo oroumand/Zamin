@@ -1,8 +1,8 @@
-﻿using MiniBlog.Core.Contracts.Blogs.Queries.GetBlogByBusinessId;
+﻿using MiniBlog.Core.Contracts.Blogs.Queries.GetById;
 
 namespace MiniBlog.Core.Contracts.Blogs.Queries;
 
 public interface IBlogQueryRepository
 {
-    public Task<BlogQr> Execute(GetBlogByBusinessIdQuery query);
+    public Task<BlogQr?> ExecuteAsync(GetBlogByIdQuery query);
 }

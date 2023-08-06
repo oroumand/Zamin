@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.VisualBasic;
 using Zamin.Core.Domain.Entities;
 using Zamin.Extensions.UsersManagement.Abstractions;
 
@@ -23,8 +24,7 @@ public static class AuditableShadowProperties
 
     public static void AddAuditableShadowProperties(this ModelBuilder modelBuilder)
     {
-        foreach (var entityType in modelBuilder.Model
-                                               .GetEntityTypes().Where(c => typeof(Entity).IsAssignableFrom(c.ClrType)))
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes().Where(c => IsSubclassOfRawGeneric(typeof(Entity<>), c.ClrType)))
         {
             modelBuilder.Entity(entityType.ClrType)
                         .Property<string>(CreatedByUserId).HasMaxLength(50);
@@ -47,19 +47,33 @@ public static class AuditableShadowProperties
         var now = DateTime.UtcNow;
         var userId = userInfoService.UserIdOrDefault();
 
-        var modifiedEntries = changeTracker.Entries<Entity>().Where(x => x.State == EntityState.Modified);
+        var modifiedEntries = changeTracker.Entries().Where(x => x.State == EntityState.Modified && IsSubclassOfRawGeneric(typeof(Entity<>), x.Metadata.ClrType));
         foreach (var modifiedEntry in modifiedEntries)
         {
             modifiedEntry.Property(ModifiedDateTime).CurrentValue = now;
             modifiedEntry.Property(ModifiedByUserId).CurrentValue = userId;
         }
 
-        var addedEntries = changeTracker.Entries<Entity>().Where(x => x.State == EntityState.Added);
+        var addedEntries = changeTracker.Entries().Where(x => x.State == EntityState.Added && IsSubclassOfRawGeneric(typeof(Entity<>), x.Metadata.ClrType));
         foreach (var addedEntry in addedEntries)
         {
             addedEntry.Property(CreatedDateTime).CurrentValue = now;
             addedEntry.Property(CreatedByUserId).CurrentValue = userId;
         }
+    }
+
+    static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
+    {
+        while (toCheck != null && toCheck != typeof(object))
+        {
+            var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+            if (generic == cur)
+            {
+                return true;
+            }
+            toCheck = toCheck.BaseType;
+        }
+        return false;
     }
 }
 

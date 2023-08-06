@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MiniBlog.Infra.Data.Sql.Queries.Common
+﻿namespace MiniBlog.Infra.Data.Sql.Queries.Blogs
 {
     public partial class Blog
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string? CreatedByUserId { get; set; }

@@ -8,7 +8,13 @@ namespace Zamin.Core.Domain.Entities;
 /// https://martinfowler.com/bliki/DDD_Aggregate.html
 /// 
 /// </summary>
-public abstract class AggregateRoot : Entity
+public abstract class AggregateRoot<TId> : Entity<TId>
+     where TId : struct,
+          IComparable,
+          IComparable<TId>,
+          IConvertible,
+          IEquatable<TId>,
+          IFormattable
 {
     /// <summary>
     /// لیست Evantهای مربوطه را نگهداری می‌کند        
@@ -58,4 +64,11 @@ public abstract class AggregateRoot : Entity
     /// Eventهای موجود در این Aggregate را پاک می‌کند
     /// </summary>
     public void ClearEvents() => _events.Clear();
+}
+
+
+
+public abstract class AggregateRoot : AggregateRoot<long>
+{
+
 }

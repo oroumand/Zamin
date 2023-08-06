@@ -15,7 +15,7 @@ public static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        string cnn = "Server =; Database = ; User Id = ; Password = ; MultipleActiveResultSets = true; Encrypt = false";
+        string cnn = "Server =; Database =ZaminSampleDb ; User Id =; Password = ; MultipleActiveResultSets = true; Encrypt = false";
         builder.Services.AddZaminParrotTranslator(c =>
         {
             c.ConnectionString = cnn;
@@ -44,7 +44,7 @@ public static class HostingExtensions
 
         builder.Services.AddZaminApiCore("Zamin", "MiniBlog");
         builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();      
+        builder.Services.AddEndpointsApiExplorer();
 
         //builder.Services.AddZaminTraceJeager(c =>
         //{
@@ -68,7 +68,7 @@ public static class HostingExtensions
         //    c.ApplicationName = "MiniBlog";
         //    c.ConnectionString = cnn;           
         //});
-     
+
         //builder.Services.AddZaminPollingPublisher(c =>
         //{
         //    c.SendInterval = 1000;
@@ -93,7 +93,7 @@ public static class HostingExtensions
 
 
 
-        
+
         return builder.Build();
     }
 
@@ -109,8 +109,8 @@ public static class HostingExtensions
         }
 
         app.UseHttpsRedirection();
-       
-       // app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
+
+        // app.Services.ReceiveEventFromRabbitMqMessageBus(new KeyValuePair<string, string>("MiniBlog", "BlogCreated"));
 
         app.UseAuthorization();
 

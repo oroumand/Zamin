@@ -1,6 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MiniBlog.Core.Contracts.Blogs.Commands.CreateBlog;
-using MiniBlog.Core.Contracts.Blogs.Queries.GetBlogByBusinessId;
+using MiniBlog.Core.Contracts.Blogs.Commands.AddPost;
+using MiniBlog.Core.Contracts.Blogs.Commands.Create;
+using MiniBlog.Core.Contracts.Blogs.Commands.Delete;
+using MiniBlog.Core.Contracts.Blogs.Commands.DeleteGraph;
+using MiniBlog.Core.Contracts.Blogs.Commands.RemovePost;
+using MiniBlog.Core.Contracts.Blogs.Commands.Update;
+using MiniBlog.Core.Contracts.Blogs.Queries.GetById;
 using Zamin.EndPoints.Web.Controllers;
 
 namespace MiniBlog.Endpoints.API.Blogs
@@ -8,19 +13,38 @@ namespace MiniBlog.Endpoints.API.Blogs
     [Route("api/[controller]")]
     public class BlogController : BaseController
     {
-        [HttpPost("[action]")]
-        public async Task<IActionResult> CreateBlog(CreateBlogCommand createBlog)
-            => await Create<CreateBlogCommand, Guid>(createBlog);
+        #region Commands
+        [HttpPost("Create")]
+        public async Task<IActionResult> CreateBlog([FromBody] CreateBlogCommand command) => await Create<CreateBlogCommand, Guid>(command);
 
-        [HttpGet("[action]")]
-        public async Task<IActionResult> GetBlogByBusinessId(GetBlogByBusinessIdQuery query)
-            => await Query<GetBlogByBusinessIdQuery, BlogQr>(query);
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateBlog([FromBody] UpdateBlogCommand command) => await Edit(command);
 
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> DeleteBlog([FromBody] DeleteBlogCommand command) => await Delete(command);
+
+        [HttpDelete("DeleteGraph")]
+        public async Task<IActionResult> DeleteGraphBlog([FromBody] DeleteGraphBlogCommand command) => await Delete(command);
+
+        [HttpPost("AddPost")]
+        public async Task<IActionResult> AddPost([FromBody] AddPostCommand command) => await Create(command);
+
+        [HttpDelete("RemovePost")]
+        public async Task<IActionResult> RemovePost([FromBody] RemovePostCommand command) => await Delete(command);
+        #endregion
+
+        #region Queries
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(GetBlogByIdQuery query) => await Query<GetBlogByIdQuery, BlogQr?>(query);
+        #endregion
+
+        #region Methods
         [HttpGet("/Clear")]
         public bool Clear()
         {
             GC.Collect(2);
             return true;
         }
+        #endregion
     }
 }

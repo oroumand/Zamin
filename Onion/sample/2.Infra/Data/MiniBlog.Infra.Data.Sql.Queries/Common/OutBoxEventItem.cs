@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MiniBlog.Infra.Data.Sql.Queries.Common
+﻿namespace MiniBlog.Infra.Data.Sql.Queries.Common
 {
     public partial class OutBoxEventItem
     {

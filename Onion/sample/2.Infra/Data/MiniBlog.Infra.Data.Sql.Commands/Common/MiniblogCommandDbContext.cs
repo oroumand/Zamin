@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniBlog.Core.Domain.Blogs.Entities;
+using MiniBlog.Core.Domain.People.Entities;
 using Zamin.Extensions.Events.Outbox.Dal.EF;
-using Zamin.Infra.Data.Sql.Commands;
 
 namespace MiniBlog.Infra.Data.Sql.Commands.Common
 {

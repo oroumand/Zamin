@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniBlog.Core.Contracts.Blogs.Queries;
-using MiniBlog.Core.Contracts.Blogs.Queries.GetBlogByBusinessId;
+using MiniBlog.Core.Contracts.Blogs.Queries.GetById;
 using MiniBlog.Infra.Data.Sql.Queries.Common;
 using Zamin.Infra.Data.Sql.Queries;
 
@@ -12,12 +12,11 @@ public class BlogQueryRepository : BaseQueryRepository<MiniblogQueryDbContext>, 
     {
     }
 
-    public async Task<BlogQr> Execute(GetBlogByBusinessIdQuery query)
+    public async Task<BlogQr?> ExecuteAsync(GetBlogByIdQuery query)
         => await _dbContext.Blogs.Select(c => new BlogQr()
         {
             Id = c.Id,
-            BusinessId = c.BusinessId,
             Title = c.Title,
             Description = c.Description
-        }).FirstOrDefaultAsync(c => c.BusinessId.Equals(query.BlogBusinessId));
+        }).FirstOrDefaultAsync(c => c.Id.Equals(query.BlogId));
 }
