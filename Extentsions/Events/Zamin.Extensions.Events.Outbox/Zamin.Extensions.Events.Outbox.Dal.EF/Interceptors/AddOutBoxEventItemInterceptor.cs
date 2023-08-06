@@ -25,10 +25,10 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
 
     private static void AddOutbox(DbContextEventData eventData)
     {
-        List<AggregateRoot> changedAggregates = eventData.Context.ChangeTracker
-            .Entries<AggregateRoot>()
+        List<dynamic> changedAggregates = eventData.Context.ChangeTracker
+            .Entries<IAggregateRoot>()
             .Where(x => x.State != EntityState.Detached)
-            .Select(c => c.Entity)
+            .Select(c => c.Entity as dynamic)
             .Where(c => c.GetEvents().Any())
             .ToList();
 
@@ -71,6 +71,5 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
             }
         }
     }
-
 
 }
