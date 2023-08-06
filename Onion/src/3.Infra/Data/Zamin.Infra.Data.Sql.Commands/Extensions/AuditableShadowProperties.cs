@@ -24,7 +24,7 @@ public static class AuditableShadowProperties
 
     public static void AddAuditableShadowProperties(this ModelBuilder modelBuilder)
     {
-        foreach (var entityType in modelBuilder.Model.GetEntityTypes().Where(c => IsSubclassOfRawGeneric(typeof(Entity<>), c.ClrType)))
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes().Where(c => typeof(IAuditableEntity).IsAssignableFrom(c.ClrType)))
         {
             modelBuilder.Entity(entityType.ClrType)
                         .Property<string>(CreatedByUserId).HasMaxLength(50);
@@ -47,14 +47,14 @@ public static class AuditableShadowProperties
         var now = DateTime.UtcNow;
         var userId = userInfoService.UserIdOrDefault();
 
-        var modifiedEntries = changeTracker.Entries().Where(x => x.State == EntityState.Modified && IsSubclassOfRawGeneric(typeof(Entity<>), x.Metadata.ClrType));
+        var modifiedEntries = changeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Modified);
         foreach (var modifiedEntry in modifiedEntries)
         {
             modifiedEntry.Property(ModifiedDateTime).CurrentValue = now;
             modifiedEntry.Property(ModifiedByUserId).CurrentValue = userId;
         }
 
-        var addedEntries = changeTracker.Entries().Where(x => x.State == EntityState.Added && IsSubclassOfRawGeneric(typeof(Entity<>), x.Metadata.ClrType));
+        var addedEntries = changeTracker.Entries<IAuditableEntity>().Where(x => x.State == EntityState.Added);
         foreach (var addedEntry in addedEntries)
         {
             addedEntry.Property(CreatedDateTime).CurrentValue = now;
@@ -62,18 +62,5 @@ public static class AuditableShadowProperties
         }
     }
 
-    static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
-    {
-        while (toCheck != null && toCheck != typeof(object))
-        {
-            var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
-            if (generic == cur)
-            {
-                return true;
-            }
-            toCheck = toCheck.BaseType;
-        }
-        return false;
-    }
 }
 

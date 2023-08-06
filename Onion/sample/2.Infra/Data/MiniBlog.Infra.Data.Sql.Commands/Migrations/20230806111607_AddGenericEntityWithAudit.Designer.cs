@@ -12,7 +12,7 @@ using MiniBlog.Infra.Data.Sql.Commands.Common;
 namespace MiniBlog.Infra.Data.Sql.Commands.Migrations
 {
     [DbContext(typeof(MiniblogCommandDbContext))]
-    [Migration("20230806091849_AddGenericEntityWithAudit")]
+    [Migration("20230806111607_AddGenericEntityWithAudit")]
     partial class AddGenericEntityWithAudit
     {
         /// <inheritdoc />

@@ -5,7 +5,7 @@ namespace Zamin.Core.Domain.Entities;
 /// کلاس پایه برای تمامی Entityها موجود در سامانه
 /// </summary>
 
-public abstract class Entity<TId>
+public abstract class Entity<TId>: IAuditableEntity
           where TId : struct,
           IComparable,
           IComparable<TId>,

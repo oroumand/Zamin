@@ -8,8 +8,7 @@ namespace Zamin.Core.Domain.Entities;
 /// https://martinfowler.com/bliki/DDD_Aggregate.html
 /// 
 /// </summary>
-public abstract class AggregateRoot<TId> : Entity<TId>
-     where TId : struct,
+public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot where TId : struct,
           IComparable,
           IComparable<TId>,
           IConvertible,
