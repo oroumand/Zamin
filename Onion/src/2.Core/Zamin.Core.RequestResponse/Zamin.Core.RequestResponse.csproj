@@ -8,10 +8,8 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
 	</PropertyGroup>
-
 	<ItemGroup>
-		<ProjectReference Include="..\..\1.Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
-		<ProjectReference Include="..\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
-	</ItemGroup>
+		<PackageReference Include="FluentValidation" Version="11.4.0" />
 
+	</ItemGroup>
 </Project>

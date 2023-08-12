@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
     <ProjectReference Include="..\MiniBlog.Core.Domain\MiniBlog.Core.Domain.csproj" />
+    <ProjectReference Include="..\MiniBlog.Core.RequestResponse\MiniBlog.Core.RequestResponse.csproj" />
   </ItemGroup>
 
 </Project>

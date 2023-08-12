@@ -1,6 +1,7 @@
 ﻿using Zamin.Utilities;
 using Zamin.Core.Contracts.ApplicationServices.Commands;
-using Zamin.Core.Contracts.ApplicationServices.Common;
+using Zamin.Core.RequestResponse.Commands;
+using Zamin.Core.RequestResponse.Common;
 
 namespace Zamin.Core.ApplicationServices.Commands;
 

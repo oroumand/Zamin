@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniBlog.Core.Contracts.Blogs.Queries;
-using MiniBlog.Core.Contracts.Blogs.Queries.GetById;
+using MiniBlog.Core.RequestResponse.Blogs.Queries.GetById;
 using MiniBlog.Infra.Data.Sql.Queries.Common;
 using Zamin.Infra.Data.Sql.Queries;
 

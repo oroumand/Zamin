@@ -90,10 +90,6 @@ public static class HostingExtensions
         //});
 
         builder.Services.AddSwaggerGen();
-
-
-
-
         return builder.Build();
     }
 

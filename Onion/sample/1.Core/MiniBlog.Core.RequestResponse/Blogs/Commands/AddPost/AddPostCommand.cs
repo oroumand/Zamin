@@ -1,6 +1,6 @@
-﻿using Zamin.Core.Contracts.ApplicationServices.Commands;
+﻿using Zamin.Core.RequestResponse.Commands;
 
-namespace MiniBlog.Core.Contracts.Blogs.Commands.AddPost;
+namespace MiniBlog.Core.RequestResponse.Blogs.Commands.AddPost;
 
 public class AddPostCommand : ICommand
 {

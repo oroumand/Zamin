@@ -1,4 +1,4 @@
-﻿namespace Zamin.Core.Contracts.ApplicationServices.Queries;
+﻿namespace Zamin.Core.RequestResponse.Queries;
 
 /// <summary>
 /// اینترفیسی جهت استفاده به عنوان مارکر برای کلاس‌هایی که پارامتر‌های ورودی را برای جستجو تعیین می‌کنند!

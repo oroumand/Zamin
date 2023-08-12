@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Zamin.Core.Contracts.ApplicationServices.Common;
-using Zamin.Core.Contracts.ApplicationServices.Queries;
+using Zamin.Core.RequestResponse.Common;
+using Zamin.Core.RequestResponse.Queries;
 using Zamin.Extensions.Logger.Abstractions;
 
 namespace Zamin.Core.ApplicationServices.Queries;

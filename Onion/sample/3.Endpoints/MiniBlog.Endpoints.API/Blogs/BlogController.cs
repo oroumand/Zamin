@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MiniBlog.Core.Contracts.Blogs.Commands.AddPost;
-using MiniBlog.Core.Contracts.Blogs.Commands.Create;
-using MiniBlog.Core.Contracts.Blogs.Commands.Delete;
-using MiniBlog.Core.Contracts.Blogs.Commands.DeleteGraph;
-using MiniBlog.Core.Contracts.Blogs.Commands.RemovePost;
-using MiniBlog.Core.Contracts.Blogs.Commands.Update;
-using MiniBlog.Core.Contracts.Blogs.Queries.GetById;
+using MiniBlog.Core.RequestResponse.Blogs.Commands.AddPost;
+using MiniBlog.Core.RequestResponse.Blogs.Commands.Create;
+using MiniBlog.Core.RequestResponse.Blogs.Commands.Delete;
+using MiniBlog.Core.RequestResponse.Blogs.Commands.DeleteGraph;
+using MiniBlog.Core.RequestResponse.Blogs.Commands.RemovePost;
+using MiniBlog.Core.RequestResponse.Blogs.Commands.Update;
+using MiniBlog.Core.RequestResponse.Blogs.Queries.GetById;
 using Zamin.EndPoints.Web.Controllers;
 
 namespace MiniBlog.Endpoints.API.Blogs

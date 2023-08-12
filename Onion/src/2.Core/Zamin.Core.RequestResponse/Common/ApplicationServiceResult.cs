@@ -1,4 +1,4 @@
-﻿namespace Zamin.Core.Contracts.ApplicationServices.Common;
+﻿namespace Zamin.Core.RequestResponse.Common;
 public abstract class ApplicationServiceResult : IApplicationServiceResult
 {
     protected readonly List<string> _messages = new();

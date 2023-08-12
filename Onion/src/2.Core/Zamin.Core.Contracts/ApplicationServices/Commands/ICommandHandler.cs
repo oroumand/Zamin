@@ -1,4 +1,6 @@
-﻿namespace Zamin.Core.Contracts.ApplicationServices.Commands;
+﻿using Zamin.Core.RequestResponse.Commands;
+
+namespace Zamin.Core.Contracts.ApplicationServices.Commands;
 
 public interface ICommandHandler<TCommand, TData> where TCommand : ICommand<TData>
 {

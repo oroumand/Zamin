@@ -1,4 +1,5 @@
 ﻿using Zamin.Core.Contracts.ApplicationServices.Queries;
+using Zamin.Core.RequestResponse.Queries;
 
 namespace Zamin.Core.ApplicationServices.Queries;
 

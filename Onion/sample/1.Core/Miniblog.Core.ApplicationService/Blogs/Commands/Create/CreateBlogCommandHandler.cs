@@ -1,8 +1,9 @@
 ﻿using MiniBlog.Core.Contracts.Blogs.Commands;
-using MiniBlog.Core.Contracts.Blogs.Commands.Create;
 using MiniBlog.Core.Domain.Blogs.Entities;
+using MiniBlog.Core.RequestResponse.Blogs.Commands.Create;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.Contracts.ApplicationServices.Commands;
+using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
 
 namespace MiniBlog.Core.ApplicationService.Blogs.Commands.Create;

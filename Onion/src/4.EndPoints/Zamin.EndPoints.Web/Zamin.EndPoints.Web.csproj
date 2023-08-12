@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
-		<Version>7.3.0-beta.1</Version>
+		<Version>7.4.0-beta.1</Version>
 		<Authors>Alireza Oroumand</Authors>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -25,6 +25,7 @@
 	  <ProjectReference Include="..\..\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
 	  <ProjectReference Include="..\..\2.Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
 	  <ProjectReference Include="..\..\2.Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+	  <ProjectReference Include="..\..\2.Core\Zamin.Core.RequestResponse\Zamin.Core.RequestResponse.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -37,8 +38,10 @@
 		<Using Include="Microsoft.Extensions.DependencyModel" />
 		<Using Include="System.Reflection" />
 		<Using Include="Zamin.Core.Contracts.ApplicationServices.Commands" />
-		<Using Include="Zamin.Core.Contracts.ApplicationServices.Common" />
 		<Using Include="Zamin.Core.Contracts.ApplicationServices.Queries" />
+		<Using Include="Zamin.Core.RequestResponse.Common" />
+		<Using Include="Zamin.Core.RequestResponse.Commands" />
+		<Using Include="Zamin.Core.RequestResponse.Queries" />
 		<Using Include="Zamin.Core.Contracts.Data.Commands" />
 		<Using Include="Zamin.Core.Contracts.Data.Queries" />
 	</ItemGroup>

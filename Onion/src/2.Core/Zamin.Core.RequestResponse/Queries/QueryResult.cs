@@ -1,6 +1,6 @@
-﻿using Zamin.Core.Contracts.ApplicationServices.Common;
+﻿using Zamin.Core.RequestResponse.Common;
 
-namespace Zamin.Core.Contracts.ApplicationServices.Queries;
+namespace Zamin.Core.RequestResponse.Queries;
 
 /// <summary>
 /// نتیجه یک کوئری را بازگشت می‌دهد

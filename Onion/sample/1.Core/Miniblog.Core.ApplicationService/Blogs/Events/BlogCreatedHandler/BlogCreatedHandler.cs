@@ -4,6 +4,7 @@ using MiniBlog.Core.Domain.Blogs.Events;
 using MiniBlog.Core.Domain.People.Entities;
 using Zamin.Core.Contracts.ApplicationServices.Events;
 
+
 namespace MiniBlog.Core.ApplicationService.Blogs.Events.BlogCreatedHandler;
 public class BlogCreatedHandler : IDomainEventHandler<BlogCreated>
 {

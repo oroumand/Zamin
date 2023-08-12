@@ -1,4 +1,6 @@
-﻿namespace Zamin.Core.Contracts.ApplicationServices.Commands;
+﻿using Zamin.Core.RequestResponse.Commands;
+
+namespace Zamin.Core.Contracts.ApplicationServices.Commands;
 /// <summary>
 /// تعریف ساختار برای مدیریت دستورات. پیاده سازی الگوی Mediator
 /// از این الگو جهت کاهش پیچیدگی صدا زدن دستورات استفاده می‌شود

@@ -1,4 +1,4 @@
-﻿namespace Zamin.Core.Contracts.ApplicationServices.Commands;
+﻿namespace Zamin.Core.RequestResponse.Commands;
 
 /// <summary>
 /// جهت علامت گذاری کلاسی که پارامتر‌های ورودی درستور را دارد از این اینترفیس اسفتاده می‌شود

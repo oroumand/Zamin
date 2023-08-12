@@ -4,6 +4,9 @@ using Zamin.Utilities;
 using Zamin.EndPoints.Web.Extensions;
 using Zamin.Extensions.Serializers.Abstractions;
 using Zamin.Core.Contracts.ApplicationServices.Events;
+using Zamin.Core.RequestResponse.Commands;
+using Zamin.Core.RequestResponse.Common;
+using Zamin.Core.RequestResponse.Queries;
 
 namespace Zamin.EndPoints.Web.Controllers
 {

@@ -1,10 +1,10 @@
 ﻿using Zamin.Core.Domain.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Zamin.Core.Contracts.ApplicationServices.Commands;
-using Zamin.Core.Contracts.ApplicationServices.Common;
 using Zamin.Extensions.Logger.Abstractions;
 using Zamin.Extensions.Translations.Abstractions;
+using Zamin.Core.RequestResponse.Commands;
+using Zamin.Core.RequestResponse.Common;
 
 namespace Zamin.Core.ApplicationServices.Commands;
 

@@ -1,7 +1,7 @@
 ﻿using MiniBlog.Core.Contracts.Blogs.Queries;
-using MiniBlog.Core.Contracts.Blogs.Queries.GetById;
+using MiniBlog.Core.RequestResponse.Blogs.Queries.GetById;
 using Zamin.Core.ApplicationServices.Queries;
-using Zamin.Core.Contracts.ApplicationServices.Queries;
+using Zamin.Core.RequestResponse.Queries;
 using Zamin.Utilities;
 
 namespace MiniBlog.Core.ApplicationService.Blogs.Queries.GetById;

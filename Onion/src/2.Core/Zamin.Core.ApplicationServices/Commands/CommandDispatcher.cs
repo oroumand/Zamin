@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Zamin.Core.Contracts.ApplicationServices.Commands;
+using Zamin.Core.RequestResponse.Commands;
 using Zamin.Extensions.Logger.Abstractions;
 
 namespace Zamin.Core.ApplicationServices.Commands;

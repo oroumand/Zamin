@@ -1,5 +1,6 @@
-﻿using Zamin.Core.Contracts.ApplicationServices.Common;
-using Zamin.Core.Contracts.ApplicationServices.Queries;
+﻿using Zamin.Core.Contracts.ApplicationServices.Queries;
+using Zamin.Core.RequestResponse.Common;
+using Zamin.Core.RequestResponse.Queries;
 using Zamin.Utilities;
 
 namespace Zamin.Core.ApplicationServices.Queries;

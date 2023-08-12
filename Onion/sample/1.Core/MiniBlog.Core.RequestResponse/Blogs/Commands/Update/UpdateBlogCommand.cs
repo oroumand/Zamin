@@ -1,6 +1,7 @@
-﻿using Zamin.Core.Contracts.ApplicationServices.Commands;
+﻿
+using Zamin.Core.RequestResponse.Commands;
 
-namespace MiniBlog.Core.Contracts.Blogs.Commands.Update;
+namespace MiniBlog.Core.RequestResponse.Blogs.Commands.Update;
 
 public class UpdateBlogCommand : ICommand
 {

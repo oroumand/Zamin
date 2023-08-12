@@ -1,9 +1,9 @@
-﻿namespace Zamin.Core.Contracts.ApplicationServices.Queries;
+﻿namespace Zamin.Core.RequestResponse.Queries;
 /// <summary>
 /// اینترفیسی جهت استفاده به عنوان مارکر برای کلاس‌هایی که پارامتر‌های ورودی را برای جستجو تعیین می‌کنند!
 /// در صورتی که جستجو نیاز به صفحه بندی داشته باشد از این اینترفیس استفاده می‌شود
 /// </summary>
-public interface IPageQuery<TData>:IQuery<TData>
+public interface IPageQuery<TData> : IQuery<TData>
 {
     /// <summary>
     /// شماره صفحه ای که باید اطلاعات از آن بارگذاری شود

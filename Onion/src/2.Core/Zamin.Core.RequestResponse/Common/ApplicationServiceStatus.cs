@@ -1,4 +1,4 @@
-﻿namespace Zamin.Core.Contracts.ApplicationServices.Common;
+﻿namespace Zamin.Core.RequestResponse.Common;
 public enum ApplicationServiceStatus
 {
     Ok = 1,
