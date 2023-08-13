@@ -57,11 +57,11 @@ public static class HostingExtensions
         builder.Services.AddDbContext<MiniblogCommandDbContext>(
             c => c.UseSqlServer(configuration.GetConnectionString("CommandDb_ConnectionString"))
             .AddInterceptors(new SetPersianYeKeInterceptor(),
-                             new AddAuditDataInterceptor(),
-                             new AddOutBoxEventItemInterceptor()));
+                             new AddAuditDataInterceptor()));
 
         //QueryDbContext
-        builder.Services.AddDbContext<MiniblogQueryDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
+        builder.Services.AddDbContext<MiniblogQueryDbContext>(
+            c => c.UseSqlServer(configuration.GetConnectionString("QueryDb_ConnectionString")));
 
         //PollingPublisher
         //builder.Services.AddZaminPollingPublisherDalSql(configuration, "PollingPublisherSqlStore");
