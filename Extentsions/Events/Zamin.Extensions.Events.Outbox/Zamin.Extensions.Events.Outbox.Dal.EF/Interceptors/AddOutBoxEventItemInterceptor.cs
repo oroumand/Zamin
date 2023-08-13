@@ -29,7 +29,7 @@ public class AddOutBoxEventItemInterceptor : SaveChangesInterceptor
             .Entries<IAggregateRoot>()
             .Where(x => x.State != EntityState.Detached)
             .Select(c => c.Entity as dynamic)
-            .Where(c => c.GetEvents().Any())
+            .Where(c => c.GetEvents() != null && c.GetEvents().Count > 0)
             .ToList();
 
         if (changedAggregates is null || !changedAggregates.Any())
