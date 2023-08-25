@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+		<PropertyGroup>
+				<TargetFramework>net7.0</TargetFramework>
+				<Nullable>enable</Nullable>
+				<ImplicitUsings>enable</ImplicitUsings>
+		</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-    <PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="7.0.0-beta.1" />
-  </ItemGroup>
+		<ItemGroup>
+				<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+				<PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="7.0.0-beta.1" />
+		</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zamin.Extensions.MessageBus.RabbitMQ\Zamin.Extensions.MessageBus.RabbitMQ.csproj" />
-  </ItemGroup>
+		<ItemGroup>
+				<ProjectReference Include="..\Zamin.Extensions.MessageBus.RabbitMQ\Zamin.Extensions.MessageBus.RabbitMQ.csproj" />
+		</ItemGroup>
 
 </Project>

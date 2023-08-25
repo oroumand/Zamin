@@ -3,6 +3,7 @@ using System.Reflection;
 using Zamin.Core.Contracts.ApplicationServices.Commands;
 using Zamin.Core.Contracts.ApplicationServices.Events;
 using Zamin.Core.Domain.Events;
+using Zamin.Core.RequestResponse.Commands;
 using Zamin.Extensions.MessageBus.Abstractions;
 using Zamin.Extensions.MessageBus.MessageInbox.Options;
 using Zamin.Extensions.Serializers.Abstractions;
