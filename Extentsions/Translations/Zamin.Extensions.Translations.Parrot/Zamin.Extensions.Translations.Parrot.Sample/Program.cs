@@ -20,11 +20,11 @@ builder.Services.AddZaminParrotTranslator(c =>
     c.SchemaName = "dbo";
     c.TableName = "ParrotTranslations";
     c.ReloadDataIntervalInMinuts = 1;
-    c.DefaultTranslations = new DefaultTranslationOption[]
-    {
+    c.DefaultTranslations =
+    [
         new() { Key = "TITLE", Value = "عنوان", Culture = "fa-IR" },
         new() { Key = "TITLE", Value = "Title", Culture = "en-US" },
-    };
+    ];
 });
 var app = builder.Build();
 
