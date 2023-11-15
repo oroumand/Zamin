@@ -12,7 +12,7 @@ public class ParrotTranslatorOptions
 
 public class DefaultTranslationOption
 {
-    public string Key { get; set; }
-    public string Value { get; set; }
-    public string Culture { get; set; }
+    public string Key { get; set; } = nameof(Key);
+    public string Value { get; set; } = nameof(Value);
+    public string Culture { get; set; } = nameof(Culture);
 }

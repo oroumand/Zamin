@@ -10,7 +10,7 @@ public class ParrotSqlRepository
 {
     private readonly IDbConnection _dbConnection;
     private List<LocalizationRecord> _localizationRecords;
-    private Timer _timer;
+
     static readonly object _locker = new();
 
     private readonly ParrotTranslatorOptions _configuration;
@@ -37,7 +37,7 @@ public class ParrotSqlRepository
 
         LoadLocalizationRecords(null);
 
-        _timer = new Timer(LoadLocalizationRecords,
+        _ = new Timer(LoadLocalizationRecords,
                            null,
                            TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts),
                            TimeSpan.FromMinutes(configuration.ReloadDataIntervalInMinuts));
@@ -88,24 +88,18 @@ public class ParrotSqlRepository
     private void SeedData()
     {
         string values = string.Empty;
-
-        foreach (var translation in _configuration.DefaultTranslations)
+        
+        var newItemsInDefaultTranslations = _configuration.DefaultTranslations.
+            Where(c => !_localizationRecords.Any(d => d.Key.Equals(c.Key) && d.Culture.Equals(c.Culture)))
+            .Select(c => $"(N'{c.Key}',N'{c.Value}',N'{c.Culture}')").ToList();
+        
+        if (newItemsInDefaultTranslations.Any())
         {
-            if (_localizationRecords.FirstOrDefault(c => c.Key.Equals(translation.Key) && c.Culture.Equals(translation.Culture)) is null)
-                values = values + ',' + $"(N'{translation.Key}',N'{translation.Value}',N'{translation.Culture}')";
-        }
-
-        if (values.Length > 0)
-        {
-            values = values.Remove(0, 1);
-
-            string _command = $"INSERT INTO [{_configuration.SchemaName}].[{_configuration.TableName}]([Key],[Value],[Culture]) VALUES {values}";
+            string _command = $"INSERT INTO [{_configuration.SchemaName}].[{_configuration.TableName}]([Key],[Value],[Culture]) VALUES {string.Join(",", newItemsInDefaultTranslations)}";
 
             using IDbConnection db = new SqlConnection(_configuration.ConnectionString);
 
             db.ExecuteAsync(_command, commandType: CommandType.Text);
-
-            db.Dispose();
         }
     }
 
