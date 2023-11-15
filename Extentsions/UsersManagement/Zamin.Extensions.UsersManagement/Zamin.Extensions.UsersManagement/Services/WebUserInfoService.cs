@@ -19,22 +19,22 @@ public class WebUserInfoService : IUserInfoService
     }
 
     public string GetUserAgent()
-    => _httpContextAccessor.HttpContext?.Request.Headers["User-Agent"] ?? "Unknown";
+    => _httpContextAccessor?.HttpContext?.Request?.Headers["User-Agent"] ?? _configuration.DefaultUserAgent;
 
     public string GetUserIp()
-    => _httpContextAccessor.HttpContext?.Connection?.RemoteIpAddress?.ToString() ?? "0.0.0.0";
+    => _httpContextAccessor.HttpContext?.Connection?.RemoteIpAddress?.ToString() ?? _configuration.DefaultUserIp;
 
     public string UserId()
     => _httpContextAccessor?.HttpContext?.User?.GetClaim(ClaimTypes.NameIdentifier) ?? string.Empty;
 
     public string GetUsername()
-    => _httpContextAccessor.HttpContext?.User?.GetClaim(ClaimTypes.Name) ?? string.Empty;
+    => _httpContextAccessor.HttpContext?.User?.GetClaim(ClaimTypes.Name) ?? _configuration.DefaultUsername;
 
     public string GetFirstName()
-    => _httpContextAccessor.HttpContext?.User?.GetClaim(ClaimTypes.GivenName) ?? string.Empty;
+    => _httpContextAccessor.HttpContext?.User?.GetClaim(ClaimTypes.GivenName) ?? _configuration.DefaultFirstName;
 
     public string GetLastName()
-    => _httpContextAccessor.HttpContext?.User?.GetClaim(ClaimTypes.Surname) ?? string.Empty;
+    => _httpContextAccessor.HttpContext?.User?.GetClaim(ClaimTypes.Surname) ?? _configuration.DefaultLastName;
 
     public bool IsCurrentUser(string userId)
     {
