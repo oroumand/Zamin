@@ -77,6 +77,7 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
             {
                 Activity span = StartChildActivity(e);
                 _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
+                var temp = e.ToParcel();
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
                 consumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel()).Wait();
             }

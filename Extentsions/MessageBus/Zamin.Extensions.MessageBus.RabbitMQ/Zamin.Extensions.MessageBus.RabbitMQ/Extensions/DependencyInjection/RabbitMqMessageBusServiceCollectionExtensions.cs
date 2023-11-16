@@ -13,7 +13,7 @@ public static class RabbitMqMessageBusServiceCollectionExtensions
     public static IServiceCollection AddZaminRabbitMqMessageBus(this IServiceCollection services, IConfiguration configuration, List<Type>? commands = null, Dictionary<string, List<Type>>? events = null)
     {
         services.Configure<RabbitMqOptions>(configuration);
-        AddServices(services);
+        services.AddServices();
         return services;
     }
 
@@ -26,11 +26,11 @@ public static class RabbitMqMessageBusServiceCollectionExtensions
     public static IServiceCollection AddZaminRabbitMqMessageBus(this IServiceCollection services, Action<RabbitMqOptions> setupAction, List<Type>? commands = null, Dictionary<string, List<Type>>? events = null)
     {
         services.Configure(setupAction);
-        AddServices(services);
+        services.AddServices();
         return services;
     }
 
-    private static void AddServices(IServiceCollection services)
+    private static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddSingleton(sp =>
         {
@@ -45,6 +45,7 @@ public static class RabbitMqMessageBusServiceCollectionExtensions
         services.AddScoped<ISendMessageBus, RabbitMqSendMessageBus>();
 
         services.AddSingleton<IReceiveMessageBus, RabbitMqReceiveMessageBus>();
+        return services;
     }
 
     public static void ReceiveCommandFromRabbitMqMessageBus(this IServiceProvider serviceProvider, params string[] commands)
