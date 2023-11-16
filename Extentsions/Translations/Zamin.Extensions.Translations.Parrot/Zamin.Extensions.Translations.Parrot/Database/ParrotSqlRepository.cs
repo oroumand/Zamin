@@ -92,14 +92,18 @@ public class ParrotSqlRepository
         var newItemsInDefaultTranslations = _configuration.DefaultTranslations.
             Where(c => !_localizationRecords.Any(d => d.Key.Equals(c.Key) && d.Culture.Equals(c.Culture)))
             .Select(c => $"(N'{c.Key}',N'{c.Value}',N'{c.Culture}')").ToList();
-        
-        if (newItemsInDefaultTranslations.Any())
+
+        var count = newItemsInDefaultTranslations.Count;
+        if (count>0)
         {
             string _command = $"INSERT INTO [{_configuration.SchemaName}].[{_configuration.TableName}]([Key],[Value],[Culture]) VALUES {string.Join(",", newItemsInDefaultTranslations)}";
 
             using IDbConnection db = new SqlConnection(_configuration.ConnectionString);
 
-            db.ExecuteAsync(_command, commandType: CommandType.Text);
+            db.Execute(_command, commandType: CommandType.Text);
+
+            _logger.LogInformation("Parrot Translator Add {Count} items to its dictionary from default translations at {DateTime}", count,DateTime.Now);
+
         }
     }
 
