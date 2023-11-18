@@ -13,11 +13,11 @@
 
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
-	  <PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="7.0.0-beta.1" />
-		<PackageReference Include="Zamin.Extensions.Events.Abstractions" Version="7.0.0-beta.1" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+	  <PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="8.0.0-beta.1" />
+		<PackageReference Include="Zamin.Extensions.Events.Abstractions" Version="8.0.0-beta.1" />
 
 	</ItemGroup>
 
