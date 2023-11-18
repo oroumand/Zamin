@@ -16,7 +16,7 @@ public class InboxMessageConsumer : IMessageConsumer
     private readonly IJsonSerializer _jsonSerializer;
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IMessageInboxItemRepository _messageInboxItemRepository;
-    private readonly List<Type> _domainEventTypes = new();
+    private readonly List<Type> _domainEventTypes = [];
     private readonly List<Type> _commandTypes = new();
     public InboxMessageConsumer(IOptions<MessageInboxOptions> messageInboxOptions, IJsonSerializer jsonSerializer, IMessageInboxItemRepository messageInboxItemRepository, ICommandDispatcher commandDispatcher = null, IEventDispatcher eventDispatcher = null)
     {
