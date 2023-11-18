@@ -17,8 +17,12 @@ public class InboxMessageConsumer : IMessageConsumer
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IMessageInboxItemRepository _messageInboxItemRepository;
     private readonly List<Type> _domainEventTypes = [];
-    private readonly List<Type> _commandTypes = new();
-    public InboxMessageConsumer(IOptions<MessageInboxOptions> messageInboxOptions, IJsonSerializer jsonSerializer, IMessageInboxItemRepository messageInboxItemRepository, ICommandDispatcher commandDispatcher = null, IEventDispatcher eventDispatcher = null)
+    private readonly List<Type> _commandTypes = [];
+    public InboxMessageConsumer(IOptions<MessageInboxOptions> messageInboxOptions,
+                                IJsonSerializer jsonSerializer,
+                                IMessageInboxItemRepository messageInboxItemRepository,
+                                ICommandDispatcher commandDispatcher,
+                                IEventDispatcher eventDispatcher)
     {
         _messageInboxOptions = messageInboxOptions.Value;
         _eventDispatcher = eventDispatcher;
