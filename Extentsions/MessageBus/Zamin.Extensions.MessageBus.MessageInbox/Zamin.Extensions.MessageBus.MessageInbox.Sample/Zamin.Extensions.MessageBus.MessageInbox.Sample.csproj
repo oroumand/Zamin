@@ -7,9 +7,9 @@
 		</PropertyGroup>
 
 		<ItemGroup>
-				<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-				<PackageReference Include="Zamin.Extensions.MessageBus.RabbitMQ" Version="7.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="7.0.0-beta.1" />
+				<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+				<PackageReference Include="Zamin.Extensions.MessageBus.RabbitMQ" Version="8.0.1-beta.1" />
+				<PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="8.0.0-beta.1" />
 		</ItemGroup>
 
 		<ItemGroup>
