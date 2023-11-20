@@ -34,36 +34,36 @@ public static class OpenTeletmetryServiceCollectionExtensions
     {
         var serviceProvider = services.BuildServiceProvider();
         var options = serviceProvider.GetRequiredService<IOptions<OpenTeletmetryOptions>>().Value;
-        services.AddOpenTelemetryTracing(tracerProviderBuilder =>
-        {
 
-            string serviceName = $"{options.ApplicationName}.{options.ServiceName}";
-            tracerProviderBuilder
-            .AddConsoleExporter()
-            .AddJaegerExporter(c =>
+        services.AddOpenTelemetry()
+            .WithTracing(tracerProviderBuilder =>
             {
-                c.AgentHost = options.AgentHost;
-                c.AgentPort = options.AgentPort;
-                c.ExportProcessorType = options.ExportProcessorType;
-                c.MaxPayloadSizeInBytes = options.MaxPayloadSizeInBytes;
+
+                string serviceName = $"{options.ApplicationName}.{options.ServiceName}";
+                tracerProviderBuilder
+                .AddConsoleExporter()
+                .AddJaegerExporter(c =>
+                {
+                    c.AgentHost = options.AgentHost;
+                    c.AgentPort = options.AgentPort;
+                    c.ExportProcessorType = options.ExportProcessorType;
+                    c.MaxPayloadSizeInBytes = options.MaxPayloadSizeInBytes;
+                })
+                .AddSource(serviceName)
+                .SetResourceBuilder(
+                    ResourceBuilder.CreateDefault()
+                        .AddService(serviceName: serviceName, serviceVersion: options.ServiceVersion, serviceInstanceId: options.ServiceId))
+                .AddHttpClientInstrumentation()
+                .AddAspNetCoreInstrumentation()
+                .AddSqlClientInstrumentation()
+                .AddEntityFrameworkCoreInstrumentation();
             })
-            .AddSource(serviceName)
-            .SetResourceBuilder(
-                ResourceBuilder.CreateDefault()
-                    .AddService(serviceName: serviceName, serviceVersion: options.ServiceVersion, serviceInstanceId: options.ServiceId))
-            .AddHttpClientInstrumentation()
-            .AddAspNetCoreInstrumentation()
-            .AddSqlClientInstrumentation()
-            .AddEntityFrameworkCoreInstrumentation();
-        });
-
-
-        services.AddOpenTelemetryMetrics(c =>
-        {
-            c.AddConsoleExporter();
-            c.AddRuntimeInstrumentation();
-            c.AddAspNetCoreInstrumentation();
-        });
+            .WithMetrics(c =>
+            {
+                c.AddConsoleExporter();
+                c.AddRuntimeInstrumentation();
+                c.AddAspNetCoreInstrumentation();
+            });
 
         return services;
     }
