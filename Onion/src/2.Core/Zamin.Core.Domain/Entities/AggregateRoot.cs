@@ -42,7 +42,7 @@ public abstract class AggregateRoot<TId> : Entity<TId>, IAggregateRoot where TId
 
     private void Mutate(IDomainEvent @event)
     {
-        var onMethod = this.GetType().GetMethod("On", BindingFlags.Instance | BindingFlags.NonPublic, new Type[] { @event.GetType() });
+        var onMethod = this.GetType().GetMethod("On", BindingFlags.Instance | BindingFlags.NonPublic, [@event.GetType()]);
         onMethod.Invoke(this, new[] { @event });
     }
 
