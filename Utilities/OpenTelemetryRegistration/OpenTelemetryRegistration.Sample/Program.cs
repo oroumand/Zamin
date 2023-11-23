@@ -18,7 +18,7 @@ builder.Services.AddZaminTraceSupport(c =>
     c.ServiceVersion = "1.0.0";
     c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
     c.OltpEndpoint = "http://localhost:4317";
-   // c.ExportProcessorType = OpenTelemetry.ExportProcessorType.Simple;
+    c.ExportProcessorType = OpenTelemetry.ExportProcessorType.Simple; 
 });
 var app = builder.Build();
 

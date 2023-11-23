@@ -38,31 +38,21 @@ public static class OpenTeletmetryServiceCollectionExtensions
         services.AddOpenTelemetry()
             .WithTracing(tracerProviderBuilder =>
             {
-
                 string serviceName = $"{options.ApplicationName}.{options.ServiceName}";
                 tracerProviderBuilder
-                .AddConsoleExporter()
-                .AddOtlpExporter(oltpOptions =>
-                {
-                    oltpOptions.Endpoint = new Uri(options.OltpEndpoint);
-                    oltpOptions.ExportProcessorType = options.ExportProcessorType;
-                })
-                .AddSource("PersonController")
-                .SetResourceBuilder(
-                    ResourceBuilder.CreateDefault()
+                .SetResourceBuilder(ResourceBuilder.CreateDefault()
                         .AddService(serviceName: serviceName, serviceVersion: options.ServiceVersion, serviceInstanceId: options.ServiceId))
                 .AddHttpClientInstrumentation()
                 .AddAspNetCoreInstrumentation()
                 .AddSqlClientInstrumentation()
-                .AddEntityFrameworkCoreInstrumentation();
+                .AddEntityFrameworkCoreInstrumentation()
+                .AddOtlpExporter(oltpOptions =>
+                {
+                    oltpOptions.Endpoint = new Uri(options.OltpEndpoint);
+                    oltpOptions.ExportProcessorType = options.ExportProcessorType;
+                });
             });
-          /*  .WithMetrics(c =>
-            {
-                c.AddConsoleExporter();
-                c.AddRuntimeInstrumentation();
-                c.AddAspNetCoreInstrumentation();
-                c.AddOtlpExporter();
-            });*/
+
 
         return services;
     }
