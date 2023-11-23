@@ -47,7 +47,7 @@ public static class OpenTeletmetryServiceCollectionExtensions
                     oltpOptions.Endpoint = new Uri(options.OltpEndpoint);
                     oltpOptions.ExportProcessorType = options.ExportProcessorType;
                 })
-                .AddSource(serviceName)
+                .AddSource("PersonController")
                 .SetResourceBuilder(
                     ResourceBuilder.CreateDefault()
                         .AddService(serviceName: serviceName, serviceVersion: options.ServiceVersion, serviceInstanceId: options.ServiceId))
@@ -55,13 +55,14 @@ public static class OpenTeletmetryServiceCollectionExtensions
                 .AddAspNetCoreInstrumentation()
                 .AddSqlClientInstrumentation()
                 .AddEntityFrameworkCoreInstrumentation();
-            })
-            .WithMetrics(c =>
+            });
+          /*  .WithMetrics(c =>
             {
                 c.AddConsoleExporter();
                 c.AddRuntimeInstrumentation();
                 c.AddAspNetCoreInstrumentation();
-            });
+                c.AddOtlpExporter();
+            });*/
 
         return services;
     }
