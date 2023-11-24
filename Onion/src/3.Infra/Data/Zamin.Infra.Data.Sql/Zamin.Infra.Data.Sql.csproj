@@ -10,9 +10,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
-		<PackageReference Include="Zamin.Extensions.ChangeDataLog.Abstractions" Version="7.0.0-beta.2" />
-		<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="7.0.0-beta.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+		<PackageReference Include="Zamin.Extensions.ChangeDataLog.Abstractions" Version="8.0.0-beta.1" />
+		<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="8.0.0-beta.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<Using Include="Microsoft.EntityFrameworkCore" />
