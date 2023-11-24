@@ -9,28 +9,28 @@ using Zamin.Utilities.OpenTelemetryRegistration.Options;
 namespace Zamin.Extensions.DependencyInjection;
 public static class OpenTeletmetryServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminTraceJeager(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddZaminTraceSupport(this IServiceCollection services, IConfiguration configuration)
     {
 
         services.Configure<OpenTeletmetryOptions>(configuration);
-        AddJeagerTraceServices(services);
+        AddTraceServices(services);
         return services;
     }
 
-    public static IServiceCollection AddZaminTraceJeager(this IServiceCollection services, IConfiguration configuration, string sectionName)
+    public static IServiceCollection AddZaminTraceSupport(this IServiceCollection services, IConfiguration configuration, string sectionName)
     {
-        services.AddZaminTraceJeager(configuration.GetSection(sectionName));
+        services.AddZaminTraceSupport(configuration.GetSection(sectionName));
         return services;
     }
 
-    public static IServiceCollection AddZaminTraceJeager(this IServiceCollection services, Action<OpenTeletmetryOptions> setupAction)
+    public static IServiceCollection AddZaminTraceSupport(this IServiceCollection services, Action<OpenTeletmetryOptions> setupAction)
     {
         services.Configure(setupAction);
-        AddJeagerTraceServices(services);
+        AddTraceServices(services);
         return services;
     }
 
-    private static IServiceCollection AddJeagerTraceServices(IServiceCollection services)
+    private static IServiceCollection AddTraceServices(IServiceCollection services)
     {
         var serviceProvider = services.BuildServiceProvider();
         var options = serviceProvider.GetRequiredService<IOptions<OpenTeletmetryOptions>>().Value;
@@ -38,32 +38,21 @@ public static class OpenTeletmetryServiceCollectionExtensions
         services.AddOpenTelemetry()
             .WithTracing(tracerProviderBuilder =>
             {
-
                 string serviceName = $"{options.ApplicationName}.{options.ServiceName}";
                 tracerProviderBuilder
-                .AddConsoleExporter()
-                .AddJaegerExporter(c =>
-                {
-                    c.AgentHost = options.AgentHost;
-                    c.AgentPort = options.AgentPort;
-                    c.ExportProcessorType = options.ExportProcessorType;
-                    c.MaxPayloadSizeInBytes = options.MaxPayloadSizeInBytes;
-                })
-                .AddSource(serviceName)
-                .SetResourceBuilder(
-                    ResourceBuilder.CreateDefault()
+                .SetResourceBuilder(ResourceBuilder.CreateDefault()
                         .AddService(serviceName: serviceName, serviceVersion: options.ServiceVersion, serviceInstanceId: options.ServiceId))
                 .AddHttpClientInstrumentation()
                 .AddAspNetCoreInstrumentation()
                 .AddSqlClientInstrumentation()
-                .AddEntityFrameworkCoreInstrumentation();
-            })
-            .WithMetrics(c =>
-            {
-                c.AddConsoleExporter();
-                c.AddRuntimeInstrumentation();
-                c.AddAspNetCoreInstrumentation();
+                .AddEntityFrameworkCoreInstrumentation()
+                .AddOtlpExporter(oltpOptions =>
+                {
+                    oltpOptions.Endpoint = new Uri(options.OltpEndpoint);
+                    oltpOptions.ExportProcessorType = options.ExportProcessorType;
+                });
             });
+
 
         return services;
     }
