@@ -46,6 +46,7 @@ public static class OpenTeletmetryServiceCollectionExtensions
                 .AddAspNetCoreInstrumentation()
                 .AddSqlClientInstrumentation()
                 .AddEntityFrameworkCoreInstrumentation()
+                .SetSampler(new TraceIdRatioBasedSampler(options.SamplingProbability))
                 .AddOtlpExporter(oltpOptions =>
                 {
                     oltpOptions.Endpoint = new Uri(options.OltpEndpoint);
