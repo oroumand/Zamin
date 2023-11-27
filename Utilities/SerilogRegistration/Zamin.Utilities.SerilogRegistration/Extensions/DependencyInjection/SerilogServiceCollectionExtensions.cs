@@ -18,9 +18,9 @@ public static class SerilogServiceCollectionExtensions
         return AddServices(builder, enrichersType);
     }
 
-    public static WebApplicationBuilder AddZaminSerilog(this WebApplicationBuilder builder, IConfiguration configuration, string sectionName)
+    public static WebApplicationBuilder AddZaminSerilog(this WebApplicationBuilder builder, IConfiguration configuration, string sectionName, params Type[] enrichersType)
     {
-        return builder.AddZaminSerilog(configuration.GetSection(sectionName));
+        return builder.AddZaminSerilog(configuration.GetSection(sectionName), enrichersType);
     }
 
     public static WebApplicationBuilder AddZaminSerilog(this WebApplicationBuilder builder, Action<SerilogApplicationEnricherOptions> setupAction, params Type[] enrichersType)
