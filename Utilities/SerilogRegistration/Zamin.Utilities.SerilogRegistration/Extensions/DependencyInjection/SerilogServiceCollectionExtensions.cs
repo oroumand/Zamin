@@ -18,9 +18,9 @@ public static class SerilogServiceCollectionExtensions
         return AddServices(builder, enrichersType);
     }
 
-    public static WebApplicationBuilder AddZaminSerilog(this WebApplicationBuilder builder, IConfiguration configuration, string sectionName)
+    public static WebApplicationBuilder AddZaminSerilog(this WebApplicationBuilder builder, IConfiguration configuration, string sectionName, params Type[] enrichersType)
     {
-        return builder.AddZaminSerilog(configuration.GetSection(sectionName));
+        return builder.AddZaminSerilog(configuration.GetSection(sectionName), enrichersType);
     }
 
     public static WebApplicationBuilder AddZaminSerilog(this WebApplicationBuilder builder, Action<SerilogApplicationEnricherOptions> setupAction, params Type[] enrichersType)
@@ -52,7 +52,7 @@ public static class SerilogServiceCollectionExtensions
             lc
             //.WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
             .Enrich.FromLogContext()
-            .Enrich.With(logEventEnrichers.ToArray())
+            .Enrich.With([.. logEventEnrichers])
             .Enrich.WithExceptionDetails()
             .Enrich.WithSpan()
             .ReadFrom.Configuration(ctx.Configuration);
