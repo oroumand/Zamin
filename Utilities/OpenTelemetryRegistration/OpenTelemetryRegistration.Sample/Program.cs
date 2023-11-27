@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Zamin.Extensions.DependencyInjection;
+using Zamin.Utilities.OpenTelemetryRegistration.Monitoring;
 using Zamin.Utilities.OpenTelemetryRegistration.Sample.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PersonContext>(c => c.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-builder.Services.AddZaminTraceSupport(c =>
+builder.Services.AddZaminObservabilitySupport(c =>
 {
     c.ApplicationName = "Zamin";
     c.ServiceName = "OpenTelemetrySample";
@@ -19,8 +20,13 @@ builder.Services.AddZaminTraceSupport(c =>
     c.ServiceId = "cb387bb6-9a66-444f-92b2-ff64e2a81f98";
     c.OltpEndpoint = "http://localhost:4317";
     c.ExportProcessorType = OpenTelemetry.ExportProcessorType.Simple; 
+    c.SamplingProbability = 1;
 });
 var app = builder.Build();
+
+
+app.UseZaminObservabilityMiddlewares();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
