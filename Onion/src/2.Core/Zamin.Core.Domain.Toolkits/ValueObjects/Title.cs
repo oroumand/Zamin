@@ -10,7 +10,7 @@ public class Title : BaseValueObject<Title>
 
     #region Constructors and Factories
     public static Title FromString(string value) => new Title(value);
-    public Title(string value)
+    private Title(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
         {
