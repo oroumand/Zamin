@@ -57,9 +57,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Endpoints", "3. Endpoint
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBlog.Endpoints.API", "sample\3.Endpoints\MiniBlog.Endpoints.API\MiniBlog.Endpoints.API.csproj", "{0A096841-155A-4A97-A47B-69B4C9452A58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Core.RequestResponse", "src\2.Core\Zamin.Core.RequestResponse\Zamin.Core.RequestResponse.csproj", "{1DB0D0EE-6F37-4CDD-A544-6E0D27E600C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Core.RequestResponse", "src\2.Core\Zamin.Core.RequestResponse\Zamin.Core.RequestResponse.csproj", "{1DB0D0EE-6F37-4CDD-A544-6E0D27E600C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBlog.Core.RequestResponse", "sample\1.Core\MiniBlog.Core.RequestResponse\MiniBlog.Core.RequestResponse.csproj", "{85746797-1FF6-42F0-8C1B-89120F08E194}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBlog.Core.RequestResponse", "sample\1.Core\MiniBlog.Core.RequestResponse\MiniBlog.Core.RequestResponse.csproj", "{85746797-1FF6-42F0-8C1B-89120F08E194}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

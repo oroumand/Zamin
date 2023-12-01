@@ -1,25 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Version>8.0.0-beta.1</Version>
-		<Authors>Alireza Oroumand</Authors>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
-	</PropertyGroup>
+		<PropertyGroup>
+				<TargetFramework>net8.0</TargetFramework>
+				<Version>8.0.0-beta.1</Version>
+				<Authors>Alireza Oroumand</Authors>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+				<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+				<PackageIcon>icon.png</PackageIcon>
+		</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Dapper" Version="2.1.24" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0-beta.1" />
-	</ItemGroup>
-	<ItemGroup>
-		<Using Include="Microsoft.EntityFrameworkCore" />
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
-		<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
-		<ProjectReference Include="..\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
-	</ItemGroup>
+		<ItemGroup>
+				<None Include="..\..\..\..\..\icon.png" Pack="true" PackagePath=""/>
+		</ItemGroup>
+
+		<ItemGroup>
+				<PackageReference Include="Dapper" Version="2.1.24" />
+				<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+				<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0-beta.1" />
+		</ItemGroup>
+
+		<ItemGroup>
+				<Using Include="Microsoft.EntityFrameworkCore" />
+		</ItemGroup>
+
+		<ItemGroup>
+				<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
+				<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+				<ProjectReference Include="..\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
+		</ItemGroup>
 
 </Project>
