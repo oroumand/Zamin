@@ -11,7 +11,7 @@ public class LegalNationalId : BaseValueObject<LegalNationalId>
 
     #region Constructors and Factories
     public static LegalNationalId FromString(string value) => new(value);
-    public LegalNationalId(string value)
+    private LegalNationalId(string value)
     {
         if (!value.IsLegalNationalIdValid())
         {
