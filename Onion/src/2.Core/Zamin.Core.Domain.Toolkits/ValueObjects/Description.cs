@@ -11,7 +11,7 @@ public class Description : BaseValueObject<Description>
 
     #region Constructors and Factories
     public static Description FromString(string value) => new(value);
-    public Description(string value)
+    private Description(string value)
     {
         if (!string.IsNullOrWhiteSpace(value) && value.Length > 500)
         {
