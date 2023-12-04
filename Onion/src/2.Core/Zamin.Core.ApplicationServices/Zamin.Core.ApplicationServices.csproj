@@ -1,24 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Version>8.0.0-beta.1</Version>
-		<Authors>Alireza Oroumand</Authors>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
-	</PropertyGroup>
+		<PropertyGroup>
+				<TargetFramework>net8.0</TargetFramework>
+				<Version>8.0.0-beta.1</Version>
+				<Authors>Alireza Oroumand</Authors>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+				<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+				<PackageIcon>icon.png</PackageIcon>
+		</PropertyGroup>
 
-  <ItemGroup>    
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\..\1.Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
-    <ProjectReference Include="..\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
-    <ProjectReference Include="..\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+		<ItemGroup>
+				<None Include="..\..\..\..\icon.png" Pack="true" PackagePath=""/>
+		</ItemGroup>
 
-  </ItemGroup>
+		<ItemGroup>
+				<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+				<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+		</ItemGroup>
+
+		<ItemGroup>
+				<ProjectReference Include="..\..\1.Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
+				<ProjectReference Include="..\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
+				<ProjectReference Include="..\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+
+		</ItemGroup>
 
 </Project>

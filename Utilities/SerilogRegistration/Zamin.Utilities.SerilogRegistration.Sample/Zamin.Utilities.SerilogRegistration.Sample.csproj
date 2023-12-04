@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+		<PropertyGroup>
+				<TargetFramework>net8.0</TargetFramework>
+				<Nullable>enable</Nullable>
+				<ImplicitUsings>enable</ImplicitUsings>
+		</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="Zamin.Extensions.UsersManagement" Version="8.0.0-beta.1" />
-  </ItemGroup>
+		<ItemGroup>
+				<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+				<PackageReference Include="Zamin.Extensions.UsersManagement" Version="8.0.0-beta.1" />
+		</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Zamin.Utilities.SerilogRegistration\Zamin.Utilities.SerilogRegistration.csproj" />
-  </ItemGroup>
+		<ItemGroup>
+				<ProjectReference Include="..\Zamin.Utilities.SerilogRegistration\Zamin.Utilities.SerilogRegistration.csproj" />
+		</ItemGroup>
 
 </Project>

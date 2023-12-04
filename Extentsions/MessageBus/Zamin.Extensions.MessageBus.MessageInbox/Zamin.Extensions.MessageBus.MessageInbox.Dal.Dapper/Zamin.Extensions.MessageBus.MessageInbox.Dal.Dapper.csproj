@@ -8,8 +8,13 @@
 				<ImplicitUsings>enable</ImplicitUsings>
 				<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 				<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+				<PackageIcon>icon.png</PackageIcon>
 		</PropertyGroup>
-		
+
+		<ItemGroup>
+				<None Include="..\..\..\..\icon.png" Pack="true" PackagePath=""/>
+		</ItemGroup>
+
 		<ItemGroup>
 				<PackageReference Include="Dapper" Version="2.1.21" />
 				<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
@@ -18,5 +23,5 @@
 				<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
 				<PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="8.0.0-beta.1" />
 		</ItemGroup>
-		
+
 </Project>

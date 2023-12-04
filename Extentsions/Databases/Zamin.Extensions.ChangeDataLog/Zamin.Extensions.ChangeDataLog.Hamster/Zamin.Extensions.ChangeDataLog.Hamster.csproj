@@ -1,19 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Version>8.0.0-beta.1</Version>
-		<Authors>Alireza Oroumand</Authors>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
-		<PackageReference Include="Zamin.Extensions.ChangeDataLog.Abstractions" Version="8.0.0-beta.1" />
-		<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="8.0.0-beta.1" />
-		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-	</ItemGroup>
+		<PropertyGroup>
+				<TargetFramework>net8.0</TargetFramework>
+				<Version>8.0.0-beta.1</Version>
+				<Authors>Alireza Oroumand</Authors>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+				<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+				<PackageIcon>icon.png</PackageIcon>
+		</PropertyGroup>
+
+		<ItemGroup>
+				<None Include="..\..\..\..\icon.png" Pack="true" PackagePath=""/>
+		</ItemGroup>
+		
+		<ItemGroup>
+				<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+				<PackageReference Include="Zamin.Extensions.ChangeDataLog.Abstractions" Version="8.0.0-beta.1" />
+				<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="8.0.0-beta.1" />
+				<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+				<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+				<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+		</ItemGroup>
+
 </Project>

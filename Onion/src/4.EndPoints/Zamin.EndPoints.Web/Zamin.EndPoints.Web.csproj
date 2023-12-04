@@ -1,50 +1,54 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Version>8.0.0-beta.1</Version>
-		<Authors>Alireza Oroumand</Authors>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
-	</PropertyGroup>
+		<PropertyGroup>
+				<TargetFramework>net8.0</TargetFramework>
+				<Version>8.0.0-beta.1</Version>
+				<Authors>Alireza Oroumand</Authors>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+				<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+				<PackageIcon>icon.png</PackageIcon>
+		</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
-		<PackageReference Include="Scrutor" Version="4.2.2" />
-		<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
-	</ItemGroup>
+		<ItemGroup>
+				<None Include="..\..\..\..\icon.png" Pack="true" PackagePath="" />
+		</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\1.Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
-	  <ProjectReference Include="..\..\2.Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
-	  <ProjectReference Include="..\..\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
-	  <ProjectReference Include="..\..\2.Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
-	  <ProjectReference Include="..\..\2.Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
-	  <ProjectReference Include="..\..\2.Core\Zamin.Core.RequestResponse\Zamin.Core.RequestResponse.csproj" />
-	</ItemGroup>
+		<ItemGroup>
+				<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+				<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.0" />
+				<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
+				<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.0" />
+				<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
+				<PackageReference Include="Scrutor" Version="4.2.2" />
+				<PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+		</ItemGroup>
 
-	<ItemGroup>
-		<Using Include="Microsoft.AspNetCore.Builder" />
-		<Using Include="Microsoft.AspNetCore.Hosting" />
-		<Using Include="Microsoft.Extensions.Configuration" />
-		<Using Include="Microsoft.Extensions.Hosting" />
-		<Using Include="Microsoft.Extensions.DependencyInjection" />
-		<Using Include="Microsoft.Extensions.Logging" />
-		<Using Include="Microsoft.Extensions.DependencyModel" />
-		<Using Include="System.Reflection" />
-		<Using Include="Zamin.Core.Contracts.ApplicationServices.Commands" />
-		<Using Include="Zamin.Core.Contracts.ApplicationServices.Queries" />
-		<Using Include="Zamin.Core.RequestResponse.Common" />
-		<Using Include="Zamin.Core.RequestResponse.Commands" />
-		<Using Include="Zamin.Core.RequestResponse.Queries" />
-		<Using Include="Zamin.Core.Contracts.Data.Commands" />
-		<Using Include="Zamin.Core.Contracts.Data.Queries" />
-	</ItemGroup>
+		<ItemGroup>
+				<ProjectReference Include="..\..\1.Utilities\Zamin.Utilities\Zamin.Utilities.csproj" />
+				<ProjectReference Include="..\..\2.Core\Zamin.Core.ApplicationServices\Zamin.Core.ApplicationServices.csproj" />
+				<ProjectReference Include="..\..\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
+				<ProjectReference Include="..\..\2.Core\Zamin.Core.Domain.Toolkits\Zamin.Core.Domain.Toolkits.csproj" />
+				<ProjectReference Include="..\..\2.Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+				<ProjectReference Include="..\..\2.Core\Zamin.Core.RequestResponse\Zamin.Core.RequestResponse.csproj" />
+		</ItemGroup>
+
+		<ItemGroup>
+				<Using Include="Microsoft.AspNetCore.Builder" />
+				<Using Include="Microsoft.AspNetCore.Hosting" />
+				<Using Include="Microsoft.Extensions.Configuration" />
+				<Using Include="Microsoft.Extensions.Hosting" />
+				<Using Include="Microsoft.Extensions.DependencyInjection" />
+				<Using Include="Microsoft.Extensions.Logging" />
+				<Using Include="Microsoft.Extensions.DependencyModel" />
+				<Using Include="System.Reflection" />
+				<Using Include="Zamin.Core.Contracts.ApplicationServices.Commands" />
+				<Using Include="Zamin.Core.Contracts.ApplicationServices.Queries" />
+				<Using Include="Zamin.Core.RequestResponse.Common" />
+				<Using Include="Zamin.Core.RequestResponse.Commands" />
+				<Using Include="Zamin.Core.RequestResponse.Queries" />
+				<Using Include="Zamin.Core.Contracts.Data.Commands" />
+				<Using Include="Zamin.Core.Contracts.Data.Queries" />
+		</ItemGroup>
 
 </Project>
-
