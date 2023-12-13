@@ -81,7 +81,7 @@ public static class UtilitiesExtensions
         return claims;
     }
 
-    private static string GenerateCacheKey(ProviderOption provider, string token)
+    private static string GenerateCacheKey(this ProviderOption provider, string token)
     {
         var cacheKeyText = $"{provider.RegisterUserInfoClaims.CacheKeyPrefix}{provider.Scheme}_{token}";
         var cacheKey = provider.RegisterUserInfoClaims.CacheKeyFormat == CacheKeyFormat.Base64 ? cacheKeyText.ToBase64Encode() : cacheKeyText;
