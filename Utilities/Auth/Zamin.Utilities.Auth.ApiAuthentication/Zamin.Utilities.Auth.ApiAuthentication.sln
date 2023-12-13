@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Utilities.Auth.ApiAuthentication", "Zamin.Utilities.Auth.ApiAuthentication\Zamin.Utilities.Auth.ApiAuthentication.csproj", "{2398D951-34B6-4967-8396-D91FD2B42943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Utilities.Auth.ApiAuthentication.Sample", "Zamin.Utilities.Auth.ApiAuthentication.Sample\Zamin.Utilities.Auth.ApiAuthentication.Sample.csproj", "{EAC775BB-7096-4A3D-B35E-84A4E17F2A33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2398D951-34B6-4967-8396-D91FD2B42943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2398D951-34B6-4967-8396-D91FD2B42943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2398D951-34B6-4967-8396-D91FD2B42943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2398D951-34B6-4967-8396-D91FD2B42943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAC775BB-7096-4A3D-B35E-84A4E17F2A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAC775BB-7096-4A3D-B35E-84A4E17F2A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAC775BB-7096-4A3D-B35E-84A4E17F2A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAC775BB-7096-4A3D-B35E-84A4E17F2A33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3EDE5618-D6FA-4CCF-8578-8819E53ABB96}
+	EndGlobalSection
+EndGlobal
