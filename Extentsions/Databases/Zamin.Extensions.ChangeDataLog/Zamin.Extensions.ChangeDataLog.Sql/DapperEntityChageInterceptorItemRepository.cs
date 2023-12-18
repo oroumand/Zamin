@@ -1,9 +1,9 @@
 ﻿using Dapper;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 using System.Data;
-using System.Data.SqlClient;
-using Zamin.Extensions.ChangeDataLog.Sql.Options;
 using Zamin.Extensions.ChangeDataLog.Abstractions;
+using Zamin.Extensions.ChangeDataLog.Sql.Options;
 
 namespace Zamin.Extensions.ChangeDataLog.Sql;
 public class DapperEntityChageInterceptorItemRepository : IEntityChageInterceptorItemRepository
@@ -26,6 +26,7 @@ public class DapperEntityChageInterceptorItemRepository : IEntityChageIntercepto
         InsertEntityChageInterceptorItemCommand = string.Format(InsertEntityChageInterceptorItemCommand, _options.SchemaName, _options.EntityTableName);
         InsertPropertyChangeLogItemCommand = string.Format(InsertPropertyChangeLogItemCommand, _options.SchemaName, _options.PropertyTableName);
     }
+
     public void Save(List<EntityChageInterceptorItem> entityChageInterceptorItems)
     {
         foreach (var item in entityChageInterceptorItems)
@@ -53,8 +54,6 @@ public class DapperEntityChageInterceptorItemRepository : IEntityChageIntercepto
         throw new NotImplementedException();
     }
 
-
-
     private void CreateEntityChageInterceptorItemTableIfNeeded()
     {
         string table = _options.EntityTableName;
@@ -75,7 +74,6 @@ public class DapperEntityChageInterceptorItemRepository : IEntityChageIntercepto
             $" End";
         _dbConnection.Execute(createTable);
     }
-
 
     private void CreatePropertyChangeLogItemTableIfNeeded()
     {
