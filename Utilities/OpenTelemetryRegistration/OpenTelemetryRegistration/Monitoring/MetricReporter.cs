@@ -37,9 +37,9 @@ public class MetricReporter
     {
         var keyValuePairs = new KeyValuePair<string, object?>[3]
         {
-            new KeyValuePair<string, object?>("statusCode", statusCode),
-            new KeyValuePair<string, object?>("httpMethod", httpMethod),
-            new KeyValuePair<string, object?>("path", path)
+            new("statusCode", statusCode),
+            new("httpMethod", httpMethod),
+            new("path", path)
         };
         var tags = new TagList(keyValuePairs);
         _responseTimeHistogram.Record(elapsed.TotalSeconds, tags);

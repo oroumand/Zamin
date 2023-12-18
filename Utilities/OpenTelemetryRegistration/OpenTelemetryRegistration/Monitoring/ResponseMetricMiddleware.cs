@@ -7,14 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Zamin.Utilities.OpenTelemetryRegistration.Monitoring;
-public class ResponseMetricMiddleware
+public class ResponseMetricMiddleware(RequestDelegate request)
 {
-    private readonly RequestDelegate _request;
-
-    public ResponseMetricMiddleware(RequestDelegate request)
-    {
-        _request = request ?? throw new ArgumentNullException(nameof(request));
-    }
+    private readonly RequestDelegate _request = request ?? throw new ArgumentNullException(nameof(request));
 
     public async Task Invoke(HttpContext httpContext, MetricReporter reporter)
     {

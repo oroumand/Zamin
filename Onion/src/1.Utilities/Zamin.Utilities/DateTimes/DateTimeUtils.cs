@@ -214,4 +214,6 @@ public static class DateTimeUtils
     /// <param name="offsetInHours">Offset</param>
     public static DateTimeOffset ToDateTimeOffset(this DateTime dt, double offsetInHours = 0)
         => dt.ToDateTimeOffset(offsetInHours == 0 ? TimeSpan.Zero : TimeSpan.FromHours(offsetInHours));
+
+    //MonthToDayCount(
 }
