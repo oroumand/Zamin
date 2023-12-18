@@ -1,8 +1,8 @@
 ﻿using Dapper;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Data;
-using System.Data.SqlClient;
 using Zamin.Extensions.MessageBus.Abstractions;
 using Zamin.Extensions.MessageBus.MessageInbox.Dal.Dapper.Options;
 
