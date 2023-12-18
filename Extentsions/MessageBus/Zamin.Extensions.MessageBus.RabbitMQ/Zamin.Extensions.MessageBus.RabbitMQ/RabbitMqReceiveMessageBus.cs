@@ -74,39 +74,35 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
 
     private void Consumer_EventReceived(object sender, BasicDeliverEventArgs e)
     {
-        using (IServiceScope scope = _serviceScopeFactory.CreateScope())
+        using IServiceScope scope = _serviceScopeFactory.CreateScope();
+        try
         {
-            try
-            {
-                Activity span = StartChildActivity(e);
-                _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
-                var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-                consumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel()).Wait();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                throw;
-            }
+            Activity span = StartChildActivity(e);
+            _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
+            var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
+            consumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel()).Wait();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            throw;
         }
     }
 
     private void Consumer_CommandReceived(object sender, BasicDeliverEventArgs e)
     {
-        using (IServiceScope scope = _serviceScopeFactory.CreateScope())
+        using IServiceScope scope = _serviceScopeFactory.CreateScope();
+        try
         {
-            try
-            {
-                Activity span = StartChildActivity(e);
-                _logger.LogDebug("Command Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
-                var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
-                consumer.ConsumeCommand(e.BasicProperties.AppId, e.ToParcel()).Wait();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                throw;
-            }
+            Activity span = StartChildActivity(e);
+            _logger.LogDebug("Command Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
+            var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
+            consumer.ConsumeCommand(e.BasicProperties.AppId, e.ToParcel()).Wait();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, ex.Message);
+            throw;
         }
 
     }
