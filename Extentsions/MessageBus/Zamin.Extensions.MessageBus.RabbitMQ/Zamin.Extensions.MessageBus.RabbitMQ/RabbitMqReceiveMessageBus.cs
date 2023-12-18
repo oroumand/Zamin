@@ -22,7 +22,10 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
     private readonly string _commandQueueName;
     private IServiceScopeFactory _serviceScopeFactory;
 
-    public RabbitMqReceiveMessageBus(IConnection connection, ILogger<RabbitMqReceiveMessageBus> logger, IOptions<RabbitMqOptions> rabbitMqOptions, IServiceScopeFactory serviceScopeFactory)
+    public RabbitMqReceiveMessageBus(IConnection connection,
+                                     ILogger<RabbitMqReceiveMessageBus> logger,
+                                     IOptions<RabbitMqOptions> rabbitMqOptions,
+                                     IServiceScopeFactory serviceScopeFactory)
     {
         _logger = logger;
         _rabbitMqOptions = rabbitMqOptions.Value;
@@ -77,14 +80,13 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
             {
                 Activity span = StartChildActivity(e);
                 _logger.LogDebug("Event Received With RoutingKey: {RoutingKey}.", e.RoutingKey);
-                var temp = e.ToParcel();
                 var consumer = scope.ServiceProvider.GetRequiredService<IMessageConsumer>();
                 consumer.ConsumeEvent(e.BasicProperties.AppId, e.ToParcel()).Wait();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                throw ex;
+                throw;
             }
         }
     }
@@ -103,7 +105,7 @@ public class RabbitMqReceiveMessageBus : IReceiveMessageBus, IDisposable
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                throw ex;
+                throw;
             }
         }
 
