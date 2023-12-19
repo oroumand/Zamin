@@ -1,7 +1,7 @@
 ﻿using Dapper;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using System.Data;
-using System.Data.SqlClient;
 using Zamin.Extensions.Translations.Parrot.DataModel;
 using Zamin.Extensions.Translations.Parrot.Options;
 
@@ -88,13 +88,13 @@ public class ParrotSqlRepository
     private void SeedData()
     {
         string values = string.Empty;
-        
+
         var newItemsInDefaultTranslations = _configuration.DefaultTranslations.
             Where(c => !_localizationRecords.Any(d => d.Key.Equals(c.Key) && d.Culture.Equals(c.Culture)))
             .Select(c => $"(N'{c.Key}',N'{c.Value}',N'{c.Culture}')").ToList();
 
         var count = newItemsInDefaultTranslations.Count;
-        if (count>0)
+        if (count > 0)
         {
             string _command = $"INSERT INTO [{_configuration.SchemaName}].[{_configuration.TableName}]([Key],[Value],[Culture]) VALUES {string.Join(",", newItemsInDefaultTranslations)}";
 
@@ -102,7 +102,7 @@ public class ParrotSqlRepository
 
             db.Execute(_command, commandType: CommandType.Text);
 
-            _logger.LogInformation("Parrot Translator Add {Count} items to its dictionary from default translations at {DateTime}", count,DateTime.Now);
+            _logger.LogInformation("Parrot Translator Add {Count} items to its dictionary from default translations at {DateTime}", count, DateTime.Now);
 
         }
     }
