@@ -8,7 +8,7 @@ using Zamin.Utilities.Auth.ApiAuthentication.Options;
 
 namespace Zamin.Extensions.DependencyInjection;
 
-public static class UtilitiesExtensions
+public static class ProviderExtensions
 {
     public static string AddProviderHttpClient(this ProviderOption provider, IServiceCollection services)
     {
@@ -41,7 +41,6 @@ public static class UtilitiesExtensions
 
     public static async Task<List<Claim>> UserInfoEndpointCaller(this ProviderOption provider, HttpContext httpContext, HttpClient client, string token)
     {
-
         List<Claim> claims = [];
         if (provider.RegisterUserInfoClaims.CachingData)
         {
@@ -100,51 +99,6 @@ public static class UtilitiesExtensions
 
         return [.. response.Claims];
     }
-
-    public static ClaimsIdentity CreateClaimsIdentity(this ClaimsPrincipal? principal, List<Claim> claims)
-        => new(principal?.Claims?.ToList().GetNotExist([.. claims]),
-               principal?.Identities.FirstOrDefault()?.AuthenticationType,
-               principal?.Identities.FirstOrDefault()?.NameClaimType,
-               principal?.Identities.FirstOrDefault()?.RoleClaimType);
-
-    public static ClaimsPrincipal? ClonePrincipalWithConvertedClaims(this ClaimsPrincipal? principal, ProviderOption provider)
-    {
-        if (principal is null) return null;
-
-        ClaimsPrincipal clone = principal.Clone();
-
-        List<Claim>? claims = provider.ClaimConvertor([.. clone.Claims]);
-        string? authenticationType = clone.Identities.First().AuthenticationType;
-        string? nameType = clone.Identities.First().NameClaimType;
-        string? roleType = clone.Identities.First().RoleClaimType;
-        ClaimsIdentity claimsIdentity = new(claims, authenticationType, nameType, roleType);
-
-        return new(claimsIdentity);
-    }
-
-    public static List<Claim> ClaimConvertor(this ProviderOption provider, List<Claim> currentClaims)
-    {
-        List<Claim> convertedClaima = [];
-
-        currentClaims.ForEach((currentClaim) =>
-        {
-            var mapRule = provider.UserClaimConvertTypeRules.FirstOrDefault(c => c.Source.Equals(currentClaim.Type));
-
-            convertedClaima.Add(mapRule is null ? currentClaim
-                : new Claim(mapRule.Destination,
-                            currentClaim.Value,
-                            currentClaim.ValueType,
-                            currentClaim.Issuer,
-                            currentClaim.OriginalIssuer,
-                            currentClaim.Subject));
-
-        });
-
-        return convertedClaima;
-    }
-
-    public static List<Claim> GetNotExist(this List<Claim> current, List<Claim> target)
-        => [.. target.Where(claim => !current.Any(currentClaim => currentClaim.Type.Equals(claim.Type) && currentClaim.Value.Equals(claim.Value)))];
 
     private static string ToBase64Encode(this string plainText) => Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(plainText));
 }
