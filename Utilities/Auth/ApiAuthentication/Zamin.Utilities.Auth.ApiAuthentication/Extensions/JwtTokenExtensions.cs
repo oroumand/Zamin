@@ -56,7 +56,7 @@ public static class JwtTokenExtensions
                         context.Principal.AddIdentity(context.Principal.CreateClaimsIdentity(claims));
                     }
 
-                    if (provider.UserClaimConvertTypeRules.Count != 0)
+                    if (provider.UserClaimTypeMapRules.Count != 0)
                     {
                         context.Principal = context.Principal.ClonePrincipalWithConvertedClaims(provider);
                     }
