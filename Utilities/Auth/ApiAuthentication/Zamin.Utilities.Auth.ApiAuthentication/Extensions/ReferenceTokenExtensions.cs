@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Claims;
+using Zamin.Utilities.Auth.ApiAuthentication.Extensions;
 using Zamin.Utilities.Auth.ApiAuthentication.Options;
 
 namespace Zamin.Extensions.DependencyInjection;
@@ -35,13 +36,13 @@ public static class ReferenceTokenExtensions
                 {
                     if (context.Principal is null) throw new ArgumentNullException($"{provider.Scheme} ({provider.Authority}) , principal is null");
 
-                    if (provider.RegisterUserInfoClaims.Enabled)
+                    if (provider.RegisterUserInfoClaims.Enabled && context.Principal.HasSubClaim(provider.UserIdentifierClaimType))
                     {
                         List<Claim> claims = await provider.GetUserInfoClaims(context.HttpContext, httpClientName);
                         context.Principal.AddIdentity(context.Principal.CreateClaimsIdentity(claims));
                     }
 
-                    if (provider.UserClaimConvertTypeRules.Count != 0)
+                    if (provider.UserClaimTypeMapRules.Count != 0)
                     {
                         context.Principal = context.Principal.ClonePrincipalWithConvertedClaims(provider);
                     }
