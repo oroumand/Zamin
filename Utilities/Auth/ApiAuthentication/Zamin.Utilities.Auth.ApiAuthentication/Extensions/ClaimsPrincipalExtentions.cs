@@ -45,21 +45,23 @@ public static class ClaimsPrincipalExtentions
 
         provider.UserClaimRules.ForEach(rule =>
         {
-            var currentClaim = currentClaims.FirstOrDefault(claim => claim.Type.Equals(rule.Source))
-                               ?? throw new ArgumentException($"{rule.Source} not found");
+            var currentClaim = currentClaims.FirstOrDefault(claim => claim.Type.Equals(rule.Source));
 
-            var mappedClaim = new Claim(rule.Destination,
-                                        currentClaim.Value,
-                                        currentClaim.ValueType,
-                                        currentClaim.Issuer,
-                                        currentClaim.OriginalIssuer,
-                                        currentClaim.Subject);
-
-            newClaims.Add(mappedClaim);
-
-            if (rule.RemoveSource is false)
+            if (currentClaim is not null)
             {
-                newClaims.Add(currentClaim);
+                var mappedClaim = new Claim(rule.Destination,
+                                            currentClaim.Value,
+                                            currentClaim.ValueType,
+                                            currentClaim.Issuer,
+                                            currentClaim.OriginalIssuer,
+                                            currentClaim.Subject);
+
+                newClaims.Add(mappedClaim);
+
+                if (rule.RemoveSource is false)
+                {
+                    newClaims.Add(currentClaim);
+                }
             }
         });
 
