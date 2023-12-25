@@ -69,6 +69,10 @@ public static class SwaggerServiceCollectionExtensions
             {
                 setup.RoutePrefix = option.RoutePrefix;
                 setup.SwaggerEndpoint($"/swagger/{option.Name}/swagger.json", option.Title);
+                if (option.OAuthConfig.UsePkce)
+                {
+                    setup.OAuthUsePkce();
+                }
             });
         }
     }
