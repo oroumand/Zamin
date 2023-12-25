@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+		<PropertyGroup>
+				<TargetFramework>net8.0</TargetFramework>
+				<Nullable>enable</Nullable>
+				<ImplicitUsings>enable</ImplicitUsings>
+				<InvariantGlobalization>true</InvariantGlobalization>
+		</PropertyGroup>
+
+		<ItemGroup>
+				<PackageReference Include="Zamin.Utilities.Auth.ApiAuthentication" Version="8.0.0-beta.1" />
+		</ItemGroup>
+
+		<ItemGroup>
+				<ProjectReference Include="..\Zamin.Utilities.Swagger.Registration\Zamin.Utilities.Swagger.Registration.csproj" />
+		</ItemGroup>
+
+</Project>
