@@ -1,10 +1,8 @@
-using Zamin.Core.Domain.Exceptions;
-
-namespace SampleGuards.Guards.GuardClauses;
+namespace Zamin.Utilities.Guards.GuardClauses;
 
 public static class LessThanGuardClause
 {
-    public static void LessThan<T>(this Guard guard, T value, T maximumValue, IComparer<T> comparer, string message, params string[] parameters)
+    public static void LessThan<T>(this Guard guard, T value, T maximumValue, IComparer<T> comparer, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
@@ -12,12 +10,12 @@ public static class LessThanGuardClause
         int comparerResult = comparer.Compare(value, maximumValue);
 
         if (comparerResult > -1)
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
 
-    public static void LessThan<T>(this Guard guard, T value, T maximumValue, string message, params string[] parameters)
+    public static void LessThan<T>(this Guard guard, T value, T maximumValue, string message)
         where T : IComparable<T>, IComparable
     {
-        guard.LessThan(value, maximumValue, Comparer<T>.Default, message, parameters);
+        guard.LessThan(value, maximumValue, Comparer<T>.Default, message);
     }
 }

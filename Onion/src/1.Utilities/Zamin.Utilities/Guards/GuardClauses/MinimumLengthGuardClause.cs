@@ -1,24 +1,23 @@
 using System.Collections;
-using Zamin.Core.Domain.Exceptions;
 
-namespace SampleGuards.Guards.GuardClauses;
+namespace Zamin.Utilities.Guards.GuardClauses;
 
 public static class MinimumLengthGuardClause
 {
-    public static void MinimumLength(this Guard guard, string value, int minimumLength, string message, params string[] parameters)
+    public static void MinimumLength(this Guard guard, string value, int minimumLength, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
 
         if (value.Length < minimumLength)
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
-    public static void MinimumLength<T>(this Guard guard, ICollection value, int minimumLength, string message, params string[] parameters)
+    public static void MinimumLength<T>(this Guard guard, ICollection value, int minimumLength, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
 
         if (value.Count < minimumLength)
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
 }

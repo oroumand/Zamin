@@ -1,4 +1,4 @@
-﻿namespace SampleGuards.Guards;
+﻿namespace Zamin.Utilities.Guards;
 
 public class Guard
 {

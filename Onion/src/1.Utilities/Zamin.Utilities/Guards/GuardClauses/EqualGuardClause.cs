@@ -1,24 +1,22 @@
-using Zamin.Core.Domain.Exceptions;
-
-namespace SampleGuards.Guards.GuardClauses;
+namespace Zamin.Utilities.Guards.GuardClauses;
 
 public static class EqualGuardClause
 {
-    public static void Equal<T>(this Guard guard, T value, T targetValue, string message, params string[] parameters)
+    public static void Equal<T>(this Guard guard, T value, T targetValue, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
 
         if (!Equals(value, targetValue))
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
 
-    public static void Equal<T>(this Guard guard, T value, T targetValue, IEqualityComparer<T> equalityComparer, string message, params string[] parameters)
+    public static void Equal<T>(this Guard guard, T value, T targetValue, IEqualityComparer<T> equalityComparer, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
 
         if (!equalityComparer.Equals(value, targetValue))
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
 }
