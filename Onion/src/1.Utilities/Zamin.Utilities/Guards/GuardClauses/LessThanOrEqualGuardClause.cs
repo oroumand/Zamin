@@ -1,10 +1,8 @@
-using Zamin.Core.Domain.Exceptions;
-
-namespace SampleGuards.Guards.GuardClauses;
+namespace Zamin.Utilities.Guards.GuardClauses;
 
 public static class LessThanOrEqualGuardClause
 {
-    public static void LessThanOrEqual<T>(this Guard guard, T value, T minimumValue, IComparer<T> comparer, string message, params string[] parameters)
+    public static void LessThanOrEqual<T>(this Guard guard, T value, T minimumValue, IComparer<T> comparer, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
@@ -12,12 +10,12 @@ public static class LessThanOrEqualGuardClause
         int comparerResult = comparer.Compare(value, minimumValue);
 
         if (comparerResult > 0)
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
 
-    public static void LessThanOrEqual<T>(this Guard guard, T value, T minimumValue, string message, params string[] parameters)
+    public static void LessThanOrEqual<T>(this Guard guard, T value, T minimumValue, string message)
         where T : IComparable<T>, IComparable
     {
-        guard.LessThanOrEqual(value, minimumValue, Comparer<T>.Default, message, parameters);
+        guard.LessThanOrEqual(value, minimumValue, Comparer<T>.Default, message);
     }
 }

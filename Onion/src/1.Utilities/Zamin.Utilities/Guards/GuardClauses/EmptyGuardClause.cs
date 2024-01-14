@@ -1,11 +1,10 @@
 using System.Collections;
-using Zamin.Core.Domain.Exceptions;
 
-namespace SampleGuards.Guards.GuardClauses;
+namespace Zamin.Utilities.Guards.GuardClauses;
 
 public static class EmptyGuardClause
 {
-    public static void Empty<T>(this Guard guard, T value, string message, params string[] parameters)
+    public static void Empty<T>(this Guard guard, T value, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
@@ -23,15 +22,15 @@ public static class EmptyGuardClause
             return;
 
         if (!Equals(value, default(T)))
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
 
-    public static void Empty<T>(this Guard guard, T value, IEqualityComparer<T> equalityComparer, string message, params string[] parameters)
+    public static void Empty<T>(this Guard guard, T value, IEqualityComparer<T> equalityComparer, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
 
         if (!equalityComparer.Equals(value, default))
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
 }

@@ -1,10 +1,8 @@
-using Zamin.Core.Domain.Exceptions;
-
-namespace SampleGuards.Guards.GuardClauses;
+namespace Zamin.Utilities.Guards.GuardClauses;
 
 public static class ExclusiveBetweenGuardClause
 {
-    public static void ExclusiveBetween<T>(this Guard guard, T value, T minimumValue, T maximumValue, IComparer<T> comparer, string message, params string[] parameters)
+    public static void ExclusiveBetween<T>(this Guard guard, T value, T minimumValue, T maximumValue, IComparer<T> comparer, string message)
     {
         if (string.IsNullOrEmpty(message))
             throw new ArgumentNullException("Message");
@@ -13,15 +11,15 @@ public static class ExclusiveBetweenGuardClause
         int maximumValueComparerResult = comparer.Compare(value, maximumValue);
 
         if (minimumValueComparerResult != 1)
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
 
         if (maximumValueComparerResult != -1)
-            throw new InvalidEntityStateException(message, parameters);
+            throw new InvalidOperationException(message);
     }
 
-    public static void ExclusiveBetween<T>(this Guard guard, T value, T minimumValue, T maximumValue, string message, params string[] parameters)
+    public static void ExclusiveBetween<T>(this Guard guard, T value, T minimumValue, T maximumValue, string message)
         where T : IComparable<T>, IComparable
     {
-        guard.ExclusiveBetween(value, minimumValue, maximumValue, Comparer<T>.Default, message, parameters);
+        guard.ExclusiveBetween(value, minimumValue, maximumValue, Comparer<T>.Default, message);
     }
 }
