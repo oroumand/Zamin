@@ -18,8 +18,8 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-		<PackageReference Include="Zamin.Core.RequestResponse" Version="8.0.0-beta.1" />
-		<PackageReference Include="Zamin.Core.Contracts" Version="8.0.0-beta.1" />
+		<PackageReference Include="Zamin.Core.RequestResponse" Version="8.0.0" />
+		<PackageReference Include="Zamin.Core.Contracts" Version="8.0.0" />
 		<PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="8.0.0" />
 		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0" />
 	</ItemGroup>
