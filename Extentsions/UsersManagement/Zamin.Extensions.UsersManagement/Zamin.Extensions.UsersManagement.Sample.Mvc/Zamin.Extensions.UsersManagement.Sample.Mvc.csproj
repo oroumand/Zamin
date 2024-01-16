@@ -8,9 +8,9 @@
 
 		<ItemGroup>
 				<PackageReference Include="IdentityModel" Version="6.2.0" />
-				<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="8.0.0-beta.1" />
-				<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
-				<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.0" />
+				<PackageReference Include="Zamin.Extensions.UsersManagement.Abstractions" Version="8.0.0" />
+				<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+				<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.1" />
 		</ItemGroup>
 
 		<ItemGroup>
