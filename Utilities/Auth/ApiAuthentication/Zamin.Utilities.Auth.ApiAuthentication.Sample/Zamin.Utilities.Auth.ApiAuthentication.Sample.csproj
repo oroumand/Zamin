@@ -7,8 +7,8 @@
 		</PropertyGroup>
 
 		<ItemGroup>
-				<PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="8.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="8.0.0-beta.1" />
+				<PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="8.0.0" />
+				<PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="8.0.0" />
 				<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		</ItemGroup>
 
