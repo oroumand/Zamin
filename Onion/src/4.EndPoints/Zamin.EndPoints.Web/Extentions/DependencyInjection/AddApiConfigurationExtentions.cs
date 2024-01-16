@@ -16,11 +16,12 @@ public static class AddApiConfigurationExtensions
 
     public static void UseZaminApiExceptionHandler(this IApplicationBuilder app)
     {
+        
         app.UseApiExceptionHandler(options =>
         {
             options.AddResponseDetails = (context, ex, error) =>
             {
-                if (ex.GetType().Name == typeof(SqlException).Name)
+                if (ex.GetType().Name == typeof(Microsoft.Data.SqlClient.SqlException).Name)
                 {
                     error.Detail = "Exception was a database exception!";
                 }
