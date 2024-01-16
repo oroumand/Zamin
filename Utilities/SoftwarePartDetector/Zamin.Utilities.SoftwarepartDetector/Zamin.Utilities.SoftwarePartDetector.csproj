@@ -12,7 +12,7 @@
 		</PropertyGroup>
 
 		<ItemGroup>
-				<None Include="..\..\..\icon.png" Pack="true" PackagePath=""/>
+				<None Include="..\..\..\icon.png" Pack="true" PackagePath="" />
 		</ItemGroup>
 
 		<ItemGroup>
@@ -20,7 +20,7 @@
 				<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 				<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
 				<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
-				<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0-beta.1" />
+				<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0" />
 		</ItemGroup>
 
 </Project>
