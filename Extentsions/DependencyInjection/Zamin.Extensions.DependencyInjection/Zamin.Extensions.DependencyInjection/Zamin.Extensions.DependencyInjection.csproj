@@ -2,7 +2,7 @@
 
 		<PropertyGroup>
 				<TargetFramework>net8.0</TargetFramework>
-				<Version>8.0.0-beta.1</Version>
+				<Version>8.0.0</Version>
 				<Nullable>enable</Nullable>
 				<Authors>Alireza Oroumand</Authors>
 				<ImplicitUsings>enable</ImplicitUsings>
@@ -12,7 +12,7 @@
 		</PropertyGroup>
 
 		<ItemGroup>
-				<None Include="..\..\..\..\icon.png" Pack="true" PackagePath=""/>
+				<None Include="..\..\..\..\icon.png" Pack="true" PackagePath="" />
 		</ItemGroup>
 
 		<ItemGroup>
@@ -20,7 +20,7 @@
 				<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 				<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
 				<PackageReference Include="Scrutor" Version="4.2.2" />
-				<PackageReference Include="Zamin.Extensions.DependencyInjection.Abstractions" Version="8.0.0-beta.1" />
+				<PackageReference Include="Zamin.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
 		</ItemGroup>
 
 </Project>
