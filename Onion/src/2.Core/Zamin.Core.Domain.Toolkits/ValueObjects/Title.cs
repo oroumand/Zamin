@@ -14,11 +14,11 @@ public class Title : BaseValueObject<Title>
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new InvalidValueObjectStateException("ValidationErrorIsRequire", nameof(Title));
+            throw new InvalidValueObjectStateException("ValidationErrorIsRequire {0}", nameof(Title));
         }
         if (value.Length < 2 || value.Length > 250)
         {
-            throw new InvalidValueObjectStateException("ValidationErrorStringLength", nameof(Title), "2", "250");
+            throw new InvalidValueObjectStateException("ValidationErrorStringLength {0} {1} {2}", nameof(Title), "2", "250");
         }
         Value = value;
     }
