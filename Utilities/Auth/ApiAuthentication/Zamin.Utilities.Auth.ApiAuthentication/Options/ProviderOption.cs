@@ -14,7 +14,8 @@ public sealed class ProviderOption
     public RefrenceTokenConfigOption RefrenceTokenConfig { get; set; } = new();
     public string UserIdentifierClaimType { get; set; } = ClaimTypes.NameIdentifier;
     public RegisterUserInfoClaimsOption RegisterUserInfoClaims { get; set; } = new();
-    public List<UserClaimTypeMapRuleOption> UserClaimTypeMapRules { get; set; } = [];
+    public List<UserClaimRuleOption> UserClaimRules { get; set; } = [];
+    public List<UserClaimAddonOption> UserClaimAddons { get; set; } = [];
     public EndpointsPathOption? EndpointsPath { get; set; } = null;
     public int Priority { get; set; } = 1;
 }
