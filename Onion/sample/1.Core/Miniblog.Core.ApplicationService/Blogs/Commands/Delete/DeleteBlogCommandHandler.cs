@@ -9,12 +9,12 @@ namespace MiniBlog.Core.ApplicationService.Blogs.Commands.Delete;
 
 public sealed class DeleteBlogCommandHandler : CommandHandler<DeleteBlogCommand>
 {
-    private readonly IBlogCommandRepository _blogCommandRepository;
+    private readonly IUnitOfWork _blogUnitOfWork;
 
     public DeleteBlogCommandHandler(ZaminServices zaminServices,
-                                    IBlogCommandRepository blogCommandRepository) : base(zaminServices)
+                                    IUnitOfWork blogUnitOfWork) : base(zaminServices)
     {
-        _blogCommandRepository = blogCommandRepository;
+        _blogUnitOfWork = blogUnitOfWork;
     }
 
     public override async Task<CommandResult> Handle(DeleteBlogCommand command)
