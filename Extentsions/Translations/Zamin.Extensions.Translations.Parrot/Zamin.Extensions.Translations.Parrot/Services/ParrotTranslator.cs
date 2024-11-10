@@ -25,20 +25,31 @@ public class ParrotTranslator : ITranslator, IDisposable
         _logger.LogInformation("Parrot Translator Start working with culture {Culture}", _currentCulture);
     }
 
+   
     public string this[string name] { get => GetString(name); set => throw new NotImplementedException(); }
+    public string this[CultureInfo culture, string name ] { get => GetString(culture, name); set => throw new NotImplementedException(); }
 
 
     public string this[string name, params string[] arguments] { get => GetString(name, arguments); set => throw new NotImplementedException(); }
+    public string this[CultureInfo culture, string name, params string[] arguments] { get => GetString(culture, name,  arguments); set => throw new NotImplementedException(); }
 
 
     public string this[char separator, params string[] names] { get => GetConcateString(separator, names); set => throw new NotImplementedException(); }
+    public string this[CultureInfo culture, char separator, params string[] names] { get => GetConcateString(culture, separator, names); set => throw new NotImplementedException(); }
 
 
     public string GetString(string name)
     {
         _logger.LogTrace("Parrot Translator GetString with name {name}", name);
+            return _localizer.Get(name, _currentCulture);
 
-        return _localizer.Get(name, _currentCulture);
+    }
+    public string GetString(CultureInfo culture, string name)
+    {
+        _logger.LogTrace("Parrot Translator GetString  with culture {culture} name {name}", culture, name);
+        if (culture is null)
+            return _localizer.Get(name, _currentCulture);
+        else return _localizer.Get(name, culture.ToString());
     }
 
 
@@ -62,6 +73,26 @@ public class ParrotTranslator : ITranslator, IDisposable
         return pattern;
     }
 
+    public string GetString(CultureInfo culture, string pattern, params string[] arguments)
+    {
+        _logger.LogTrace("Parrot Translator GetString with culture {culture} and  pattern {pattern} and arguments {arguments}", culture, pattern, arguments);
+
+        for (int i = 0; i < arguments.Length; i++)
+        {
+            arguments[i] = GetString(culture,arguments[i]);
+        }
+
+        pattern = GetString(culture, pattern);
+
+        for (int i = 0; i < arguments.Length; i++)
+        {
+            string placeHolder = $"{{{i}}}";
+            pattern = pattern.Replace(placeHolder, arguments[i]);
+        }
+
+        return pattern;
+    }
+
     public string GetConcateString(char separator = ' ', params string[] names)
     {
         _logger.LogTrace("Parrot Translator GetConcateString with separator {separator} and names {names}", separator, names);
@@ -69,6 +100,18 @@ public class ParrotTranslator : ITranslator, IDisposable
         for (int i = 0; i < names.Length; i++)
         {
             names[i] = GetString(names[i]);
+        }
+
+        return string.Join(separator, names);
+    }
+
+    public string GetConcateString(CultureInfo culture, char separator = ' ',  params string[] names)
+    {
+        _logger.LogTrace("Parrot Translator GetConcateString with culture {culture} and separator {separator} and names {names}", culture, separator, names);
+
+        for (int i = 0; i < names.Length; i++)
+        {
+            names[i] = GetString(culture, names[i]);
         }
 
         return string.Join(separator, names);
