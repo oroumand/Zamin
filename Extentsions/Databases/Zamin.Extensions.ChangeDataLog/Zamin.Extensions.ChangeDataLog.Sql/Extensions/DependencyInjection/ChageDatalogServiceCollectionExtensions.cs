@@ -10,7 +10,7 @@ public static class ChageDatalogServiceCollectionExtensions
 {
     public static IServiceCollection AddZaminChageDatalogDalSql(this IServiceCollection services, IConfiguration configuration)
     {        
-        services.AddScoped<IEntityChageInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
+        services.AddScoped<IEntityChageInterceptorItemRepository, DapperEntityChangeInterceptorItemRepository>();
         services.Configure<ChangeDataLogSqlOptions>(configuration);
         return services;
     }
@@ -23,7 +23,7 @@ public static class ChageDatalogServiceCollectionExtensions
 
     public static IServiceCollection AddZaminChageDatalogDalSql(this IServiceCollection services, Action<ChangeDataLogSqlOptions> setupAction)
     {
-        services.AddScoped<IEntityChageInterceptorItemRepository, DapperEntityChageInterceptorItemRepository>();
+        services.AddScoped<IEntityChageInterceptorItemRepository, DapperEntityChangeInterceptorItemRepository>();
         services.Configure(setupAction);
         return services;
     }
