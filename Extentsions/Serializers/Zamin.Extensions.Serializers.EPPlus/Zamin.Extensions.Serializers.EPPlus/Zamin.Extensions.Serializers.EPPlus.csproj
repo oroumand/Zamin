@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 		<PropertyGroup>
-				<TargetFramework>net8.0</TargetFramework>
-				<Version>8.0.0</Version>
+				<TargetFramework>net9.0</TargetFramework>
+				<Version>9.0.0</Version>
 				<Nullable>enable</Nullable>
 				<Authors>Alireza Oroumand</Authors>
 				<ImplicitUsings>enable</ImplicitUsings>
@@ -16,11 +16,11 @@
 		</ItemGroup>
 
 		<ItemGroup>
-				<PackageReference Include="EPPlus" Version="7.0.6" />
-				<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="8.0.0" />
-				<PackageReference Include="Zamin.Extensions.Translations.Abstractions" Version="8.0.0" />
-				<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-				<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+				<PackageReference Include="EPPlus" Version="7.5.0" />
+				<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="9.0.0" />
+				<PackageReference Include="Zamin.Extensions.Translations.Abstractions" Version="9.0.0" />
+				<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+				<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
 		</ItemGroup>
 
 </Project>
