@@ -18,7 +18,8 @@ public class ParrotSqlRepository
     private readonly string _selectCommand = "Select * from [{0}].[{1}]";
     private readonly string _insertCommand = "INSERT INTO [{0}].[{1}]([Key],[Value],[Culture]) VALUES (@Key,@Value,@Culture) select SCOPE_IDENTITY()";
 
-    public ParrotSqlRepository(ParrotTranslatorOptions configuration, ILogger logger)
+    public ParrotSqlRepository(ParrotTranslatorOptions configuration,
+                               ILogger logger)
     {
         _configuration = configuration;
         _logger = logger;
