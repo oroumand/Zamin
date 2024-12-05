@@ -10,48 +10,42 @@ namespace Zamin.Extensions.DependencyInjection;
 
 public static class DistributedSqlCacheServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminSqlDistributedCache(this IServiceCollection services,
-                                                                  IConfiguration configuration,
-                                                                  string sectionName)
+    public static IServiceCollection AddZaminSqlDistributedCache(this IServiceCollection services, IConfiguration configuration, string sectionName)
         => services.AddZaminSqlDistributedCache(configuration.GetSection(sectionName));
 
     public static IServiceCollection AddZaminSqlDistributedCache(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();
         services.Configure<DistributedSqlCacheOptions>(configuration);
 
-        var option = configuration.Get<DistributedSqlCacheOptions>();
+        DistributedSqlCacheOptions options = configuration.Get<DistributedSqlCacheOptions>()
+            ?? throw new ArgumentNullException(nameof(options));
 
-        if (option.AutoCreateTable)
-            CreateTable(option);
-
-        services.AddDistributedSqlServerCache(options =>
-        {
-            options.ConnectionString = option.ConnectionString;
-            options.SchemaName = option.SchemaName;
-            options.TableName = option.TableName;
-        });
-
-        return services;
+        return services.AddServices(options);
     }
 
-    public static IServiceCollection AddZaminSqlDistributedCache(this IServiceCollection services,
-                                                            Action<DistributedSqlCacheOptions> setupAction)
+    public static IServiceCollection AddZaminSqlDistributedCache(this IServiceCollection services, Action<DistributedSqlCacheOptions> setupAction)
+    {
+        services.Configure(setupAction);
+        DistributedSqlCacheOptions options = new();
+        setupAction.Invoke(options);
+
+        return services.AddServices(options);
+    }
+
+    private static IServiceCollection AddServices(this IServiceCollection services, DistributedSqlCacheOptions options)
     {
         services.AddTransient<ICacheAdapter, DistributedSqlCacheAdapter>();
-        services.Configure(setupAction);
 
-        var option = new DistributedSqlCacheOptions();
-        setupAction.Invoke(option);
-
-        if (option.AutoCreateTable)
-            CreateTable(option);
-
-        services.AddDistributedSqlServerCache(options =>
+        if (options.AutoCreateTable)
         {
-            options.ConnectionString = option.ConnectionString;
-            options.SchemaName = option.SchemaName;
-            options.TableName = option.TableName;
+            CreateTable(options);
+        }
+
+        services.AddDistributedSqlServerCache(configuration =>
+        {
+            configuration.ConnectionString = options.ConnectionString;
+            configuration.SchemaName = options.SchemaName;
+            configuration.TableName = options.TableName;
         });
 
         return services;
@@ -62,6 +56,14 @@ public static class DistributedSqlCacheServiceCollectionExtensions
         string table = options.TableName;
         string schema = options.SchemaName;
 
+        // SQL script to check and create schema if it doesn't exist
+        string createSchema =
+            $"IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = '{schema}')" + "\n" +
+            $"BEGIN" + "\n" +
+            $"EXEC('CREATE SCHEMA [{schema}]');" + "\n" +
+            $"END";
+
+        // SQL script to check and create table if it doesn't exist
         string createTable =
             $"IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{table}' ))" + "\n" +
             $"Begin" + "\n" +
@@ -75,7 +77,13 @@ public static class DistributedSqlCacheServiceCollectionExtensions
             $"INDEX Index_ExpiresAtTime NONCLUSTERED (ExpiresAtTime))" + "\n" +
             $"End";
 
-        var dbConnection = new SqlConnection(options.ConnectionString);
+        using var dbConnection = new SqlConnection(options.ConnectionString);
+        dbConnection.Open();
+
+        // Execute the script to create schema if needed
+        dbConnection.Execute(createSchema);
+
+        // Execute the script to create table if needed
         dbConnection.Execute(createTable);
     }
 }

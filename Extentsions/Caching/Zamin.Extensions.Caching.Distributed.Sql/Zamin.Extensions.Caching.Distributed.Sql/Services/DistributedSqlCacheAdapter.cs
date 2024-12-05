@@ -41,7 +41,7 @@ public class DistributedSqlCacheAdapter : ICacheAdapter
             SlidingExpiration = slidingExpiration
         };
 
-        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serialize(obj)),option);
+        _cache.Set(key, Encoding.UTF8.GetBytes(_serializer.Serialize(obj)), option);
     }
 
     public TOutput Get<TOutput>(string key)

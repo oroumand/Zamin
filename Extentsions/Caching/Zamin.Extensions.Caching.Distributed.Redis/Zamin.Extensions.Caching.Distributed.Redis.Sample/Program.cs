@@ -6,13 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddZaminMicrosoftSerializer();
+builder.Services.AddZaminRedisDistributedCache(builder.Configuration, "Cache");
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddZaminRedisDistributedCache(option =>
-{
-    option.Configuration = "localhost:9191,password=123456";
-    option.InstanceName = "Zamin.Sample.";
-});
 
 //Middlewares
 

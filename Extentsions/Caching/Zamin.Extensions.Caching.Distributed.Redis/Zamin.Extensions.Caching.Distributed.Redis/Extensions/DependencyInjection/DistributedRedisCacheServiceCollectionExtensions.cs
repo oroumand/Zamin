@@ -8,40 +8,36 @@ namespace Zamin.Extensions.DependencyInjection;
 
 public static class DistributedRedisCacheServiceCollectionExtensions
 {
-    public static IServiceCollection AddZaminRedisDistributedCache(this IServiceCollection services,
-                                                                   IConfiguration configuration,
-                                                                   string sectionName)
+    public static IServiceCollection AddZaminRedisDistributedCache(this IServiceCollection services, IConfiguration configuration, string sectionName)
         => services.AddZaminRedisDistributedCache(configuration.GetSection(sectionName));
 
     public static IServiceCollection AddZaminRedisDistributedCache(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<ICacheAdapter, DistributedRedisCacheAdapter>();
         services.Configure<DistributedRedisCacheOptions>(configuration);
 
-        var option = configuration.Get<DistributedRedisCacheOptions>();
+        DistributedRedisCacheOptions options = configuration.Get<DistributedRedisCacheOptions>()
+            ?? throw new ArgumentNullException(nameof(options));
 
-        services.AddStackExchangeRedisCache(options =>
-        {
-            options.Configuration = option.Configuration;
-            options.InstanceName = option.InstanceName;
-        });
-
-        return services;
+        return services.AddServices(options);
     }
 
-    public static IServiceCollection AddZaminRedisDistributedCache(this IServiceCollection services,
-                                                              Action<DistributedRedisCacheOptions> setupAction)
+    public static IServiceCollection AddZaminRedisDistributedCache(this IServiceCollection services, Action<DistributedRedisCacheOptions> setupAction)
+    {
+        services.Configure(setupAction);
+        DistributedRedisCacheOptions options = new();
+        setupAction.Invoke(options);
+
+        return services.AddServices(options);
+    }
+
+    private static IServiceCollection AddServices(this IServiceCollection services, DistributedRedisCacheOptions options)
     {
         services.AddTransient<ICacheAdapter, DistributedRedisCacheAdapter>();
-        services.Configure(setupAction);
-
-        var option = new DistributedRedisCacheOptions();
-        setupAction.Invoke(option);
-
-        services.AddStackExchangeRedisCache(options =>
+        
+        services.AddStackExchangeRedisCache(configurations =>
         {
-            options.Configuration = option.Configuration;
-            options.InstanceName = option.InstanceName;
+            configurations.Configuration = options.Configuration;
+            configurations.InstanceName = options.InstanceName;
         });
 
         return services;
