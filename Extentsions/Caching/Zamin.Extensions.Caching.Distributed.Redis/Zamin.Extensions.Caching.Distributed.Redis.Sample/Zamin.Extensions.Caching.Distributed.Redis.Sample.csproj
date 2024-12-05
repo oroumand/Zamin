@@ -1,13 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
 		<PropertyGroup>
-				<TargetFramework>net8.0</TargetFramework>
+				<TargetFramework>net9.0</TargetFramework>
 				<Nullable>enable</Nullable>
 				<ImplicitUsings>enable</ImplicitUsings>
+				<UserSecretsId>54db0e41-1642-4d1c-931c-1971bd3527c9</UserSecretsId>
+				<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		</PropertyGroup>
 
 		<ItemGroup>
-				<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+				<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+				<PackageReference Include="Swashbuckle.AspNetCore" Version="7.1.0" />
+				<PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="9.0.0" />
 		</ItemGroup>
 
 		<ItemGroup>
