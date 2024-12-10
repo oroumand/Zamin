@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 		<PropertyGroup>
-				<TargetFramework>net8.0</TargetFramework>
-				<Version>8.0.0</Version>
+				<TargetFramework>net9.0</TargetFramework>
+				<Version>9.0.0</Version>
 				<Authors>Alireza Oroumand</Authors>
 				<ImplicitUsings>enable</ImplicitUsings>
 				<Nullable>enable</Nullable>
@@ -14,9 +14,4 @@
 		<ItemGroup>
 				<None Include="..\..\..\..\icon.png" Pack="true" PackagePath=""/>
 		</ItemGroup>
-
-		<ItemGroup>
-				<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		</ItemGroup>
-
 </Project>

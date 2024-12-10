@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<Version>8.0.0</Version>
+		<TargetFramework>net9.0</TargetFramework>
+		<Version>9.0.0</Version>
 		<Authors>Alireza Oroumand</Authors>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -16,12 +16,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.1" />
-		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="8.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.1" />
-		<PackageReference Include="Scrutor" Version="4.2.2" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0-preview4.23342.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.SqlServer" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
+		<PackageReference Include="Scrutor" Version="5.0.2" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
 
 	</ItemGroup>
 

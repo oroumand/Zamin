@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 		<PropertyGroup>
-				<TargetFramework>net8.0</TargetFramework>
+				<TargetFramework>net9.0</TargetFramework>
 				<Nullable>enable</Nullable>
 				<ImplicitUsings>enable</ImplicitUsings>
 				<UserSecretsId>50feefd7-6360-44e7-85b6-bdc2f6fcb980</UserSecretsId>

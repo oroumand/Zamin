@@ -39,7 +39,7 @@ public static class RabbitMqMessageBusServiceCollectionExtensions
             {
                 Uri = new Uri(options.Value.Url)
             };
-            var connection = factory.CreateConnection();
+            var connection = factory.CreateConnectionAsync().Result;
             return connection;
         });
         services.AddScoped<ISendMessageBus, RabbitMqSendMessageBus>();
