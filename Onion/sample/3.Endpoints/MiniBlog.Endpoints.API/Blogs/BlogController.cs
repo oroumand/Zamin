@@ -15,27 +15,27 @@ namespace MiniBlog.Endpoints.API.Blogs
     {
         #region Commands
         [HttpPost("Create")]
-        public async Task<IActionResult> CreateBlog([FromBody] CreateBlogCommand command) => await Create<CreateBlogCommand, Guid>(command);
+        public async Task<IActionResult> CreateBlog([FromBody] CreateBlogCommand command) => await CreateAsync<CreateBlogCommand, Guid>(command);
 
         [HttpPut("Update")]
-        public async Task<IActionResult> UpdateBlog([FromBody] UpdateBlogCommand command) => await Edit(command);
+        public async Task<IActionResult> UpdateBlog([FromBody] UpdateBlogCommand command) => await EditAsync(command);
 
         [HttpDelete("Delete")]
-        public async Task<IActionResult> DeleteBlog([FromBody] DeleteBlogCommand command) => await Delete(command);
+        public async Task<IActionResult> DeleteBlog([FromBody] DeleteBlogCommand command) => await DeleteAsync(command);
 
         [HttpDelete("DeleteGraph")]
-        public async Task<IActionResult> DeleteGraphBlog([FromBody] DeleteGraphBlogCommand command) => await Delete(command);
+        public async Task<IActionResult> DeleteGraphBlog([FromBody] DeleteGraphBlogCommand command) => await DeleteAsync(command);
 
         [HttpPost("AddPost")]
-        public async Task<IActionResult> AddPost([FromBody] AddPostCommand command) => await Create(command);
+        public async Task<IActionResult> AddPost([FromBody] AddPostCommand command) => await CreateAsync(command);
 
         [HttpDelete("RemovePost")]
-        public async Task<IActionResult> RemovePost([FromBody] RemovePostCommand command) => await Delete(command);
+        public async Task<IActionResult> RemovePost([FromBody] RemovePostCommand command) => await DeleteAsync(command);
         #endregion
 
         #region Queries
         [HttpGet("GetById")]
-        public async Task<IActionResult> GetById(GetBlogByIdQuery query) => await Query<GetBlogByIdQuery, BlogQr?>(query);
+        public async Task<IActionResult> GetById(GetBlogByIdQuery query) => await QueryAsync<GetBlogByIdQuery, BlogQr?>(query);
         #endregion
 
         #region Methods
