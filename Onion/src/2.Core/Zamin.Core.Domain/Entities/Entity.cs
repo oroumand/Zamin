@@ -49,7 +49,7 @@ public abstract class Entity<TId>: IAuditableEntity
         if (left is null || right is null)
             return false;
 
-        return left.Equals(right);
+        return left.Equals((object) right);
     }
 
     public static bool operator !=(Entity<TId> left, Entity<TId> right)
