@@ -1,6 +1,7 @@
 ﻿using MiniBlog.Core.Contracts.Blogs.Commands;
 using MiniBlog.Core.RequestResponse.Blogs.Commands.Delete;
 using Zamin.Core.ApplicationServices.Commands;
+using Zamin.Core.Contracts.Data.Commands;
 using Zamin.Core.Domain.Exceptions;
 using Zamin.Core.RequestResponse.Commands;
 using Zamin.Utilities;
@@ -9,11 +10,14 @@ namespace MiniBlog.Core.ApplicationService.Blogs.Commands.Delete;
 
 public sealed class DeleteBlogCommandHandler : CommandHandler<DeleteBlogCommand>
 {
+    private readonly IBlogCommandRepository _blogCommandRepository;
     private readonly IUnitOfWork _blogUnitOfWork;
 
     public DeleteBlogCommandHandler(ZaminServices zaminServices,
+        IBlogCommandRepository commandRepository,
                                     IUnitOfWork blogUnitOfWork) : base(zaminServices)
     {
+        _blogCommandRepository = commandRepository;
         _blogUnitOfWork = blogUnitOfWork;
     }
 
