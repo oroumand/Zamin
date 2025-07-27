@@ -12,6 +12,7 @@ public sealed class DeleteBlogCommandHandler(ZaminServices zaminServices,
                                 IBlogCommandRepository blogCommandRepository,
                                 IUnitOfWork blogUnitOfWork) : CommandHandler<DeleteBlogCommand>(zaminServices)
 {
+
     private readonly IUnitOfWork _blogUnitOfWork = blogUnitOfWork;
     private readonly IBlogCommandRepository _blogCommandRepository = blogCommandRepository;
 
