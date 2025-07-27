@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MiniBlog.Core.RequestResponse.Blogs.Commands.AddBlogPost;
 using MiniBlog.Core.RequestResponse.Blogs.Commands.AddPost;
 using MiniBlog.Core.RequestResponse.Blogs.Commands.Create;
 using MiniBlog.Core.RequestResponse.Blogs.Commands.Delete;
@@ -16,6 +17,10 @@ namespace MiniBlog.Endpoints.API.Blogs
         #region Commands
         [HttpPost("Create")]
         public async Task<IActionResult> CreateBlog([FromBody] CreateBlogCommand command) => await Create<CreateBlogCommand, Guid>(command);
+
+        [HttpPost("AddBlogPost")]
+        public async Task<IActionResult> AddBlogPost([FromBody] AddBlogPostCommand command) => await Create<AddBlogPostCommand, Guid>(command);
+
 
         [HttpPut("Update")]
         public async Task<IActionResult> UpdateBlog([FromBody] UpdateBlogCommand command) => await Edit(command);

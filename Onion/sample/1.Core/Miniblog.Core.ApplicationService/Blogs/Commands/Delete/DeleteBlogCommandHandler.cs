@@ -8,26 +8,18 @@ using Zamin.Utilities;
 
 namespace MiniBlog.Core.ApplicationService.Blogs.Commands.Delete;
 
-public sealed class DeleteBlogCommandHandler : CommandHandler<DeleteBlogCommand>
+public sealed class DeleteBlogCommandHandler(ZaminServices zaminServices,
+                                IBlogCommandRepository blogCommandRepository,
+                                IUnitOfWork blogUnitOfWork) : CommandHandler<DeleteBlogCommand>(zaminServices)
 {
-    private readonly IBlogCommandRepository _blogCommandRepository;
-    private readonly IUnitOfWork _blogUnitOfWork;
 
-    public DeleteBlogCommandHandler(ZaminServices zaminServices,
-        IBlogCommandRepository commandRepository,
-                                    IUnitOfWork blogUnitOfWork) : base(zaminServices)
-    {
-        _blogCommandRepository = commandRepository;
-        _blogUnitOfWork = blogUnitOfWork;
-    }
+    private readonly IUnitOfWork _blogUnitOfWork = blogUnitOfWork;
+    private readonly IBlogCommandRepository _blogCommandRepository = blogCommandRepository;
 
     public override async Task<CommandResult> Handle(DeleteBlogCommand command)
     {
-        var blog = await _blogCommandRepository.GetGraphAsync(command.Id);
-
-        if (blog is null)
-            throw new InvalidEntityStateException("بلاگ یافت نشد");
-
+        var blog = await _blogCommandRepository.GetGraphAsync(command.Id) ?? throw new InvalidEntityStateException("بلاگ یافت نشد");
+        
         blog.Delete();
 
         _blogCommandRepository.Delete(blog);

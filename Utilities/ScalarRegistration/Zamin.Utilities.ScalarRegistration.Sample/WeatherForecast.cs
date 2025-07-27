@@ -1,4 +1,4 @@
-namespace Zamin.Utilities.Swagger.Registration.Sample.WeatherForecasts;
+namespace Zamin.Utilities.ScalarRegistration.Sample;
 
 public class WeatherForecast
 {

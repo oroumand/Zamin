@@ -12,7 +12,7 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
     public class RabbitMqSendMessageBus : IDisposable, ISendMessageBus
     {
         #region Fields And Properties
-        private readonly IModel _channel;
+        private readonly IChannel _channel;
         private readonly IJsonSerializer _jsonSerializer;
         private readonly ILogger<RabbitMqSendMessageBus> _logger;
         private readonly RabbitMqOptions _rabbitMqOptions;
@@ -25,8 +25,8 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
             _jsonSerializer = jsonSerializer;
             _logger = logger;
             _rabbitMqOptions = rabbitMqOptions.Value;
-            _channel = connection.CreateModel();
-            _channel.ExchangeDeclare(_rabbitMqOptions.ExchangeName, ExchangeType.Topic, true, false, null);
+            _channel = connection.CreateChannelAsync().Result;
+            _channel.ExchangeDeclareAsync(_rabbitMqOptions.ExchangeName, ExchangeType.Topic, true, false, null).Wait();
         }
 
         #endregion
@@ -80,20 +80,19 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
         }
         public void Send(Parcel parcel)
         {
-            if (parcel is null)
-                throw new ArgumentNullException(nameof(parcel));
+            ArgumentNullException.ThrowIfNull(parcel);
             Activity childActivity = StartChildActivity(parcel);
             AddActivityHeaders(parcel, childActivity);
 
-            var basicProperties = _channel.CreateBasicProperties();
+            var basicProperties = new BasicProperties();
 
             basicProperties.Persistent = _rabbitMqOptions.PerssistMessage;
             basicProperties.AppId = _rabbitMqOptions.ServiceName;
             basicProperties.CorrelationId = parcel?.CorrelationId;
             basicProperties.MessageId = parcel?.MessageId;
             basicProperties.Headers = parcel?.Headers;
-            basicProperties.Type = parcel.MessageName;
-            _channel.BasicPublish(_rabbitMqOptions.ExchangeName, parcel.Route, basicProperties, parcel.MessageBody.ToByteArray());
+            basicProperties.Type = parcel?.MessageName ?? "NullMessageName";
+            _channel.BasicPublishAsync(_rabbitMqOptions.ExchangeName, parcel.Route, _rabbitMqOptions.IsMessageMandatory,basicProperties, parcel.MessageBody.ToByteArray());
             _logger.LogDebug("Message Sent {MessageName}",parcel.MessageName);
         }
         #endregion
@@ -123,7 +122,7 @@ namespace Zamin.Extensions.MessageBus.RabbitMQ
             if (_channel != null)
             {
                 if (_channel.IsOpen)
-                    _channel.Close();
+                    _channel.CloseAsync().Wait();
                 _channel.Dispose();
             }
         }

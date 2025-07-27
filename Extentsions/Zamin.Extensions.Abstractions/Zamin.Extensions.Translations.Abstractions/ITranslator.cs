@@ -1,4 +1,6 @@
-﻿namespace Zamin.Extensions.Translations.Abstractions;
+﻿using System.Globalization;
+
+namespace Zamin.Extensions.Translations.Abstractions;
 
 public interface ITranslator
 {

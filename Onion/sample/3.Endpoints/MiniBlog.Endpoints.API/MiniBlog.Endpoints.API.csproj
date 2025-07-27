@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 		<PropertyGroup>
-				<TargetFramework>net8.0</TargetFramework>
+				<TargetFramework>net9.0</TargetFramework>
 				<Nullable>enable</Nullable>
 				<ImplicitUsings>enable</ImplicitUsings>
 				<UserSecretsId>50feefd7-6360-44e7-85b6-bdc2f6fcb980</UserSecretsId>
@@ -15,26 +15,26 @@
 		</ItemGroup>
 
 		<ItemGroup>
-				<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
-				<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.1">
+				<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+				<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
 						<PrivateAssets>all</PrivateAssets>
 						<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 				</PackageReference>
-				<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-				<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
-				<PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="8.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.Events.PollingPublisher" Version="8.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.Events.PollingPublisher.Dal.Dapper" Version="8.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.MessageBus.MessageInbox" Version="8.0.1-beta.1" />
-				<PackageReference Include="Zamin.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="8.0.0-beta.1" />
+				<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+				<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.2.0" />
+				<PackageReference Include="Zamin.Extensions.Caching.InMemory" Version="9.0.0" />
+				<PackageReference Include="Zamin.Extensions.Events.PollingPublisher" Version="8.0.0" />
+				<PackageReference Include="Zamin.Extensions.Events.PollingPublisher.Dal.Dapper" Version="8.0.0" />
+				<PackageReference Include="Zamin.Extensions.MessageBus.MessageInbox" Version="9.0.0" />
+				<PackageReference Include="Zamin.Extensions.MessageBus.MessageInbox.Dal.Dapper" Version="9.0.0" />
 				<PackageReference Include="Zamin.Extensions.MessageBus.RabbitMQ" Version="8.0.1-beta.1" />
-				<PackageReference Include="Zamin.Extensions.ObjectMappers.AutoMapper" Version="8.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="8.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="8.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="8.0.0-beta.1" />
-				<PackageReference Include="Zamin.Extensions.UsersManagement" Version="8.0.0-beta.1" />
+				<PackageReference Include="Zamin.Extensions.ObjectMappers.AutoMapper" Version="9.0.0" />
+				<PackageReference Include="Zamin.Extensions.Serializers.Microsoft" Version="9.0.0" />
+				<PackageReference Include="Zamin.Extensions.Serializers.NewtonSoft" Version="9.0.0" />
+				<PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="9.0.0" />
+				<PackageReference Include="Zamin.Extensions.UsersManagement" Version="9.0.0" />
 				<PackageReference Include="Zamin.Utilities.OpenTelemetryRegistration" Version="8.0.0-beta.2" />
-				<PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="8.0.0-beta.1" />
+				<PackageReference Include="Zamin.Utilities.SerilogRegistration" Version="8.0.0" />
 		</ItemGroup>
 
 		<ItemGroup>

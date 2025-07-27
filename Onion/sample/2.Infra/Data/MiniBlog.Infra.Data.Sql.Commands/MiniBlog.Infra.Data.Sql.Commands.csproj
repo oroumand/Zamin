@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Zamin.Extensions.Events.Outbox.Dal.EF" Version="7.0.2-beta.2" />
+    <PackageReference Include="Zamin.Extensions.Events.Outbox.Dal.EF" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

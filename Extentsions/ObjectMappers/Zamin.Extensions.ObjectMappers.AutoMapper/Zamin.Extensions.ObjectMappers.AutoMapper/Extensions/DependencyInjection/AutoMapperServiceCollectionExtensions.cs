@@ -5,7 +5,7 @@ using System.Reflection;
 using Zamin.Extensions.ObjectMappers.AutoMapper.Options;
 using Zamin.Extensions.ObjectMappers.AutoMapper.Services;
 using Zamin.Extensions.ObjectMappers.Abstractions;
-
+using AutoMapper;
 namespace Zamin.Extensions.DependencyInjection;
 public static class AutoMapperServiceCollectionExtensions
 {
