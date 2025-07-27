@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Utilities.Sinks.Elasticsearch", "Zamin.Utilities.Sinks.Elasticsearch\Zamin.Utilities.Sinks.Elasticsearch.csproj", "{EB2AD21F-EBBE-47CD-B1C5-A62C686968AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Utilities.Sinks.Elasticsearch.Sample", "Zamin.Utilities.Sinks.Elasticsearch.Sample\Zamin.Utilities.Sinks.Elasticsearch.Sample.csproj", "{07F49A57-968F-4252-AA48-25A21C6573AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB2AD21F-EBBE-47CD-B1C5-A62C686968AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2AD21F-EBBE-47CD-B1C5-A62C686968AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2AD21F-EBBE-47CD-B1C5-A62C686968AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2AD21F-EBBE-47CD-B1C5-A62C686968AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07F49A57-968F-4252-AA48-25A21C6573AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07F49A57-968F-4252-AA48-25A21C6573AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07F49A57-968F-4252-AA48-25A21C6573AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07F49A57-968F-4252-AA48-25A21C6573AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4EC7F0C-2C92-4C45-A040-0C170816DDFE}
+	EndGlobalSection
+EndGlobal
