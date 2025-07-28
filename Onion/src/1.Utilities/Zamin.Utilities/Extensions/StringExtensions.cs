@@ -20,7 +20,8 @@ public static class StringExtensions
     {
         return string.IsNullOrWhiteSpace(data) ?
                     string.Empty :
-                    data.Replace(ArabicYeChar, PersianYeChar).Replace(ArabicKeChar, PersianKeChar).Trim();
+                    data.Replace(ArabicYeChar, PersianYeChar).Replace(ArabicKeChar, PersianKeChar).Trim()
+                        .Fa2En();
     }
 
 
@@ -49,6 +50,54 @@ public static class StringExtensions
     {
         return System.Text.Encoding.UTF8.GetString(input);
     }
+    public static string ToNumeric(this int value)
+    {
+        return value.ToString("N0"); //"123,456"
+    }
+    public static string ToCurrency(this int value)
+    {
+        //fa-IR => current culture currency symbol => ریال
+        //123456 => "123,123ریال"
+        return value.ToString("C0");
+    }
 
+    public static string En2Fa(this string str)
+    {
+        return str.Replace("0", "۰")
+            .Replace("1", "۱")
+            .Replace("2", "۲")
+            .Replace("3", "۳")
+            .Replace("4", "۴")
+            .Replace("5", "۵")
+            .Replace("6", "۶")
+            .Replace("7", "۷")
+            .Replace("8", "۸")
+            .Replace("9", "۹");
+    }
+
+    public static string Fa2En(this string str)
+    {
+        return str.Replace("۰", "0")
+            .Replace("۱", "1")
+            .Replace("۲", "2")
+            .Replace("۳", "3")
+            .Replace("۴", "4")
+            .Replace("۵", "5")
+            .Replace("۶", "6")
+            .Replace("۷", "7")
+            .Replace("۸", "8")
+            .Replace("۹", "9")
+            //iphone numeric
+            .Replace("٠", "0")
+            .Replace("١", "1")
+            .Replace("٢", "2")
+            .Replace("٣", "3")
+            .Replace("٤", "4")
+            .Replace("٥", "5")
+            .Replace("٦", "6")
+            .Replace("٧", "7")
+            .Replace("٨", "8")
+            .Replace("٩", "9");
+    }
 
 }
