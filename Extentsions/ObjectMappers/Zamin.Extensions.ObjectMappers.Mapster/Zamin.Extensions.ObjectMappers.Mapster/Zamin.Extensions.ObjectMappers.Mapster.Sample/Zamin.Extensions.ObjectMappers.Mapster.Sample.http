@@ -1,0 +1,6 @@
+@Zamin.Extensions.ObjectMappers.Mapster.Sample_HostAddress = http://localhost:5213
+
+GET {{Zamin.Extensions.ObjectMappers.Mapster.Sample_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

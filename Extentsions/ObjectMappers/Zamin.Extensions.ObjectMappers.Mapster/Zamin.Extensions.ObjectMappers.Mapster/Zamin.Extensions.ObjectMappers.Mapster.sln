@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.ObjectMappers.Mapster", "Zamin.Extensions.ObjectMappers.Mapster\Zamin.Extensions.ObjectMappers.Mapster.csproj", "{9563A42C-F024-4974-9BEE-074E92D35E6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zamin.Extensions.ObjectMappers.Mapster.Sample", "Zamin.Extensions.ObjectMappers.Mapster.Sample\Zamin.Extensions.ObjectMappers.Mapster.Sample.csproj", "{45425C32-25DD-415D-BA1A-50F726AB2600}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9563A42C-F024-4974-9BEE-074E92D35E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9563A42C-F024-4974-9BEE-074E92D35E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9563A42C-F024-4974-9BEE-074E92D35E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9563A42C-F024-4974-9BEE-074E92D35E6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45425C32-25DD-415D-BA1A-50F726AB2600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45425C32-25DD-415D-BA1A-50F726AB2600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45425C32-25DD-415D-BA1A-50F726AB2600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45425C32-25DD-415D-BA1A-50F726AB2600}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
