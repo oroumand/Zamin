@@ -1,5 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
+using Zamin.EndPoints.Web.Filters;
 using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
 
 namespace Zamin.Extensions.DependencyInjection;
@@ -8,7 +10,11 @@ public static class AddApiConfigurationExtensions
 {
     public static IServiceCollection AddZaminApiCore(this IServiceCollection services, params string[] assemblyNamesForLoad)
     {
-        services.AddControllers().AddFluentValidation();
+        services.AddControllers(delegate (MvcOptions options)
+        {
+            options.Filters.Add<PascalCaseJsonFilter>();
+            options.Filters.Add<CamelCaseJsonFilter>();
+        }).AddFluentValidation();
         services.AddZaminDependencies(assemblyNamesForLoad);
 
         return services;
