@@ -10,6 +10,8 @@ namespace Zamin.EndPoints.Web.Filters
     public class CamelCaseJsonAttribute : Attribute
     {
     }
+
+
     public class CamelCaseJsonFilter : IAsyncResultFilter
     {
         public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)

@@ -11,6 +11,8 @@ namespace Zamin.EndPoints.Web.Filters
     public class PascalCaseJsonAttribute : Attribute
     {
     }
+
+
     public class PascalCaseJsonFilter : IAsyncResultFilter
     {
         public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
