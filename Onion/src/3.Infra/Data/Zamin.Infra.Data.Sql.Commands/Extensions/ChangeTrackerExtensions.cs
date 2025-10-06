@@ -9,7 +9,10 @@ public static class ChangeTrackerExtensions
 
     public static List<AggregateRoot> GetAggregatesWithEvent(this ChangeTracker changeTracker) =>
             changeTracker.Aggreates()
-                                     .Where(IsNotDetached()).Select(c => c.Entity).Where(c => c.GetEvents().Any()).ToList();
+                                     .Where(IsNotDetached())
+                                     .Select(c => c.Entity)
+                                     .Where(c => c.GetEvents()
+                                         .Any()).ToList();
     public static IEnumerable<EntityEntry<AggregateRoot>> Aggreates(this ChangeTracker changeTracker) =>
         changeTracker.Entries<AggregateRoot>();
 
