@@ -1,14 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MiniBlog.Core.RequestResponse.Blogs.Queries.GetById;
 using MiniBlog.Infra.Data.Sql.Queries.Blogs;
+using MiniBlog.Infra.Data.Sql.Queries.Common.LanguageService;
 using Zamin.Infra.Data.Sql.Queries;
 
 namespace MiniBlog.Infra.Data.Sql.Queries.Common
 {
     public partial class MiniblogQueryDbContext : BaseQueryDbContext
     {
-        public MiniblogQueryDbContext(DbContextOptions<MiniblogQueryDbContext> options)
+        private readonly ILanguageService _userService;
+        public MiniblogQueryDbContext(DbContextOptions<MiniblogQueryDbContext> options, ILanguageService userService)
             : base(options)
         {
+            this._userService = userService;
         }
 
         public virtual DbSet<Blog> Blogs { get; set; } = null!;
@@ -31,6 +35,12 @@ namespace MiniBlog.Infra.Data.Sql.Queries.Common
 
                 entity.Property(e => e.ModifiedByUserId).HasMaxLength(50);
             });
+
+            modelBuilder.Entity<Blog>().Property(e => e.Title)
+            .HasConversion(c => c, c => TranslateData.Getvalue(c, _userService.GetLanguage()));
+
+            modelBuilder.Entity<Blog>().Property(e => e.Description)
+           .HasConversion(c => c, c => TranslateData.Getvalue(c, _userService.GetLanguage()));
 
             modelBuilder.Entity<OutBoxEventItem>(entity =>
             {
