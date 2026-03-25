@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Zamin.Extensions.ChangeDataLog.Abstractions;
+﻿namespace Zamin.Extensions.ChangeDataLog.Abstractions;
 public class EntityChageInterceptorItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();

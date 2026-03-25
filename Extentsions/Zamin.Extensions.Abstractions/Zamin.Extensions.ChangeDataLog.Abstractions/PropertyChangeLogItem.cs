@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Zamin.Extensions.ChangeDataLog.Abstractions;
+﻿namespace Zamin.Extensions.ChangeDataLog.Abstractions;
 public class PropertyChangeLogItem
 {
     public Guid Id { get; set; } = Guid.NewGuid();

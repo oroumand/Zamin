@@ -1,0 +1,30 @@
+<Project>
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Alireza Oroumand</Authors>
+    <Company>َARO Mind</Company>
+    <RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>false</IncludeSymbols>
+    <NoWarn>1591</NoWarn>  
+    <PackageProjectUrl>https://github.com/oroumand/Zamin</PackageProjectUrl>
+    <PackageTags>Zamin;Framework;DDD;CQRS;Onion</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>  
+    <Company>Zamin-Test-From-Directory-Build-Props</Company>
+  </PropertyGroup>
+
+   <PropertyGroup>
+    <PackageIcon>icon.png</PackageIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)build/assets/icon.png"
+          Pack="true"
+          PackagePath="" />
+  </ItemGroup>
+</Project>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32210.238
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11605.240
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Caching.Abstractions", "Zamin.Extensions.Chaching.Abstractions\Zamin.Extensions.Caching.Abstractions.csproj", "{0792FFC2-5C0F-456A-A060-878F11AF2360}"
 EndProject
@@ -22,6 +22,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.Events.Abstractions", "Zamin.Extensions.Events.Abstractions\Zamin.Extensions.Events.Abstractions.csproj", "{1C70B28F-4096-4C14-AE49-14C8718F4E2F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zamin.Extensions.ChangeDataLog.Abstractions", "Zamin.Extensions.ChangeDataLog.Abstractions\Zamin.Extensions.ChangeDataLog.Abstractions.csproj", "{824F9102-E3BA-4413-A8EB-211355F80382}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E2E14BB9-2892-4551-AAC1-2EF54AC2DBC7}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

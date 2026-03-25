@@ -1,17 +1,2 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-		<PropertyGroup>
-				<TargetFramework>net9.0</TargetFramework>
-				<Version>9.0.0</Version>
-				<Nullable>enable</Nullable>
-				<Authors>Alireza Oroumand</Authors>
-				<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-				<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
-				<PackageIcon>icon.png</PackageIcon>
-		</PropertyGroup>
-
-		<ItemGroup>
-				<None Include="..\..\..\icon.png" Pack="true" PackagePath=""/>
-		</ItemGroup>
-
 </Project>

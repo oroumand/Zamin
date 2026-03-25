@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using Zamin.Extensions.MessageBus.Abstractions;
 
 namespace Zamin.Extensions.MessageBus.Abstractions.Fakes;
 
