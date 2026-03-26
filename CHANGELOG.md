@@ -59,3 +59,10 @@
 - مهاجرت `Zamin.Extensions.ChangeDataLog.Hamster` به `.NET 10`
 - مهاجرت `Zamin.Extensions.ChangeDataLog.Sql` به `.NET 10`
 - مهاجرت `Zamin.Extensions.UsersManagement` به `.NET 10`
+
+- ثبت یک مورد نیازمند به‌روزرسانی امنیتی در dependency مربوط به MVC در `Zamin.Utilities.SoftwarepartDetector`
+- یکپارچه‌سازی کامل `Directory.Build.props` در ریشه repository
+- یکپارچه‌سازی کامل `Directory.Packages.props` در ریشه repository
+- حذف فایل‌های محلی build و package management از زیرپوشه‌ها
+- مهاجرت بخش `Onion` به `.NET 10`
+- مهاجرت `Zamin.Extensions.MessageBus.RabbitMQ` به `.NET 10`

@@ -168,3 +168,40 @@ sample مربوط به این بخش در این مرحله به دلیل تغی
 در مراحل بعدی باید مشخص شود که:
 - آیا این package باید همچنان در خانواده Extensions باقی بماند
 - یا به‌عنوان بخشی وابسته به Onion بازتعریف و مستندسازی شود
+
+### نکته امنیتی مربوط به SoftwarePartDetector
+
+در جریان migration نسخه 10، package مربوط به `SoftwarePartDetector` مهاجرت داده شد، اما یکی از dependencyهای مربوط به MVC در این بخش دارای مسئله امنیتی شناخته‌شده است.
+
+این dependency باید در اولین فرصت پس از انتشار نسخه 10 به نسخه امن‌تر به‌روزرسانی شود.
+## یکپارچه‌سازی تنظیمات مرکزی
+
+در این مرحله، تنظیمات build و dependency management به‌صورت کامل در ریشه repository یکپارچه شد.
+
+### تغییرات انجام‌شده
+
+- فقط یک `Directory.Build.props` در ریشه repository نگه داشته شد
+- فقط یک `Directory.Packages.props` در ریشه repository نگه داشته شد
+- فایل‌های محلی مشابه از زیرپوشه‌ها حذف شدند
+- نسخه فریم‌ورک، نسخه packageها و dependencyهای third-party از یک نقطه مرکزی مدیریت شدند
+
+این تغییر باعث شد ساختار build ساده‌تر، شفاف‌تر و قابل نگهداری‌تر شود.
+## مهاجرت Onion
+
+در ادامه migration نسخه 10، بخش `Onion` نیز به‌صورت یکجا به `.NET 10` مهاجرت داده شد.
+
+این مهاجرت شامل این بخش‌ها بود:
+
+- utilityهای داخلی Onion
+- packageهای اصلی Core
+- packageهای زیرساخت داده
+- endpointهای وب
+- هماهنگ‌سازی sampleهای وابسته در حد امکان
+
+در این مرحله، ساختار dependencyهای داخلی Onion با packageهای نسخه 10 یکدست شد و بستر لازم برای بازگشت به بخش‌های deferred در `Extensions` فراهم شد.
+
+## مهاجرت بخش MessageBus.RabbitMQ
+
+در ادامه migration نسخه 10، package `Zamin.Extensions.MessageBus.RabbitMQ` نیز به `.NET 10` مهاجرت داده شد.
+
+در این مرحله dependencyهای این بخش با abstractionهای نسخه 10 و serializerهای نسخه 10 هماهنگ شدند تا بستر لازم برای تکمیل migration سایر بخش‌های MessageBus فراهم شود.

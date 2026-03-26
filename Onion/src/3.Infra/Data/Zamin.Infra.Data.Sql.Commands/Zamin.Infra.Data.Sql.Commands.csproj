@@ -1,32 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-		<PropertyGroup>
-				<TargetFramework>net9.0</TargetFramework>
-				<Version>9.0.0</Version>
-				<Authors>Alireza Oroumand</Authors>
-				<ImplicitUsings>enable</ImplicitUsings>
-				<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-				<RepositoryUrl>https://github.com/oroumand/Zamin</RepositoryUrl>
-				<PackageIcon>icon.png</PackageIcon>
-		</PropertyGroup>
-
-		<ItemGroup>
-				<None Include="..\..\..\..\..\icon.png" Pack="true" PackagePath="" />
-		</ItemGroup>
-
-		<ItemGroup>
-				<PackageReference Include="Dapper" Version="2.1.35" />
-				<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
-				<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="9.0.0" />
-		</ItemGroup>
-
-		<ItemGroup>
-				<Using Include="Microsoft.EntityFrameworkCore" />
-		</ItemGroup>
-
-		<ItemGroup>
-				<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
-				<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
-				<ProjectReference Include="..\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
-		</ItemGroup>
-
+	<ItemGroup>
+		<PackageReference Include="Dapper" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions"  />
+	</ItemGroup>
+	<ItemGroup>
+		<Using Include="Microsoft.EntityFrameworkCore" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Contracts\Zamin.Core.Contracts.csproj" />
+		<ProjectReference Include="..\..\..\2.Core\Zamin.Core.Domain\Zamin.Core.Domain.csproj" />
+		<ProjectReference Include="..\Zamin.Infra.Data.Sql\Zamin.Infra.Data.Sql.csproj" />
+	</ItemGroup>
 </Project>

@@ -1,13 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.DependencyModel" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
-		<PackageReference Include="Zamin.Core.RequestResponse" Version="9.0.0" />
-		<PackageReference Include="Zamin.Core.Contracts" Version="9.0.0" />
-		<PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" Version="9.0.1" />
-		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyModel"  />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"  />
+		<PackageReference Include="Zamin.Core.RequestResponse" />
+		<PackageReference Include="Zamin.Core.Contracts"/>
+		<PackageReference Include="Zamin.Extensions.MessageBus.Abstractions" />
+		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions"  />
 	</ItemGroup>
-
 </Project>

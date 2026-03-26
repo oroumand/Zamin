@@ -1,6 +1,5 @@
-﻿using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using FluentValidation.AspNetCore;
 using Zamin.EndPoints.Web.Filters;
 using Zamin.EndPoints.Web.Middlewares.ApiExceptionHandler;
 
