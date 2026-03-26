@@ -1,18 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
-		<PropertyGroup>
-				<TargetFramework>net9.0</TargetFramework>
-				<ImplicitUsings>enable</ImplicitUsings>
-		</PropertyGroup>
-
-		<ItemGroup>
-				<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-				<PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
-				<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="9.0.0" />
-		</ItemGroup>
-
-		<ItemGroup>
-				<ProjectReference Include="..\Zamin.Extensions.Serializers.NewtonSoft\Zamin.Extensions.Serializers.NewtonSoft.csproj" />
-		</ItemGroup>
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" />
+		<PackageReference Include="Swashbuckle.AspNetCore"/>
+		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Zamin.Extensions.Serializers.NewtonSoft\Zamin.Extensions.Serializers.NewtonSoft.csproj" />
+	</ItemGroup>
 </Project>

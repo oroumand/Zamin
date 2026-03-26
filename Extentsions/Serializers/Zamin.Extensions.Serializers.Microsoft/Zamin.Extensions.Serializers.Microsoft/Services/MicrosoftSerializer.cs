@@ -18,7 +18,6 @@ public MicrosoftSerializer(ILogger<MicrosoftSerializer> logger)
     public TOutput Deserialize<TOutput>(string input)
     {
         _logger.LogTrace("Microsoft Serializer Deserialize with name {input}", input);
-
         return string.IsNullOrWhiteSpace(input) ?
             default : JsonSerializer.Deserialize<TOutput>(input, options);
     }
@@ -38,8 +37,5 @@ public MicrosoftSerializer(ILogger<MicrosoftSerializer> logger)
         return input == null ? string.Empty : JsonSerializer.Serialize(input, options);
     }
 
-    public void Dispose()
-    {
-        _logger.LogInformation("Microsoft Serializer Stop working");
-    }
+    public void Dispose() => _logger.LogInformation("Microsoft Serializer Stop working");
 }

@@ -10,6 +10,7 @@ namespace Zamin.Extensions.DependencyInjection;
 
 public static class JwtTokenExtensions
 {
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static AuthenticationBuilder AddJwtTokenSupoort(this AuthenticationBuilder authenticationBuilder,
                                                            IServiceCollection services,
                                                            ProviderOption provider)

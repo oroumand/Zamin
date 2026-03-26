@@ -1,165 +1,146 @@
-# برنامه ارتقا و بازطراحی Zamin
+<div dir="rtl">
+
+# راهبرد مهاجرت و بازطراحی Zamin
 
 ## مقدمه
 
-این سند راهبرد کلی مهاجرت Zamin از .NET 9 به .NET 10 را مشخص می‌کند.
+هدف این سند مشخص کردن مسیر مهاجرت کامل Zamin از `.NET 9` به `.NET 10` و تعیین نحوه برخورد با بهبودهای معماری، تغییرات داخلی و تغییرات breaking است.
 
-هدف این مهاجرت صرفاً ارتقا نسخه فریم‌ورک نیست، بلکه شامل:
+در این مرحله، راهبرد پروژه از مهاجرت موجی محدود به یک مهاجرت کامل و کنترل‌شده تغییر کرده است. دلیل این تصمیم این است که نیمه‌مهاجرت ماندن پروژه، هم در توسعه داخلی مشکل ایجاد می‌کند و هم باعث می‌شود برخی packageها، sampleها و dependencyها به‌درستی build نشوند.
 
-- تثبیت زیرساخت build و packaging
-- تمیزکاری ساختار پروژه
-- آماده‌سازی برای بازطراحی بخش‌های پیچیده
-- ایجاد مسیر توسعه پایدار برای آینده
+نمونه این مسئله در وابستگی برخی packageها به پیاده‌سازی‌های دیگر دیده می‌شود؛ جایی که باقی ماندن بخشی از پروژه روی نسخه 9 مانع build سالم کل زنجیره می‌شود.
 
-Zamin به عنوان بخشی از اکوسیستم **ARO-Mind** در حال توسعه است و این migration گامی مهم در بلوغ این اکوسیستم محسوب می‌شود.
+## هدف نسخه 10
 
----
+در نسخه 10، هدف این موارد است:
+
+- مهاجرت کامل کل framework به `.NET 10`
+- یکدست‌سازی build و packaging
+- تکمیل و تثبیت مستندات
+- انجام بهبودهای داخلی و non-breaking
+- شناسایی و deprecate کردن بخش‌هایی که در آینده باید حذف یا بازطراحی شوند
+
+## هدف نسخه 11
+
+در نسخه 11، هدف این موارد خواهد بود:
+
+- حذف APIها و packageهای deprecated شده
+- اعمال breaking changeهای معماری
+- بازطراحی بخش‌هایی که در نسخه 10 فقط علامت‌گذاری شده‌اند
 
 ## اصول راهبردی
 
-در این migration چند اصل کلیدی رعایت می‌شود:
+### اصل اول: مهاجرت کامل قبل از بازطراحی عمیق
 
-### 1. مهاجرت مرحله‌ای (Wave-based)
-به جای ارتقا یک‌باره کل پروژه، migration در چند موج انجام می‌شود.
+ابتدا کل پروژه به `.NET 10` مهاجرت داده می‌شود تا همه packageها، sampleها و dependencyها در یک وضعیت پایدار و یکدست قرار بگیرند.
 
-### 2. حداقل تغییر در موج اول
-در موج اول تمرکز فقط روی migration است، نه redesign.
+### اصل دوم: انجام بهبودهای non-breaking در نسخه 10
 
-### 3. حفظ سازگاری
-تا حد ممکن از ایجاد breaking change جلوگیری می‌شود.
+هر بهبودی که از بیرون پروژه دیده نمی‌شود یا قرارداد عمومی را نمی‌شکند، در همین نسخه انجام می‌شود.
 
-### 4. تفکیک abstraction و implementation
-ابتدا abstractionها مهاجرت داده می‌شوند، سپس implementationها.
+### اصل سوم: defer کردن breaking changeها
 
----
+هر تغییری که باعث شکستن مصرف‌کننده‌ها شود، در نسخه 10 فقط deprecate می‌شود و حذف واقعی آن به نسخه 11 موکول خواهد شد.
 
-## زیرساخت build
+### اصل چهارم: حذف محدود و کم‌هزینه در همین نسخه
 
-در این مرحله، زیرساخت build و packaging به‌صورت متمرکز بازطراحی شده است.
+اگر در برخی بخش‌ها، به‌ویژه در `Root Utilities`، پروژه یا قابلیتی وجود داشته باشد که مصرف بیرونی مهمی نداشته باشد و حذف آن ripple effect زیادی ایجاد نکند، حذف آن در همین نسخه 10 مجاز است.
 
-### اجزای اصلی:
+## دسته‌بندی تغییرات
 
-- `global.json` → تعیین نسخه SDK
-- `Directory.Build.props` (ریشه) → تنظیمات مشترک
-- `Directory.Packages.props` → مدیریت نسخه dependencyها
-- `Directory.Build.props` محلی → override برای waveها
+### دسته A: مهاجرت مستقیم
 
-### نکته مهم
+این دسته شامل پروژه‌هایی است که فقط باید به `.NET 10` مهاجرت داده شوند و معمولاً نیاز به بازطراحی ندارند.
 
-از آنجا که MSBuild پس از یافتن اولین `Directory.Build.props` جستجو را متوقف می‌کند، فایل‌های محلی به‌صورت صریح فایل ریشه را import می‌کنند.
+نمونه‌ها:
+- implementationهای ساده‌تر در `ObjectMappers`
+- implementationهای ساده‌تر در `Serializers`
+- برخی packageهای `Caching`
+- برخی packageهای `DependencyInjection`
 
-این ساختار امکان:
+### دسته B: مهاجرت همراه با بهبود داخلی
 
-- مدیریت مرکزی
-- override کنترل‌شده
-- migration مرحله‌ای
+این دسته شامل پروژه‌هایی است که علاوه بر migration، به مقداری تمیزکاری داخلی، اصلاح dependencyها یا build fix نیاز دارند، اما این اصلاحات breaking نیستند.
 
-را فراهم می‌کند.
+نمونه‌ها:
+- برخی packageهای `Events`
+- بعضی implementationهای `Caching`
+- sample projectها
+- بخشی از `Root Utilities`
 
----
+### دسته C: مهاجرت همراه با deprecate
 
-## موج اول (Wave 1)
+این دسته شامل پروژه‌ها یا APIهایی است که باید در نسخه 10 باقی بمانند، ولی از همین حالا برای حذف یا بازطراحی در نسخه 11 علامت‌گذاری می‌شوند.
 
-### هدف
-مهاجرت abstraction packageهای پایه به .NET 10
+نمونه‌ها:
+- `Zamin.Extensions.Logger.Abstractions`
+- بخش‌هایی از `MessageBus`
+- بخش‌هایی از `Translations`
+- بخش‌هایی از `Auth.ApiAuthentication`
 
-### packageهای شامل:
+## وضعیت packageهای abstraction
 
-- Zamin.Extensions.Caching.Abstractions
-- Zamin.Extensions.DependencyInjection.Abstractions
-- Zamin.Extensions.Events.Abstractions
-- Zamin.Extensions.ChangeDataLog.Abstractions
-- Zamin.Extensions.ObjectMappers.Abstractions
-- Zamin.Extensions.Serializers.Abstractions
-- Zamin.Extensions.UsersManagement.Abstractions
-- Zamin.Extensions.MessageBus.Abstractions
-- Zamin.Extensions.Translations.Abstractions
+packageهای abstraction موج اول قبلاً به `.NET 10` مهاجرت داده شده‌اند و به‌عنوان پایه نسخه 10 framework در نظر گرفته می‌شوند.
 
-### دلیل انتخاب
+این packageها شامل این موارد هستند:
 
-این packageها:
+- `Zamin.Extensions.Caching.Abstractions`
+- `Zamin.Extensions.DependencyInjection.Abstractions`
+- `Zamin.Extensions.Events.Abstractions`
+- `Zamin.Extensions.ChangeDataLog.Abstractions`
+- `Zamin.Extensions.ObjectMappers.Abstractions`
+- `Zamin.Extensions.Serializers.Abstractions`
+- `Zamin.Extensions.UsersManagement.Abstractions`
+- `Zamin.Extensions.MessageBus.Abstractions`
+- `Zamin.Extensions.Translations.Abstractions`
 
-- contractهای نسبتاً پایدار دارند
-- وابستگی‌های پیچیده ندارند
-- پایه implementationهای دیگر هستند
+## وضعیت بخش‌های نیازمند بازبینی جدی
 
----
+بخش‌های زیر همچنان نیازمند بازبینی جدی هستند، اما در نسخه 10 فقط migrate و در صورت لزوم deprecate می‌شوند:
 
-## خارج از موج اول
+### بخش مربوط به MessageBus
+- پیچیدگی بالا
+- سختی درک مدل consumer
+- نیاز به ساده‌سازی اتصال به صف
 
-### Zamin.Extensions.Logger.Abstractions
+### بخش مربوط به Translations
+- مسئله culture handling
+- وابستگی storage به پیاده‌سازی
+- نیاز به بازبینی طراحی runtime
 
-این پروژه فعلاً از migration خارج شده است.
+### بخش مربوط به Logger
+- ابهام در اینکه abstraction واقعی هست یا نه
+- احتمال حذف، ادغام یا بازطراحی
 
-#### دلیل:
+### بخش مربوط به Auth
+- پیچیدگی بیشتر از حد انتظار
+- فاصله گرفتن از نقش registration ساده
 
-- abstraction واقعی محسوب نمی‌شود
-- بیشتر نقش نگهداری EventId و ثابت‌های logging را دارد
-- نیازمند تصمیم معماری (حذف / ادغام / تغییر ساختار)
+### بخش مربوط به SoftwarePartDetector
+- ایده ارزشمند ولی نیازمند تثبیت API و مرزبندی دقیق‌تر
 
----
+## راهبرد مستندسازی
 
-## موج‌های بعدی
+در نسخه 10، مستندات باید هم‌زمان با migration تکمیل شوند.
 
-### Wave 2
-مهاجرت implementation packageها:
+تمرکز مستندات در این مرحله روی این بخش‌هاست:
 
-- Caching implementations
-- ObjectMappers implementations
-- Serializers implementations
-- MessageBus implementations
-- Events implementations
-
-### Wave 3
-تکمیل sampleها و endpointها:
-
-- Zamin.EndPoints
-- Sample projects
-- Integration tests (در صورت اضافه شدن)
-
----
-
-## بخش‌های نیازمند بازطراحی
-
-این بخش‌ها در مراحل بعدی نیاز به بازبینی جدی دارند:
-
-### MessageBus
-- طراحی فعلی پیچیده و سخت‌فهم است
-- نحوه اتصال consumerها نیاز به ساده‌سازی دارد
-
-### Translations
-- وابستگی به culture در runtime مشکل‌ساز است
-- storage strategy نیاز به بازطراحی دارد
-
-### Auth (ApiAuthentication)
-- ساختار فعلی پیچیده و خارج از کنترل کامل است
-- نیاز به ساده‌سازی و استانداردسازی دارد
-
-### Logging
-- ساختار abstraction مشخص نیست
-- نیاز به تصمیم درباره حذف یا redesign
-
-### SoftwarePartDetector
-- ایده قوی است ولی نیاز به تثبیت API دارد
-
----
-
-## ترتیب اجرای کلی
-
-1. تثبیت build system
-2. مهاجرت abstractionها (Wave 1)
-3. انتشار packageهای پایه
-4. مهاجرت implementationها (Wave 2)
-5. تکمیل sampleها
-6. بازطراحی بخش‌های پیچیده
-
----
+- معرفی پروژه
+- معماری فعلی
+- ساختار build و packaging
+- راهبرد migration
+- deprecationها
+- مستندات packageها
+- تکمیل sampleها
 
 ## نتیجه مورد انتظار
 
-پس از اتمام این مراحل:
+در پایان نسخه 10 باید این وضعیت حاصل شده باشد:
 
-- ساختار پروژه تمیزتر و قابل فهم‌تر خواهد بود
-- build و packaging یکدست می‌شود
-- migration به .NET 10 کامل می‌شود
-- بستر مناسبی برای توسعه‌های بعدی در ARO-Mind فراهم می‌شود
+- همه packageهای اصلی Zamin روی `.NET 10` باشند
+- build و packaging به‌صورت یکدست و مرکزی مدیریت شود
+- sampleهای اصلی قابل build باشند
+- مستندات اصلی پروژه کامل و قابل اتکا باشند
+- APIها و بخش‌های مسئله‌دار برای نسخه 11 به‌صورت رسمی deprecate شده باشند
+
+</div>

@@ -1,20 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore"/>
+		<PackageReference Include="Zamin.Extensions.Serializers.Abstractions"/>
+		<PackageReference Include="Zamin.Extensions.Translations.Abstractions"/>
+		<PackageReference Include="Zamin.Extensions.Translations.Parrot"/>
+	</ItemGroup>
 
-		<PropertyGroup>
-				<TargetFramework>net9.0</TargetFramework>
-
-				<ImplicitUsings>enable</ImplicitUsings>
-		</PropertyGroup>
-
-		<ItemGroup>
-				<PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
-				<PackageReference Include="Zamin.Extensions.Serializers.Abstractions" Version="9.0.0" />
-				<PackageReference Include="Zamin.Extensions.Translations.Abstractions" Version="9.0.0" />
-				<PackageReference Include="Zamin.Extensions.Translations.Parrot" Version="9.0.0" />
-		</ItemGroup>
-
-		<ItemGroup>
-				<ProjectReference Include="..\Zamin.Extensions.Serializers.EPPlus\Zamin.Extensions.Serializers.EPPlus.csproj" />
-		</ItemGroup>
-
+	<ItemGroup>
+		<ProjectReference Include="..\Zamin.Extensions.Serializers.EPPlus\Zamin.Extensions.Serializers.EPPlus.csproj" />
+	</ItemGroup>
 </Project>

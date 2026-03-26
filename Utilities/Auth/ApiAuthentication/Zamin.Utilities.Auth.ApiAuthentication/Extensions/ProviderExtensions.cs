@@ -10,6 +10,7 @@ namespace Zamin.Extensions.DependencyInjection;
 
 public static class ProviderExtensions
 {
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static string AddProviderHttpClient(this ProviderOption provider, IServiceCollection services)
     {
         var httpClientName = string.IsNullOrWhiteSpace(provider.HttpClientFactoryName) ? $"Provider{provider.Priority}HttpClient" : provider.HttpClientFactoryName;
@@ -26,7 +27,7 @@ public static class ProviderExtensions
 
         return httpClientName;
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static async Task<List<Claim>> GetUserInfoClaims(this ProviderOption provider, HttpContext httpContext, string httpClientName)
     {
         var token = httpContext.Request.Headers.Authorization.ToString().Replace("Bearer ", "")
@@ -38,7 +39,7 @@ public static class ProviderExtensions
 
         return userInfoClaims;
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static async Task<List<Claim>> UserInfoEndpointCaller(this ProviderOption provider, HttpContext httpContext, HttpClient client, string token)
     {
         List<Claim> claims = [];
@@ -79,14 +80,14 @@ public static class ProviderExtensions
 
         return claims;
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     private static string GenerateCacheKey(this ProviderOption provider, string token)
     {
         var cacheKeyText = $"{provider.RegisterUserInfoClaims.CacheKeyPrefix}{provider.Scheme}_{token}";
         var cacheKey = provider.RegisterUserInfoClaims.CacheKeyFormat == CacheKeyFormat.Base64 ? cacheKeyText.ToBase64Encode() : cacheKeyText;
         return cacheKey;
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static async Task<List<Claim>> CallUserInfoEndpoint(this ProviderOption provider, HttpClient client, string token)
     {
         var response = await client.GetUserInfoAsync(new UserInfoRequest
@@ -99,6 +100,6 @@ public static class ProviderExtensions
 
         return [.. response.Claims];
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     private static string ToBase64Encode(this string plainText) => Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(plainText));
 }

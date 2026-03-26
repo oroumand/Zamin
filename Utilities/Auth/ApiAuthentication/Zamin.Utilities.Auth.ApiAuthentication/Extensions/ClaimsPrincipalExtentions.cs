@@ -5,6 +5,7 @@ namespace Zamin.Utilities.Auth.ApiAuthentication.Extensions;
 
 public static class ClaimsPrincipalExtentions
 {
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static bool HasSubClaim(this ClaimsPrincipal? principal, string userIdentifierClaimType)
         => principal?.Claims.Any(c => c.Type.Equals(userIdentifierClaimType)) ?? false;
 
@@ -13,7 +14,7 @@ public static class ClaimsPrincipalExtentions
                principal?.Identities.FirstOrDefault()?.AuthenticationType,
                principal?.Identities.FirstOrDefault()?.NameClaimType,
                principal?.Identities.FirstOrDefault()?.RoleClaimType);
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static ClaimsPrincipal? ClonePrincipalWithConvertedClaims(this ClaimsPrincipal? principal, ProviderOption provider)
     {
         if (provider.UserClaimRules.Any(rule => string.IsNullOrWhiteSpace(rule.Source) || string.IsNullOrWhiteSpace(rule.Destination)))
@@ -38,7 +39,7 @@ public static class ClaimsPrincipalExtentions
 
         return new(claimsIdentity);
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     private static List<Claim> UserClaimRulesProcesor(this ProviderOption provider, List<Claim> currentClaims)
     {
         List<Claim> newClaims = [];
@@ -67,14 +68,14 @@ public static class ClaimsPrincipalExtentions
 
         return newClaims;
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     private static List<Claim> UserClaimAddonsProcesor(this ProviderOption provider)
         => provider.UserClaimAddons.Select(addon => new Claim(addon.Type,
                                                               addon.Value,
                                                               addon.ValueType,
                                                               addon.Issuer,
                                                               addon.OriginalIssuer)).ToList();
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     private static List<Claim> GetNotExist(this List<Claim> current, List<Claim> target)
         => [.. target.Where(claim => !current.Any(currentClaim => currentClaim.Type.Equals(claim.Type) && currentClaim.Value.Equals(claim.Value)))];
 }

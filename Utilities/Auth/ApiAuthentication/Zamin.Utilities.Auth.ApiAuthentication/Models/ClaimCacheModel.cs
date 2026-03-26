@@ -2,6 +2,7 @@
 
 namespace Zamin.Utilities.Auth.ApiAuthentication.Models;
 
+[Obsolete("این کلاس deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
 public class ClaimCacheModel
 {
     public string Type { get; set; }

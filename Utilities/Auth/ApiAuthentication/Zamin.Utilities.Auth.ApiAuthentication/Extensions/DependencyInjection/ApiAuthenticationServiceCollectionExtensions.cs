@@ -7,9 +7,10 @@ namespace Zamin.Extensions.DependencyInjection;
 
 public static class ApiAuthenticationServiceCollectionExtensions
 {
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static IServiceCollection AddZaminApiAuthentication(this IServiceCollection services, IConfiguration configuration, string sectionName)
         => services.AddZaminApiAuthentication(configuration.GetSection(sectionName));
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static IServiceCollection AddZaminApiAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<ApiAuthenticationOption>(configuration);
@@ -17,7 +18,7 @@ public static class ApiAuthenticationServiceCollectionExtensions
 
         return services.AddAuthentication(option);
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     public static IServiceCollection AddZaminApiAuthentication(this IServiceCollection services, Action<ApiAuthenticationOption> action)
     {
         services.Configure(action);
@@ -26,7 +27,7 @@ public static class ApiAuthenticationServiceCollectionExtensions
 
         return services.AddAuthentication(option);
     }
-
+    [Obsolete("این متد deprecated شده است. از تنظیمات استاندارد ASP.NET Core برای Authentication استفاده کنید.")]
     private static IServiceCollection AddAuthentication(this IServiceCollection services, ApiAuthenticationOption option)
     {
         if (option.Active)

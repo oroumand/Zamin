@@ -1,4 +1,6 @@
 ﻿namespace Zamin.Extensions.Logger.Abstractions;
+
+[Obsolete("این بخش در نسخه 10 deprecated شده و ممکن است در Zamin 11 حذف یا بازطراحی شود.")]
 public class ZaminEventId
 {
     public const int PerformanceMeasurement = 1001;

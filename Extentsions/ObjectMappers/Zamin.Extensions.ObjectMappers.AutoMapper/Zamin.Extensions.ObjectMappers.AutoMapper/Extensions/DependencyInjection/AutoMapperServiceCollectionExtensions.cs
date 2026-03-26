@@ -5,7 +5,6 @@ using System.Reflection;
 using Zamin.Extensions.ObjectMappers.AutoMapper.Options;
 using Zamin.Extensions.ObjectMappers.AutoMapper.Services;
 using Zamin.Extensions.ObjectMappers.Abstractions;
-using AutoMapper;
 namespace Zamin.Extensions.DependencyInjection;
 public static class AutoMapperServiceCollectionExtensions
 {
@@ -18,9 +17,9 @@ public static class AutoMapperServiceCollectionExtensions
     {
         var option = configuration.Get<AutoMapperOption>();
 
-        var assemblies = GetAssemblies(option.AssmblyNamesForLoadProfiles);
+        var assemblies = GetAssemblies(option?.AssmblyNamesForLoadProfiles??string.Empty);
 
-        return services.AddAutoMapper(assemblies).AddSingleton<IMapperAdapter, AutoMapperAdapter>();
+        return services.AddAutoMapper(cfg => { },assemblies).AddSingleton<IMapperAdapter, AutoMapperAdapter>();
     }
 
     public static IServiceCollection AddZaminAutoMapperProfiles(this IServiceCollection services, Action<AutoMapperOption> setupAction)
@@ -30,7 +29,7 @@ public static class AutoMapperServiceCollectionExtensions
 
         var assemblies = GetAssemblies(option.AssmblyNamesForLoadProfiles);
 
-        return services.AddAutoMapper(assemblies).AddSingleton<IMapperAdapter, AutoMapperAdapter>();
+        return services.AddAutoMapper(cfg => { },assemblies).AddSingleton<IMapperAdapter, AutoMapperAdapter>();
     }
 
     private static List<Assembly> GetAssemblies(string assmblyNames)
