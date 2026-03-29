@@ -4,6 +4,7 @@ using MiniBlog.Endpoints.API.CustomDecorators;
 using MiniBlog.Endpoints.API.Extentions.DependencyInjection.Swaggers.Extentions;
 using MiniBlog.Infra.Data.Sql.Commands.Common;
 using MiniBlog.Infra.Data.Sql.Queries.Common;
+using MiniBlog.Infra.Data.Sql.Queries.Common.LanguageService;
 using Serilog;
 using Zamin.Core.ApplicationServices.Commands;
 using Zamin.Core.ApplicationServices.Events;
@@ -52,6 +53,8 @@ public static class HostingExtensions
         //zamin
         builder.Services.AddZaminInMemoryCaching();
         //builder.Services.AddZaminSqlDistributedCache(configuration, "SqlDistributedCache");
+
+        builder.Services.AddTransient<ILanguageService, LanguageService>(); 
 
         //CommandDbContext
         builder.Services.AddDbContext<MiniblogCommandDbContext>(
